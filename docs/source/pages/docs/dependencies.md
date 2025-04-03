@@ -1,0 +1,257 @@
+<!-- -*- eval:(visual-line-mode 1) -*- -->
+
+<div data-theme-toc="true"></div>
+<div data-guild-docs="true"></div>
+
+## Overview
+
+A *dependency* is a file or other resource required by an operation. Dependencies are defined for an operation in a Guild file using the `requires` attribute.
+
+``` yaml
+train:
+  requires:
+    - file: data.csv
+```
+
+> <span data-guild-class="callout important">Important</span> Dependencies play a key role in Guild experiments. Guild run directories are initially *empty*. Any files required by an operation must be defined as dependencies.
+
+Dependencies are defined using *resources*, which in turn consist of one or more *sources*. When Guild runs an operation, it *resolves* all required resource sources. If a source cannot be resolved, Guild stops the run with an error.
+
+When Guild runs `train` above it resolves the required file `data.csv` as follows:
+
+- Guild looks for `data.csv` relative to the Guild file location.
+- If Guild finds `data.csv` it creates a link to or a copy of `data.csv` in the [run directory](/t/runs/40#run-directory).
+- If Guild does not find `data.csv` it stops the run with an error message.
+
+Use dependencies to ensure that an operation has what it needs to run.
+
+## Inline vs Named Resources
+
+The [`requires`](/reference/guildfile#operation-requires) operation resource is a list of either *inline* or *named* resources.
+
+Inline resources are defined directly in the `requires` attribute. The example above shows an inline resource consisting of a single `file` source.
+
+Named resoures are defined in a model [`resources`](/reference/guildfile#model-resources) attribute. Named resources are specified as strings in `requires` with operation name.
+
+This following shows the dependency above as a named resource:
+
+``` yaml
+- operations:
+    train:
+      requires:
+       - data
+
+  resources:
+    data:
+     - file: data.csv
+```
+
+Use a named resource to:
+
+- Share a resource definition across operations
+- Simplify a requirements specification to include only names --- this can clarify operation dependencies
+
+## Resource Types
+
+Guild supports a number of resource types, or *resource source* types, which are described below. Refer to [*Guild File Reference*](/reference/guildfile#resource-sources) for a specification of each type.
+
+### Project Files
+
+To make a project file or directly available for a run, define a `file` source.
+
+``` yaml
+train:
+  requires:
+    - file: data.csv
+```
+
+Guild either links to the file or creates a copy based on the source [`target-type`](/reference/guildfile#resource-source-target-type) attribute. By default Guild creates links to resolved files. To create a copy, specify `copy` for `target-type`:
+
+``` yaml
+train:
+  requires:
+    - file: data.csv
+      target-type: copy
+```
+
+> <span data-guild-class="callout note">Note</span> Use `copy` to ensure that changes to a file are not applied to current runs by way of links. This is an important consideration when auditing runs. Note however that copying duplicates a file or directory for each run.
+>
+> `copy` will become the default target type in a future version of Guild.
+
+If the specified file is an archive --- i.e. has a known archive syntax such as `.zip`, `.tar`, etc. --- Guild unpacks the file as a part of resolving it. You can disable this behavior by setting `unpack` to `no`.
+
+Use `target-path` to resolve sources within subdirectories. For example, to copy `data.csv` above into a `data` subdirectory, use:
+
+``` yaml
+train:
+  requires:
+    - file: data.csv
+      target-type: copy
+      target-path: data
+```
+
+For additional attributes used to configure sources, see [*Guild File Reference*](/reference/guildfile#resource-source-attributes).
+
+### Network Files
+
+To resolve a file located on a network, define `url` source.
+
+``` yaml
+train:
+  requires:
+    - url: http://my.org/data.tar.gz
+```
+
+The same resolution rules for [project files](#project-files) (see above) apply to network files.
+
+Guild downloads network files and saves them to a resource cache located in [Guild home](/docs/environments#guild-home). By default, Guild creates links to these cached resources. To ensure that a run has a copy of the resolved sources and does not depend on these cached files, use `copy` for the source `target-type`.
+
+``` yaml
+train:
+  requires:
+    - url: http://my.org/data.tar.gz
+      target-type: copy
+```
+
+To ensure that a downloaded source is not corrupt, use the [`sha256`](/reference/guildfile#resource-source-sha256) attribute to define a SHA-256 digest. Guild checks the digest of downloaded files and stops with an error message if it doesn't match the specified value. Use [`guid download`](/commands/download) to pre-fetch a network file and calculate its SHA-256 digest for use with this attribute.
+
+Refer to see [*Guild File Reference*](/reference/guildfile#resource-source-attributes) for other attributes used to configure network file sources.
+
+### Run Files
+
+To use files generated by other operations for a run, use an `operation` source.
+
+The following defines three operations that constitute a [pipeline](/docs/pipelines) for preparing data, training, and testing:
+
+``` yaml
+prepare-data:
+  requires:
+    - file: data.csv
+
+train:
+  requires:
+    - operation: prepare-data
+
+test:
+  requires:
+    - operation: prepare-data
+    - operation: train
+```
+
+Guild resolves an operation source by first selecting a run that matches the specified operation name. By default Guild selects the latest non-error run. A user can optionally specify the run ID using flag assignment syntax.
+
+If Guild cannot find a suitable run, it fails with an error message.
+
+When Guild finds a suitable run, it creates links to the files in that run directory. This makes the output of the required run available to the dependent run.
+
+To select a subset of run files, use the [`select`](/reference/guildfile#resource-source-select) source attribute. For example, to select only files ending with `.hdf5` (a common extension for serialized Keras files):
+
+``` yaml
+test:
+  requires:
+    - operation: train
+      select: '.+\.hd5f'
+```
+
+> <span data-guild-class="callout note">Note</span> Values for `select` are regular expressions and not file system wildcards. This will change in a future version of Guild.
+
+Other [source attributes](/reference/guildfile#resource-source-attributes) may be used to further configure operation sources.
+
+### Configuration Files
+
+To use a configuration file that contains the current run values, use a `config` source.
+
+```
+train:
+  flags:
+    learning-rate: 0.1
+    batch-size: 100
+  requires:
+    - config: config.yml
+```
+
+When Guild resolves this source, it looks for a project file named `config.yml`. It applies the current flag values to the configuration file and writes it to the run directory.
+
+Guild supports two configuration file formats:
+
+- [JSON](https://json.org)
+- [YAML](https://yaml.org)
+
+Guild uses the extension of the specified file to determine the format.
+
+The file `config.yml` referenced above might look like this:
+
+``` yaml
+learning-rate: 0.1
+batch-size: 100
+dropout: 0.2
+```
+
+This file defines three settings, two of which are also defined for the `train` operation above. When a user start `train`, Guild applies the specified flag values to `config.yml`.
+
+The following command sets `learning-rate`. The value for `batch-size`, defined in the operation above, is unchanged.
+
+``` command
+guild run train learning-rate=0.2
+```
+
+Guild writes the resolved `config.yml` as:
+
+``` yaml
+learning-rate: 0.2
+batch-size: 100
+dropout: 0.3
+```
+
+> <span data-guild-class="callout note">Note</span> Guild uses the flag name when writing values to configuration files. To write to nested values, use dots in the flag names to denote nesting levels. A future version of Guild will support configuration files using the [flags interface](/docs/flags#flags-interface), which will provide more flexibility and features to support this case.
+
+### Software Modules
+
+To test if a software module is available before starting a run, use a `module` source.
+
+``` yaml
+train:
+  requires:
+   - module: pandas
+   - module: keras
+```
+
+Guild attempts to load the module before starting the run. If it cannot load the module, it exits with an error message.
+
+Use the [`help`](/reference/guildfile#resource-source-help) attribute to provide a user friendly message when the check fails.
+
+``` yaml
+train:
+  requires:
+   - module: matplotlib
+     help: operation requires matplotlib - install it using 'pip install matplotlib'
+```
+
+> <span data-guild-class="callout important">Important</span> Guild does not *install* modules defined for `requires` --- it *verifies* that the modules are available. Ensure that required modules are installed in the environment before running the operation.
+
+## Share Resources Across Models
+
+Use `config` objects and inheritance to share resource definitions across models.
+
+Example:
+
+``` yaml
+- config: shared-resources
+  resources:
+    data:
+     - file: data.csv
+
+- model: a
+  extends: shared-resources
+  operations:
+    train:
+      main: train_a
+      requires: data
+
+- model: b
+  extends: shared-resources
+  operations:
+    train:
+      main: train_b
+      requires: data
+```

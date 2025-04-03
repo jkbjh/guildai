@@ -1,7 +1,17 @@
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-   index
+
+   main.md
+   pages.rst
+   pages/start.md
+
+.. toctree::
+       :maxdepth: 5
+       :caption: Markdown Files
+       :glob:
+
+       pages/*
 
 Indices and tables
 ==================

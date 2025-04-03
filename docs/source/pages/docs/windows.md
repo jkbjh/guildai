@@ -1,0 +1,51 @@
+<!-- -*- eval:(visual-line-mode 1) -*- -->
+
+<div data-theme-toc="true"></div>
+<div data-guild-docs="true"></div>
+
+## Overview
+
+This guide provides details for using and configuring Guild for Windows environments.
+
+## Activate Virtual Environments
+
+### Command Line
+
+To activate a virtual environment on Windows, run `activate.bat`, which is located in the `Scripts` directory of the virtual environment:
+
+``` command
+<venv>\Scripts\activate.bat
+```
+
+### Power Shell
+
+If you're running Power Shell, run `Activate.ps1` instead:
+
+``` command
+<venv>\Scripts\Activate.ps1
+```
+
+## Set Environment Variables
+
+Guild makes use of various environment variables, in particular `GUILD_HOME`, which specifies where Guild saves runs and cached files. Setting environment variables in Windows is different from POSIX systems like Linux and macOS.
+
+For detailed help, refer to [ HowTo: Set an Environment Variable in Windows - Command Line and Registry](http://www.dowdandassociates.com/blog/content/howto-set-an-environment-variable-in-windows-command-line-and-registry/) by [Dowd and Associates](http://www.dowdandassociates.com/).
+
+## Symbolic Links Privileges in Windows
+
+The following Guild commands require special privileges on Windows to create symbolic links:
+
+- [`run`](/commands/run) - Symbolic links are used when linking required resource files.
+- [`tensorboard`](/commands/tensorboard) - Symbolic links are used when constructing the TensorBoard log directory used to view selected runs.
+
+You can satisfy this requirement using one of two techniques:
+
+- Run the command using Administrative privileges
+- Granting the current user Symbolic Link privileges
+
+While generally we do no advocate running commands as Administrator, this methods is considerably simpler than granting the current user Symbolic Link privileges.
+
+For more information, see:
+
+- [Start a Command Prompt as an Administrator](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj717276(v=ws.11)) (Microsoft Documentation)
+- [Create symbolic links](https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/create-symbolic-links) (Microsoft Documentation)

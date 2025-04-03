@@ -1,0 +1,474 @@
+<!-- -*- eval:(visual-line-mode 1) -*- -->
+
+<div data-theme-toc="true"></div>
+<div data-guild-docs="true"></div>
+
+## Overview
+
+Flags are user-specified inputs to an operation. Flags can define any type of information. Flags are commonly used for:
+
+- Hyperparameters
+- Data file locations
+- Data set names
+- Other operation confirmation
+
+Flags are specified for an operation using `NAME=VALUE` arguments to [`guild run`](/commands/run).
+
+The following command sets two flag values:
+
+``` command
+guild run train learning-rate=0.1 batch-size=100
+```
+
+Flags values can also be provided in [batch files](#batch-files).
+
+## Flags Interface
+
+Guild makes flag values available to a script using a *flags interface*. Guild supports different interfaces:
+
+- Command line arguments
+- Environment variables
+- Python global variables
+- Configuration file entries
+
+Guild works across platforms and languages using standard interfaces when possible. Guild does not require changes to script code to support Guild-specific configuration. Guild uses script inspection and explicit configuration in [Guild files](/docs/guildfiles) for flag information.
+
+When Guild does not have explicit configuration (e.g. when a script is run directly) it attempts to infer the flags interface by inspecting the script. See [*Default Behavior*](/docs/defaults#flags-interface) for more information.
+
+The flags interface is configured for an operation using the `flags-dest` attribute. See [`flags-dest` in *Guild File Reference*](/reference/guildfile#operation-flags-dest) for configuration details.
+
+For example of different interfaces, see [*Guild File Cheatsheet*](/cheatsheets/guildfile#flags-interface-python-modules).
+
+### Command Line Arguments
+
+Unless otherwise configured (or inferred by inspecting the script), Guild uses a command line interface to pass flag values to a script.
+
+This interface can be explicitly configured by setting `flags-dest` to `args`.
+
+Flag values are included as command line arguments using the format:
+
+<pre><code>--<em>FLAG_ARG_NAME</em> <em>ENCODED_FLAG_VALUE</em></code></pre>
+
+By default, *`FLAG_ARG_NAME`* is the flag name. If the `arg-name` attribute is specified for a flag definition, Guild uses the attribute value instead.
+
+*`ENCODED_FLAG_VALUE`* is the string-encoded flag value.
+
+Each non-null flag value is specified as arguments following this format.
+
+Consider the following command:
+
+``` command
+guild run train.py learning-rate=0.1 batch-size=100
+```
+
+Guild passes the two flag values to `train.py` as follows:
+
+``` command
+python -m train --learning-rate 0.1 --batch-size 100
+```
+
+The following Guild file configuration changes the argument names for each flag:
+
+``` yaml
+train:
+  flags:
+    learning-rate:
+      arg-name: lr
+    batch-size:
+      arg-name: bs
+```
+
+In this case, Guild passes the two flag values as:
+
+``` command
+python -m train --lr 0.1 --bs 100
+```
+
+> <span data-guild-class="callout tip">Tip</span> Use the `--print-cmd` option with [`guild run`](/commands/run) to print the full command Guild uses when running an operation.
+
+### Environment Variables
+
+Guild makes flag values available as environment variables to each run process. Environment variables are named <code>FLAG_<em>UPPER_CASE_NAME</em></code>. *`UPPER_CASE_NAME`* is the flag name coverted to upper case with non-alphanumeric characters converted to undercore characters.
+
+For example, the value for flag *`x`* is read as the environment variable `FLAG_X`.
+
+Use the [`env-name`](/reference/guildfile#flag-env-name) flag attribute to specify a different environment variable name for a flag.
+
+For example, the following configuration causes Guild to set values of `x` using the environment variable `X` instead of `FLAG_X`:
+
+``` yaml
+op:
+  flags:
+    x:
+      env-name: X
+```
+
+> <span data-guild-class="callout tip">Tip</span> Use environment variables as a convenient way to read flag values without having to process command line arguments.
+
+### Python Global Variables
+
+Guild sets flag values as global variables in a Python script when `flags-dest` is set to `globals` or when Guild otherwise detects this interface [through inspection](#flag-detection).
+
+Guild only sets global variables when they are already defined in a script. Guild does not create new variables in a script.
+
+The following operation uses a global variables interface to set values for flags `x` and `y`:
+
+``` yaml
+train:
+  flags-dest: globals
+  flags-import: [x, y]
+```
+
+Here is a Python script that uses `x` and `y`:
+
+``` python
+x = 1
+y = 2
+
+print("z: %i" % (x + y))
+```
+
+You can alternatively set flag values in a Python global dict variable using <code>global:<em>VARIABLE_NAME</em></code> for `flags-dest`.
+
+The following configuration sets flag values as items in the `params` global variable.
+
+``` yaml
+train:
+  flags-dest: global:params
+  flags-import: [x, y]
+```
+
+The following Python script shows how `train` might be implemented using `params`:
+
+``` python
+params = {"x": 1, "y": 2}
+
+print("z: %i" % (params["x"] + params["y"]))
+```
+
+### Configuration Files
+
+As of Guild 0.7.2, you can use configuration files to define flags for an operation.
+
+Guild supports the following configuration file formats:
+
+- YAML
+- JSON
+- Python Configuration File / INI
+
+To configuration an operation to use a configuration file for flags, specify `config:<path to config file>` for the operation `flags-dest`.
+
+The following example uses the file `flags.yml` to define flags:
+
+``` yaml
+train:
+  flags-dest: config:flags.yml
+  flags-import: all
+```
+
+Sample `flags.yml`:
+
+``` yaml
+x: 1
+y: 2
+```
+
+Guild imports flag values from the configuration file as defaults.
+
+When you run the operation, Guild generates a copy of the specified configuration file in the run directory. The copy contains any modified flag values.
+
+For example, when you run for the example above:
+
+``` command
+guild run train x=3
+```
+
+Guild generates a file named `flags.yml` in the run directory containing these values:
+
+``` yaml
+x: 3
+y: 2
+```
+
+If you want to rename the generated file, use a `config` resource with the `rename` attribute.
+
+``` yaml
+train:
+  flags-dest: config:flags.in.yml
+  flags-import: all
+  requires:
+    - config: flags.yml
+      rename: flags.in.yml flags.yml
+```
+
+## Import Flags
+
+To avoid duplicating flag definitions in scripts and in Guild files, Guild lets you *import* flag definitions.
+
+### Flag Detection
+
+To import flags, Guild inspects a script and look for possible flag definitions based on the flags interface. As described above, the flags interface can be explicitly configured. Otherwise Guild attempts to infer the interface.
+
+Guild uses the rules below for inferring flags according to the specified interface.
+
+<div data-guild-class="terms">
+
+| *Interface* | *Detection Method* |
+|-|-|
+| `args` | Guild runs the script with the `--help` option and inspects `argparse` generated option. From this Guild infers flag name, description, type, available choices, and default value. |
+| `globals` | Guild inspects the Python module and looks for global variables that are assigned numbers, strings, or boolean constants. Guild does not import variables that start with `_`. From this Guild infers flag name, type, and default value. |
+| `global:<name>` | Guild inspects the Python module and looks for the specified global variable. Guild infers flags if the variable references a dict. Guild infers flags from dict items that are number, string, or boolean constants. From these items, Guild infers flag name, type, and default value. |
+
+</div>
+
+Guild does not currently support flag imports for non-Python scripts. In such cases, explicitly define each flag and use [command line arguments](#command-line-arguments) or [environment variables](#environment-variables) (see above) to access flags.
+
+### Flag Import Configuration
+
+Guild supports different import scenarios:
+
+- Import all detected flags
+- Import a list of detected flags
+- Import all but some detected flags
+- Explicitly disable flag imports
+
+##### Import All Flags
+
+To import all detected flags, use the value `all` or `yes` for `flags-import`.
+
+``` yaml
+op:
+  flags-import: all
+```
+
+##### Import Some Flags
+
+To import a list of detected flags, specify the flag names in a list.
+
+```
+op:
+  flags-import: [x, y, z]
+```
+
+##### Import All but Some Flags
+
+You can combine `flags-import: all` with `flags-import-skip` to import all flags but skip those specified.
+
+``` yaml
+op:
+  flags-import: all
+  flags-import-skip: [x, y]
+```
+
+This pattern is useful when Guild mistakenly infers a command line option or variable as a flag.
+
+##### Explicitly Disable Flags Import
+
+To disable Guild support for detecting and importing flags, use the value `no` for `flags-import`.
+
+``` yaml
+op:
+  flags-import: no
+```
+
+In this case, you must explicitly define each flag your script supports.
+
+> <span data-guild-class="callout tip">Tip</span> When `flags-import` is `no`, Guild does not inspect your script for flags. Use this value to avoid processing your scripts when you don't need to.
+
+## Flag Definitions
+
+Define flags for an operation using the [`flags`](/reference/guildfile#operation-flags) operation attribute.
+
+``` yaml
+train:
+  flags:
+    learning-rate: 0.01
+    batch-size: 100
+```
+
+Each flag is defined by a key in the `flags` mapping. The key is the *flag name*.
+
+Flags can be defined using a value, as shown above, or with a mapping of attributes. If a value is specified, it's used as the default flag value. The default value can otherwise be defined using the [`default`](/reference/guildfile#flag-default) attribute. The following is equivalent to the configuration above:
+
+``` yaml
+train:
+  flags:
+    learning-rate:
+      default: 0.01
+    batch-size:
+      default: 100
+```
+
+Flags support a number of attributes for defining settings for help, value checks, type conversion, and interface details. Refer to [*Guild File Reference*](/reference/guildfile#flag-attributes) for a list of supported attributes.
+
+For more examples of flag definitions, see [*Guild File Cheatsheet*](/cheatsheets/guildfile#flag-definitions).
+
+## Batch Files
+
+Batch files are files that contain one or more sets of flags to use for a run.
+
+Specify batch files for a run using one or more arguments with the syntax <code>@<em>PATH</em></code> where *`PATH`* is the path to a valid batch file.
+
+For example, to use the batch file `trials.csv` for operation `train`, run:
+
+``` command
+guild run @trials.csv
+```
+
+For information on batch file format, see [Batch Files](/docs/runs#batch-files).
+
+## Special Flag Values
+
+Guild supports a number of special flag value types that influence the way Guild runs an operation.
+
+<div data-guild-class="terms">
+
+| | |
+|-|-|
+| [*Value List*](#value-lists) | Used in manual searches to generate runs for a list of values. |
+| [*Sequence Function*](#sequence-functions) | Used in grid search to generate a sequential list of values. |
+| [*Search Space Function*](#search-space-functions) | Used in random search and other optimizers to specify a search space. |
+</div>
+
+### Value Lists
+
+A *value list* is a flag value in the format <code>[<em>VAL1</em>,<em>VAL2</em>,<span data-guild-class="fal fa-ellipsis-h"></span>]</code> where each value is a number, a string, or boolean value.
+
+A value list is processed according to the [*batch operation*](/docs/optimization) used. The [default batch operation](/docs/optimization#grid-search) uses values in a grid search. Other batch operations, including [random](/docs/optimization#random-search) and [sequetial optimizers](/docs/optimization#sequential-optimization), use the list as a set of choices to select from when suggesting trial values.
+
+The following command is a *grid search*. It runs the `train` operation a total of *nine* times --- one for each combination of values defined by value lists:
+
+``` command
+guild run train lr=[0.001,0.01,0.1] batch-size=[100,500,1000]
+```
+
+This command is a sequential optimization using [`gp`](/reference/optimizers#gp) to minimize *`loss`*. It uses the same flag values. Based on the optimizer, it generates 5 trials using value lists as *choices* to sample from:
+
+``` command
+guild run train lr=[0.001,0.01,0.1] batch-size=[100,500,1000] -Fo gp -m 5
+```
+
+### Sequence Functions
+
+Sequence functions are specified in the format <code><em>NAME</em>[<em>ARGS</em>]</code> where *`NAME`* is one of the functions below and *`ARGS`* is a list of values separated by a colon `:`.
+
+<div data-guild-class="terms">
+
+| *Function Name* | *Description* |
+|-|-|
+| [`range`](#range) | Range with *start*, *end*, and an optional step size |
+| [`linspace`](#linspace) | Evenly spaced sequence along a linear scale with *start*, *end*, and an optional value count |
+| [`logspace`](#logspace) | Evenly spaced sequence along a log-linear scale with *start*, *end*, an optional value count, and an optional logarithmic base |
+
+</div>
+
+#### range
+
+```
+range[START:END:STEP=1]
+```
+
+Generates a list of values starting with `START` and ending with `END` in increments of `STEP`. `STEP` can be omitted, in which case the value `1` is used.
+
+| *Example* | *Sequence* |
+|------------------------|------------------------|
+| `range[1:4]`           | `[1, 2, 3, 4]`         |
+| `range[1:4:2]`         | `[1, 3]`               |
+| `range[0:0.3:0.1]`     | `[0.0, 0.1, 0.2, 0.3]` |
+
+#### linspace
+
+```
+linspace[START:END:COUNT=5]
+```
+
+Generates `COUNT` values that are evenly spaced between `START` and `END` inclusively.
+
+| *Example*         | *Sequence*                  |
+|-------------------|-----------------------------|
+| `linspace[1:5]`   | `[1.0, 2.0, 3.0, 4.0, 5.0]` |
+| `linspace[1:5:3]` | `[1.0, 3.0, 5.0]`           |
+
+#### logspace
+
+```
+logspace[LOW:HIGH:COUNT=5:BASE=10]
+```
+
+Generates `COUNT` values along a logarithmic scale between `BASE ^ LOW` and `BASE ^ HIGH` inclusively.
+
+| *Example*           | *Sequence*                                 |
+|---------------------|--------------------------------------------|
+| `logspace[1:5]`     | `[10.0, 100.0, 1000.0, 10000.0, 100000.0]` |
+| `logspace[0:4:3]`   | `[1.0, 100.0, 10000.0]`                    |
+| `logspace[-4:-1:4]` | `[0.0001, 0.001, 0.01, 0.1]`               |
+| `logspace[0:2:3:2]` | `[1.0, 2.0, 4.0]`                          |
+
+### Search Space Functions
+
+Search space functions are specified in the format <code><em>NAME</em>[<em>ARGS</em>]</code> where *`NAME`* is one of the functions below and *`ARGS`* is a list of values separated by a colon `:`.
+
+<div data-guild-class="terms">
+
+| *Function Name* | *Description* |
+|-|-|
+| [`uniform`](#uniform)       | Uniform distribution over a range of values     |
+| [`loguniform`](#loguniform) | Log-uniform distribution over a range of values |
+</div>
+
+#### uniform
+
+```
+uniform[START:END]
+```
+
+Alternative syntax (omits function name):
+
+```
+[START:END]
+```
+
+Search space from `START` to `END` from a uniform distribution.
+
+#### loguniform
+
+```
+loguniform[START:END]
+```
+
+Search space from `START` to `END` from a log-uniform distribution.
+
+## Flag Value Decoding
+
+Guild uses the [YAML spec](https://yaml.org/spec/) for decoding strings to values.
+
+Examples:
+
+| *String Value* | *Decoded Type* |
+|----------------|----------------|
+| `hello`        | string         |
+| `1`            | int            |
+| `1.0`          | float          |
+| `1e2`          | float          |
+| `'1e2'`        | string         |
+| `[1,2,3]`      | list           |
+
+Guild provides an exception in cases where a string that appears to be a run ID but would otherwise be treated by YAML as scientific notation.
+
+| *String Value* | *Decoded Type* |
+|----------------|----------------|
+| `1e10`         | string         |
+| `67217e15`     | string         |
+
+In cases where a flag must interpret these values as floats, specify the `type` attribute as `float` for the flag definition.
+
+For example:
+
+``` yaml
+train:
+  flags:
+    learning-rate:
+      type: float
+```
+
+In this case, Guild will explicitly decode string input to `float`.

@@ -1,0 +1,419 @@
+<!-- -*- eval:(visual-line-mode 1) -*- -->
+
+<div data-theme-toc="true"></div>
+<div data-guild-docs="true"></div>
+
+## Overview
+
+Guild files are named `guild.yml` and are located in project directories. They provide information about your project.
+
+- Scripts used to generate experiments
+- User input parameters
+- Generated metrics
+- Script source code
+- Requires input files
+
+While Guild can run scripts directly without explicit configuration, in such cases Guild makes assumptions about how to run each script. For all but simple cases, we recommend using Guild files to formally define your project operations.
+
+More about Guild files:
+
+- [*Get Started: Add a Guild File*](/start/guildfile) --- step-by-step example creating a simple Guild file
+- [*Guild File Reference*](/reference/guildfile) --- complete list of configuration options
+- [*Guild File Cheatsheet*](/cheatsheets/guildfile) --- configuration examples
+
+## Format
+
+Guild files are plain text files in YAML format. See [*Guild File Reference*](/reference/guildfile) for details on file format.
+
+## Operations
+
+An *operation* defines what Guild executes to for a run.
+
+Consider this example, which defines a single operation named `train`:
+
+``` yaml
+train:
+  description: Train a model using a Python script
+  main: train
+  flags:
+    learning-rate: 0.1
+    batch-size: 100
+```
+
+The operation is named `train` and can be run using `guild run train`. It runs the `train` Python module, which is specified by the `main` attribute. The operataion defines two flags: `learning-rate` and `batch-size`.
+
+You can run the operation from a command terminal by changing to the directory containing `guild.yml` (the project directory) and running:
+
+``` command
+guild run train
+```
+
+``` output
+You are about to run train
+  batch-size: 100
+  learning-rate: 0.1
+Continue? (Y/n)
+```
+
+Guild shows a preview of the flags used for the operation and asks you to confirm the operation by pressing `Enter`. When you confirm the operation, Guild executes the `train` module with the specified flag values. Guild generates a [*run*](/docs/runs), which is a record of the operation inputs and outputs.
+
+Guild passes flag values to Python modules by setting global variables or by passing arguments on the command line. You can configure this interface or Guild can detect it. For more information, see [Flags Interface](#flags-interface) below.
+
+Guild supports operations in Python as well as other languages. Here's an operation that runs a shell script:
+
+``` yaml
+train:
+  description: Train a model using a shell script
+  exec: train.sh
+```
+
+For more information on running operations with difference languages, see [Other Language Operations](#other-language-operations) below.
+
+### Python Operation
+
+Guild provides special support for Python-based operations. To define a Python based operation, use the [`main`](/reference/guildfile#operation-main) operation attribute to specify the Python main module. This is a Python module that runs a task when loaded by the Python interpreter as `__main__`.
+
+Consider a script named `train_classifier.py`:
+
+``` python
+from models import cnn
+
+def train():
+    model = cnn.CNN()
+    model.train()
+
+if __name__ == "__main__":
+    train()
+```
+
+To run the script using Python, you use:
+
+``` command
+python train_classifier.py
+```
+
+In this case, the `main` module name is `train_classifier` and is specified in a Guild file operation as follows:
+
+``` yaml
+train:
+  main: train_classifier
+```
+
+> <span data-guild-class="callout note">Note</span> Do not include the file name extension when specifying a main module for an operation. The attribute value specifies a Python *module* and not a file name.
+
+### Other Language Operations
+
+To run a non-Python based operation, use the `exec` operation attribute. The value for `exec` is a command available on the `PATH` environment variable or a path to an executable program.
+
+The following example runs a Java program, provided as a JAR file:
+
+``` yaml
+train:
+  exec: java -jar train.jar
+  requires:
+    - file: train.jar
+```
+
+Any files needed by the operation --- e.g. programs, etc. --- must be specified as dependencies using the `requires` attribute. Refer to [Dependencies](#dependencies) below for information on specifying required files for an operation.
+
+### Flags
+
+*Flags* are user inputs to an operation. Flags define model and training hyperparameters as well other script inputs, such as data set information, user defined input paths, deployment endpoints, etc.
+
+Flags are defined for each operation using the `flags` attribute.
+
+``` yaml
+train:
+  flags:
+    learning-rate: 0.1
+    batch-size: 100
+```
+
+<span data-guild-class="caption">Use flags to define operation inputs such as *learning rate* and *batch size*</span>
+
+When running an operation, a user sets flag values using `FLAG_NAME=VALUE` arguments to [`guild run`](/commands/run).
+
+``` command
+guild run train learning-rate=0.01 batch-size=1000
+```
+
+<span data-guild-class="caption">Specify flag values as `FLAG_NAME=VALUE` arguments</span>
+
+See [Flags Interface](#flags-interface) below for information on how Guild conveys flag values to a script.
+
+Guild records flag values used for each run. Flag values are displayed in several contexts:
+
+- Output from [`runs info`](/commands/runs-info)
+- Columns in [Guild Compare](/docs/compare)
+- Columns in **Compare Runs** of [Guild View](/docs/view)
+- Hyperparameters in [Guild TensorBoard](/docs/tensorboard)
+
+#### Flags Interface
+
+Guild conveys flag values to a script using various methods:
+
+- Command line arguments
+- Environment variables
+- Global variables (Python only)
+
+For Python based operations, Guild detects the flags interface by inspecting the `main` module. If the module uses Python's [`argparse` package](ext:https://docs.python.org/library/argparse.html), Guild assumes that the script uses command line arguments to read flag values. Otherwise, Guild assumes the script uses global variables for flags.
+
+Specify the interface using the `flags-dest` operation attribute (short for *flags destination*).
+
+When `flags-dest` is set, Guild does not inspect the file to detect the flags interface.
+
+##### Flags as Command Line Arguments
+
+To indicate that flags should be passed as command line arguments use `args`:
+
+```
+train:
+  flags:
+    learning-rate: 0.1
+    batch-size: 100
+  flags-dest: args
+```
+
+<span data-guild-class="caption">Flags conveyed to a script using command line arguments</span>
+
+In this case, Guild runs the command `python -m train --learning-rate 0.1 --batch-size 100`. The script `train.py` must parse these command lines to read the specified flag values.
+
+By default Guild uses the flag name as the argument name. To use a different value, specify the `arg-name` flag attribute.
+
+##### Flags as Global Variables (Python only)
+
+When `flags-dest` is `globals`, Guild sets flag values as script global variables.
+
+#### Automatically Import Flags (Python only)
+
+Guild can import flags from Python scripts to avoid duplicating information in a Guild file. By default, Guild does not attempt to import flags from Python scripts.
+
+To import flags from a Python script, use the [`flags-import`](/reference/guildfile#operation-flags-import) operation attribute.
+
+#### Flag Definitions
+
+See [*Flags*](/docs/flags) for details on defining flags for an operation.
+
+### Source Code
+
+Guild copies operation source code to a run directory for each run. Guild uses the run copy of the source code rather than the project source code. This services two purposes:
+
+- The source code copy for a run is definitive --- it's the source code that is run
+- Changes to the project do not effect an in-progress run
+
+It's important to copy the required source code files. By default, Guild copies text files with safeguards to prevent copying too many files or files that are too big. Change this behavior by defining a `sourcecode` attribute for operation or the operation model.
+
+See [*Guild File Reference*](/reference/guildfile#source-code) for more information.
+
+### Output Scalars
+
+In some cases, Guild applies additional rules to capture scalars logged by known frameworks. Refer to [Framework Scalars](#framework-scalars) below for more information.
+
+The sections that follow describe how you can configure Guild's output scalar behavior.
+
+#### Custom Output Scalars
+
+Configure output scalars for an operation by defining a `output-scalars` attribute. Guild supports two schemes:
+
+- Pattern mapping
+- Pattern list
+
+A pattern mapping associates patterns with scalar keys. Pattern mappings work well when you have a fixed set of scalars that you want to capture, and you want to ignore everything.
+
+The following configuration captures scalars using a pattern mapping.
+
+``` yaml
+train:
+  output-scalars:
+    loss: 'Loss: (\value)'
+    accuracy: 'Accuracy: (\value)'
+    step:
+```
+
+#### Disable Output Scalars
+
+If you want to log scalars explicitly (e.g. using a [TensorFlow summary writer](https://www.tensorflow.org/api_docs/python/tf/summary/SummaryWriter)) you can disable Guild's output summary support by setting `output-scalars` to `off`.
+
+``` yaml
+train:
+  output-scalars: off
+```
+
+#### Keras Scalars
+
+By default, Guild applies the following patterns when running Keras operations:
+
+|||
+|-|-|
+| `Epoch (?P<step>[0-9]+)` | Sets the current `step` used for subsequently logged scalar values |
+| ` - ([a-z_]+): (\value)` | Captures scalar values staring with lower case (skips `ETA`, which would otherwise be logged as a scalar) |
+
+### Dependencies
+
+When an operation needs a file or other resource, it defines a *dependency* on a resource. Guild starts each run with an empty directory. If an operation needs a file, it must define it as a dependency.
+
+Refer to [*Dependencies*](/docs/dependencies) for details on defining and using dependencies in Guild.
+
+### Pipelines
+
+Pipelines are multi-step runs defined using the [`steps`](/reference/guildfile#operation-steps) attribute.
+
+Refer to [*Pipelines*](/docs/pipelines) for details on defining and using pipelines in Guild.
+
+## Models
+
+A *model* defines a set of related operations. Generally models correspond to the structures that you train, evaluate, and deploy. However, Guild models may define any operations or even be used for non-modeling functions.
+
+Models must be defined using [full format](/reference/guildfile#full-format) Guild files. Models are top-level objects with a `model` attribute.
+
+``` yaml
+- model: mnist
+  operations:
+    train: mnist_train
+    validate: mnist_val
+```
+
+Define a model when you want to:
+
+- Provide namespaces for operations
+- Define [named resources](#resources)
+- Use model [inheritance](#inheritance) to reuse configuration
+
+## Resources
+
+A *resource* is a set of *sources* required by an operation. A source typically defines one or more source files. An operation indicates it requires a resource by defining it in the [`requires`](/reference/guildfile#operation-requires) attribute.
+
+Resources may be defined inline or as named resources. See [*Dependencies*](/docs/dependencies#inline-vs-named-resources) for more information.
+
+Refer to [*Guild File Reference*](/reference/guildfile#resources) for resource attributes.
+
+## Packages
+
+Guild supports installation and use of models and operations through packages. See [*Packages*](/docs/packages) for more information.
+
+## Reusable Config
+
+Guild supports reusable configuration through top-level `config` objects.
+
+Configuration must be defined using [full format](/reference/guildfile#full-format) Guild files.
+
+Configuration objects may contain any attributes. Attributes are applied based on how the object is used.
+
+Guild supports two uses of `config` objects:
+
+- [Top-level object inheritance](#inheritance)
+- [Attribute includes](#attribute-includes)
+
+Below is a sample `config` object.
+
+``` yaml
+- config: model-base
+  operations:
+    train: '{{ name }}_train'
+    validate: '{{ name }}_val'
+```
+
+<span data-guild-class="caption">Top-level `config` object named `base-model` that defines an `operations` attribute</span>
+
+This configuration can be referenced using the `extends` attribute of another top-level object to inherit the configuration attributes.
+
+``` yaml
+- model: mnist
+  extends: model-base
+  params:
+    name: mnist
+```
+
+<span data-guild-class="caption">Top-level `model` object that *extends* `base-model` --- it defines a `name` param, which resolves references in the inherited attributes</span>
+
+### Inheritance
+
+Guild files support *inheritance* where attributes of one object (parent) are applied by default to another object (child). A child may redefine attributes as needed.
+
+Here's an example of using inheritance (copied from above):
+
+``` yaml
+- config: model-base
+  operations:
+    train: '{{ name }}_train'
+    validate: '{{ name }}_val'
+
+- model: mnist
+  extends: model-base
+  params:
+    name: mnist
+```
+
+A common use of inheritance is to reuse resource definitions.
+
+``` yaml
+- config: data-support
+  resources:
+    prepared-data:
+      - operation: prepare-data
+
+- operations:
+    prepare-data:
+      main: prepare_data
+
+- model: mlp
+  extends: data-support   # inherit the resources defined above
+  operations:
+    train:
+      main: train_mlp
+      requires: prepared-data
+```
+
+### Attribute Includes
+
+You can reuse config settings through a special `$include` attribute. This attribute is used for flags and operations.
+
+Here's an example:
+
+``` yaml
+- config: train-flags
+  flags:
+    learning-rate: 0.1
+    batch-size: 100
+
+- operations:
+    train-cnn:
+      flags:
+        $include: train-flags
+    train-lr:
+      flags:
+        $include: train-flags
+```
+
+## Including Files
+
+Guild files can include other YAML files by using a top-level `include` object. The `include` type attribute specifies the path of the file to include. Paths are considered relative to the including Guild file.
+
+Here is a sample `guild.yml` file that includes two files.
+
+``` yaml
+- include: guild-mnist.yml
+- include: guild-cifar.yml
+```
+
+<span data-guild-class="caption">`guild.yml` --- includes two files</span>
+
+The included files must be valid full format Guild files. Their contents are included in the Guild including file at the location each is defined.
+
+``` yaml
+- model: mnist
+  operations:
+    train: mnist_train
+    validate: mnist_validate
+```
+
+<span data-guild-class="caption">`guild-mnist.yml` --- included by `guild.yml` above</span>
+
+``` yaml
+- model: cifar
+  operations:
+    train: cifar_train
+    validate: cifar_valuate
+```
+
+<span data-guild-class="caption">`guild-cifar.yml` --- also included by `guild.yml` above</span>

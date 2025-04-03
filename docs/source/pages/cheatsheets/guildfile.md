@@ -1,0 +1,708 @@
+<!-- -*- eval:(visual-line-mode 1) -*- -->
+
+<div data-theme-toc="true"></div>
+<div data-guild-docs="true"></div>
+
+## Guild File Format
+
+Operation only format (use to start and simple projects):
+
+``` yaml
+train:
+  main: mnist_train
+
+test:
+  main: mnist_test
+```
+
+Full format (use for multiple models, named resources, config reuse):
+
+``` yaml
+- model: mnist
+  operations:
+    train:
+      main: mnist_train
+
+    test:
+      main: mnist_test
+```
+
+## Operations
+
+### Python Based Operations
+
+One operation, runs Python module, imports all detected flags:
+
+``` yaml
+train:
+  main: mnist_train
+  flags-import: all
+```
+
+Module `train` located in package `mnist`:
+
+``` yaml
+train:
+  main: mnist.train
+  flags-import: all
+```
+
+Module `train` located in subdirectory `src`:
+
+``` yaml
+train:
+  main: src/train
+  flags-import: all
+```
+
+Module with arguments (flag args are appended to argument list):
+
+``` yaml
+train:
+  main: main --train
+  flags-import: [lr, dropout]
+```
+
+Control Python command using `exec`:
+
+``` yaml
+train-debug:
+  exec: python -v -m mnist_train
+```
+
+### Other Languages
+
+Run an R script:
+
+``` yaml
+train:
+  exec: Rscript train.r
+```
+
+R script with arguments:
+
+``` yaml
+train:
+  exec: Rscript train.r --learning-rate ${learning-rate}
+  flags:
+    learning-rate: 0.1
+```
+
+Pass all flag arguments:
+
+``` yaml
+train:
+  exec: Rscript train.r ${flag_args}
+  flags:
+    learning-rate: 0.1
+    batch-size: 100
+```
+
+## Flags
+
+### Flag Imports
+
+Import all detected flags:
+
+``` yaml
+train:
+  flags-import: all
+```
+
+Import some flags:
+
+``` yaml
+train:
+  flags-import:
+    - learning_rate
+    - batch_size
+    - dropout
+```
+
+Import all but some flags:
+
+``` yaml
+train:
+  flags-import: all
+  flags-import-skip:
+    - num_classes
+    - log_dir
+```
+
+Disable flag import:
+
+``` yaml
+train:
+  flags-import: off
+```
+
+### Flags Interface - Python Modules
+
+For a list of working examples, refer to the [`examples/flags`](https://github.com/guildai/guildai/tree/master/examples/flags) project.
+
+Auto-detect [flags interface](/docs/flags#flags-interface):
+
+``` yaml
+train:
+  flags-import: all
+```
+
+Disable auto-detect - always use global variables:
+
+``` yaml
+train:
+  flags-dest: globals
+  flags-import: all
+```
+
+Disable auto-detect - use command line arguments:
+
+``` yaml
+train:
+  flags-dest: args
+  flags-import: all
+```
+
+Set flags in `params` global dict:
+
+``` yaml
+train:
+  flags-dest: global:params
+  flags-import: all
+```
+
+Set flags in `params` global dict (alternative version):
+
+``` yaml
+train:
+  flags-dest: dict:params
+  flags-import: all
+```
+
+Set flags in `params` global `SimpleNamespace` variable:
+
+``` yaml
+train:
+  flags-dest: namespace:params
+  flags-import: all
+```
+
+### Flags Interface - Other Languages
+
+Pass all args as command line arguments:
+
+``` yaml
+train:
+  exec: echo ${flag_args}
+  flags:
+    msg: hello
+```
+
+Pass individual flags as arguments:
+
+``` yaml
+train:
+  exec: echo ${msg}
+  flags:
+    msg: hello
+```
+
+### Flag Definitions
+
+Single-value flags definitions (values are defaults):
+
+``` yaml
+train:
+  flags:
+    learning-rate: 0.1
+    batch-size: 100
+```
+
+Provide flag help using `description`:
+
+``` yaml
+train:
+  flags:
+    learning-rate:
+      description: Learning rate used for training
+      default: 0.1
+    batch-size:
+      description: Batch size used for training
+      default: 100
+```
+
+Require a flag value:
+
+``` yaml
+train:
+  flags:
+    data:
+      description: Location of data file
+      required: yes
+```
+
+Limit values to a set of choices:
+
+``` yaml
+train:
+  flags:
+    optimizer:
+      choices:
+       - adam
+       - sgd
+       - rmsprop
+      default: sgd
+```
+
+Provide help for choices with `description`:
+
+``` yaml
+train:
+  flags:
+    optimizer:
+      choices:
+       - value: adam
+         description: Adam optimizer
+       - value: sgd
+         description: Stochastic gradient descent optimizer
+       - value: rmsprop
+         description: RMSProp optimizer
+      default: sgd
+```
+
+Require a choice:
+
+``` yaml
+train:
+  flags:
+    dropout:
+      choices: [0.1, 0.2, 0.3]
+      required: yes
+```
+
+Allow other values (choices used in help text):
+
+``` yaml
+train:
+  flags:
+    dropout: [0.1, 0.2, 0.3]
+    allow-other: yes
+```
+
+Use `type` to check values:
+
+``` yaml
+train:
+  flags:
+    data:
+      type: existing-path
+      default: data
+    data-digest:
+      type: string
+      required: yes
+    learning-rate:
+      type: float
+      default: 0.1
+```
+
+Use an alternative argument name (applies to command line option name and global variable name):
+
+``` yaml
+train:
+  flags:
+    learning-rate:
+      arg-name: lr
+```
+
+Use arg name to set nested values with <code>global:<em>NAME</em></code> interface:
+
+``` yaml
+train:
+  flags-dest: global:params
+  flags:
+    learning-rate:
+      arg-name: train.lr
+```
+
+Use `arg-switch` to specify that the flag value `yes` causes a switch
+option (i.e. an option without an argument) to be used:
+
+``` yaml
+train:
+  flags-dest: args
+  flags:
+    test:
+      arg-switch: yes
+```
+
+In this case, the following command causes `--test` to appear as a
+single switch to the train script (e.g. `python -m test --test`):
+
+``` command
+guild run train test=yes
+```
+
+Use `arg-split` to support a list value for a flag:
+
+``` yaml
+train:
+  flags-dest: args
+  flags:
+    inner-layers:
+      default: "10 10 10"
+      arg-split: yes
+```
+
+In this case, the following command causes three values as arguments
+to the option `--inner-layers` (e.g. `python -m test --inner-layers 20
+20 20`):
+
+``` command
+guild run train inner-layers="20 20 20"
+```
+
+## Dependencies
+
+### Inline vs Named Resources
+
+Inline resource:
+
+``` yaml
+train:
+  requires:
+    - file: data.csv
+```
+
+Named resource (requires [full format](/reference/guildfile#full-format) Guild file):
+
+``` yaml
+- operations:
+    train:
+      requires: data
+
+    test:
+      requires: data
+
+  resources:
+    data:
+      - file: data.csv
+```
+
+### Required Project Files
+
+Basic project file dependency (creates a link in run dir to project file):
+
+``` yaml
+train:
+  requires:
+    - file: data.csv
+```
+
+Copy file, rather than link:
+
+``` yaml
+train:
+  requires:
+    - file: data.csv
+      target-type: copy
+```
+
+Create resolved dependency under `data` dir:
+
+``` yaml
+train:
+  requires:
+    - file: data.csv
+      target-path: data
+```
+
+Rename target file:
+
+``` yaml
+train:
+  requires:
+    - file: train.csv
+      rename: train.csv data.csv
+```
+
+Ensure file contents:
+
+``` yaml
+train:
+  requires:
+    - file: data.csv
+      target-type: copy
+      sha256: 5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03
+```
+
+Require unpacked archive contents (archive types are unpacked by default):
+
+``` yaml
+train:
+  requires:
+    - file: data.tar.gz
+```
+
+Don't unpack archive:
+
+``` yaml
+train:
+  requires:
+    - file: data.tar.gz
+      unpack: no
+```
+
+Require project subdirectory:
+
+``` yaml
+train:
+  requires:
+    - file: datasets/mnist
+```
+
+### Required Network Files
+
+Yann LeCun's MNIST dataset:
+
+``` yaml
+train:
+  requires:
+    - url: http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
+      sha256: 440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609
+    - url: http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz
+      sha256: 3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c
+    - url: http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
+      sha256: 8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6
+    - url: http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
+      sha256: f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6
+```
+
+Use a named resource to create dataset files in run subdirectory:
+
+``` yaml
+- operations:
+    cnn:
+      requires: mnist-data
+    lr:
+      requires: mnist-data
+
+  resources:
+    mnist-data:
+      target-path: mnist-idx-data
+      sources:
+        - url: http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
+          sha256: 440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609
+        - url: http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz
+          sha256: 3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c
+        - url: http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
+          sha256: 8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6
+        - url: http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
+          sha256: f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6
+```
+
+### Required Operation Files
+
+Require all files generated by `prepare-data` operation:
+
+``` yaml
+train:
+  requires:
+    - operation: prepare-data
+
+prepare-data: {}
+```
+
+Require only `*.hdf5` files generated by `prepare-data` (`select` uses regular expression):
+
+``` yaml
+train:
+  requires:
+    - operation: prepare-data
+      select: .+\.hdf5
+```
+
+Require `model.ckpt` from any operation that starts with `train-`:
+
+``` yaml
+train:
+  requires:
+    - operation: ^train-.+
+      select: model\.ckpt
+```
+
+## Output Scalars
+
+Default capture pattern (shown here for reference):
+
+``` yaml
+train:
+  output-scalars: '(\key): (\value)'
+```
+
+Use a different pattern to capture scalars:
+
+``` yaml
+train:
+  output-scalars: ' - (\key): (\value)'
+```
+
+Disable output scalars:
+
+``` yaml
+train:
+  output-scalars: no
+```
+
+Use keys to define patterns for each supported scalar (`step` is a special scalar key used to track global step for scalars):
+
+``` yaml
+train:
+  output-scalars:
+    step: 'Training epoch (\step)'
+    loss: 'Validation loss: (\value)'
+```
+
+Use named capture groups to specify the key for a particular pattern:
+
+``` yaml
+train:
+  output-scalars: 'epoch (?P<step>\step) - train loss (?P<loss>\value) - val loss (?P<val_loss>\value)'
+```
+
+Use a list of specs as needed to define output scalars.
+
+``` yaml
+train:
+  output-scalars:
+    - 'Epoch (?P<step>\step)'
+    - loss: 'loss: (\value)'
+      acc: 'accuracy: (\value)'
+    - '(\key)=(\value)'
+```
+
+## Source Code
+
+Copy only Python and YAML files - operation level config:
+
+``` yaml
+train:
+  sourcecode:
+    - '*.py'
+    - '*.yml'
+```
+
+Copy only Python and YAML files - model level config (applies by default to all model operations):
+
+``` yaml
+- model: cnn
+  sourcecode:
+    - '*.py'
+    - '*.yml'
+```
+
+Extend default rules to include additional files matching a pattern:
+
+``` yaml
+train:
+  sourcecode:
+    - include: '*.png'
+```
+
+Extend default rules to exclude files matching a pattern:
+
+``` yaml
+train:
+  sourcecode:
+    - exclude: '*.csv'
+```
+
+Exclude a directory (improves performance for directories containing many files):
+
+``` yaml
+train:
+  sourcecode:
+    - exclude:
+        dir: data
+```
+
+Use a different source code root:
+
+``` yaml
+train:
+  sourcecode:
+    root: ../src
+```
+
+Use a different source code root with modified rules:
+
+``` yaml
+train:
+  sourcecode:
+    root: ../src
+    select:
+      - '*.py'
+      - '*.yml'
+```
+
+Copy the source code to the run directory root:
+
+``` yaml
+train:
+  sourcecode:
+    dest: .
+```
+
+Copy the source code to a `src` subdirectory in the run directory:
+
+``` yaml
+train:
+  sourcecode:
+    dest: src
+    select:
+      - '*.py'
+      - '*.yml'
+```
+
+<div data-toc-id="sourcecode-disable"><p>Disable source code:</p></div>
+
+``` yaml
+train:
+  sourcecode: no
+```
+
+## Optimizers
+
+Define optimizers for an operation (use to change default settings):
+
+``` yaml
+train:
+  optimizers:
+    gp:
+      kappa: 1.5
+      xi: 0.1
+    forest:
+      kappa: 1.5
+      xi: 0.1
+```
+
+Define default optimizer (applies when `--optimize` used with [`run`](/commands/run) command):
+
+``` yaml
+train:
+  optimizers:
+    forest:
+      default: yes
+```
+
+Define alternative optimizers that use the same algorithm:
+
+``` yaml
+train:
+  optimizers:
+    gp-1:
+      algorithm: gp
+      kappa: 1.5
+    gp-2:
+      algorithm: gp
+      kappa: 1.8
+```

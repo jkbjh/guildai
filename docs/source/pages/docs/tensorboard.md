@@ -1,0 +1,42 @@
+<!-- -*- eval:(visual-line-mode 1) -*- -->
+
+<div data-theme-toc="true"></div>
+<div data-guild-docs="true"></div>
+
+<!-- TODO
+
+Sections for:
+
+- Using TB to compare images - esp plots. Include some examples.
+
+-->
+
+## Overview
+
+Guild provides integrated support for [TensorBoard](https://www.tensorflow.org/tensorboard).
+
+To use TensorBoard to view Guild runs, use [`guild tensorboard`](/commands/tensorboard):
+
+``` command
+guild tensorboard
+```
+
+Guild manages the TensorBoard log directory by synchronizing with the current set of runs and their summaries. You can leave TensorBoard running while you generate more runs or while runs are logging summaries. TensorBoard will update automatically.
+
+![tb|552x382](upload://5vsGXd9mCrlSTO4O0wsJfktXFCH.png)
+
+## Differences in Guild TensorBoard
+
+Guild runs the installed version of TensorBoard without customization. This lets you use the current features of TensorBoard from Guild.
+
+A number of things are different when you run TensorBoard with Guild:
+
+- Guild dynamically adds images saved to the run directory as TensorBoard summaries. This lets you view run-generated images without having to write them as summaries.
+
+  ![plot-feature|539x400](upload://yayDFDa0SD6IBMBuoOi3DC7I6w6.png)
+
+- Guild dynamically adds summaries so that flags and scalars can be compared in the **HParams** tab. This lets you use TensorBoard to compare hyperparameter results without having to write summaries yourself.
+
+  ![tb-hparams2|552x354](upload://nHvQt4ObNpmO2GMOeHp3SKu8uf.png)
+
+- Guild filters runs shown in TensorBoard according to the run filter options used with [`guild tensorboard`](/commands/tensorboard). This lets you quickly compare runs matching various criteria without having to manually create a TensorBoard log directory.

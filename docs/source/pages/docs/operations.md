@@ -1,0 +1,197 @@
+<!-- -*- eval:(visual-line-mode 1) -*- -->
+
+<div data-theme-toc="true"></div>
+<div data-guild-docs="true"></div>
+
+## Overview
+
+Guild uses operations to start [*runs*](/docs/runs). Specify an operation for [`guild run`](/commands/run) using the format:
+
+``` command
+guild run OPERATION
+```
+
+Operations are defined in [Guild files](/docs/guildfiles).
+
+Operations are defined using one of two formats:
+
+- [Operation only](/reference/guildfile#operation-only-format)
+- [Full format](/reference/guildfile#full-format)
+
+*Operation only format* defines operations at the top-level of a Guild file, as mapping items.
+
+``` yaml
+train:
+  description: Train a model
+
+validate:
+  description: Validate a model
+```
+
+<span data-guild-class="caption">Two operations defined using *operation only* format</span>
+
+*Full format* defines operations under *models*. Models are defined in the Guild file as top-level list items, or *objects*.
+
+``` yaml
+- model: mnist
+  operations:
+    train:
+      description: Train model on MNIST
+
+    validate:
+      description: Validate model on MNIST
+```
+
+Refer to [*Guild File Reference*](/reference/guildfile#guild-file-format) for more information on file format.
+
+List available operations for a project using [`guild operations`](/commands/operations):
+
+``` command
+guild operations
+```
+
+> <span data-guild-class="callout tip">Tip</span> The [`guild ops`](/commands/ops) command is a shortened alias for `operations`.</span>
+
+Guild shows the public operations defined in the project Guild file.
+
+## Python Based Operations
+
+Python based operations are defined in `*.py` files and must be specified using their *module name* as the `main` operation attribute in a Guild file.
+
+``` yaml
+train:
+  main: train_logreg
+```
+
+<span data-guild-class="caption">Guild file (`guild.yml`) defining operation `train`, which is implemented in Python module `train_logreg`</span>
+
+> <span data-guild-class="callout note">Note</span> Do not include the `.py` suffix when specifying `main`. The value refers to the module name, not the file name.
+
+Guild loads such modules as `__main__` in the same way that Python itself loads them when run using `python -m <module name>` from the command line.
+
+You may perform operation tasks directly in the module like this:
+
+``` python
+from models import logreg
+
+logreg.train("data.csv")
+```
+
+<span data-guild-class="caption">Sample Python module --- always executes task when loaded</span>
+
+Alternatively, check the module name and only perform operation tasks if it `__main__`.
+
+``` python
+from models import logref
+
+def main():
+    logreg.train("data.csv")
+
+if __name__ == "__main__":
+    main()
+```
+
+<span data-guild-class="caption">Sample Python module --- execute task only when module is loaded as `__main__`</span>
+
+### Additional arguments to `main`
+
+By default, Guild passes additional arguments to the `main` module that correspond to operation [flag values](/docs/flags). You can, however, specify arguments in the `main` attribute. These additional arguments are provided regardless of the flag-specific arguments.
+
+For example, the following `main` spec runs the Python module `logreg` with the additional argument `--train`.
+
+``` yaml
+train:
+  main: logreg --train
+```
+
+### Using additional arguments for sub-commands
+
+Python CLIs that use *sub-commands* for operations are supported using additional arguments in the `main` spec. For example, consider a script that supports `train` and `test` subcommands. You can define a `train` operation that runs the `train` command this way:
+
+``` yaml
+train:
+  main: logreg train
+```
+
+## Other Language Operations
+
+Guild supports non-Python based operations with the `exec` operation attribute. Use `exec` to specify a command that Guild runs, which can use any executable program.
+
+For example, the following operation uses R to train a model:
+
+``` yaml
+train:
+  exec: Rscript .guild/sourcecode/train.r
+```
+
+The script `train.r` is prefixed with `.guild/sourcecode/` because operations run in the context of a [*run directory*](/docs/runs#run-dir), not the project directory. Guild copies source code files from the project to the run directory under `.guild/sourcecode` by default. See [Operation Source Code](#operation-source-code) for more information.
+
+### Flags Interface
+
+When using non-Python languages to implement an operation, you can access flags using one of two methods:
+
+- Command line arguments
+- Environment variables
+
+#### Flag Value Command Line Arguments
+
+To use command line arguments, you must specify flag arguments in the `exec` specification. You can specify flag values in one of two ways:
+
+- Individual flag references
+- All flag assignments
+
+To include a flag value in the `exec` command, use the format `${FLAG_NAME}`.
+
+``` yaml
+train:
+  exec: .guild/sourcecode/train.sh ${learning-rate} ${batch-size}
+  flags:
+    learning-rate: 0.1
+    batch-size: 100
+```
+
+When run using default flag values, Guild will start this operation using the following command:
+
+``` command
+train.sh 0.1 100
+```
+
+> <span data-guild-class="callout tip">Tip</span> Use the `--print-cmd` option with [`guild run`](/commands/run) to show the command Guild uses to start an operation.
+
+#### Flag  Environment Variables
+
+Guild always provides flag values as environment variables, regardless of language type. Environment variables provide a convenient way to access flags as they don't require command line processing.
+
+### Special Command Line Arguments
+
+Guild supports some built-in command line arguments that are replaced with special values creating the operation command.
+
+|||
+|-|-|
+| `${flag_args}` | Set of flag assignments in the format `<name>=<value>` |
+| `${project_dir}` | Project directory path (also available as the `PROJECT_DIR` environment variable for the operation --- see below) |
+
+### Special Environment Variables
+
+Guild sets a number of environment that are available for an operation.
+
+|               |                                                                                       |
+|---------------|---------------------------------------------------------------------------------------|
+| `RUN_DIR`     | Path of the active run directory                                                      |
+| `RUN_ID`      | ID of the active run                                                                  |
+| `PROJECT_DIR` | Path of the active run source project (e.g. where the defining Guild file is located) |
+| `GUILD_OP`    | Active run op spec                                                                    |
+| `GUILD_HOME`  | Path where Guild AI is installed                                                      |
+| `CMD_DIR`     | Path where the Guild command was run                                                  |
+
+## Operation Source Code
+
+Guild saves source code for an operation with each run. This ensures that the run has a record of the source code used and that changes to project code don't affect runs in progress.
+
+By default, Guild copies text files within the project directory as source code. As a safe-guard, Guild skips files larger than 1M and will not copy more than 100 files. Configures these rules using the `sourcecode` operation attribute.
+
+See [*Guild File Reference*](/reference/guildfile#source-code) for information on configuring rules for source code copies.
+
+See [*Guild File Cheatsheet*](/cheatsheets/guildfile#source-code) for examples.
+
+By default, source code is copied to the run directory under `.guild/sourcecode`. You can change this location using the `dest` attribute of the source code spec.
