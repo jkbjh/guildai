@@ -140,7 +140,7 @@ train:
 
 For a list of working examples, refer to the [`examples/flags`](https://github.com/guildai/guildai/tree/master/examples/flags) project.
 
-Auto-detect [flags interface](/docs/flags#flags-interface):
+Auto-detect [flags interface](/pages/docs/flags#flags-interface):
 
 ``` yaml
 train:
@@ -373,7 +373,7 @@ train:
     - file: data.csv
 ```
 
-Named resource (requires [full format](/reference/guildfile#full-format) Guild file):
+Named resource (requires [full format](/pages/reference/guildfile#full-format) Guild file):
 
 ``` yaml
 - operations:
@@ -685,7 +685,7 @@ train:
       xi: 0.1
 ```
 
-Define default optimizer (applies when `--optimize` used with [`run`](/commands/run) command):
+Define default optimizer (applies when `--optimize` used with [`run`](/pages/commands/run) command):
 
 ``` yaml
 train:

@@ -160,7 +160,7 @@ To convert to full format, move the operations to a top-level `model` object:
 
 ## Operations
 
-An *operation* tells Guild what to do when you execute [`guild run`](/commands/run). For information on using operations, see [*Operations*](/docs/operations).
+An *operation* tells Guild what to do when you execute [`guild run`](/pages/commands/run). For information on using operations, see [*Operations*](/pages/docs/operations).
 
 Define operations in Guild files using either [*operation-only format*](#operation-only-format) or [*full format*](#full-format). Each operation is a map of *attributes*.
 
@@ -266,7 +266,7 @@ This value tells Guild how to communicate flag values to the operation script. G
 
 - <code>namespace:<em>NAME</em></code>
 
-  Set flag values in a [`SimpleNamespace`](https://docs.python.org/3/library/types.html#types.SimpleNamespace) global variable (Python 3 modules only).
+  Set flag values in a [`SimpleNamespace`](https://pages/docs.python.org/3/library/types.html#types.SimpleNamespace) global variable (Python 3 modules only).
 
   *`NAME`* is the name of the global namespace variable.
 
@@ -366,7 +366,7 @@ Tags specified when the operation is run are added to the list specified in the 
 
 <h4 data-toc-id="operation-compare">compare</h4>
 
-*List of columns to include for operation runs in [Guild Compare](/docs/compare) (list of [column specs](#columns))*
+*List of columns to include for operation runs in [Guild Compare](/pages/docs/compare) (list of [column specs](#columns))*
 
 Use to define only the columns that are useful for comparison when an operation has a large number of flags or scalars.
 
@@ -388,9 +388,9 @@ To maximize a scalar, precede the attribute value with a negative sign `-`. This
 
 *Mapping of named optimizers associated with the operation*
 
-The mapping is of names to optimizer attributes. A name can be used for a run by specifying it with the `--optimizer` option with [`guild run`](/commands/run).
+The mapping is of names to optimizer attributes. A name can be used for a run by specifying it with the `--optimizer` option with [`guild run`](/pages/commands/run).
 
-By default, the name is used as the optimizer operation. For example, a mapping key of `gp` uses the [`gp`](/reference/optimizers#gp) optimizer. You can use a different optimizer by defining the special `algorithm` attribute. As with any optimizer, the value for `algorithm` can be a project defined operation.
+By default, the name is used as the optimizer operation. For example, a mapping key of `gp` uses the [`gp`](/pages/reference/optimizers#gp) optimizer. You can use a different optimizer by defining the special `algorithm` attribute. As with any optimizer, the value for `algorithm` can be a project defined operation.
 
 You can also define the special `default` attribute, which indicates if the optimizer is used when the operation is run with the `--optimize` option.
 
@@ -398,7 +398,7 @@ You can also define the special `default` attribute, which indicates if the opti
 
 *List of plugins to enable for the operation*
 
-Use the value `all` to enable all plugins. To enable all summary-related plugins (`cpu`, `gpu`, `disk`, `memory`, and `perf`) use the value `summary`. See [Plugins Reference](/reference/plugins) for more information.
+Use the value `all` to enable all plugins. To enable all summary-related plugins (`cpu`, `gpu`, `disk`, `memory`, and `perf`) use the value `summary`. See [Plugins Reference](/pages/reference/plugins) for more information.
 
 <h4 data-toc-id="operation-pip-freeze">pip-freeze</h4>
 
@@ -422,7 +422,7 @@ Set this value to `yes` to cause Guild to delete runs for this operation when th
 
 There may be cases where a run performs an action that is recorded elswhere (e.g. logged externally) and there is little value in keeping the run when it succeeds.
 
-This setting can be overridden using `--keep-run` with the [run](/commands/run) command.
+This setting can be overridden using `--keep-run` with the [run](/pages/commands/run) command.
 
 ## Flags
 
@@ -438,7 +438,7 @@ Guild supports the special `$include` mapping key, which can be a string or list
 
 *Flag name (required string)*
 
-The flag name is used when specifing a flag value. When specifying a value as an argument to the [`guild run`](/commands/run) command, the name is used as <code><em>FLAG_NAME</em>=<em>VALUE</em></code>.
+The flag name is used when specifing a flag value. When specifying a value as an argument to the [`guild run`](/pages/commands/run) command, the name is used as <code><em>FLAG_NAME</em>=<em>VALUE</em></code>.
 
 <h4 data-toc-id="flag-description">description</h4>
 
@@ -858,7 +858,7 @@ Use to ensure that a source does not change without detection.
 
 If the source is a directory, Guild ignores this value and prints a warning message.
 
-> <span data-guild-class="callout tip">Tip</span> Use [`guild download`](/commands/download) to download a remote resource (URL) and calculate it's current SHA-256 digest. Use that value in the source definition to ensure that runs always use the expected source.
+> <span data-guild-class="callout tip">Tip</span> Use [`guild download`](/pages/commands/download) to download a remote resource (URL) and calculate it's current SHA-256 digest. Use that value in the source definition to ensure that runs always use the expected source.
 >
 > To calculate SHA-256 digests for a project file, use `sha256sum` or a similar program.
 
@@ -953,7 +953,7 @@ If the value is a list, it's used for [`select`](#sourcecode-select) as if speci
 
 If the value is a mapping, it uses the attributes listed under [Source Code Attributes](#source-code-attributes) below.
 
-See also: [*Source Code Cheatsheet*](/cheatsheets/guildfile#source-code)
+See also: [*Source Code Cheatsheet*](/pages/cheatsheets/guildfile#source-code)
 
 ### Source Code Attributes
 
@@ -1027,7 +1027,7 @@ Excluding `dir` types has a performance benefit as Guild will not scan the conte
 
 Guild supports output scalars as an alternative to explicit logging to summary logs. Use output scalars to log numeric results by printing them as script output.
 
-Output is matched using [regular expressions](https://docs.python.org/library/re.html). Values are captured using capture groups. The special escape values `\key`, `\value`, and `\step` can be used to match keys, values, and step values respectively.
+Output is matched using [regular expressions](https://pages/docs.python.org/library/re.html). Values are captured using capture groups. The special escape values `\key`, `\value`, and `\step` can be used to match keys, values, and step values respectively.
 
 By default, Guild logs output written in the format:
 
@@ -1045,17 +1045,17 @@ The `output-scalars` attribute can be a mapping of scalar keys to capturing patt
 
 If the value of `output-scalars` is a list, each item can be a mapping of keys to capturing patterns, which is treated identically as the mapping described above, or as strings. If an item is a string, it must define two capture groups. By default, the first capture group is the scalar *key* and the second capture group is the scalar *value*. Named capture groups can be used to reverse this order using `_key` and `_value` group names for the captured key and value respectively.
 
-Patterns must be valid Python [regular expression](https://docs.python.org/library/re.html).
+Patterns must be valid Python [regular expression](https://pages/docs.python.org/library/re.html).
 
 The special templates `\key`, `\value`, and `\step` represent regular expressions for valid keys, numeric values, and step values respectively.
 
-> <span data-guild-class="callout tip">Tip</span> Use the `--test-output-scalars` option to [`guild run`](/commands/run) to test strings from generated output. You can test a file or interatively test strings that you type into the console (use `-` as the file name to read from standard intput).
+> <span data-guild-class="callout tip">Tip</span> Use the `--test-output-scalars` option to [`guild run`](/pages/commands/run) to test strings from generated output. You can test a file or interatively test strings that you type into the console (use `-` as the file name to read from standard intput).
 
 Refer to [Guild File Cheatsheet](/t/guild-file-cheatsheet/192#output-scalars-15) for output scalar configuration examples.
 
 ## Columns
 
-By default Guild shows all flags and root output scalars for an operation run in [Guild Compare](/docs/compare). Use the `columns` operation attribute to define an alternative set of columns.
+By default Guild shows all flags and root output scalars for an operation run in [Guild Compare](/pages/docs/compare). Use the `columns` operation attribute to define an alternative set of columns.
 
 Guild supports a special syntax for specifying a column, which is defined by the following grammar:
 
@@ -1079,7 +1079,7 @@ To show a run *attribute*, prefix the attribute name with a dot (`'.'`). For a l
 
 Steps are used to implement sequential work flow in Guild. The [`steps`](#operation-steps) operation attribute specifies a list of operations to run.
 
-Operations that define steps are referred to as [*pipelines*](/docs/pipelines).
+Operations that define steps are referred to as [*pipelines*](/pages/docs/pipelines).
 
 A step is a string or a mapping. If a step item is a string, the value is used as [`run`](#step-run) in a mapping.
 
@@ -1140,7 +1140,7 @@ In addition to the attributes above, a step supports the following run options:
 - remote
 - stop-after
 
-Refer to [`guild run`](/commands/run) for information on each option.
+Refer to [`guild run`](/pages/commands/run) for information on each option.
 
 ### Step Check
 
@@ -1183,7 +1183,7 @@ Guild assumes that the `compare-to` file is relative to the step run directory.
 
 *Checks the run file for matching text (string)*
 
-`contains` must be a valid Python [regular expression](https://docs.python.org/library/re.html).
+`contains` must be a valid Python [regular expression](https://pages/docs.python.org/library/re.html).
 
 If the run file output does not contain text that matches this attribute value, the check fails.
 
@@ -1220,7 +1220,7 @@ The `model` type attribute specifies the model name.
 
 *Description of the model (multiline string)*
 
-Use to provide a single line description as well as multiline descriptions. The first line of a model description is used in [`guild models`](/commands/models) output. Additional lines are used to show model help.
+Use to provide a single line description as well as multiline descriptions. The first line of a model description is used in [`guild models`](/pages/commands/models) output. Additional lines are used to show model help.
 
 <h4 data-toc-id="model-operations">operations</h4>
 
@@ -1246,7 +1246,7 @@ The `sourcecode` spec defined at the model level applies to all model operations
 
 *Default Python requirement for model operations (string)*
 
-This value must be a valid [pip install requirements spec](https://pip.pypa.io/en/stable/reference/pip_install/#requirement-specifiers).
+This value must be a valid [pip install requirements spec](https://pip.pypa.io/en/stable/pages/reference/pip_install/#requirement-specifiers).
 
 Operations can redefine this value as needed using [`python-requires`](#operation-python-requires).
 
@@ -1282,7 +1282,7 @@ Guild includes model references in model help.
 
 A Guild file can contain at most one top-level package object. A package object is identified by the use of the `package` attribute.
 
-Guild uses package configuration when you run [`guild package`](/commands/package). If a package object is not defined for a Guild file, Guild uses default values (see below).
+Guild uses package configuration when you run [`guild package`](/pages/commands/package). If a package object is not defined for a Guild file, Guild uses default values (see below).
 
 Define a package when you want to:
 

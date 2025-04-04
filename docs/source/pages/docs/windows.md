@@ -35,8 +35,8 @@ For detailed help, refer to [ HowTo: Set an Environment Variable in Windows - Co
 
 The following Guild commands require special privileges on Windows to create symbolic links:
 
-- [`run`](/commands/run) - Symbolic links are used when linking required resource files.
-- [`tensorboard`](/commands/tensorboard) - Symbolic links are used when constructing the TensorBoard log directory used to view selected runs.
+- [`run`](/pages/commands/run) - Symbolic links are used when linking required resource files.
+- [`tensorboard`](/pages/commands/tensorboard) - Symbolic links are used when constructing the TensorBoard log directory used to view selected runs.
 
 You can satisfy this requirement using one of two techniques:
 
@@ -47,5 +47,5 @@ While generally we do no advocate running commands as Administrator, this method
 
 For more information, see:
 
-- [Start a Command Prompt as an Administrator](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj717276(v=ws.11)) (Microsoft Documentation)
-- [Create symbolic links](https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/create-symbolic-links) (Microsoft Documentation)
+- [Start a Command Prompt as an Administrator](https://pages/docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj717276(v=ws.11)) (Microsoft Documentation)
+- [Create symbolic links](https://pages/docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/create-symbolic-links) (Microsoft Documentation)

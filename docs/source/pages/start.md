@@ -11,7 +11,7 @@ If you're familiar with installing Python packages using `pip`, simply install t
 pip install guildai
 ```
 
-Alternatively, to install to the [user install directory](https://pip.pypa.io/en/stable/reference/pip_install/#cmdoption-user), run:
+Alternatively, to install to the [user install directory](https://pip.pypa.io/en/stable/pages/reference/pip_install/#cmdoption-user), run:
 
 ``` command
 pip install guildai --user
@@ -29,7 +29,7 @@ For help troubleshooting, see [*Get Help with Guid AI*](/help).
 
 ## Get Command Help
 
-Guild's primary interface is the [command line](/docs/cli). Commands are run using the format `guild COMMAND`. Use the `--help` option to show information for a command.
+Guild's primary interface is the [command line](/pages/docs/cli). Commands are run using the format `guild COMMAND`. Use the `--help` option to show information for a command.
 
 Show all Guild commands:
 
@@ -37,7 +37,7 @@ Show all Guild commands:
 guild --help
 ```
 
-See [*Guild AI Commands*](/commands) for a complete reference.
+See [*Guild AI Commands*](/pages/commands) for a complete reference.
 
 ## Command Completion
 
@@ -110,27 +110,27 @@ Press **Enter** to start the operation.
 
 Guild runs `train.py`, which prints a simulated loss.
 
-When Guild runs a script, it generates a new experiment, or [*run*](/docs/runs). Each run tracks experiment details including results.
+When Guild runs a script, it generates a new experiment, or [*run*](/pages/docs/runs). Each run tracks experiment details including results.
 
 > <span data-guild-class="callout highlight">Highlight</span> Guild lets you track experiments without changing your scripts. This saves time and keeps your source independent of an experiment tracking system.
 
 These are the steps that Guild performs when it runs a script:
 
-- **Inspect the script for [*flags*](/docs/flags).** A flag is a user-configurable setting used by your script. In this case, Guild detects two hyperparameters: *`noise`* and *`x`*. By default, Guild treats global constants in Python scripts as flags. This behavior can be controlled through [explicit configuration](/docs/flags#flags-interface), which you learn about later.
+- **Inspect the script for [*flags*](/pages/docs/flags).** A flag is a user-configurable setting used by your script. In this case, Guild detects two hyperparameters: *`noise`* and *`x`*. By default, Guild treats global constants in Python scripts as flags. This behavior can be controlled through [explicit configuration](/pages/docs/flags#flags-interface), which you learn about later.
 
-- **Generate a new [*run directory*](/docs/runs#run-directory).** This is where all run-related files are stored. Guild uses a unique identifier, or *run ID* to ensure that each run is isolated from other runs.
+- **Generate a new [*run directory*](/pages/docs/runs#run-directory).** This is where all run-related files are stored. Guild uses a unique identifier, or *run ID* to ensure that each run is isolated from other runs.
 
-- **Copy project source code.** To ensure that changes to your project code do not effect in-process runs, Guild copies required source code to the run directory. By default, Guild copies text files under a certain size. You can control this behavior using a [Guild file](/docs/guild-files). For more information, see [Guild File Reference](/reference/guildfile#source-code).
+- **Copy project source code.** To ensure that changes to your project code do not effect in-process runs, Guild copies required source code to the run directory. By default, Guild copies text files under a certain size. You can control this behavior using a [Guild file](/pages/docs/guild-files). For more information, see [Guild File Reference](/pages/reference/guildfile#source-code).
 
 - **Run the script within the run directory**. Guild starts a new operating system process, just as you would when you run the script yourself (e.g. by typing `python train.py`). Guild runs the script *inside the run directory*. This ensures that script-generated files are written for the unique run and not to the project directory.
 
-> <span data-guild-class="callout important">Important</span> Guild runs all scripts from the run directory, which is empty by default. ***If your script attempts to reads files located in your project directory, it won't find them.*** You must use a [Guild File](/docs/guildfile) to tell Guild which files your script needs. These are defined as *dependencies*. For more information, see [Dependencies](/docs/dependencies).
+> <span data-guild-class="callout important">Important</span> Guild runs all scripts from the run directory, which is empty by default. ***If your script attempts to reads files located in your project directory, it won't find them.*** You must use a [Guild File](/pages/docs/guildfile) to tell Guild which files your script needs. These are defined as *dependencies*. For more information, see [Dependencies](/pages/docs/dependencies).
 
-- **Capture output and log scalars**. As your script runs, Guild monitors its output to look for *scalars*. A scalar is a numeric value associated with a key and, optionally, a step. Guild logs scalars within the run directory. For more information, see [Scalars](/docs/scalars).
+- **Capture output and log scalars**. As your script runs, Guild monitors its output to look for *scalars*. A scalar is a numeric value associated with a key and, optionally, a step. Guild logs scalars within the run directory. For more information, see [Scalars](/pages/docs/scalars).
 
 ## View Results
 
-Start the [Guild View](/docs/view) application:
+Start the [Guild View](/pages/docs/view) application:
 
 ``` command
 guild view
@@ -150,7 +150,7 @@ Return to the command terminal and press **Ctrl-C** to stop Guild View.
 
 When working in a command line environment, it's convenient to use the terminal to view run results.
 
-From your terminal, use [`guild runs`](/commands/runs) to list the current runs:
+From your terminal, use [`guild runs`](/pages/commands/runs) to list the current runs:
 
 ``` command
 guild runs
@@ -162,9 +162,9 @@ guild runs
 
 Guild lists runs, showing the run ID, operation name, start time, status, and label. As you generate more runs, they appear in this list.
 
-Information about each run is saved in a [*run directory*](/docs/runs#run-directory), including metadata, flag inputs, and results.
+Information about each run is saved in a [*run directory*](/pages/docs/runs#run-directory), including metadata, flag inputs, and results.
 
-Use [`guild runs info`](/commands/runs-info) to show information about a run:
+Use [`guild runs info`](/pages/commands/runs-info) to show information about a run:
 
 ``` command
 guild runs info
@@ -203,7 +203,7 @@ By default, Guild shows information for the latest run.
 
 Guild saves project *source code* for each run.
 
-To list source code, include the `--sourcecode` option with [`guild ls`](/commands/ls):
+To list source code, include the `--sourcecode` option with [`guild ls`](/pages/commands/ls):
 
 ``` command
 guild ls --sourcecode
@@ -217,7 +217,7 @@ guild ls --sourcecode
 
 > <span data-guild-class="callout highlight">Highlight</span> Guild snapshots the source code at the time the operation is run so you have an accurate record of what executed. You don't have to commit your code to a repository before starting a run. You can freely modify your project source while operations are running.
 
-Use the `--sourcecode` option with [`guild cat`](/commands/cat) to view source code associated with a run :
+Use the `--sourcecode` option with [`guild cat`](/pages/commands/cat) to view source code associated with a run :
 
 ``` command
 guild cat --sourcecode --path train.py
@@ -238,7 +238,7 @@ print("loss: %f" % loss)
 ```
 [/details]
 
-You can also open source code files in your system editor with [`guild open`](/commands/open):
+You can also open source code files in your system editor with [`guild open`](/pages/commands/open):
 
 ``` command
 guild open --sourcecode --path train.py
@@ -248,7 +248,7 @@ Guild opens the copy `train.py` used for the run with the default system program
 
 ![code-start|653x500](upload://rVsTFAobvJ6tXYbM9cHTbZcUADv.png)
 
-<span data-guild-class="caption">View a run file in a system program with [`guild open`](/commands/open)</span>
+<span data-guild-class="caption">View a run file in a system program with [`guild open`](/pages/commands/open)</span>
 
 ## Summary
 
@@ -261,4 +261,4 @@ In this section, you use Guild AI to capture experiments for a sample training s
 
 In the next section, you use Guild's built-in hyperparameter tuning support to find values for *`x`* that minimize *`loss`* for the sample training script.
 
-<span data-guild-class="btn next">[Next: Optimize a Model](/start/optimize)</span>
+<span data-guild-class="btn next">[Next: Optimize a Model](/pages/start/optimize)</span>

@@ -16,7 +16,7 @@ Project files:
 | [tpe.py](https://github.com/guildai/guildai/blob/master/examples/hyperopt/tpe.py) | Optimizer support using Tree of Parzen Estimators with Hyperopt |
 | [requirements.txt](https://github.com/guildai/guildai/blob/master/examples/hyperopt/requirements.txt) | List of required libraries |
 
-An [*optimizer*](/docs/optimization) is a Guild operation that specializes in running multiple trials based on a batch prototype.
+An [*optimizer*](/pages/docs/optimization) is a Guild operation that specializes in running multiple trials based on a batch prototype.
 
 In this example, we create a custom optimizer named `tpe`. The optimizer is used to find optimal hyperparameter values using the Tree of Parzen Estimators algorithm from the [Hyperopt](http://hyperopt.github.io/hyperopt/) library.
 
@@ -24,7 +24,7 @@ Here's the Guild file that defines both the training operation and the optimizer
 
 https://github.com/guildai/guildai/blob/master/examples/hyperopt/guild.yml
 
-> <span data-guild-class="callout note">Note</span> Each operation uses the Python module corresponding to its name. If a module uses a different name, specify it using the [`main`](/reference/guildfile#operation-main) attribute.
+> <span data-guild-class="callout note">Note</span> Each operation uses the Python module corresponding to its name. If a module uses a different name, specify it using the [`main`](/pages/reference/guildfile#operation-main) attribute.
 
 Start an optimization batch by running:
 
@@ -36,7 +36,7 @@ The `train` operation is configured to use the `tpe` optimizer by default (see a
 
 The `tpe` optimizer is configured to run 10 trials by default. Change this value using `--max-trials`.
 
-You can view operation help for `tpe` to show supported flags. These are set using `-Fo` options with [`guild run`](/commands/run).
+You can view operation help for `tpe` to show supported flags. These are set using `-Fo` options with [`guild run`](/pages/commands/run).
 
 ``` command
 guild run tpe --help-op
@@ -64,7 +64,7 @@ https://github.com/guildai/guildai/blob/master/examples/hyperopt/tpe.py#L24
 
 ## Convert Prototype Flags to Search Space
 
-The batch *proto* run defines the flag values used for trials. These may contain search specs like `[-2:2]` or `uniform[-2:2]`. This syntax represents a Guild [*search space function*](/docs/flags#search-space-functions). Decode search space functions to create a Hyperopt search space.
+The batch *proto* run defines the flag values used for trials. These may contain search specs like `[-2:2]` or `uniform[-2:2]`. This syntax represents a Guild [*search space function*](/pages/docs/flags#search-space-functions). Decode search space functions to create a Hyperopt search space.
 
 Read the proto flags and uses them to create a search space:
 
@@ -86,7 +86,7 @@ Hyperopt calls a function with a dictionary of suggested flag values. Use `batch
 
 https://github.com/guildai/guildai/blob/master/examples/hyperopt/tpe.py#L48
 
-The result is the objective specified in [`guild run`](/commands/run) --- or `loss` by default.
+The result is the objective specified in [`guild run`](/pages/commands/run) --- or `loss` by default.
 
 ## Minimize the Objective
 
@@ -99,7 +99,7 @@ https://github.com/guildai/guildai/blob/master/examples/hyperopt/tpe.py#L32
 
 ### Configure TPE Algorithm
 
-The value for `algo` uses a local function that supports the TPE hyperparameters. The hyperparameters in this case are defined as module global variables. These are imported by Guild and can be customized using `-Fo` options with [`guild run`](/commands/run).
+The value for `algo` uses a local function that supports the TPE hyperparameters. The hyperparameters in this case are defined as module global variables. These are imported by Guild and can be customized using `-Fo` options with [`guild run`](/pages/commands/run).
 
 <div data-guild-github-select="109-112">
 

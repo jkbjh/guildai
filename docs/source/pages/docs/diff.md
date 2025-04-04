@@ -5,7 +5,7 @@
 
 ## Overview
 
-Use [`guild diff`](/commands/diff) to compares two runs.
+Use [`guild diff`](/pages/commands/diff) to compares two runs.
 
 By default, Guild diffs the last two runs. You can specify which runs to diff by specifying the run index or run IDs as arguments.
 
@@ -41,7 +41,7 @@ You can alternatively compare specific parts of two runs using other options.
 
 </div>
 
-For a complete list of options, see [`guild diff`](/commands/diff).
+For a complete list of options, see [`guild diff`](/pages/commands/diff).
 
 ## Diff to Working Source Code
 
@@ -55,7 +55,7 @@ guild diff --working
 
 ## Diff Programs
 
-When diffing runs or paths, Guild passes the two [*run directories*](/docs/runs#run-dir) (or applicable paths if certain options are included) to a diff program. By default, Guild chooses a diff program available on your system based on its capabilities.
+When diffing runs or paths, Guild passes the two [*run directories*](/pages/docs/runs#run-dir) (or applicable paths if certain options are included) to a diff program. By default, Guild chooses a diff program available on your system based on its capabilities.
 
 To specify the diff program used, use the `--cmd` or `-c` option. Guild passes the paths to compare as arguments at the end of the specified command. For example, to use [Meld](https://meldmerge.org/) to compare runs, use:
 
@@ -65,4 +65,4 @@ guild compare -c meld
 
 ![diff-feature|539x400](upload://rPo7TcML1pv9xJCg3nlYaTXn4Bm.png) 
 
-You can configure the diff program that Guild uses by default in *user configuration*. For more information, see [*User Config Reference*](/reference/user-config#diff).
+You can configure the diff program that Guild uses by default in *user configuration*. For more information, see [*User Config Reference*](/pages/reference/user-config#diff).

@@ -19,7 +19,7 @@ The following sections document the type of information defined in user configur
 
 **Section heading:** `check`
 
-[`guild check`](/commands/check) can be configured by defining any of the attributes below under a top-level `check` mapping.
+[`guild check`](/pages/commands/check) can be configured by defining any of the attributes below under a top-level `check` mapping.
 
 ### Check Attributes
 
@@ -40,13 +40,13 @@ check:
   offline: yes
 ```
 
-Note, you can use `--offline` or `--no-offline` when running [`guild check`](/commands/check) to override this setting.
+Note, you can use `--offline` or `--no-offline` when running [`guild check`](/pages/commands/check) to override this setting.
 
 ## Diff
 
 **Section heading:** `diff`
 
-[`guild diff`](/commands/diff) can be configured by defining any of the attributes below under a top-level `diff` mapping.
+[`guild diff`](/pages/commands/diff) can be configured by defining any of the attributes below under a top-level `diff` mapping.
 
 ### Diff Attributes
 
@@ -85,4 +85,4 @@ remotes:
     ...
 ```
 
-Refer to [Remotes Reference](/reference/remotes) for details on configuring remote types.
+Refer to [Remotes Reference](/pages/reference/remotes) for details on configuring remote types.

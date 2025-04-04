@@ -9,10 +9,10 @@ Examples are Guild AI projects that illustrate various features and capabilities
 
 |||
 |-|-|
-| [Hello](/examples/hello) | Basic use of flags and dependencies |
-| [Languages](/examples/languages) | How Guild works with various languages |
-| [Notebook - Interactive Interface](/examples/notebooks) | Use Guild's interactive Python API in a Jupyter Notebook |
-| [Notebook - Binary Classifier](/examples/binary-classifier-notebook) | Use Guild to run a binary classifier implemented in a Jupyter Notebook |
+| [Hello](/pages/examples/hello) | Basic use of flags and dependencies |
+| [Languages](/pages/examples/languages) | How Guild works with various languages |
+| [Notebook - Interactive Interface](/pages/examples/notebooks) | Use Guild's interactive Python API in a Jupyter Notebook |
+| [Notebook - Binary Classifier](/pages/examples/binary-classifier-notebook) | Use Guild to run a binary classifier implemented in a Jupyter Notebook |
 
 </div>
 
@@ -22,7 +22,7 @@ Examples are Guild AI projects that illustrate various features and capabilities
 
 |||
 |-|-|
-| [TensorFlow 2](/examples/tensorflow2) | Use Guild to drive experiments with TensorFlow 2  |
+| [TensorFlow 2](/pages/examples/tensorflow2) | Use Guild to drive experiments with TensorFlow 2  |
 </div>
 
 ## Miscellaneous
@@ -31,8 +31,8 @@ Examples are Guild AI projects that illustrate various features and capabilities
 
 |||
 |-|-|
-| [Hyperopt](/examples/hyperopt) | Hyperopt integration showing custom hyperparameter optimizer|
-| [Package](/examples/package) | Add package support to a Guild file |
-| [Pytest](/examples/pytest) | Use pytest with Guild to run fine grained tests |
+| [Hyperopt](/pages/examples/hyperopt) | Hyperopt integration showing custom hyperparameter optimizer|
+| [Package](/pages/examples/package) | Add package support to a Guild file |
+| [Pytest](/pages/examples/pytest) | Use pytest with Guild to run fine grained tests |
 
 </div>

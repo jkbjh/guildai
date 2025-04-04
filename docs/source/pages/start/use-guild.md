@@ -5,9 +5,9 @@
 
 ## Overview
 
-This is the final section of [*Get Started with Guild AI*](/start). In the previous sections, you learn about Guild's core features. Here you apply Guild to your own work.
+This is the final section of [*Get Started with Guild AI*](/pages/start). In the previous sections, you learn about Guild's core features. Here you apply Guild to your own work.
 
-> <span data-guild-class="callout note">Note</span> This guide applies to Python based projects. If your project uses a different language, refer to [*Languages Example*](/examples/languages). If you don't see a suitable example for a language, [ask for help](/new-topic?category=general).
+> <span data-guild-class="callout note">Note</span> This guide applies to Python based projects. If your project uses a different language, refer to [*Languages Example*](/pages/examples/languages). If you don't see a suitable example for a language, [ask for help](/new-topic?category=general).
 
 ## Identify the Main Module
 
@@ -23,7 +23,7 @@ For this guide, we use various main modules to illustate different configuration
 
 Even if you don't plan to use a virtual environment for your work, it's a good idea to create a new, empty virtual environment when adding Guild support. As you run your project and discover missing Python modules, install the applicable Python packages using `pip` and add them to [`requirements.txt`](https://pip.pypa.io/en/stable/user_guide/#requirements-files). With this file, others can easily recreate a working virtual environment.
 
-As you [learn earlier](/start/classifier#create-a-guild-environment), Guild works with any virtual environment, including those created with [conda](https://docs.conda.io/), [virtualenv](https://virtualenv.pypa.io), or Python's [venv](https://docs.python.org/library/venv.html) module.
+As you [learn earlier](/pages/start/classifier#create-a-guild-environment), Guild works with any virtual environment, including those created with [conda](https://pages/docs.conda.io/), [virtualenv](https://virtualenv.pypa.io), or Python's [venv](https://pages/docs.python.org/library/venv.html) module.
 
 Here's a simple way to create a project-local virtual environment using Python's built-in `venv` module (Python 3 only):
 
@@ -31,7 +31,7 @@ Here's a simple way to create a project-local virtual environment using Python's
 python -m venv venv
 ```
 
-You can alternatively use [`guild init`](/commands/init) to create a virtual environment. This method uses *virtualenv*. To ensure that you create an empty environment, use the `--no-reqs` option.
+You can alternatively use [`guild init`](/pages/commands/init) to create a virtual environment. This method uses *virtualenv*. To ensure that you create an empty environment, use the `--no-reqs` option.
 
 ``` command
 guild init --no-reqs
@@ -57,13 +57,13 @@ In an activated environment, ensure that the environment uses the latest version
 pip install --upgrade pip
 ```
 
-If you create an empty environment using a method other than [`guild init`](/commands/init), install Guild explicitly into the environment:
+If you create an empty environment using a method other than [`guild init`](/pages/commands/init), install Guild explicitly into the environment:
 
 ``` command
 pip install guildai
 ```
 
-Run [`guild check`](/commands/check) to verify that Guild uses the activated environment. Note the value for `python_exe` in the output --- it should be the environment's Python executable.
+Run [`guild check`](/pages/commands/check) to verify that Guild uses the activated environment. Note the value for `python_exe` in the output --- it should be the environment's Python executable.
 
 ``` command
 guild check
@@ -201,13 +201,13 @@ train:
   main: models.mnist_mlp
 ```
 
-For more information, see [`main` operation attribute](/reference/guildfile#operation-main).
+For more information, see [`main` operation attribute](/pages/reference/guildfile#operation-main).
 
 ## Test Operation Source Code
 
 Before running `train`, verify that Guild copies the correct operation source code.
 
-From the project directory, use [`guild run`](/commands/run) with `--test-sourcecode`:
+From the project directory, use [`guild run`](/pages/commands/run) with `--test-sourcecode`:
 
 ``` command
 guild run --test-sourcecode
@@ -219,7 +219,7 @@ If there are missing source code files, the operation won't run correctly. Guild
 
 Guild uses default rules to detect source code files. These include safeguards to avoid copying too many files or copying files that are too big. If Guild excludes files due to safeguards, it logs a warning message.
 
-Change Guild's default source code copy rules by defining the [`sourcecode`](/reference/guildfile#operation-sourcecode) operation attribute.
+Change Guild's default source code copy rules by defining the [`sourcecode`](/pages/reference/guildfile#operation-sourcecode) operation attribute.
 
 Reasons for defining operation `sourcecode`:
 
@@ -228,7 +228,7 @@ Reasons for defining operation `sourcecode`:
 - Silence warnings about large files or too many files
 - Skip non-source directories with large numbers of files to speed up source code copies
 
-For examples of `sourcecode` specs, see [*Guild File Cheatsheet*](/cheatsheets/guildfile#source-code).
+For examples of `sourcecode` specs, see [*Guild File Cheatsheet*](/pages/cheatsheets/guildfile#source-code).
 
 ## Run with Guild
 
@@ -251,7 +251,7 @@ You re-enable flags import later as needed. Your goal in this step is to run the
 
 When Guild starts an operation, it executes these steps:
 
-1. Create a new run directory in the `runs` subdirectory of [Guild home](/docs/environments#guild-home)
+1. Create a new run directory in the `runs` subdirectory of [Guild home](/pages/docs/environments#guild-home)
 2. Initialize the run directory with run metadata in <code><em>RUN_DIR</em>/.guild</code>
 3. Copy operation source code to <code><em>RUN_DIR</em>/.guild/sourcecode</code>
 4. Resolve dependencies (you don't have any yet --- you learn about this in [File Dependencies](#file-dependencies) below)
@@ -267,7 +267,7 @@ The most common problems at this stage include:
 
 ## Resolve Missing Source Code
 
-If Guild fails to copy all required source code files, you typically see an error `ImportError: No module named ...` or `ModuleNotFoundError: ...`. Diagnose this problem by listing the source code files copied for the run with [`guild ls`](/commands/ls):
+If Guild fails to copy all required source code files, you typically see an error `ImportError: No module named ...` or `ModuleNotFoundError: ...`. Diagnose this problem by listing the source code files copied for the run with [`guild ls`](/pages/commands/ls):
 
 ``` command
 guild ls --sourcecode
@@ -281,7 +281,7 @@ If the operation is missing required input files, the error message usually cont
 
 This is a common issue when defining Guild operations. You solve it by defining *dependencies* for the operation.
 
-By default, Guild runs operations in a newly created, empty directory called the [*run directory*](/docs/runs#run-directory). Unless otherwise configured in the Guild file, the operation does not have access to project files.
+By default, Guild runs operations in a newly created, empty directory called the [*run directory*](/pages/docs/runs#run-directory). Unless otherwise configured in the Guild file, the operation does not have access to project files.
 
 > <span data-guild-class="callout important">Important</span>
 > - Operations are run in the context of the *run directory* --- not the project directory
@@ -302,7 +302,7 @@ It reads a file named `config.json` from the current directory. When you run it 
 
 When the module is run with Guild, it runs in a newly created, empty directory. `config.json` isn't there!
 
-Check the files in a run directory using [`guild ls`](/commands/ls):
+Check the files in a run directory using [`guild ls`](/pages/commands/ls):
 
 ``` command
 guild ls
@@ -312,7 +312,7 @@ Unless you tell Guild to put files there when it initializes the run, the list i
 
 Guild intentionally starts with empty directories to ensure that required files are explicitly defined in the Guild file.
 
-To make `config.json` available for a run, add it as a file dependency using the [`requires`](/reference/guildfile#operation-requires) operation attribute:
+To make `config.json` available for a run, add it as a file dependency using the [`requires`](/pages/reference/guildfile#operation-requires) operation attribute:
 
 ``` yaml
 train:
@@ -331,7 +331,7 @@ Guild supports a variety of dependency resolution features:
 - Validate file integrity using SHA-256 digests
 - Rename resolved files to support existing code
 
-For for information, see [*Dependencies*](/docs/dependencies).
+For for information, see [*Dependencies*](/pages/docs/dependencies).
 
 With this information, see if you can satisfy the file dependencies for the operation.
 
@@ -368,19 +368,19 @@ The most recent run (the run at the top of the list) should be `completed`.
 
 You may have a number of failed runs (runs with `error` status). That's okay! Experimentation begins with the first run and errors are normal.
 
-You can delete failed runs by specifying `--error` with [`guild runs rm`](/commands/runs-rm):
+You can delete failed runs by specifying `--error` with [`guild runs rm`](/pages/commands/runs-rm):
 
 ``` command
 guild runs rm --error
 ```
 
-As long as you don't use `--permanent` when you delete runs, you can restore them using [`guild runs restore`](/commands/runs-restore).
+As long as you don't use `--permanent` when you delete runs, you can restore them using [`guild runs restore`](/pages/commands/runs-restore).
 
 > <span data-guild-class="callout tip">Tip</span> Avoid the temptation to use `--permanent` when you delete runs. You may be surprised what you learn from failed runs. Consider waiting before you purge deleted runs until you need to. Use `guild check --space` to see how much disk space deleted runs consume. When you purge runs, use the `--started` option to purge runs older than a certain number of days -- e.g. `guild purge --started "before 30 days ago"`.
 
 ## Verify Output Files
 
-If the operation generates files --- for example, a saved model --- confirm the files are part of the run using [`guild ls`](/commands/ls):
+If the operation generates files --- for example, a saved model --- confirm the files are part of the run using [`guild ls`](/pages/commands/ls):
 
 ``` command
 guild ls
@@ -441,7 +441,7 @@ saved_model_path = os.getenv("SAVED_MODEL_PATH") or "/tmp/model.hdf5"
 
 This change is independent of Guild. It simply makes the otherwise hard-coded path configurable. To test this change with Python, run the script with the applicable environment variable.
 
-To support this change, modify the Guild file to define an [`env`](/reference/guildfile#operation-env) operation attribute:
+To support this change, modify the Guild file to define an [`env`](/pages/reference/guildfile#operation-env) operation attribute:
 
 ``` yaml
 train:
@@ -454,7 +454,7 @@ Guild configures the run process environment to include `SAVED_MODEL_PATH`. When
 
 ### Override with Command Line Args
 
-Similar to [Override with Environment Variables](#override-with-environment-variables) above, you can override hard-coded paths using command line arguments. Using the [`argparse`](https://docs.python.org/library/argparse.html) Python module, the above example becomes:
+Similar to [Override with Environment Variables](#override-with-environment-variables) above, you can override hard-coded paths using command line arguments. Using the [`argparse`](https://pages/docs.python.org/library/argparse.html) Python module, the above example becomes:
 
 ``` python
 import argparse
@@ -471,7 +471,7 @@ saved_model_path = args.saved_model or "/tmp/model.hdf5"
 
 This change is also independent of Guild. It lets a caller change the model save location using the `--save-model` command line option.
 
-To support this change, add the command line option to the [`main`](/reference/guildfile#operation-main) spec:
+To support this change, add the command line option to the [`main`](/pages/reference/guildfile#operation-main) spec:
 
 ``` yaml
 train:
@@ -480,7 +480,7 @@ train:
 
 When Guild runs the operation, it includes the specified command line options to `my_mod`.
 
-> <span data-guild-class="callout note">Note</span> You can test the command by specifying `--print-cmd` with [`guild run`](/commands/run).
+> <span data-guild-class="callout note">Note</span> You can test the command by specifying `--print-cmd` with [`guild run`](/pages/commands/run).
 
 ## Capture Operation Metrics
 
@@ -488,7 +488,7 @@ Up to this point you're concerned with a single boolean outcome: *does the opera
 
 This is arguably the most important step in this guide. It establishes the way you measure progress and regress.
 
-Guild records numeric values, or [*scalars*](/docs/scalars), generated by your operation. Common scalars include *loss*, *precision*, and *recall*. An operation can log any value of interest as a scalar. Scalars may be optionally associated with a *step* to record a value at a point of progress during the operation.
+Guild records numeric values, or [*scalars*](/pages/docs/scalars), generated by your operation. Common scalars include *loss*, *precision*, and *recall*. An operation can log any value of interest as a scalar. Scalars may be optionally associated with a *step* to record a value at a point of progress during the operation.
 
 A *metric* is a scalar that specifically describes operation performance.
 
@@ -508,19 +508,19 @@ Guild shows a number of run attributes. Refer to the `scalars` attribute to see 
 
 ### Configure Output Scalars
 
-Guild can detect scalar values printed to operation output. Guild refers to these as [*output scalars*](/docs/scalars#output-scalars). If your operation doesn't otherwise write [TensorBoard summaries](#log-tensorboard-summaries) (see below), the fastest way capture operation metrics is to configure the [`output-scalars`](/reference/guildfile#operation-output-scalars) operation attribute.
+Guild can detect scalar values printed to operation output. Guild refers to these as [*output scalars*](/pages/docs/scalars#output-scalars). If your operation doesn't otherwise write [TensorBoard summaries](#log-tensorboard-summaries) (see below), the fastest way capture operation metrics is to configure the [`output-scalars`](/pages/reference/guildfile#operation-output-scalars) operation attribute.
 
-Refer to [*Scalars*](/docs/scalars#output-scalars) for help configuring the operation to capture metrics.
+Refer to [*Scalars*](/pages/docs/scalars#output-scalars) for help configuring the operation to capture metrics.
 
-The [*Guild File Cheatsheet*](/cheatsheets/guildfile#output-scalars) provides a number of common examples.
+The [*Guild File Cheatsheet*](/pages/cheatsheets/guildfile#output-scalars) provides a number of common examples.
 
-If the operation already logs TensorBoard summaries, we recommend that you [disable output scalars](/cheatsheets/guildfile#disable-output-scalars).
+If the operation already logs TensorBoard summaries, we recommend that you [disable output scalars](/pages/cheatsheets/guildfile#disable-output-scalars).
 
 ### Log TensorBoard Summaries
 
 Guild uses the TensorBoard summary file format to store and load all run scalars. [Output scalars](#configure-output-scalars) (see above) are written to this file format.
 
-If the operation [writes TensorBoard summaries](/docs/scalars#tensorboard-summaries), logged scalars should be visible when you [view run scalars](#view-run-scalars) (see above).
+If the operation [writes TensorBoard summaries](/pages/docs/scalars#tensorboard-summaries), logged scalars should be visible when you [view run scalars](#view-run-scalars) (see above).
 
 If you don't see the expected scalars, verify that the operation writes the summary logs to a relative path. Summary files written outside the run directory are not visible to Guild.
 
@@ -530,7 +530,7 @@ As this point the operation should run to completion and log important metrics. 
 
 Run the operation two or three times. If you follow the [10 second rule](#10-second-rule) this doesn't take long!
 
-Compare operation performance with [`guild compare`](/commands/compare):
+Compare operation performance with [`guild compare`](/pages/commands/compare):
 
 ``` command
 guild compare -C
@@ -553,7 +553,7 @@ Guild enabled quick and easy *experimentation*. Experiments test hypothesis. Eac
 
 Up to this point you focus on running code from start to finish without crashing. This may seem like a trivial accomplishment. It's not. You're now in position to quickly iterate over code changes and, importantly, *hyperparameter tuning*.
 
-In [Get Started](/start/optimize) you run a simple `train.py` script with Guild to find optimal values for hyperparameter *`x`*:
+In [Get Started](/pages/start/optimize) you run a simple `train.py` script with Guild to find optimal values for hyperparameter *`x`*:
 
 ``` command
 guild run train.py x=[-2.0:2.0] --minimize loss --optimizer gp
@@ -633,9 +633,9 @@ model.compile(loss='categorical_crossentropy',
 
 ## Configure Operation Flags
 
-In the previous step you review the operation hyperparameters. In this step, you configure operation [*flags*](/docs/flags). Flags let you set hyperparameter values without modifying code.
+In the previous step you review the operation hyperparameters. In this step, you configure operation [*flags*](/pages/docs/flags). Flags let you set hyperparameter values without modifying code.
 
-When you run a script directly with Guild, Guild detects operation flags. Consider the mock training script used in [*Get Started*](/start):
+When you run a script directly with Guild, Guild detects operation flags. Consider the mock training script used in [*Get Started*](/pages/start):
 
 https://github.com/guildai/guildai/blob/master/examples/get-started/train.py
 
@@ -686,13 +686,13 @@ train:
 
 Guild detects global variables as flags when you run a script directly. This is referred to as flag *importing*. When you define an operation, Guild disables flag importing by default. Set `flags-import` to `all` to tell Guild to import all detected flags.
 
-Use the `--test-flags` option with [`guild run`](/commands/run) to list the flags that Guild imports:
+Use the `--test-flags` option with [`guild run`](/pages/commands/run) to list the flags that Guild imports:
 
 ``` command
 guild run --test-flags
 ```
 
-You can also show imported flags by specifying `--help-op` with [`guild run`](/commands/run):
+You can also show imported flags by specifying `--help-op` with [`guild run`](/pages/commands/run):
 
 ``` command
 guild run --help-op
@@ -702,13 +702,13 @@ If Guild imports flags that you don't want, use `flags-import-skip` to tell Guil
 
 If you prefer to import a specific list of flags, use `flags-import` and specify the list rather than `all`.
 
-For more information on configuring flags for global variables, see [*Flags*](/docs/flags/#python-global-variables).
+For more information on configuring flags for global variables, see [*Flags*](/pages/docs/flags/#python-global-variables).
 
-For more code samples, [*Guild File Cheatsheet*](/reference/guildfile#flags).
+For more code samples, [*Guild File Cheatsheet*](/pages/reference/guildfile#flags).
 
 ### Command Line Arguments
 
-If the operation already supports a command line interface using [`argparse`](https://docs.python.org/library/argparse.html) or [Click](https://click.palletsprojects.com/), set `flags-dest` to `args`:
+If the operation already supports a command line interface using [`argparse`](https://pages/docs.python.org/library/argparse.html) or [Click](https://click.palletsprojects.com/), set `flags-dest` to `args`:
 
 ``` yaml
 train:
@@ -726,7 +726,7 @@ We modify `mnist_mlp.py` to use `argparse` to define the full set of hyperparame
 https://github.com/guildai/guildai/blob/master/examples/get-started-use-guild/mnist_mlp_args.py#L22
 </div>
 
-With these changes, you can see the list of imported flags by specifying `--help-op` with [`guild run`](/commands/run):
+With these changes, you can see the list of imported flags by specifying `--help-op` with [`guild run`](/pages/commands/run):
 
 ``` command
 guild run --help-op
@@ -826,7 +826,7 @@ This is a minimal change to configure flags with environment variables. Use this
 
 A stronger case for environment variables is for configuring file locations. See [Override with Environment Variables](#override-with-environment-variables) above for an example.
 
-You can show the generated config file using [`guild cat`](/commands/cat):
+You can show the generated config file using [`guild cat`](/pages/commands/cat):
 
 ``` command
 guild cat --path config.json
@@ -836,7 +836,7 @@ Note that the config file for each run contains the current flag values.
 
 ## Summary
 
-In this final section of [Get Started](/start) you apply Guild to your project. This is a significant achievement!
+In this final section of [Get Started](/pages/start) you apply Guild to your project. This is a significant achievement!
 
 Your project now supports:
 
@@ -844,7 +844,7 @@ Your project now supports:
 
 - **Reproducibility**
 
-  Users discover the project interface by either reading the Guild file or running [`guild help`](/commands/help). They run the operation using [`guild run`](/commands/run).
+  Users discover the project interface by either reading the Guild file or running [`guild help`](/pages/commands/help). They run the operation using [`guild run`](/pages/commands/run).
 
 - **Experiment tracking**
 
@@ -866,6 +866,6 @@ Your project now supports:
 
 ## Next Steps
 
-You may have questions at this point about how to most effectively use Guild AI. Guild is a technical tool and it's often easier to ask for help than to work through problems on your own. [Explore the documentation](/docs) and [how-to guides](/c/howto) but don't hesitate to [ask a question](/new-topic?category=general) if you can't find and answer.
+You may have questions at this point about how to most effectively use Guild AI. Guild is a technical tool and it's often easier to ask for help than to work through problems on your own. [Explore the documentation](/pages/docs) and [how-to guides](/c/howto) but don't hesitate to [ask a question](/new-topic?category=general) if you can't find and answer.
 
 Please also take a moment to read the community [Code of Conduct](/code-of-conduct). This is our pledge to keep this community safe and welcoming environment for all voices and perspectives. If you feel that behavior by community members or content on this site or any [Guild AI repository](https://github.com/guildai) is not consistent with this code, please let us know by sending a message to `admin@guild.ai`. Your concerns are maintained with strict confidentiality.

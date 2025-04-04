@@ -46,7 +46,7 @@ https://github.com/guildai/guildai/blob/master/examples/languages/guild.yml#L1-L
 
 https://github.com/guildai/guildai/blob/master/examples/languages/train.r
 
-<span data-guild-class="caption">R port of the sample function used in [Get Started with Guild AI](/start)</span>
+<span data-guild-class="caption">R port of the sample function used in [Get Started with Guild AI](/pages/start)</span>
 
 Run this example:
 
@@ -118,7 +118,7 @@ https://github.com/guildai/guildai/blob/master/examples/languages/guild.yml#L37-
 
 https://github.com/guildai/guildai/blob/master/examples/languages/train.jl
 
-<span data-guild-class="caption">Julia port of the sample function used in [Get Started with Guild AI](/start)</span>
+<span data-guild-class="caption">Julia port of the sample function used in [Get Started with Guild AI](/pages/start)</span>
 
 To run the Julia example:
 

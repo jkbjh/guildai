@@ -9,12 +9,12 @@ Up to this point, you run `train.py` directly without providing additional infor
 
 When Guild runs an operation, it determines the following:
 
-- How the script reads user-provided values, or [*flags*](/docs/flags)
-- How the script communicates numeric results, or [*scalars*](/docs/scalars), such as training *loss* and *accuracy*
+- How the script reads user-provided values, or [*flags*](/pages/docs/flags)
+- How the script communicates numeric results, or [*scalars*](/pages/docs/scalars), such as training *loss* and *accuracy*
 
-Unless configured otherwise, Guild uses [default rules](/docs/defaults) to determine this information.
+Unless configured otherwise, Guild uses [default rules](/pages/docs/defaults) to determine this information.
 
-You can configure this information explicitly using a [*Guild file*](/docs/guildfiles). A Guild file is a human-readable text file named `guild.yml` located in a project directory.
+You can configure this information explicitly using a [*Guild file*](/pages/docs/guildfiles). A Guild file is a human-readable text file named `guild.yml` located in a project directory.
 
 ## Create a Guild File
 
@@ -46,19 +46,19 @@ Below is a description of each setting.
 |||
 |-|-|
 | `description` | This value appears when listing the operation and in project help. See [*Get Project Info*](#get-project-info) below. |
-| `main` | Guild loads the specified Python module when running the operation. By default, Guild uses the operation name. We could omit `main` in this case but include it here to illustrate its use. For more information, see [*Python Based Operations*](/docs/operations#python-based-operations). |
-| `flags-import` | When a Guild file is used, Guild does not automatically import flags from the main module. You must explicitly import flags or define them for the operation. In this case, we tell Guild to [import all detected flags](/docs/flags#import-all-flags) from the main module. |
-| `output-scalars` | Numeric results like *loss* and *accuracy* are called [*scalars*](/docs/scalars). Guild detects scalars written as script output (e.g. using `print` or `log` functions in Python) and those that are [logged explicitly](/docs/scalars#tensorboard-summaries). By default, Guild captures scalars written to output in the format <code><em>KEY</em>: <em>VALUE</em></code>. We could omit `output-scalars` in this case but include it here for illustration. For more information, see [*Output Scalars*](/docs/scalars#output-scalars). |
+| `main` | Guild loads the specified Python module when running the operation. By default, Guild uses the operation name. We could omit `main` in this case but include it here to illustrate its use. For more information, see [*Python Based Operations*](/pages/docs/operations#python-based-operations). |
+| `flags-import` | When a Guild file is used, Guild does not automatically import flags from the main module. You must explicitly import flags or define them for the operation. In this case, we tell Guild to [import all detected flags](/pages/docs/flags#import-all-flags) from the main module. |
+| `output-scalars` | Numeric results like *loss* and *accuracy* are called [*scalars*](/pages/docs/scalars). Guild detects scalars written as script output (e.g. using `print` or `log` functions in Python) and those that are [logged explicitly](/pages/docs/scalars#tensorboard-summaries). By default, Guild captures scalars written to output in the format <code><em>KEY</em>: <em>VALUE</em></code>. We could omit `output-scalars` in this case but include it here for illustration. For more information, see [*Output Scalars*](/pages/docs/scalars#output-scalars). |
 
 </div>
 
-Refer to [*Guild File Reference*](/reference/guildfile) for details about the Guild file format and available configuration options.
+Refer to [*Guild File Reference*](/pages/reference/guildfile) for details about the Guild file format and available configuration options.
 
 > <span data-guild-class="callout note">Note</span> The values for `flags-import` and `output-scalars` used in the Guild file above are equivalent to the defaults used by Guild. They can be omitted without changing the behavior of the operation. We define them here for illustration purposes.
 
 ## Get Project Info
 
-Save your changes to `guild.yml` above. Use [`guild operations`](/commands/operations) to show operations defined for the project:
+Save your changes to `guild.yml` above. Use [`guild operations`](/pages/commands/operations) to show operations defined for the project:
 
 ``` command
 guild operations
@@ -68,7 +68,7 @@ guild operations
 train  Sample training script
 ```
 
-Use [`guild help`](/commands/help) to show project information:
+Use [`guild help`](/pages/commands/help) to show project information:
 
 ``` command
 guild help
@@ -106,7 +106,7 @@ BASE OPERATIONS
 
 Press **q** to exit help.
 
-> <span data-guild-class="callout highlight">Highlight</span> In addition to configuring operations, Guild files define the *user interface* for a project. The interface is discovered with Guild commands like [`operations`](/commands/operations) and [`help`](/commands/help). This supports project reuse and reproducibility. Operations are easy to recall, run, and compare.
+> <span data-guild-class="callout highlight">Highlight</span> In addition to configuring operations, Guild files define the *user interface* for a project. The interface is discovered with Guild commands like [`operations`](/pages/commands/operations) and [`help`](/pages/commands/help). This supports project reuse and reproducibility. Operations are easy to recall, run, and compare.
 
 ## Run the Operation
 
@@ -129,7 +129,7 @@ Press **Enter** to start the operation.
 
 Guild runs `train`, which is equivalent to the operations you've run to this point, but is explicitly defined in `guild.yml`.
 
-> <span data-guild-class="callout tip">Tip</span> While it's convenient to run scripts directly in Guild, we recommend that you use a Guild file to explicitly define operations for your day-to-day workflow. Guild file operations are configured explicitly and discoverable as show above. They support a wide range of features that are not available when running scripts directly. For more information, see [*Guild File Reference*](/reference/guildfile).
+> <span data-guild-class="callout tip">Tip</span> While it's convenient to run scripts directly in Guild, we recommend that you use a Guild file to explicitly define operations for your day-to-day workflow. Guild file operations are configured explicitly and discoverable as show above. They support a wide range of features that are not available when running scripts directly. For more information, see [*Guild File Reference*](/pages/reference/guildfile).
 
 ## Summary
 
@@ -141,4 +141,4 @@ In this section, you create a Guild file to explicitly define a `train` operatio
 
 In the next section, you create a real-world classifier and use Guild to track and compare results.
 
-<span data-guild-class="btn next">[Next: Add a Classifier](/start/classifier)</span>
+<span data-guild-class="btn next">[Next: Add a Classifier](/pages/start/classifier)</span>

@@ -5,11 +5,11 @@
 
 ## Overview
 
-Guild performs hyperparameter optimization by running trials in a [*batch*](/docs/runs#batches). A batch is a Guild operation that specializes in running trials. Each type of batch operation generates trials in a different way.
+Guild performs hyperparameter optimization by running trials in a [*batch*](/pages/docs/runs#batches). A batch is a Guild operation that specializes in running trials. Each type of batch operation generates trials in a different way.
 
-The batch operation is specified for a run using the `--optimizer` option with [`guild run`](/commands/run). The default optimizer is implicitly specified with `--optimize`.
+The batch operation is specified for a run using the `--optimizer` option with [`guild run`](/pages/commands/run). The default optimizer is implicitly specified with `--optimize`.
 
-As with any Guild operation, you can view help for a batch operation using `--help-op` with [`guild run`](/commands/run).
+As with any Guild operation, you can view help for a batch operation using `--help-op` with [`guild run`](/pages/commands/run).
 
 ``` command
 guild run gp --help-op
@@ -19,17 +19,17 @@ The following table lists built-in batch operations. Define your own batch opera
 
 | *Operation Name* | *Description* |
 |-|-|
-| [+](/docs/runs#default-batch-operation) | Generate a trial for each unique set of specified flag values |
-| [random](/reference/optimizers#random) | Generate trials with flag values selected from specified distributions |
-| [gp](/reference/optimizers#gp) | Sequential Bayesian optimization using Gaussian processes |
-| [forest](/reference/optimizers#forest) | Sequential Bayesian optimization using decision trees |
-| [gbrt](/reference/optimizers#gbrt) | Sequential Bayesian optimization using gradient boosted regression trees |
+| [+](/pages/docs/runs#default-batch-operation) | Generate a trial for each unique set of specified flag values |
+| [random](/pages/reference/optimizers#random) | Generate trials with flag values selected from specified distributions |
+| [gp](/pages/reference/optimizers#gp) | Sequential Bayesian optimization using Gaussian processes |
+| [forest](/pages/reference/optimizers#forest) | Sequential Bayesian optimization using decision trees |
+| [gbrt](/pages/reference/optimizers#gbrt) | Sequential Bayesian optimization using gradient boosted regression trees |
 
 ## Grid Search
 
 Grid search is performed by Guild's default batch operation. Perform a grid search to explore a predetermined set of hyperparameters.
 
-The default batch operation is invoked implicitly when any flag value is a list and no other optimizer takes precedence. Another optimizer takes precedence it specified with `--optimize` or `--optimizer` or if any flag value is a [*search space function*](/docs/flags#search-space-functions).
+The default batch operation is invoked implicitly when any flag value is a list and no other optimizer takes precedence. Another optimizer takes precedence it specified with `--optimize` or `--optimizer` or if any flag value is a [*search space function*](/pages/docs/flags#search-space-functions).
 
 The following command generates *sixteen* trials, one for each combination of the specified values:
 
@@ -37,7 +37,7 @@ The following command generates *sixteen* trials, one for each combination of th
 guild run train lr='[0.0001,0.001,0.01,0.1]' dropout='[0.1,0.2,0.3,0.4]'
 ```
 
-You can use use [*sequential flag functions*](/docs/flags#sequence-functions) to generate value lists. The following is equivalent to the previous command:
+You can use use [*sequential flag functions*](/pages/docs/flags#sequence-functions) to generate value lists. The following is equivalent to the previous command:
 
 ``` command
 guild run train lr='logspace[-4:-1:4]' dropout=range[0.1:0.4:0.1]
@@ -45,7 +45,7 @@ guild run train lr='logspace[-4:-1:4]' dropout=range[0.1:0.4:0.1]
 
 ### Grid Search and Search Functions
 
-By default, Guild uses the `random` optimizer when a flag value is a [search space function](/docs/flags#search-space-functions). For example, this command implicitly uses the `random` optimizer because it uses the `loguniform` search space function for *`lr`*:
+By default, Guild uses the `random` optimizer when a flag value is a [search space function](/pages/docs/flags#search-space-functions). For example, this command implicitly uses the `random` optimizer because it uses the `loguniform` search space function for *`lr`*:
 
 ``` command
 guild run train lr=loguniform[1e-4:1e-2] dropout=[0.1,0.2]
@@ -63,9 +63,9 @@ By specifing `--optimizer` you override Guild's default behavior. This command g
 
 ## Random Search
 
-Random search is performed by the `random` optimizer. The random optimizer is used implicitly if any flag uses a [*search space function*](/docs/flags#search-space-functions).
+Random search is performed by the `random` optimizer. The random optimizer is used implicitly if any flag uses a [*search space function*](/pages/docs/flags#search-space-functions).
 
-By default the random optimizer generates 20 trials. Change this by specifying the `--max-trials` option with [`guild run`](/commands/run).
+By default the random optimizer generates 20 trials. Change this by specifying the `--max-trials` option with [`guild run`](/pages/commands/run).
 
 The following command uses the random optimizer to run 10 trials. It selects values for *`lr`* at random from the log-uniform distribution over the range `1e-4` to `1e-1`:
 
@@ -75,7 +75,7 @@ guild run train lr=loguniform[1e-4:1e-1] --max-trials 10
 
 If you specify a list value, `random` selects values from the list at random from a uniform distribution. See [Grid Search and Search Functions](#grid-search-and-search-functions) above if you want to use grid search with search space functions.
 
-Explicitly use `random` by specifying `--optimizer` (or the short form `-o`) with [`guild run`](/commands/run):
+Explicitly use `random` by specifying `--optimizer` (or the short form `-o`) with [`guild run`](/pages/commands/run):
 
 ``` command
 guild run train lr=logspace[-4:-1:4] dropout=range[0.1:0.4:0.1] -Fo random -m 10
@@ -85,9 +85,9 @@ In this case, the random optimizer runs 10 trials, selecting values at random fr
 
 ## Sequential Optimization
 
-Sequential optimization is performed by a batch operation that use previous trials to suggest hyperparameter values it believes will yield a better result (e.g. lower loss, higher accuracy, etc. Sequential optimizers include [`gp`](/reference/optimizers#gp), [`forest`](/reference/optimizers#forest), and [`gbrt`](/reference/optimizers#gbrt).
+Sequential optimization is performed by a batch operation that use previous trials to suggest hyperparameter values it believes will yield a better result (e.g. lower loss, higher accuracy, etc. Sequential optimizers include [`gp`](/pages/reference/optimizers#gp), [`forest`](/pages/reference/optimizers#forest), and [`gbrt`](/pages/reference/optimizers#gbrt).
 
-Flag values do not implicitly select sequential optimizers. You must explicitly select an optimizer by specifying `--optimize` or `--optimizer` with [`guild run`](/commands/run).
+Flag values do not implicitly select sequential optimizers. You must explicitly select an optimizer by specifying `--optimize` or `--optimizer` with [`guild run`](/pages/commands/run).
 
 Use `-Fo` options to set optimizer flags for a batch. The following command sets *`xi`* and *`random-starts`* for the `gp` optimizer:
 
@@ -105,4 +105,4 @@ If your operation does not log the specified scalar (or `loss` if the default is
 
 ## Custom Optimizers
 
-You can use any operation as an optimizer. See [*Hyperopt Example*](/examples/hyperopt) for a custom optimizer.
+You can use any operation as an optimizer. See [*Hyperopt Example*](/pages/examples/hyperopt) for a custom optimizer.

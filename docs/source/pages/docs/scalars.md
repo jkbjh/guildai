@@ -43,7 +43,7 @@ In this case, the logged scalar values are:
 | loss    | 0.05      | 2        |
 | loss    | 0.01      | 3        |
 
-You can modify the way Guild logs output scalars using the `output-scalars` operation attribute in a [Guild file](/docs/guildfiles).
+You can modify the way Guild logs output scalars using the `output-scalars` operation attribute in a [Guild file](/pages/docs/guildfiles).
 
 Consider the following output:
 
@@ -65,9 +65,9 @@ train:
     - '- (\key): (\value)'
 ```
 
-Refer to [*Guild File Reference*](/reference/guildfile#output-scalars) for a specification of the `output-scalars` attribute.
+Refer to [*Guild File Reference*](/pages/reference/guildfile#output-scalars) for a specification of the `output-scalars` attribute.
 
-Refer to [*Guild File Cheatsheet*](/cheatsheets/#output-scalars) for examples of `output-scalars`.
+Refer to [*Guild File Cheatsheet*](/pages/cheatsheets/#output-scalars) for examples of `output-scalars`.
 
 ## TensorBoard Summaries
 
@@ -85,7 +85,7 @@ You can log TensorBoard summaries using various Python APIs.
 | *Python API* | *When to Use* |
 |-|-|
 | [TensorFlow API](https://www.tensorflow.org/api_docs/python/tf/summary) | Operation uses TensorFlow or Keras |
-| [PyTorch API](https://pytorch.org/docs/stable/tensorboard.html) | Operation uses PyTorch |
+| [PyTorch API](https://pytorch.org/pages/docs/stable/tensorboard.html) | Operation uses PyTorch |
 | [MXBoard](https://github.com/awslabs/mxboard) | Operation uses MXNet |
 | [tensorBoardX](https://github.com/lanpa/tensorboardX) | Log TensorBoard summaries without incurring a large framework dependency |
 
@@ -93,7 +93,7 @@ You can log TensorBoard summaries using various Python APIs.
 
 ## View Run Scalars
 
-Show runs scalars using [`guild runs info`](/commands/runs-info).
+Show runs scalars using [`guild runs info`](/pages/commands/runs-info).
 
 By default, Guild omits scalars starting with `sys/` as these scalars are systems-related can overwhelm the list of scalars. To include system scalars, use the `--all-scalars` option:
 
@@ -107,7 +107,7 @@ You can also view scalar values in TensorBoard in the **Scalars** tab.
 guild tensorboard --tab scalars
 ```
 
-To show all scalars for multiple runs, use the `--print-scalars` option with [`guild compare`](/commands/compare).
+To show all scalars for multiple runs, use the `--print-scalars` option with [`guild compare`](/pages/commands/compare).
 
 ``` command
 guild compare --print-scalars

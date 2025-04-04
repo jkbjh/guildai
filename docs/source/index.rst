@@ -3,15 +3,17 @@
    :caption: Contents:
 
    main.md
-   pages.rst
-   pages/start.md
+   guild.md
+   ..
+      pages.rst
+      pages/start.md
 
-.. toctree::
-       :maxdepth: 5
-       :caption: Markdown Files
-       :glob:
+   .. toctree::
+	  :maxdepth: 5
+	  :caption: Markdown Files
+	  :glob:
 
-       pages/*
+	  pages/*
 
 Indices and tables
 ==================

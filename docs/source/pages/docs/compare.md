@@ -23,7 +23,7 @@ To start Guild Compare, run:
 guild compare
 ```
 
-This shows all available runs. You can limit the runs using filters like operation, status, and start time. For a list of filters, see [`guild compare`](/commands/compare).
+This shows all available runs. You can limit the runs using filters like operation, status, and start time. For a list of filters, see [`guild compare`](/pages/commands/compare).
 
 ## Interactive Mode
 

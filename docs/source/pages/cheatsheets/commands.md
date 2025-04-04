@@ -37,7 +37,7 @@ Run a script:
 guild run train.py
 ```
 
-Run an operation defined in a [Guild file](/docs/guildfiles):
+Run an operation defined in a [Guild file](/pages/docs/guildfiles):
 
 ``` command
 guild run train

@@ -2,13 +2,13 @@
 
 <div data-guild-docs="true"></div>
 
-Refer to [*Guild AI Commands*](/commands) for a list of Guild AI commands.
+Refer to [*Guild AI Commands*](/pages/commands) for a list of Guild AI commands.
 
 > The command line is the ultimate seat of power on your computer. Using the command line, you can perform amazing feats of wizardry and speed, taming your computer and getting it to do precisely what you want.
 >
 >--- David Baumgold in [*Getting to Know the Command Line*](https://www.davidbaumgold.com/tutorials/command-line/)
 
-Guild's primary interface is via the command line. Guild also supports a [Python interface](/docs/python-api) for work in Jupyter Notebooks.
+Guild's primary interface is via the command line. Guild also supports a [Python interface](/pages/docs/python-api) for work in Jupyter Notebooks.
 
 As an engineering tool, Guild fits the ecosystem of traditional POSIX toolchains. This has a number of benefits:
 

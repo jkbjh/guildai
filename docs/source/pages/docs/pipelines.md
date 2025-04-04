@@ -5,9 +5,9 @@
 
 ## Overview
 
-The term *pipeline* in this section refers to running multiple [operations](/docs/operations) to accomplish a goal.
+The term *pipeline* in this section refers to running multiple [operations](/pages/docs/operations) to accomplish a goal.
 
-Guild pipelines are implemented using higher-level operations, which define sub-operations using a [`steps`](/reference/guildfile#operation-steps) attribute.
+Guild pipelines are implemented using higher-level operations, which define sub-operations using a [`steps`](/pages/reference/guildfile#operation-steps) attribute.
 
 Consider the following three operations:
 
@@ -37,7 +37,7 @@ You can run these operations manually as a part of your development process. For
 
 This process represents an ad-hoc pipeline.
 
-When you want to automate a sequence of operations, create a higher-order operation using [`steps`](/reference/guildfile#operation-steps).
+When you want to automate a sequence of operations, create a higher-order operation using [`steps`](/pages/reference/guildfile#operation-steps).
 
 Consider a new operation `pipeline`:
 
@@ -57,7 +57,7 @@ When you run `pipeline`, Guild starts a higher-order operation, which runs each 
 Specify flag values for a step in one of two ways:
 
 - Arguments to the step operation name
-- [`flags`](/reference/guildfile#step-flags) attribute of a [`run`](/reference/guildfile#step-run) object
+- [`flags`](/pages/reference/guildfile#step-flags) attribute of a [`run`](/pages/reference/guildfile#step-run) object
 
 For example, this examples uses flag arguments:
 
@@ -96,4 +96,4 @@ pipeline:
 
 ## Step Run Attributes
 
-You may define a number of step run attributes when using step mapping. Refer to [*Guild File Reference*](/reference/guildfile#other-step-run-options) for details.
+You may define a number of step run attributes when using step mapping. Refer to [*Guild File Reference*](/pages/reference/guildfile#other-step-run-options) for details.

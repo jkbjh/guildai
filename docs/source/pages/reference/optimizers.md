@@ -5,7 +5,7 @@
 
 ## Overview
 
-An *optimizer* is a Guild operation that runs a [*batch*](/docs/runs#batches). A batch generates one or more *trial runs* or *trials*. Optimizers are able to suggest flag values to minimize or maximize an objective.
+An *optimizer* is a Guild operation that runs a [*batch*](/pages/docs/runs#batches). A batch generates one or more *trial runs* or *trials*. Optimizers are able to suggest flag values to minimize or maximize an objective.
 
 Below is a list of supported optimizers.
 
@@ -16,9 +16,9 @@ Below is a list of supported optimizers.
 | [gbrt](#gbrt)     | Sequential optimizer using gradient boosted regression trees. |
 | [random](#random) | Batch processor using randomly selected values.               |
 
-Use the default optimizer for an operation by specifying the `--optimize` option with [`guild run`](/commands/run). The default optimizer can be defined for an operation using the [`optimizers`](/reference/guildfile#operation-optimizers) attribute. Guild uses the [`gp`](#gp) optimizer if one is not otherwise defined for an operation.
+Use the default optimizer for an operation by specifying the `--optimize` option with [`guild run`](/pages/commands/run). The default optimizer can be defined for an operation using the [`optimizers`](/pages/reference/guildfile#operation-optimizers) attribute. Guild uses the [`gp`](#gp) optimizer if one is not otherwise defined for an operation.
 
-Specify a named optimizer with the `--optimizer` option to [`guild run`](/commands/run). A name may be one of the optimizers below or may be the name of an optimizer defined for the operation.
+Specify a named optimizer with the `--optimizer` option to [`guild run`](/pages/commands/run). A name may be one of the optimizers below or may be the name of an optimizer defined for the operation.
 
 Optimizer flags are set using `--opt-flag` or `-Fo`. Optimizer flags are specified like other flags using the format `NAME=VALUE`.
 
@@ -34,7 +34,7 @@ To use the `forest` optimizer:
 guild run train --optimizer forest
 ```
 
-For more examples, see [*Guild File Cheatsheet*](/cheatsheets/guildfile#optimizers).
+For more examples, see [*Guild File Cheatsheet*](/pages/cheatsheets/guildfile#optimizers).
 
 ## gp
 

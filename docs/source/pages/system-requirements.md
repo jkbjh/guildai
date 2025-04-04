@@ -25,13 +25,13 @@ Guild requires various software libraries. Each dependency is carefully consider
 |----------------------------|-----------------------------------------------------------------------------------|
 | *Pillow*                   | Converting images to raw format for TensorBoard summaries                         |
 | *PyYAML*                   | YAML file decoding                                                                |
-| *Werkzeug*                 | HTTP server used by [Guild View](/docs/view) and other Guild web applications |
+| *Werkzeug*                 | HTTP server used by [Guild View](/pages/docs/view) and other Guild web applications |
 | *daemonize*                | Background runs and other Guild background tools                                  |
 | *filelock*                 | Coordination across Guild processes (e.g. queues)                                 |
 | *jinja2*                   | Template support                                                                  |
 | *pkginfo* and *setuptools* | Python package support                                                            |
 | *scikit-optimize*          | Built-in Bayesian optimization                                                    |
-| *tabview*                  | Curses based application support used by [Guild Compare](/docs/compare]       |
+| *tabview*                  | Curses based application support used by [Guild Compare](/pages/docs/compare]       |
 | *tensorboard*              | Embedded TensorBoard support                                                      |
 
 ## Optional Software Libraries
@@ -39,6 +39,6 @@ Guild requires various software libraries. Each dependency is carefully consider
 |   |   |
 |---|---|
 | *Pandas* | Required by `guild.ipy`, Guild's Python Notebook interface |
-| *HiPlot* | Required when using `--tool hiplot` with [`guild compare`](/commands/compare) |
+| *HiPlot* | Required when using `--tool hiplot` with [`guild compare`](/pages/commands/compare) |
 | *TensorFlow* | If enabled via plugins, Guild logs system metrics for each scalar step logged by TensorFlow |
-| *Keras* | Guild detects Keras scripts and applies the [applicable default settings](/docs/defaults) for output scalars |
+| *Keras* | Guild detects Keras scripts and applies the [applicable default settings](/pages/docs/defaults) for output scalars |

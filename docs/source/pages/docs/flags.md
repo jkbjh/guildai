@@ -12,7 +12,7 @@ Flags are user-specified inputs to an operation. Flags can define any type of in
 - Data set names
 - Other operation confirmation
 
-Flags are specified for an operation using `NAME=VALUE` arguments to [`guild run`](/commands/run).
+Flags are specified for an operation using `NAME=VALUE` arguments to [`guild run`](/pages/commands/run).
 
 The following command sets two flag values:
 
@@ -31,13 +31,13 @@ Guild makes flag values available to a script using a *flags interface*. Guild s
 - Python global variables
 - Configuration file entries
 
-Guild works across platforms and languages using standard interfaces when possible. Guild does not require changes to script code to support Guild-specific configuration. Guild uses script inspection and explicit configuration in [Guild files](/docs/guildfiles) for flag information.
+Guild works across platforms and languages using standard interfaces when possible. Guild does not require changes to script code to support Guild-specific configuration. Guild uses script inspection and explicit configuration in [Guild files](/pages/docs/guildfiles) for flag information.
 
-When Guild does not have explicit configuration (e.g. when a script is run directly) it attempts to infer the flags interface by inspecting the script. See [*Default Behavior*](/docs/defaults#flags-interface) for more information.
+When Guild does not have explicit configuration (e.g. when a script is run directly) it attempts to infer the flags interface by inspecting the script. See [*Default Behavior*](/pages/docs/defaults#flags-interface) for more information.
 
-The flags interface is configured for an operation using the `flags-dest` attribute. See [`flags-dest` in *Guild File Reference*](/reference/guildfile#operation-flags-dest) for configuration details.
+The flags interface is configured for an operation using the `flags-dest` attribute. See [`flags-dest` in *Guild File Reference*](/pages/reference/guildfile#operation-flags-dest) for configuration details.
 
-For example of different interfaces, see [*Guild File Cheatsheet*](/cheatsheets/guildfile#flags-interface-python-modules).
+For example of different interfaces, see [*Guild File Cheatsheet*](/pages/cheatsheets/guildfile#flags-interface-python-modules).
 
 ### Command Line Arguments
 
@@ -84,7 +84,7 @@ In this case, Guild passes the two flag values as:
 python -m train --lr 0.1 --bs 100
 ```
 
-> <span data-guild-class="callout tip">Tip</span> Use the `--print-cmd` option with [`guild run`](/commands/run) to print the full command Guild uses when running an operation.
+> <span data-guild-class="callout tip">Tip</span> Use the `--print-cmd` option with [`guild run`](/pages/commands/run) to print the full command Guild uses when running an operation.
 
 ### Environment Variables
 
@@ -92,7 +92,7 @@ Guild makes flag values available as environment variables to each run process. 
 
 For example, the value for flag *`x`* is read as the environment variable `FLAG_X`.
 
-Use the [`env-name`](/reference/guildfile#flag-env-name) flag attribute to specify a different environment variable name for a flag.
+Use the [`env-name`](/pages/reference/guildfile#flag-env-name) flag attribute to specify a different environment variable name for a flag.
 
 For example, the following configuration causes Guild to set values of `x` using the environment variable `X` instead of `FLAG_X`:
 
@@ -277,7 +277,7 @@ In this case, you must explicitly define each flag your script supports.
 
 ## Flag Definitions
 
-Define flags for an operation using the [`flags`](/reference/guildfile#operation-flags) operation attribute.
+Define flags for an operation using the [`flags`](/pages/reference/guildfile#operation-flags) operation attribute.
 
 ``` yaml
 train:
@@ -288,7 +288,7 @@ train:
 
 Each flag is defined by a key in the `flags` mapping. The key is the *flag name*.
 
-Flags can be defined using a value, as shown above, or with a mapping of attributes. If a value is specified, it's used as the default flag value. The default value can otherwise be defined using the [`default`](/reference/guildfile#flag-default) attribute. The following is equivalent to the configuration above:
+Flags can be defined using a value, as shown above, or with a mapping of attributes. If a value is specified, it's used as the default flag value. The default value can otherwise be defined using the [`default`](/pages/reference/guildfile#flag-default) attribute. The following is equivalent to the configuration above:
 
 ``` yaml
 train:
@@ -299,9 +299,9 @@ train:
       default: 100
 ```
 
-Flags support a number of attributes for defining settings for help, value checks, type conversion, and interface details. Refer to [*Guild File Reference*](/reference/guildfile#flag-attributes) for a list of supported attributes.
+Flags support a number of attributes for defining settings for help, value checks, type conversion, and interface details. Refer to [*Guild File Reference*](/pages/reference/guildfile#flag-attributes) for a list of supported attributes.
 
-For more examples of flag definitions, see [*Guild File Cheatsheet*](/cheatsheets/guildfile#flag-definitions).
+For more examples of flag definitions, see [*Guild File Cheatsheet*](/pages/cheatsheets/guildfile#flag-definitions).
 
 ## Batch Files
 
@@ -315,7 +315,7 @@ For example, to use the batch file `trials.csv` for operation `train`, run:
 guild run @trials.csv
 ```
 
-For information on batch file format, see [Batch Files](/docs/runs#batch-files).
+For information on batch file format, see [Batch Files](/pages/docs/runs#batch-files).
 
 ## Special Flag Values
 
@@ -334,7 +334,7 @@ Guild supports a number of special flag value types that influence the way Guild
 
 A *value list* is a flag value in the format <code>[<em>VAL1</em>,<em>VAL2</em>,<span data-guild-class="fal fa-ellipsis-h"></span>]</code> where each value is a number, a string, or boolean value.
 
-A value list is processed according to the [*batch operation*](/docs/optimization) used. The [default batch operation](/docs/optimization#grid-search) uses values in a grid search. Other batch operations, including [random](/docs/optimization#random-search) and [sequetial optimizers](/docs/optimization#sequential-optimization), use the list as a set of choices to select from when suggesting trial values.
+A value list is processed according to the [*batch operation*](/pages/docs/optimization) used. The [default batch operation](/pages/docs/optimization#grid-search) uses values in a grid search. Other batch operations, including [random](/pages/docs/optimization#random-search) and [sequetial optimizers](/pages/docs/optimization#sequential-optimization), use the list as a set of choices to select from when suggesting trial values.
 
 The following command is a *grid search*. It runs the `train` operation a total of *nine* times --- one for each combination of values defined by value lists:
 
@@ -342,7 +342,7 @@ The following command is a *grid search*. It runs the `train` operation a total 
 guild run train lr=[0.001,0.01,0.1] batch-size=[100,500,1000]
 ```
 
-This command is a sequential optimization using [`gp`](/reference/optimizers#gp) to minimize *`loss`*. It uses the same flag values. Based on the optimizer, it generates 5 trials using value lists as *choices* to sample from:
+This command is a sequential optimization using [`gp`](/pages/reference/optimizers#gp) to minimize *`loss`*. It uses the same flag values. Based on the optimizer, it generates 5 trials using value lists as *choices* to sample from:
 
 ``` command
 guild run train lr=[0.001,0.01,0.1] batch-size=[100,500,1000] -Fo gp -m 5
