@@ -22,6 +22,7 @@ author = 're:guild Team'
 extensions = [
     'myst_parser',
     # other extensions
+    "sphinx_rtd_theme",
 ]
 
 # Optional: If you want to use specific MyST features, you can configure them here too.
@@ -43,7 +44,7 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+html_theme = "sphinx_rtd_theme"  #'alabaster'
 html_static_path = ['_static']
 
 # Specify MYST_DEBUG for troubleshooting
