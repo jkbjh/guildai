@@ -1,5 +1,7 @@
 <!-- -*- eval:(visual-line-mode 1) -*- -->
 
+# Use Guild
+
 <div data-theme-toc="true"></div>
 <div data-guild-docs="true"></div>
 

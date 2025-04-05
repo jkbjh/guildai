@@ -1,5 +1,5 @@
 <!-- -*- eval:(visual-line-mode 1) -*- -->
-
+# CLI
 <div data-guild-docs="true"></div>
 
 Refer to [*Guild AI Commands*](/pages/commands) for a list of Guild AI commands.
