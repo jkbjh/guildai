@@ -1,3 +1,4 @@
+# Examples
 <div data-theme-toc="true"></div>
 <div data-guild-docs="true"></div>
 
