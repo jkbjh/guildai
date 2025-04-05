@@ -4,6 +4,8 @@
    pages/cheatsheets/commands.md
    pages/cheatsheets/guildfile.md
    pages/cheatsheets/remotes.md
+   pages/commands-toc.md
+   pages/commands.md
    pages/commands/api-compare.md
    pages/commands/api-help-op.md
    pages/commands/api-merge.md
