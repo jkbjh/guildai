@@ -61,6 +61,7 @@ def generate_command_help():
         filename = _command_permalink(cmd)  # + ".md")
         print(filename)
         with open(filename, "w") as manpage:
+            manpage.write(f"# {cmd}\n\n")
             formatted_help = _format_command_help_post(cmd, help_data)
             manpage.write(formatted_help)
 
