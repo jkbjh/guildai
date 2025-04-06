@@ -20,19 +20,19 @@ For a complete list of supported platforms, see [*System Requirements*](/system-
 
 To install Guild AI, run the following command:
 
-``` command
+``` bash
 pip install --user guildai
 ```
 
 If you want to install Guild at the system level, omit the `--user` option and run the command as an administrator:
 
-``` command
+``` bash
 sudo pip install guildai
 ```
 
 If you want the latest pre-release version of Guild AI, use the `--pre` option:
 
-``` command
+``` bash
 pip install --user guildai
 ```
 
@@ -40,13 +40,13 @@ pip install --user guildai
 
 If you're using conda, activate your environment:
 
-``` command
+``` bash
 conda activate ENV-NAME
 ```
 
 Next, install Guild using `pip`:
 
-``` command
+``` bash
 pip install guildai
 ```
 
@@ -56,13 +56,13 @@ pip install guildai
 
 Guild AI provides a Docker image that you can install by running:
 
-``` command
+``` bash
 docker pull guildai/guildai
 ```
 
 Start an interactive TTY session using the image by running:
 
-``` command
+``` bash
 docker run -it guildai
 ```
 
@@ -80,26 +80,26 @@ Additional required tools for installing from source code:
 
 To install Guild from source, clone the repository by running:
 
-``` command
+``` bash
 git clone https://github.com/guildai/guildai.git
 ```
 
 Change to the `guild` directory and install the required pip packages:
 
-``` command
+``` bash
 cd guildai
 pip install -r requirements.txt
 ```
 
 Build Guild by running:
 
-``` command
+``` bash
 python setup.py build
 ```
 
 Verify Guild by running:
 
-``` command
+``` bash
 guild/scripts/guild check
 ```
 
@@ -116,7 +116,7 @@ Guild AI supports command completion on bash, zsh, and fish shells. When configu
 
 To install command completion for your shell, run:
 
-``` command
+``` bash
 guild completion --install
 ```
 
@@ -145,7 +145,7 @@ Guild uses NVIDIA System Management Interface (`nvidia-smi`) on GPU accelerated 
 
 Verify that Guild is installed properly by running [`guild check`](/pages/commands/check):
 
-``` command
+``` bash
 guild check
 ```
 If there are problems with your installation, Guild shows the details and exits with an error.

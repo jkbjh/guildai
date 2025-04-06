@@ -13,19 +13,19 @@ Short-form options are used for Guild commands when available. Refer to command 
 
 Latest release:
 
-``` command
+``` bash
 pip install guildai --upgrade
 ```
 
 Latest pre-release:
 
-``` command
+``` bash
 pip install guildai --upgrade --pre
 ```
 
 Check Guild after install:
 
-``` command
+``` bash
 guild check
 ```
 
@@ -33,67 +33,67 @@ guild check
 
 Run a script:
 
-``` command
+``` bash
 guild run train.py
 ```
 
 Run an operation defined in a [Guild file](/pages/docs/guildfiles):
 
-``` command
+``` bash
 guild run train
 ```
 
 Run with flag values:
 
-``` command
+``` bash
 guild run train lr=0.1 dropout=0.2
 ```
 
 Run without prompting:
 
-``` command
+``` bash
 guild run train -y
 ```
 
 Stage an operation without running it:
 
-``` command
+``` bash
 guild run train --stage
 ```
 
 Start a staged run:
 
-``` command
+``` bash
 guild run --start RUN-ID
 ```
 
 Use command indirection (Bash compatible shells only) to start the latest staged run:
 
-``` command
+``` bash
 guild run --stage `guild select -G`
 ```
 
 Restart a run:
 
-``` command
+``` bash
 guild run --restart RUN-ID
 ```
 
 Restart the lastest run using command indirection (Bash compatible shells only):
 
-``` command
+``` bash
 guild run --restart `guild select`
 ```
 
 Start a new run using another run as a prototype:
 
-``` command
+``` bash
 guild run --proto RUN-ID
 ```
 
 Start a new run using the latest as a prototype (Bash compatible shells only):
 
-``` command
+``` bash
 guild run --proto `guild select`
 ```
 
@@ -101,19 +101,19 @@ guild run --proto `guild select`
 
 Run four trials given two values for two flags:
 
-``` command
+``` bash
 guild run train lr=[0.01,0.1] dropout=[0.1,0.2]
 ```
 
 Run 20 random trials using flag values from a uniform and log-uniform distribution:
 
-``` command
+``` bash
 guild run train lr=loguniform[1e-5:1e-1] dropout=[0.1:0.9] -m 20
 ```
 
 Run 20 random trials but use Bayesan optimization instead of random:
 
-``` command
+``` bash
 guild run train lr=loguniform[1e-5:1e-1] dropout=[0.1:0.9] -Fo gp -m 20
 ```
 
@@ -121,61 +121,61 @@ guild run train lr=loguniform[1e-5:1e-1] dropout=[0.1:0.9] -Fo gp -m 20
 
 Get general run info:
 
-``` command
+``` bash
 guild runs info
 ```
 
 List run files:
 
-``` command
+``` bash
 guild ls
 ```
 
 List source code files:
 
-``` command
+``` bash
 guild ls --sourcecode
 ```
 
 List all run files, including Guild files and source code:
 
-``` command
+``` bash
 guild ls -a
 ```
 
 Compare runs:
 
-``` command
+``` bash
 guild compare
 ```
 
 Compare runs for an operation:
 
-``` command
+``` bash
 guild compare -Fo train
 ```
 
 Save compare data to a CSV file:
 
-``` command
+``` bash
 guild compare --csv runs.csv
 ```
 
 Print compare data in CSV format:
 
-``` command
+``` bash
 guild compare --csv -
 ```
 
 View runs in TensorBoard:
 
-``` command
+``` bash
 guild tensorboard
 ```
 
 View runs in Guild View:
 
-``` command
+``` bash
 guild view
 ```
 
@@ -185,67 +185,67 @@ guild view
 
 List the latest 20 runs:
 
-``` command
+``` bash
 guild runs
 ```
 
 List the latest 40 runs:
 
-``` command
+``` bash
 guild runs -m
 ```
 
 List all runs:
 
-``` command
+``` bash
 guild runs -a
 ```
 
 List runs for an operation:
 
-``` command
+``` bash
 guild runs -Fo train
 ```
 
 List completed runs for an operation:
 
-``` command
+``` bash
 guild runs -Fo train -C
 ```
 
 List the latest 20 deleted runs:
 
-``` command
+``` bash
 guild runs -d
 ```
 
 List all deleted runs:
 
-``` command
+``` bash
 guild runs -da
 ```
 
 List terminated and error runs:
 
-``` command
+``` bash
 guild runs -ET
 ```
 
 List runs started within the last hour:
 
-``` command
+``` bash
 guild runs -S "last hour"
 ```
 
 List runs started today:
 
-``` command
+``` bash
 guild runs -S today
 ```
 
 List runs that are older than 30 days:
 
-``` command
+``` bash
 guild runs -S "before 30 days ago"
 ```
 
@@ -253,19 +253,19 @@ guild runs -S "before 30 days ago"
 
 Delete all runs:
 
-``` command
+``` bash
 guild runs rm
 ```
 
 Delete all failed runs (status `error`):
 
-``` command
+``` bash
 guild runs rm -E
 ```
 
 Delete all staged runs:
 
-``` command
+``` bash
 guild runs rm -S
 ```
 
@@ -273,13 +273,13 @@ guild runs rm -S
 
 Restore all deleted runs:
 
-``` command
+``` bash
 guild runs restore
 ```
 
 Restore the latest five deleted runs:
 
-``` command
+``` bash
 guild runs restore :5
 ```
 
@@ -287,31 +287,31 @@ guild runs restore :5
 
 General Guild help:
 
-``` command
+``` bash
 guild --help
 ```
 
 Help for a command:
 
-``` command
+``` bash
 guild COMMAND --help
 ```
 
 Help for an operation:
 
-``` command
+``` bash
 guild run OPERATION --help-op
 ```
 
 Help for the current project:
 
-``` command
+``` bash
 guild help
 ```
 
 Help for an installed package:
 
-``` command
+``` bash
 guild help PACKAGE
 ```
 
@@ -319,30 +319,30 @@ guild help PACKAGE
 
 Test source code rules:
 
-``` command
+``` bash
 guild run train --test-sourcecode
 ```
 
 Test output scalar rules on the latest run output:
 
-``` command
+``` bash
 guild cat --output | guild run train --test-output-scalars -
 ```
 
 Test output scalar rules interactively (i.e. type sample output to evaluate and press **Enter**):
 
-``` command
+``` bash
 guild run train --test-output-scalars -
 ```
 
 Test flag imports:
 
-``` command
+``` bash
 guild run train --test-flags
 ```
 
 Stage a run to examine its file layout:
 
-``` command
+``` bash
 guild run train --stage --run-dir /tmp/staged-run
 ```

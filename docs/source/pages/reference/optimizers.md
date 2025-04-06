@@ -24,13 +24,13 @@ Optimizer flags are set using `--opt-flag` or `-Fo`. Optimizer flags are specifi
 
 To run the default optimizer for `train`:
 
-``` command
+``` bash
 guild run train --optimize
 ```
 
 To use the `forest` optimizer:
 
-``` command
+``` bash
 guild run train --optimizer forest
 ```
 

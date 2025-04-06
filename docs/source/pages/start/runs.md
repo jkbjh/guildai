@@ -15,13 +15,13 @@ In this section, you learn techniques for managing runs.
 
 Use [`guild runs`](/pages/commands/runs) to show current runs. By default, Guild only shows the latest 20 runs.
 
-``` command
+``` bash
 guild runs
 ```
 
 You can show 20 additional runs using `--more` or `-m` option.
 
-``` command
+``` bash
 guild runs -m
 ```
 
@@ -29,7 +29,7 @@ Specify `m` multiple times as needed in increase the number of runs shown --- e.
 
 To show all runs, use `--all` or `-a`.
 
-``` command
+``` bash
 guild runs -a
 ```
 
@@ -39,7 +39,7 @@ Use [`guild runs rm`](/pages/commands/runs-rm) or [`guild runs delete`](/pages/c
 
 Delete all of the runs (you restore them later):
 
-``` command
+``` bash
 guild runs rm
 ```
 
@@ -47,7 +47,7 @@ Guild shows the list of runs to delete. Press **Enter** to confirm.
 
 Verify that the runs list is empty:
 
-``` command
+``` bash
 guild runs
 ```
 
@@ -55,7 +55,7 @@ Guild moves deleted runs to [*trash*](/pages/docs/environments#guild-home) where
 
 Show deleted runs by including the `--deleted` option with [`guild runs`](/pages/commands/runs):
 
-``` command
+``` bash
 guild runs --deleted
 ```
 
@@ -65,7 +65,7 @@ To restore a deleted run, use [`guild runs restore`](/pages/commands/runs-restor
 
 Restore all of the deleted runs:
 
-``` command
+``` bash
 guild runs restore
 ```
 
@@ -73,7 +73,7 @@ Guild shows the runs to restore. Press **Enter** to confirm.
 
 Verify that the runs appear in the runs list:
 
-``` command
+``` bash
 guild runs
 ```
 
@@ -87,13 +87,13 @@ After a run is started, you can modify its label using [`guild label`](/pages/co
 
 To see how labels are used, let's tag the "best" run. First, find the run with the lowest *`loss`* using [`guild select`](/pages/commands/select):
 
-``` command
+``` bash
 guild select -Fo train.py --min loss
 ```
 
 Guild shows the run ID with the lowest loss. Confirm this by running:
 
-``` command
+``` bash
 guild compare -Fo train.py --min loss --top 1 --table
 ```
 
@@ -104,7 +104,7 @@ or `--prepend` options respectively.
 
 For example, use the `--prepend` option with [`guild label`](/pages/commands/label) to prepend "best" to the run label:
 
-``` command
+``` bash
 guild label --prepend best <run ID from previous command>
 ```
 
@@ -114,7 +114,7 @@ Guild prompts you with the proposed change. Press **Enter** to modify the run la
 
 Show runs with "best" in their label:
 
-``` command
+``` bash
 guild runs -l best
 ```
 
@@ -132,7 +132,7 @@ You can specify tags when when starting an operation with [`guild run`](/pages/c
 
 To tag an existing run, use [`guild tag`](/pages/commands/tag) with the `--add` option. Here we use a tag to mark a "best" run:
 
-``` command
+``` bash
 guild tag --add best <run ID from above>
 ```
 
@@ -156,13 +156,13 @@ Runs can be filtered by:
 
 To show "best" runs (via tags), run:
 
-``` command
+``` bash
 guild runs --tag best
 ```
 
 To show runs that were started within the last 15 minutes, run:
 
-``` command
+``` bash
 guild runs --started 'last 15 minutes'
 ```
 
@@ -174,7 +174,7 @@ Export runs to a directory for backup or to move runs out of your environment.
 
 Export all runs to a local `archived-runs` directory:
 
-``` command
+``` bash
 guild export --move archived-runs
 ```
 
@@ -188,13 +188,13 @@ Guild moves your runs into a local `archived-runs` directory. The `guild-start` 
 
 Verify that your runs list is empty:
 
-``` command
+``` bash
 guild runs
 ```
 
 List runs in an archive directory by specifying the `--archive` option with [`guild runs`](/pages/commands/runs):
 
-``` command
+``` bash
 guild runs --archive archived-runs
 ```
 

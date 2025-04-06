@@ -33,7 +33,7 @@ Note the fuzziness of the tests in this case as shown in the last five lines of 
 
 You can run tests directly using the `pytest` command:
 
-``` command
+``` bash
 pytest demo.py
 ```
 

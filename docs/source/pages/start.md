@@ -7,13 +7,13 @@
 
 If you're familiar with installing Python packages using `pip`, simply install the `guildai` package.
 
-``` command
+``` bash
 pip install guildai
 ```
 
 Alternatively, to install to the [user install directory](https://pip.pypa.io/en/stable/pages/reference/pip_install/#cmdoption-user), run:
 
-``` command
+``` bash
 pip install guildai --user
 ```
 
@@ -21,7 +21,7 @@ For detailed installation instructions, see [*Install Guild AI*](/install).
 
 When Guild is installed, check the environment:
 
-``` command
+``` bash
 guild check
 ```
 
@@ -33,7 +33,7 @@ Guild's primary interface is the [command line](/pages/docs/cli). Commands are r
 
 Show all Guild commands:
 
-``` command
+``` bash
 guild --help
 ```
 
@@ -43,7 +43,7 @@ See [*Guild AI Commands*](/pages/commands) for a complete reference.
 
 Guild provides command completion on bash, zsh, and fish shells. To install support for command completion, run:
 
-``` command
+``` bash
 guild completion --install
 ```
 
@@ -55,7 +55,7 @@ In the steps below, you create a sample training script and run it to generate e
 
 Create a new project directory:
 
-``` command
+``` bash
 mkdir guild-start
 ```
 
@@ -63,7 +63,7 @@ mkdir guild-start
 
 Change to the project directory:
 
-``` command
+``` bash
 cd guild-start
 ```
 
@@ -95,7 +95,7 @@ The project directory should look like this:
 
 Use Guild to run `train.py`:
 
-``` command
+``` bash
 guild run train.py
 ```
 
@@ -132,7 +132,7 @@ These are the steps that Guild performs when it runs a script:
 
 Start the [Guild View](/pages/docs/view) application:
 
-``` command
+``` bash
 guild view
 ```
 
@@ -152,7 +152,7 @@ When working in a command line environment, it's convenient to use the terminal 
 
 From your terminal, use [`guild runs`](/pages/commands/runs) to list the current runs:
 
-``` command
+``` bash
 guild runs
 ```
 
@@ -166,7 +166,7 @@ Information about each run is saved in a [*run directory*](/pages/docs/runs#run-
 
 Use [`guild runs info`](/pages/commands/runs-info) to show information about a run:
 
-``` command
+``` bash
 guild runs info
 ```
 
@@ -205,7 +205,7 @@ Guild saves project *source code* for each run.
 
 To list source code, include the `--sourcecode` option with [`guild ls`](/pages/commands/ls):
 
-``` command
+``` bash
 guild ls --sourcecode
 ```
 
@@ -219,7 +219,7 @@ guild ls --sourcecode
 
 Use the `--sourcecode` option with [`guild cat`](/pages/commands/cat) to view source code associated with a run :
 
-``` command
+``` bash
 guild cat --sourcecode --path train.py
 ```
 
@@ -240,7 +240,7 @@ print("loss: %f" % loss)
 
 You can also open source code files in your system editor with [`guild open`](/pages/commands/open):
 
-``` command
+``` bash
 guild open --sourcecode --path train.py
 ```
 

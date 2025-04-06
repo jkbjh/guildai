@@ -622,7 +622,7 @@ A Gist remote may be specified using an inline specification. The format is:
 
 For example, to push runs to a gist named `shared-runs` for the GitHub user `jack`, run:
 
-``` command
+``` bash
 guild push gist:jack/shared-runs
 ```
 

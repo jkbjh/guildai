@@ -35,7 +35,7 @@ All of the steps outlined in [Hello](/pages/examples/hello) can be run with this
 
 From the `package` example directory, run:
 
-``` command
+``` bash
 guild package
 ```
 
@@ -49,13 +49,13 @@ You can use [`guild init`](/pages/commands/init), *virtualenv*, or *conda*. This
 
 From the `package` example directory, run:
 
-``` command
+``` bash
 guild init -y
 ```
 
 Activate the environment:
 
-``` command
+``` bash
 source guild-env
 ```
 
@@ -65,13 +65,13 @@ If you use virtual or conda to create a virtual environment, activate the enviro
 
 Use `pip` to install the package.
 
-``` command
+``` bash
 pip install dist/*
 ```
 
 List installed Guild packages:
 
-``` command
+``` bash
 guild packages
 ```
 
@@ -85,7 +85,7 @@ You can also see the installed packages when running `pip list` and `pip info` (
 
 Once installed, operations defined in the package are available anywhere on the system --- even if the project director is removed.
 
-``` command
+``` bash
 guild run gpkg.hello/hello
 ```
 
@@ -93,7 +93,7 @@ By default, Guild does not include package operations when listing operations fr
 
 From the `package` directory, show available operations:
 
-``` command
+``` bash
 guild operations
 ```
 
@@ -105,7 +105,7 @@ hello-op    Show a message from a hello-file operation
 
 Include installed operations in the list by specifying the `--installed` option:
 
-``` command
+``` bash
 guild operations --installed
 ```
 
@@ -120,13 +120,13 @@ hello-op               Show a message from a hello-file operation
 
 Change to the parent directory:
 
-``` command
+``` bash
 cd ..
 ```
 
 From the parent directory, show operations:
 
-``` command
+``` bash
 guild operations
 ```
 
@@ -140,6 +140,6 @@ Guild shows installed operations because the parent directory does not contain a
 
 Run a packaged operation from the parent directory:
 
-``` command
+``` bash
 guild run hello msg="hi from a packaged operation"
 ```

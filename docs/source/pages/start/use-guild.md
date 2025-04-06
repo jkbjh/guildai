@@ -29,13 +29,13 @@ As you [learn earlier](/pages/start/classifier#create-a-guild-environment), Guil
 
 Here's a simple way to create a project-local virtual environment using Python's built-in `venv` module (Python 3 only):
 
-``` command
+``` bash
 python -m venv venv
 ```
 
 You can alternatively use [`guild init`](/pages/commands/init) to create a virtual environment. This method uses *virtualenv*. To ensure that you create an empty environment, use the `--no-reqs` option.
 
-``` command
+``` bash
 guild init --no-reqs
 ```
 
@@ -43,31 +43,31 @@ You must *activate the environment* in the current terminal as well as any new t
 
 For POSIX shells:
 
-``` command
+``` bash
 source venv/bin/activate
 ```
 
 For Windows:
 
-``` command
+``` bash
 venv\Scripts\activate.bat
 ```
 
 In an activated environment, ensure that the environment uses the latest version of `pip`:
 
-``` command
+``` bash
 pip install --upgrade pip
 ```
 
 If you create an empty environment using a method other than [`guild init`](/pages/commands/init), install Guild explicitly into the environment:
 
-``` command
+``` bash
 pip install guildai
 ```
 
 Run [`guild check`](/pages/commands/check) to verify that Guild uses the activated environment. Note the value for `python_exe` in the output --- it should be the environment's Python executable.
 
-``` command
+``` bash
 guild check
 ```
 
@@ -77,7 +77,7 @@ Before using Guild, run the operation directly with Python. This step resolves p
 
 Here's an example of running a module implemented in a file `mnist_mlp.py`:
 
-``` command
+``` bash
 python -m mnist_mlp
 ```
 
@@ -87,25 +87,25 @@ If the module is located in a subdirectory, determine if the subdirectory is a P
 
 Subdirectory paths must be included in the Python path when you run the module. If you're running a POSIX shell, you can include the path in the Python command as the environment variable `PYTHONPATH`. For example, if the module is located in a `src` (non-package) subdirectory, you can run:
 
-``` command
+``` bash
 PYTHONPATH=src python -m mnist_mlp
 ```
 
 You can alternatively export `PYTHONPATH` once for the terminal session:
 
-``` command
+``` bash
 export PYTHONPATH=src
 ```
 
 If you're running Windows, define `PYTHONPATH` using `set`:
 
-``` command
+``` bash
 set PYTHONPATH=src
 ```
 
 If the subdirectory is a Python package --- i.e. it contains `__init__.py` --- include the package in the module spec. For example, if `mnist_mlp.py` is located in subdirectory `models` that also contains `__init__.py`, run it using:
 
-``` command
+``` bash
 python -m models.mnist_mlp
 ```
 
@@ -123,7 +123,7 @@ ModuleNotFoundError: No module named 'keras'
 
 In this case, use `pip` to install required packages in the virtual environment. For example, to ensure the module `keras` is available, install the `keras` package:
 
-``` command
+``` bash
 pip install keras
 ```
 
@@ -211,7 +211,7 @@ Before running `train`, verify that Guild copies the correct operation source co
 
 From the project directory, use [`guild run`](/pages/commands/run) with `--test-sourcecode`:
 
-``` command
+``` bash
 guild run --test-sourcecode
 ```
 
@@ -236,7 +236,7 @@ For examples of `sourcecode` specs, see [*Guild File Cheatsheet*](/pages/cheatsh
 
 Run the operation with Guild:
 
-``` command
+``` bash
 guild run
 ```
 
@@ -271,7 +271,7 @@ The most common problems at this stage include:
 
 If Guild fails to copy all required source code files, you typically see an error `ImportError: No module named ...` or `ModuleNotFoundError: ...`. Diagnose this problem by listing the source code files copied for the run with [`guild ls`](/pages/commands/ls):
 
-``` command
+``` bash
 guild ls --sourcecode
 ```
 
@@ -306,7 +306,7 @@ When the module is run with Guild, it runs in a newly created, empty directory. 
 
 Check the files in a run directory using [`guild ls`](/pages/commands/ls):
 
-``` command
+``` bash
 guild ls
 ```
 
@@ -362,7 +362,7 @@ Otherwise, congratulations --- you have baseline support for Guild! This is a go
 
 List the runs:
 
-``` command
+``` bash
 guild runs
 ```
 
@@ -372,7 +372,7 @@ You may have a number of failed runs (runs with `error` status). That's okay! Ex
 
 You can delete failed runs by specifying `--error` with [`guild runs rm`](/pages/commands/runs-rm):
 
-``` command
+``` bash
 guild runs rm --error
 ```
 
@@ -384,7 +384,7 @@ As long as you don't use `--permanent` when you delete runs, you can restore the
 
 If the operation generates files --- for example, a saved model --- confirm the files are part of the run using [`guild ls`](/pages/commands/ls):
 
-``` command
+``` bash
 guild ls
 ```
 
@@ -502,7 +502,7 @@ Aditya Mishra provides a helpful primer on this topic: [*Metrics to Evaluate you
 
 Before proceeding, view the scalars for the latest run to see if Guild already detects them:
 
-``` command
+``` bash
 guild runs info
 ```
 
@@ -534,7 +534,7 @@ Run the operation two or three times. If you follow the [10 second rule](#10-sec
 
 Compare operation performance with [`guild compare`](/pages/commands/compare):
 
-``` command
+``` bash
 guild compare -C
 ```
 
@@ -557,7 +557,7 @@ Up to this point you focus on running code from start to finish without crashing
 
 In [Get Started](/pages/start/optimize) you run a simple `train.py` script with Guild to find optimal values for hyperparameter *`x`*:
 
-``` command
+``` bash
 guild run train.py x=[-2.0:2.0] --minimize loss --optimizer gp
 ```
 
@@ -643,7 +643,7 @@ https://github.com/guildai/guildai/blob/master/examples/get-started/train.py
 
 When you run this script, Guild examines it and detects the global variables `x` and `noise` as flags. This lets you run the script with different values for `x` and `noise`:
 
-``` command
+``` bash
 guild run train.py x=0.2 noise=0.2
 ```
 
@@ -690,13 +690,13 @@ Guild detects global variables as flags when you run a script directly. This is 
 
 Use the `--test-flags` option with [`guild run`](/pages/commands/run) to list the flags that Guild imports:
 
-``` command
+``` bash
 guild run --test-flags
 ```
 
 You can also show imported flags by specifying `--help-op` with [`guild run`](/pages/commands/run):
 
-``` command
+``` bash
 guild run --help-op
 ```
 
@@ -730,7 +730,7 @@ https://github.com/guildai/guildai/blob/master/examples/get-started-use-guild/mn
 
 With these changes, you can see the list of imported flags by specifying `--help-op` with [`guild run`](/pages/commands/run):
 
-``` command
+``` bash
 guild run --help-op
 ```
 
@@ -757,7 +757,7 @@ Note that we use a `--10sec` option, which is imported as the `10sec` flag. When
 
 If you configure the operation this way, verify that it runs quickly:
 
-``` command
+``` bash
 guild run 10sec=yes
 ```
 
@@ -830,7 +830,7 @@ A stronger case for environment variables is for configuring file locations. See
 
 You can show the generated config file using [`guild cat`](/pages/commands/cat):
 
-``` command
+``` bash
 guild cat --path config.json
 ```
 

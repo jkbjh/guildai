@@ -23,17 +23,17 @@ This example follows the process outlines in [*Use Guild in a Project*](/pages/s
 
 Start with a new virtual environment. Use [`guild init`](/pages/commands/init) or [another method](/pages/docs/environments#create-a-guild-environment) as you prefer.
 
-``` command
+``` bash
 cd examples/tensorflow2
 ```
 
-``` command
+``` bash
 guild init
 ```
 
 Activate the environment:
 
-``` command
+``` bash
 source guild-env
 ```
 
@@ -41,7 +41,7 @@ source guild-env
 
 Before adding Guild support, verify that you can run the beginner example without errors.
 
-``` command
+``` bash
 python beginner.py
 ```
 
@@ -51,13 +51,13 @@ The command should run to completion after training a model over 5 epochs. If yo
 
 Run `beginner.py` with Guild:
 
-``` command
+``` bash
 guild run beginner.py
 ```
 
 Guild runs the script to generate a *run*. When the operation is finished, show the run info:
 
-``` command
+``` bash
 guild runs info
 ```
 
@@ -89,7 +89,7 @@ https://github.com/guildai/guildai/blob/master/examples/tensorflow2/beginner_wit
 
 With this simple change, you can use Guild to run experiments with different hyperparameters. Each run is recorded with the applicable set of flag values.
 
-``` command
+``` bash
 guild run beginner_with_flags.py epochs=10
 ```
 
@@ -99,7 +99,7 @@ Use Guild to search for optimial hyperparameters. By default, Guild tries to min
 
 Start a run to find optimal values for `learning_rate` and `dropout`. Train over two epochs to save time.
 
-``` command
+``` bash
 guild run beginner_with_flags.py --optimize \
   epochs=2 \
   dropout=range[0.1:0.9:0.1] \
@@ -112,7 +112,7 @@ By default Guild runs 20 trials. Specify a different value using `--max-trials`.
 
 Use [`guild runs`](/pages/commands/runs) to list the runs:
 
-``` command
+``` bash
 guild runs
 ```
 
@@ -120,7 +120,7 @@ By default Guild shows the latest 20 runs. To show all runs, use the `--all` opt
 
 Use [TensorBoard](/pages/docs/tensorboard) to compare runs:
 
-``` command
+``` bash
 guild tensorboard
 ```
 
@@ -156,7 +156,7 @@ The operation runs the `beginner_with_flags` Python module. It provides a descri
 
 List the project operations:
 
-``` command
+``` bash
 guild operations
 ```
 
@@ -166,7 +166,7 @@ train  Train a simple neural network to classify MNIST digits
 
 Show help for the project:
 
-``` command
+``` bash
 guild help
 ```
 
@@ -204,13 +204,13 @@ Guild files *document* project capabilities, as well as enable them.
 
 Run the operation:
 
-``` command
+``` bash
 guild run
 ```
 
 Guild trains the model using the optimal hyperparameter values. Compare the results to earlier runs:
 
-``` command
+``` bash
 guild compare
 ```
 

@@ -97,18 +97,18 @@ Show runs scalars using [`guild runs info`](/pages/commands/runs-info).
 
 By default, Guild omits scalars starting with `sys/` as these scalars are systems-related can overwhelm the list of scalars. To include system scalars, use the `--all-scalars` option:
 
-``` command
+``` bash
 guild runs info --all-scalars
 ```
 
 You can also view scalar values in TensorBoard in the **Scalars** tab.
 
-``` command
+``` bash
 guild tensorboard --tab scalars
 ```
 
 To show all scalars for multiple runs, use the `--print-scalars` option with [`guild compare`](/pages/commands/compare).
 
-``` command
+``` bash
 guild compare --print-scalars
 ```

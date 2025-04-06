@@ -11,13 +11,13 @@ To see how Guild packages work, you can experiment with a pre-packaged Guild pac
 
 Install a sample package:
 
-``` command
+``` bash
 pip install gpkg.hello
 ```
 
 List available operations:
 
-``` command
+``` bash
 guild ops gpkg.hello
 ```
 
@@ -30,7 +30,7 @@ gpkg.hello/hello:from-flag         Print a message
 
 Run an operation:
 
-``` command
+``` bash
 guild run gpkg.hello/hello:default -y
 ```
 
@@ -40,7 +40,7 @@ Hello Guild!
 
 Uninstall the package.
 
-``` command
+``` bash
 pip uninstall gpkg.hello
 ```
 
@@ -58,7 +58,7 @@ Use Guild packages to:
 
 Build a package for your project by running [`guild package`](/pages/commands/package). The project must contain a [Guild file](/pages/docs/guildfiles) to run this command.
 
-``` command
+``` bash
 guild package
 ```
 
@@ -89,7 +89,7 @@ To upload a package to PyPI use the `--upload` option. Specify your PyPI user na
 
 If you upload the package to PyPI, you can install it using pip and the package name.
 
-``` command
+``` bash
 pip install gpkg.my-model
 ```
 
@@ -118,25 +118,25 @@ Installed Guild packages provide models and operations that you can run from any
 
 List installed packages:
 
-``` command
+``` bash
 guild packages
 ```
 
 Show help for an installed package:
 
-``` command
+``` bash
 guild help PACKAGE
 ```
 
 List installed models:
 
-``` command
+``` bash
 guild models -i
 ```
 
 List installed operations:
 
-``` command
+``` bash
 guild operations -i
 ```
 

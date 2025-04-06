@@ -16,7 +16,7 @@ Flags are specified for an operation using `NAME=VALUE` arguments to [`guild run
 
 The following command sets two flag values:
 
-``` command
+``` bash
 guild run train learning-rate=0.1 batch-size=100
 ```
 
@@ -57,13 +57,13 @@ Each non-null flag value is specified as arguments following this format.
 
 Consider the following command:
 
-``` command
+``` bash
 guild run train.py learning-rate=0.1 batch-size=100
 ```
 
 Guild passes the two flag values to `train.py` as follows:
 
-``` command
+``` bash
 python -m train --learning-rate 0.1 --batch-size 100
 ```
 
@@ -80,7 +80,7 @@ train:
 
 In this case, Guild passes the two flag values as:
 
-``` command
+``` bash
 python -m train --lr 0.1 --bs 100
 ```
 
@@ -179,7 +179,7 @@ When you run the operation, Guild generates a copy of the specified configuratio
 
 For example, when you run for the example above:
 
-``` command
+``` bash
 guild run train x=3
 ```
 
@@ -311,7 +311,7 @@ Specify batch files for a run using one or more arguments with the syntax <code>
 
 For example, to use the batch file `trials.csv` for operation `train`, run:
 
-``` command
+``` bash
 guild run @trials.csv
 ```
 
@@ -338,13 +338,13 @@ A value list is processed according to the [*batch operation*](/pages/docs/optim
 
 The following command is a *grid search*. It runs the `train` operation a total of *nine* times --- one for each combination of values defined by value lists:
 
-``` command
+``` bash
 guild run train lr=[0.001,0.01,0.1] batch-size=[100,500,1000]
 ```
 
 This command is a sequential optimization using [`gp`](/pages/reference/optimizers#gp) to minimize *`loss`*. It uses the same flag values. Based on the optimizer, it generates 5 trials using value lists as *choices* to sample from:
 
-``` command
+``` bash
 guild run train lr=[0.001,0.01,0.1] batch-size=[100,500,1000] -Fo gp -m 5
 ```
 

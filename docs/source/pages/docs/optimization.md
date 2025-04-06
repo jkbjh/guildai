@@ -11,7 +11,7 @@ The batch operation is specified for a run using the `--optimizer` option with [
 
 As with any Guild operation, you can view help for a batch operation using `--help-op` with [`guild run`](/pages/commands/run).
 
-``` command
+``` bash
 guild run gp --help-op
 ```
 
@@ -33,13 +33,13 @@ The default batch operation is invoked implicitly when any flag value is a list 
 
 The following command generates *sixteen* trials, one for each combination of the specified values:
 
-``` command
+``` bash
 guild run train lr='[0.0001,0.001,0.01,0.1]' dropout='[0.1,0.2,0.3,0.4]'
 ```
 
 You can use use [*sequential flag functions*](/pages/docs/flags#sequence-functions) to generate value lists. The following is equivalent to the previous command:
 
-``` command
+``` bash
 guild run train lr='logspace[-4:-1:4]' dropout=range[0.1:0.4:0.1]
 ```
 
@@ -47,7 +47,7 @@ guild run train lr='logspace[-4:-1:4]' dropout=range[0.1:0.4:0.1]
 
 By default, Guild uses the `random` optimizer when a flag value is a [search space function](/pages/docs/flags#search-space-functions). For example, this command implicitly uses the `random` optimizer because it uses the `loguniform` search space function for *`lr`*:
 
-``` command
+``` bash
 guild run train lr=loguniform[1e-4:1e-2] dropout=[0.1,0.2]
 ```
 
@@ -55,7 +55,7 @@ This command generates 20 trials. It selects values for *`dropout`* at random fr
 
 To run a grid search in this case, specify the optimizer as `+`:
 
-``` command
+``` bash
 guild run train lr=loguniform[1e-4:1e-2] dropout=[0.1,0.2] --optimizer +
 ```
 
@@ -69,7 +69,7 @@ By default the random optimizer generates 20 trials. Change this by specifying t
 
 The following command uses the random optimizer to run 10 trials. It selects values for *`lr`* at random from the log-uniform distribution over the range `1e-4` to `1e-1`:
 
-``` command
+``` bash
 guild run train lr=loguniform[1e-4:1e-1] --max-trials 10
 ```
 
@@ -77,7 +77,7 @@ If you specify a list value, `random` selects values from the list at random fro
 
 Explicitly use `random` by specifying `--optimizer` (or the short form `-o`) with [`guild run`](/pages/commands/run):
 
-``` command
+``` bash
 guild run train lr=logspace[-4:-1:4] dropout=range[0.1:0.4:0.1] -Fo random -m 10
 ```
 
@@ -91,13 +91,13 @@ Flag values do not implicitly select sequential optimizers. You must explicitly 
 
 Use `-Fo` options to set optimizer flags for a batch. The following command sets *`xi`* and *`random-starts`* for the `gp` optimizer:
 
-``` command
+``` bash
 guild run train -o gp -Fo xi=0.1 -Fo random-starts=5
 ```
 
 By deault, sequential optimizers attempts to minimize the `loss` scalar value. Use `--maximize` or `--minimize` with the [`run`](command:run) command to specify a different scalar. For example, to maximize the scalar `auc` with the `forest` optimizer, use:
 
-``` command
+``` bash
 guild run train -o forest --maximize auc
 ```
 

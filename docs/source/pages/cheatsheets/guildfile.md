@@ -338,7 +338,7 @@ train:
 In this case, the following command causes `--test` to appear as a
 single switch to the train script (e.g. `python -m test --test`):
 
-``` command
+``` bash
 guild run train test=yes
 ```
 
@@ -357,7 +357,7 @@ In this case, the following command causes three values as arguments
 to the option `--inner-layers` (e.g. `python -m test --inner-layers 20
 20 20`):
 
-``` command
+``` bash
 guild run train inner-layers="20 20 20"
 ```
 

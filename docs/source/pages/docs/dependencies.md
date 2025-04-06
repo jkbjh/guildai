@@ -191,7 +191,7 @@ This file defines three settings, two of which are also defined for the `train` 
 
 The following command sets `learning-rate`. The value for `batch-size`, defined in the operation above, is unchanged.
 
-``` command
+``` bash
 guild run train learning-rate=0.2
 ```
 

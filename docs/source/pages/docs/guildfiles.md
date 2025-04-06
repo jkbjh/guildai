@@ -44,7 +44,7 @@ The operation is named `train` and can be run using `guild run train`. It runs t
 
 You can run the operation from a command terminal by changing to the directory containing `guild.yml` (the project directory) and running:
 
-``` command
+``` bash
 guild run train
 ```
 
@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
 To run the script using Python, you use:
 
-``` command
+``` bash
 python train_classifier.py
 ```
 
@@ -133,7 +133,7 @@ train:
 
 When running an operation, a user sets flag values using `FLAG_NAME=VALUE` arguments to [`guild run`](/pages/commands/run).
 
-``` command
+``` bash
 guild run train learning-rate=0.01 batch-size=1000
 ```
 

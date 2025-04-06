@@ -51,7 +51,7 @@ https://github.com/guildai/guildai/blob/master/examples/languages/train.r
 
 Run this example:
 
-``` command
+``` bash
 guild run r
 ```
 
@@ -76,7 +76,7 @@ https://github.com/guildai/guildai/blob/master/examples/languages/train.sh
 
 Run this example:
 
-``` command
+``` bash
 guild run bash
 ```
 
@@ -102,7 +102,7 @@ https://github.com/guildai/guildai/blob/master/examples/languages/Train.java
 
 Run this example:
 
-``` command
+``` bash
 guild run java
 ```
 
@@ -110,7 +110,7 @@ guild run java
 
 The Julia example requires the `ArgParse` modules. If it's not installed, you can install it from the Julia command line by running:
 
-``` command2
+``` bash2
 julia> import Pkg
 julia> Pkg.add("ArgParse")
 ```
@@ -123,6 +123,6 @@ https://github.com/guildai/guildai/blob/master/examples/languages/train.jl
 
 To run the Julia example:
 
-``` command
+``` bash
 guild run julia
 ```

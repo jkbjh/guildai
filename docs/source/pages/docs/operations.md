@@ -7,7 +7,7 @@
 
 Guild uses operations to start [*runs*](/pages/docs/runs). Specify an operation for [`guild run`](/pages/commands/run) using the format:
 
-``` command
+``` bash
 guild run OPERATION
 ```
 
@@ -46,7 +46,7 @@ Refer to [*Guild File Reference*](/pages/reference/guildfile#guild-file-format) 
 
 List available operations for a project using [`guild operations`](/pages/commands/operations):
 
-``` command
+``` bash
 guild operations
 ```
 
@@ -152,7 +152,7 @@ train:
 
 When run using default flag values, Guild will start this operation using the following command:
 
-``` command
+``` bash
 train.sh 0.1 100
 ```
 

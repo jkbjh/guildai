@@ -29,7 +29,7 @@ https://github.com/guildai/guildai/blob/master/examples/hyperopt/guild.yml
 
 Start an optimization batch by running:
 
-``` command
+``` bash
 guild run train x=[-2:2] --optimize
 ```
 
@@ -39,7 +39,7 @@ The `tpe` optimizer is configured to run 10 trials by default. Change this value
 
 You can view operation help for `tpe` to show supported flags. These are set using `-Fo` options with [`guild run`](/pages/commands/run).
 
-``` command
+``` bash
 guild run tpe --help-op
 ```
 

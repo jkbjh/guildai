@@ -31,7 +31,7 @@ Guild View supports these features:
 
 To start Guild Run, run [`guild view`](/pages/commands/view) from a command line terminal.
 
-``` command
+``` bash
 guild view
 ```
 
@@ -55,7 +55,7 @@ To access Guild View from a remote server, your local browser must have network 
 
 To specify a port when running Guild View, use the `--port` option. For example, if port `8080` is open on the remote server, run:
 
-``` command
+``` bash
 guild view --port 8080
 ```
 

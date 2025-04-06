@@ -61,7 +61,7 @@ Refer to [*Guild File Reference*](/pages/reference/guildfile) for details about 
 
 Save your changes to `guild.yml` above. Use [`guild operations`](/pages/commands/operations) to show operations defined for the project:
 
-``` command
+``` bash
 guild operations
 ```
 
@@ -71,7 +71,7 @@ train  Sample training script
 
 Use [`guild help`](/pages/commands/help) to show project information:
 
-``` command
+``` bash
 guild help
 ```
 
@@ -113,7 +113,7 @@ Press **q** to exit help.
 
 Run the `train` operation:
 
-``` command
+``` bash
 guild run train
 ```
 

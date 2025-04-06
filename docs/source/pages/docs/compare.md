@@ -19,7 +19,7 @@ Use Guild Compare to view runs in a spreadsheet format including flags and scala
 
 To start Guild Compare, run:
 
-``` command
+``` bash
 guild compare
 ```
 
@@ -48,7 +48,7 @@ You can use Guild Compare to generate a CSV file with run data.
 
 To export data to a CSV file, use the `--csv` option.
 
-``` command
+``` bash
 guild compare --csv runs.csv
 ```
 
@@ -56,7 +56,7 @@ guild compare --csv runs.csv
 
 To print the CSV contents to the console, use `-` for the file name:
 
-``` command
+``` bash
 guild compare --csv -
 ```
 
@@ -70,7 +70,7 @@ To compare runs using a tool extension, use the `--tool` option with the tool na
 
 For example, to compare runs using HiPlot, run:
 
-``` command
+``` bash
 guild compare --tool hiplot
 ```
 
@@ -96,13 +96,13 @@ HiPlot is a visualization tool developed by Facebook used to discover correlatio
 
 To use HiPlot with Guild Compare, first install the HiPlot Python library:
 
-``` command
+``` bash
 pip install hiplot
 ```
 
 Verify that the `hiplot-render` program is installed:
 
-``` command
+``` bash
 hiplot-render --help
 ```
 
@@ -110,7 +110,7 @@ If you get an error, confirm that HiPlot is installed correctly. Refer to [Insta
 
 To use HiPlot with Guild Compare, run:
 
-``` command
+``` bash
 guild compare --tool hiplot
 ```
 

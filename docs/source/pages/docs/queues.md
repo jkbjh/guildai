@@ -15,7 +15,7 @@ Queues can be used to:
 
 To start a queue, run:
 
-``` command
+``` bash
 guild run queue
 ```
 
@@ -42,7 +42,7 @@ Use a queue to start staged runs in the order staged. This is useful when you wa
 
 To use a queue to stage runs, first start a queue in the background:
 
-``` command
+``` bash
 guild run queue --background
 ```
 
@@ -50,7 +50,7 @@ Check status of the operation as needed using `guild runs`.
 
 To list running runs, use:
 
-``` command
+``` bash
 guild runs --running
 ```
 
@@ -66,7 +66,7 @@ Guild initializes the run but does not start it. Instead, the queue, running in 
 
 Staged runs have a status of `staged`, which you can filter by running:
 
-``` command
+``` bash
 guild runs --staged
 ```
 
@@ -80,7 +80,7 @@ You can use multiple queues to run operations in parallel. Use GPU affinity to a
 
 You can run a queue once to start all staged runs. Use the flag `run-once=yes`:
 
-``` command
+``` bash
 guild run queue run-once=yes
 ```
 

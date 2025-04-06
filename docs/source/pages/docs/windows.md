@@ -13,7 +13,7 @@ This guide provides details for using and configuring Guild for Windows environm
 
 To activate a virtual environment on Windows, run `activate.bat`, which is located in the `Scripts` directory of the virtual environment:
 
-``` command
+``` bash
 <venv>\Scripts\activate.bat
 ```
 
@@ -21,7 +21,7 @@ To activate a virtual environment on Windows, run `activate.bat`, which is locat
 
 If you're running Power Shell, run `Activate.ps1` instead:
 
-``` command
+``` bash
 <venv>\Scripts\Activate.ps1
 ```
 

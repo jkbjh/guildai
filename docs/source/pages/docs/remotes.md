@@ -60,7 +60,7 @@ A remote must be available before it can be used in a remote command. Check a re
 
 To run apply a command to a remote, use the `--remote` option. For example, to run [`guild check`](/pages/commands/check) on a remote named `remote-gpu` (see example above), run:
 
-``` command
+``` bash
 guild check --remote remote-gpu
 ```
 

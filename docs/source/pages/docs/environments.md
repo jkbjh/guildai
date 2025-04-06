@@ -60,19 +60,19 @@ You can specify a different location for Guild home using one of two methods:
 
 To set `GUILD_HOME` for all Guild commands in a command shell, run:
 
-``` command
+``` bash
 export GUILD_HOME=<path>
 ```
 
 To set Guild home for one command, use one of these methods:
 
-``` command
+``` bash
 GUILD_HOME=<path> guild <command> ...
 ```
 
 or:
 
-``` command
+``` bash
 guild -H <path> <command> ...
 ```
 
@@ -99,7 +99,7 @@ You must activate a virtual environment before using it. Activate a virtual envi
 
 To activate an environment created with [`guild init`](/pages/commands/init) run:
 
-``` command
+``` bash
 source guild-env [<env path>]
 ```
 
@@ -111,7 +111,7 @@ You may omit `<env path>` if the environment is defined in the current directory
 
 To activate an environment created using `virtualenv` or `venv` use:
 
-``` command
+``` bash
 source <env path>/bin/activate
 ```
 
@@ -119,7 +119,7 @@ source <env path>/bin/activate
 
 To activate a Conda environment use:
 
-``` command
+``` bash
 conda activate <env name>
 ```
 
@@ -127,7 +127,7 @@ For more information about Conda environments, see [Conda - Managing environment
 
 Once activated, you can verify that Guild home is the expected environment by running:
 
-``` command
+``` bash
 guild check
 ```
 

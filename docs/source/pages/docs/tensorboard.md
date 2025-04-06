@@ -17,7 +17,7 @@ Guild provides integrated support for [TensorBoard](https://www.tensorflow.org/t
 
 To use TensorBoard to view Guild runs, use [`guild tensorboard`](/pages/commands/tensorboard):
 
-``` command
+``` bash
 guild tensorboard
 ```
 

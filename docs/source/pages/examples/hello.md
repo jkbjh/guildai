@@ -56,7 +56,7 @@ hello:
 
 Run `hello` with default flag values:
 
-``` command
+``` bash
 guild run hello
 ```
 ``` output
@@ -73,7 +73,7 @@ Hello Guild!
 
 Run with a different flag value:
 
-``` command
+``` bash
 guild run hello msg="Hello custom flag!"
 ```
 ``` output
@@ -90,19 +90,19 @@ Hello custom flag!
 
 View information for the latest run using `guild runs info`. This shows the run metadata including flags.
 
-``` command
+``` bash
 guild runs info
 ```
 
 List files associated with the latest run using `guild ls`. This list is empty because the operation doesn't generate files.
 
-``` command
+``` bash
 guild ls
 ```
 
 To view run output use `cat` with the `--output` option:
 
-``` command
+``` bash
 guild cat --output
 ```
 ``` output
@@ -111,7 +111,7 @@ Hello custom flag!
 
 To view output for the original run:
 
-``` command
+``` bash
 $ guild cat --output 2
 ```
 
@@ -131,13 +131,13 @@ The `file` flag is used to specify the file used as input to the operation. The 
 
 From the example directory, run:
 
-``` command
+``` bash
 guild run hello-file
 ```
 
 You can specify the file to use:
 
-``` command
+``` bash
 guild run hello-file file=hello.txt
 ```
 
@@ -170,6 +170,6 @@ To use a standard file name for input, the operation renames the upstream file t
 
 By default, Guild selects the latest non-error run for `hello-file`. You can specify an alternative run using the `hello-file` resource name:
 
-``` command
+``` bash
 guild run hello-op hello-file=<run ID>
 ```

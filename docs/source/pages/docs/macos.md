@@ -13,7 +13,7 @@ This guide provides details for using and configuring Guild on macOS.
 
 For example, use this format:
 
-``` command
+``` bash
 guild run learning-rate='[0.001,0.01,0.1]'
 ```
 
@@ -23,7 +23,7 @@ If you're not using Z Shell, you can omit the quotes.
 
 Alternatively, when running Z Shell you can alternatively use the `noglob` keyword to disable glob replacement. This lets you use unquoted arguments containing square brackets.
 
-``` command
+``` bash
 noglob guild run learning-rate=[0.001,0.01,0.1]
 ```
 
