@@ -314,7 +314,7 @@ train:
       arg-name: lr
 ```
 
-Use arg name to set nested values with <code>global:<em>NAME</em></code> interface:
+Use arg name to set nested values with `global:<em>NAME</em>`{code} interface:
 
 ``` yaml
 train:

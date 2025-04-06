@@ -47,7 +47,7 @@ This interface can be explicitly configured by setting `flags-dest` to `args`.
 
 Flag values are included as command line arguments using the format:
 
-<pre><code>--<em>FLAG_ARG_NAME</em> <em>ENCODED_FLAG_VALUE</em></code></pre>
+<pre>`--<em>FLAG_ARG_NAME</em> <em>ENCODED_FLAG_VALUE</em>`{code}</pre>
 
 By default, *`FLAG_ARG_NAME`* is the flag name. If the `arg-name` attribute is specified for a flag definition, Guild uses the attribute value instead.
 
@@ -88,7 +88,7 @@ python -m train --lr 0.1 --bs 100
 
 ### Environment Variables
 
-Guild makes flag values available as environment variables to each run process. Environment variables are named <code>FLAG_<em>UPPER_CASE_NAME</em></code>. *`UPPER_CASE_NAME`* is the flag name coverted to upper case with non-alphanumeric characters converted to undercore characters.
+Guild makes flag values available as environment variables to each run process. Environment variables are named `FLAG_<em>UPPER_CASE_NAME</em>`{code}. *`UPPER_CASE_NAME`* is the flag name coverted to upper case with non-alphanumeric characters converted to undercore characters.
 
 For example, the value for flag *`x`* is read as the environment variable `FLAG_X`.
 
@@ -128,7 +128,7 @@ y = 2
 print("z: %i" % (x + y))
 ```
 
-You can alternatively set flag values in a Python global dict variable using <code>global:<em>VARIABLE_NAME</em></code> for `flags-dest`.
+You can alternatively set flag values in a Python global dict variable using `global:<em>VARIABLE_NAME</em>`{code} for `flags-dest`.
 
 The following configuration sets flag values as items in the `params` global variable.
 
@@ -232,7 +232,7 @@ Guild supports different import scenarios:
 - Import all but some detected flags
 - Explicitly disable flag imports
 
-##### Import All Flags
+#### Import All Flags
 
 To import all detected flags, use the value `all` or `yes` for `flags-import`.
 
@@ -241,7 +241,7 @@ op:
   flags-import: all
 ```
 
-##### Import Some Flags
+#### Import Some Flags
 
 To import a list of detected flags, specify the flag names in a list.
 
@@ -250,7 +250,7 @@ op:
   flags-import: [x, y, z]
 ```
 
-##### Import All but Some Flags
+#### Import All but Some Flags
 
 You can combine `flags-import: all` with `flags-import-skip` to import all flags but skip those specified.
 
@@ -262,7 +262,7 @@ op:
 
 This pattern is useful when Guild mistakenly infers a command line option or variable as a flag.
 
-##### Explicitly Disable Flags Import
+#### Explicitly Disable Flags Import
 
 To disable Guild support for detecting and importing flags, use the value `no` for `flags-import`.
 
@@ -307,7 +307,7 @@ For more examples of flag definitions, see [*Guild File Cheatsheet*](/pages/chea
 
 Batch files are files that contain one or more sets of flags to use for a run.
 
-Specify batch files for a run using one or more arguments with the syntax <code>@<em>PATH</em></code> where *`PATH`* is the path to a valid batch file.
+Specify batch files for a run using one or more arguments with the syntax `@<em>PATH</em>`{code} where *`PATH`* is the path to a valid batch file.
 
 For example, to use the batch file `trials.csv` for operation `train`, run:
 
@@ -332,7 +332,7 @@ Guild supports a number of special flag value types that influence the way Guild
 
 ### Value Lists
 
-A *value list* is a flag value in the format <code>[<em>VAL1</em>,<em>VAL2</em>,<span data-guild-class="fal fa-ellipsis-h"></span>]</code> where each value is a number, a string, or boolean value.
+A *value list* is a flag value in the format `[<em>VAL1</em>,<em>VAL2</em>,<span data-guild-class="fal fa-ellipsis-h"></span>]`{code} where each value is a number, a string, or boolean value.
 
 A value list is processed according to the [*batch operation*](/pages/docs/optimization) used. The [default batch operation](/pages/docs/optimization#grid-search) uses values in a grid search. Other batch operations, including [random](/pages/docs/optimization#random-search) and [sequetial optimizers](/pages/docs/optimization#sequential-optimization), use the list as a set of choices to select from when suggesting trial values.
 
@@ -350,7 +350,7 @@ guild run train lr=[0.001,0.01,0.1] batch-size=[100,500,1000] -Fo gp -m 5
 
 ### Sequence Functions
 
-Sequence functions are specified in the format <code><em>NAME</em>[<em>ARGS</em>]</code> where *`NAME`* is one of the functions below and *`ARGS`* is a list of values separated by a colon `:`.
+Sequence functions are specified in the format `<em>NAME</em>[<em>ARGS</em>]`{code} where *`NAME`* is one of the functions below and *`ARGS`* is a list of values separated by a colon `:`.
 
 <div data-guild-class="terms">
 
@@ -406,7 +406,7 @@ Generates `COUNT` values along a logarithmic scale between `BASE ^ LOW` and `BAS
 
 ### Search Space Functions
 
-Search space functions are specified in the format <code><em>NAME</em>[<em>ARGS</em>]</code> where *`NAME`* is one of the functions below and *`ARGS`* is a list of values separated by a colon `:`.
+Search space functions are specified in the format `<em>NAME</em>[<em>ARGS</em>]`{code} where *`NAME`* is one of the functions below and *`ARGS`* is a list of values separated by a colon `:`.
 
 <div data-guild-class="terms">
 

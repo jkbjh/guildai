@@ -173,7 +173,7 @@ See [Batches](#batches) below for more information.
 
 You can stage a run to start later. To stage a run, use `--stage` with [`guild run`](/pages/commands/run).
 
-Start a staged run using <code>\-\-start <em>RUN-ID</em></code> with `run`.
+Start a staged run using `\-\-start <em>RUN-ID</em>`{code} with `run`.
 
 Staged runs are often used with *queues* to schedule runs. See [*Queues*](/pages/docs/queues) for more information.
 
@@ -181,7 +181,7 @@ To stage multiple runs at once using flag list values, specify `--stage-trials` 
 
 ## Restart a Run
 
-Restart a run using <code>\-\-restart <em>RUN-ID</em></code> with `run`.
+Restart a run using `\-\-restart <em>RUN-ID</em>`{code} with `run`.
 
 Restart a run that terminates early and has a checkpoint to restart from.
 
@@ -193,7 +193,7 @@ Guild uses the run flag values when restarting. You can redefine flag values as 
 
 ## Run From a Prototype
 
-To start a new run using an existing run as a prototype, use <code>\-\-proto <em>RUN-ID</em></code> with `run`.
+To start a new run using an existing run as a prototype, use `\-\-proto <em>RUN-ID</em>`{code} with `run`.
 
 By default, Guild uses the source code associated with the prototype run. To force Guild to use the current source code, specify the `--force-sourcecode` option along with `--proto`.
 
@@ -399,7 +399,7 @@ For more information, see [*Hyperparameter Optimization*](/pages/docs/optimizati
 
 ### Batch Files
 
-Trials are also generated when you specify a *batch file* for a run. Batch files are specified using <code>@<em>PATH</em></code> where *`PATH`* is the path to a file containing trial flags.
+Trials are also generated when you specify a *batch file* for a run. Batch files are specified using `@<em>PATH</em>`{code} where *`PATH`* is the path to a file containing trial flags.
 
 Batch files must be defined using one of the following formats:
 

@@ -80,7 +80,7 @@ For details on controlling flag imports, see [Import Flags](/pages/docs/flags#im
 
 By default, Guild looks for scalar values in script output. It does this regardless of the language type.
 
-Guild detects patterns in the format: <code><em>KEY</em>: <em>VALUE</em></code>, where *`KEY`* is a scalar identifier that occurs at the start of a line and *`VALUE`* is a valid float represenation. Guild logs these key/value pairs as *scalars*.
+Guild detects patterns in the format: `<em>KEY</em>: <em>VALUE</em>`{code}, where *`KEY`* is a scalar identifier that occurs at the start of a line and *`VALUE`* is a valid float represenation. Guild logs these key/value pairs as *scalars*.
 
 You can test Guild's current output scalar configruation by running the operation with the `--test-output-scalars` option.
 

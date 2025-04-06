@@ -128,7 +128,7 @@ You can configure notebook options in a Guild file in the operation `notebook` a
 
 Guild supports the following options:
 
-<h4><code>--html-no-input</code></h4>
+<h4>`--html-no-input`{code}</h4>
 
 Input cells are omitted in the HTML version of the run notebook. This is useful for generating reports.
 
