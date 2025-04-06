@@ -36,15 +36,15 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 :hidden:
 :maxdepth: 2
 
-pages/commands/label.md
-pages/commands/run.md
-pages/commands/runs.md
-pages/commands/runs-delete.md
-pages/commands/runs-list.md
-pages/commands/runs-purge.md
-pages/commands/runs-restore.md
-pages/commands/stop.md
-pages/commands/watch.md
+/pages/commands/label.md
+/pages/commands/run.md
+/pages/commands/runs.md
+/pages/commands/runs-delete.md
+/pages/commands/runs-list.md
+/pages/commands/runs-purge.md
+/pages/commands/runs-restore.md
+/pages/commands/stop.md
+/pages/commands/watch.md
 ```
 
 - [Label](/pages/commands/label.md)
@@ -63,12 +63,12 @@ pages/commands/watch.md
 :hidden:
 :maxdepth: 2
 
-pages/commands/cat.md
-pages/commands/diff.md
-pages/commands/ls.md
-pages/commands/open.md
-pages/commands/runs-info.md
-pages/commands/view.md
+/pages/commands/cat.md
+/pages/commands/diff.md
+/pages/commands/ls.md
+/pages/commands/open.md
+/pages/commands/runs-info.md
+/pages/commands/view.md
 ```
 
 - [Cat](/pages/commands/cat.md)
@@ -85,10 +85,10 @@ pages/commands/view.md
 :hidden:
 :maxdepth: 2
 
-pages/commands/compare.md
-pages/commands/diff.md
-pages/commands/tensorboard.md
-pages/commands/view.md
+/pages/commands/compare.md
+/pages/commands/diff.md
+/pages/commands/tensorboard.md
+/pages/commands/view.md
 ```
 
 - [Compare](/pages/commands/compare.md)
@@ -103,9 +103,9 @@ pages/commands/view.md
 :hidden:
 :maxdepth: 2
 
-pages/commands/help.md
-pages/commands/models.md
-pages/commands/operations.md
+/pages/commands/help.md
+/pages/commands/models.md
+/pages/commands/operations.md
 ```
 
 - [Help](/pages/commands/help.md)
@@ -119,10 +119,10 @@ pages/commands/operations.md
 :hidden:
 :maxdepth: 2
 
-pages/commands/compare.md
-pages/commands/diff.md
-pages/commands/tensorboard.md
-pages/commands/view.md
+/pages/commands/compare.md
+/pages/commands/diff.md
+/pages/commands/tensorboard.md
+/pages/commands/view.md
 ```
 
 - [Compare](/pages/commands/compare.md)
@@ -137,9 +137,9 @@ pages/commands/view.md
 :hidden:
 :maxdepth: 2
 
-pages/commands/open.md
-pages/commands/tensorboard.md
-pages/commands/view.md
+/pages/commands/open.md
+/pages/commands/tensorboard.md
+/pages/commands/view.md
 ```
 
 - [Open](/pages/commands/open.md)
@@ -153,12 +153,12 @@ pages/commands/view.md
 :hidden:
 :maxdepth: 2
 
-pages/commands/cat.md
-pages/commands/export.md
-pages/commands/import.md
-pages/commands/pull.md
-pages/commands/push.md
-pages/commands/sync.md
+/pages/commands/cat.md
+/pages/commands/export.md
+/pages/commands/import.md
+/pages/commands/pull.md
+/pages/commands/push.md
+/pages/commands/sync.md
 ```
 
 - [Cat](/pages/commands/cat.md)
@@ -175,13 +175,13 @@ pages/commands/sync.md
 :hidden:
 :maxdepth: 2
 
-pages/commands/install.md
-pages/commands/package.md
-pages/commands/packages.md
-pages/commands/packages-delete.md
-pages/commands/packages-info.md
-pages/commands/search.md
-pages/commands/uninstall.md
+/pages/commands/install.md
+/pages/commands/package.md
+/pages/commands/packages.md
+/pages/commands/packages-delete.md
+/pages/commands/packages-info.md
+/pages/commands/search.md
+/pages/commands/uninstall.md
 ```
 
 - [Install](/pages/commands/install.md)
@@ -199,13 +199,13 @@ pages/commands/uninstall.md
 :hidden:
 :maxdepth: 2
 
-pages/commands/pull.md
-pages/commands/push.md
-pages/commands/remote-start.md
-pages/commands/remote-status.md
-pages/commands/remote-stop.md
-pages/commands/remotes.md
-pages/commands/sync.md
+/pages/commands/pull.md
+/pages/commands/push.md
+/pages/commands/remote-start.md
+/pages/commands/remote-status.md
+/pages/commands/remote-stop.md
+/pages/commands/remotes.md
+/pages/commands/sync.md
 ```
 
 - [Pull](/pages/commands/pull.md)
@@ -222,10 +222,10 @@ pages/commands/sync.md
 :caption: Utilities
 :hidden:
 
-pages/commands/check
-pages/commands/download
-pages/commands/shell
-pages/commands/tensorflow-inspect
+/pages/commands/check.md
+/pages/commands/download.md
+/pages/commands/shell.md
+/pages/commands/tensorflow-inspect.md
 ```
 
 - [Check](/pages/commands/check.md)

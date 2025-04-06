@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.abspath('../source'))
 import command_help
 
 project = 'guild'
-copyright = '2025, re:guild Team'
+copyright = '2025, re:guild Team; 2017-2023 Posit Software, PBC'
 author = 're:guild Team'
 
 # -- General configuration ---------------------------------------------------
@@ -51,7 +51,7 @@ html_static_path = ['_static']
 # os.environ["MYST_DEBUG"] = "1"
 
 # Generate Help pages from the command line interface command descriptions
-command_help.generate_command_help()
+command_help.generate_command_help()  # need to add a cache for this.
 
 # Get a list of all Markdown files up to 5 directories deep
 markdown_files = list(sorted(glob.glob('pages/**/*.md', recursive=True)))

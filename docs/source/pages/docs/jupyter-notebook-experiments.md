@@ -1,5 +1,5 @@
 <!-- -*- eval:(visual-line-mode 1) -*- -->
-
+# Jupyter Notebooks
 <div data-theme-toc="true"></div>
 <div data-guild-docs="true"></div>
 
@@ -21,7 +21,7 @@ When using Jupyter Notebooks, it can be unclear what code ran at what time. Resu
 
 Guild addresses this problem by running notebooks externally.
 
-``` command
+``` bash
 guild run notebook.ipynb
 ```
 
@@ -63,7 +63,7 @@ Guild detects the flags `learning_rate`, `epochs`, and `dropout` as flags.
 
 The following command is used to generate a copy of `notebook.ipynb` with different values for `epochs` and `dropout`:
 
-``` command
+``` bash
 guild run notebook.ipynb epochs=50 dropout=0.1
 ```
 
@@ -115,7 +115,7 @@ You can run a notebook multiple times, each time with different flag values, usi
 
 For example, the following command uses Bayesian optimization to find values of `learning_rate` and `dropout` that minimize training loss.
 
-``` command
+``` bash
 guild run notebook.ipynb \
   --optimizer bayesian \
   learning_rate=log-uniform[1e-4:1e-1] \

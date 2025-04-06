@@ -1,5 +1,5 @@
 <!-- -*- eval:(visual-line-mode 1) -*- -->
-
+# Gists
 <div data-theme-toc="true"></div>
 <div data-guild-docs="true"></div>
 
@@ -20,7 +20,7 @@ remotes:
 
 Guild also supports inline remote specs for gists, letting you specify the gist details directly in a command without having to define anything in a config file.
 
-``` command
+``` bash
 guild push gist:<user>/<gist-name>
 ```
 
@@ -34,25 +34,25 @@ Say you have some runs that you want feedback on. You can quickly publish them t
 
 We use the Guild AI [Hello Example](/examples/hello) to demonstrate. The example source code is available in the Guild AI source code repository [on GitHub](https://github.com/guildai/guildai). First, change to the example directory.
 
-``` command
+``` bash
 cd guildai/examples/hello
 ```
 
 Run a few operations.
 
-``` command
+``` bash
 guild run hello msg=[Hello,Hi,Yo] -y
 ```
 
 Publish the runs to a gist:
 
-``` command
+``` bash
 guild push gist:maria/sample-runs
 ```
 
 With the runs published to the gist, others can access them this way:
 
-``` command
+``` bash
 guild pull gist:maria/sample-runs
 ```
 
@@ -73,7 +73,7 @@ To create a gist to manage runs, you need a personal access token that has the *
 
 Once you have an access token, specify it using the environment variable `GIST_ACCESS_TOKEN`. For POSIX shells, you can specify the value directly in a Guild command like this:
 
-``` command
+``` bash
 GIST_ACCESS_TOKEN=<token> guild push gist:<user>/<gist-name>
 ```
 
@@ -87,13 +87,13 @@ export GIST_USER=<user>
 export GIST_ACCESS_TOKEN=<token>
 ```
 
-``` command
+``` bash
 source gist-credentials
 ```
 
 To avoid saving the access token in plain text, you can encrypt the file. A popular program for encryption is [GnuPG](https://gnupg.org/). You can source an encrypted file in a POSIX shell using [process substitution](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Process-Substitution).
 
-``` command
+``` bash
 source <( gpg -d gist-credentials.gpg )
 ```
 

@@ -45,7 +45,7 @@ pages/docs/pipelines.md
 pages/docs/environments.md
 pages/docs/remotes.md
 pages/docs/queues.md
-pages/docs/packages.md
+pages/docs/package.md
 ```
 
 - [CLI](pages/docs/cli.md)
@@ -61,7 +61,7 @@ pages/docs/packages.md
 - [Environments](pages/docs/environments.md)
 - [Remotes](pages/docs/remotes.md)
 - [Queues](pages/docs/queues.md)
-- [Packages](pages/docs/packages.md)
+- [Packages](pages/docs/package.md)
 
 ---
 
@@ -104,16 +104,16 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 - [Runs RM](/pages/commands/runs-rm.md)
 
 
-# Commands1
+<!-- # Commands1 -->
 
 ```{toctree}
 :caption: Commands
 :hidden:
 :maxdepth: 5
 
-pages/commands-toc.md
+pages/commands.md
 ```
-- [Commands](pages/commands.md)
+<!-- - [Commands](pages/commands.md) -->
 
 # Reference
 
@@ -123,11 +123,11 @@ The documents below cover a variety of reference material.
 :caption: Reference
 :hidden:
 
-pages/reference/guildfile
-pages/reference/optimizers
-pages/reference/remotes
-pages/reference/user-config
-pages/reference/plugins
+pages/reference/guildfile.md
+pages/reference/optimizers.md
+pages/reference/remotes.md
+pages/reference/user-config.md
+pages/reference/plugins.md
 ```
 
 - [Guildfile](pages/reference/guildfile.md)
@@ -146,9 +146,9 @@ Cheatsheets contain short, easy-to-copy snippets of configuration you can use in
 :caption: Cheatsheets
 :hidden:
 
-pages/cheatsheets/commands
-pages/cheatsheets/guildfile
-pages/cheatsheets/remotes
+pages/cheatsheets/commands.md
+pages/cheatsheets/guildfile.md
+pages/cheatsheets/remotes.md
 ```
 
 - [Commands](pages/cheatsheets/commands.md)
@@ -163,14 +163,14 @@ pages/cheatsheets/remotes
 :caption: Other Docs
 :hidden:
 
-pages/help
-pages/install
-pages/system-requirements
-pages/docs/defaults
-pages/docs/windows
-pages/docs/macos
-pages/docs/jupyter-notebook-experiments
-pages/guides/share-runs-with-gists
+pages/help.md
+pages/install.md
+pages/system-requirements.md
+pages/docs/defaults.md
+pages/docs/windows.md
+pages/docs/macos.md
+pages/docs/jupyter-notebook-experiments.md
+pages/howto/share-runs-with-gists.md
 ```
 
 - [Help](pages/help.md)
@@ -180,7 +180,7 @@ pages/guides/share-runs-with-gists
 - [Windows](pages/docs/windows.md)
 - [MacOS](pages/docs/macos.md)
 - [Jupyter Notebook Experiments](pages/docs/jupyter-notebook-experiments.md)
-- [Share Runs with Gists](pages/guides/share-runs-with-gists.md)
+- [Share Runs with Gists](pages/howto/share-runs-with-gists.md)
 
 ---
 
@@ -198,8 +198,8 @@ pages/examples/notebooks.md
 pages/examples/package.md
 pages/examples/pytest.md
 pages/examples/tensorflow2.md
-pages/guides/project-template-for-python-data-science.md
-pages/guides/train-remotely.md
+pages/howto/project-template-for-python-data-science.md
+pages/howto/train-remotely.md
 ```
 
 - [Examples](pages/examples.md)
@@ -210,6 +210,6 @@ pages/guides/train-remotely.md
 - [Package](pages/examples/package.md)
 - [Pytest](pages/examples/pytest.md)
 - [TensorFlow2](pages/examples/tensorflow2.md)
-- [Project Template for Python Data Science](pages/guides/project-template-for-python-data-science.md)
-- [Train Remotely](pages/guides/train-remotely.md)
+- [Project Template for Python Data Science](pages/howto/project-template-for-python-data-science.md)
+- [Train Remotely](pages/howto/train-remotely.md)
 

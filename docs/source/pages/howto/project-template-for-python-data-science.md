@@ -1,5 +1,5 @@
 <!-- -*- eval:(visual-line-mode 1) -*- -->
-
+# Project Template for Python Data Science
 <div data-theme-toc="true"></div>
 <div data-guild-docs="true"></div>
 

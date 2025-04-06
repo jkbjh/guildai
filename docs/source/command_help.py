@@ -23,9 +23,9 @@ COMMAND_HELP_POST_TEMPLATE = """
 <div data-theme-toc="true"></div>
 <div data-guild-cmd="true"></div>
 
-### Usage
+## Usage
 
-``` command
+``` bash
 {usage[prog]} {usage[args]}
 ```
 
@@ -189,7 +189,7 @@ def _remove_paragraph_lfs(s):
 
 
 def _format_command_help_options(help_data):
-    lines = ["### Options", "", "| | |", "|-|-|"]
+    lines = ["## Options", "", "| | |", "|-|-|"]
     lines.extend([_format_command_option(option) for option in help_data["options"]])
     return "\n".join(lines)
 
@@ -205,7 +205,7 @@ def _format_command_subcommands(cmd, help_data):
     lines = [
         "",
         "",
-        "### Subcommands",
+        "## Subcommands",
         "",
         ""
         "| | |",
@@ -261,7 +261,7 @@ def _format_command_index_header():
             "Guild supports the commands listed below. You can get "
             "help for any of these commands by running:",
             "",
-            "``` command",
+            "``` bash",
             "guild <command> --help",
             "```"
             "",

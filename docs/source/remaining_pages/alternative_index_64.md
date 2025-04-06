@@ -1,10 +1,8 @@
-<div data-theme-toc="true"></div>
+# Index
 
 ## Get Started
 
 Start here to learn about Guild AI through easy-to-follow, step-by-step guides.
-
-<div data-guild-class="guild-docs-section">
 
 - [Get Started with Guild AI](/start)
 - [Optimize a Model](/start/optimize)
@@ -13,13 +11,9 @@ Start here to learn about Guild AI through easy-to-follow, step-by-step guides.
 - [Add a Classifier](/start/classifier)
 - [Use Guild in a Project](/start/use-guild)
 
-</div>
-
 ## Concepts
 
 Go deeper into the core concepts behind the features.
-
-<div data-guild-class="guild-docs-section">
 
 - [Command Line Interface](/docs/cli)
 - [Python API](/docs/python-api)
@@ -36,28 +30,20 @@ Go deeper into the core concepts behind the features.
 - [Queues](/docs/queues)
 - [Packages](/docs/packages)
 
-</div>
-
 ## Tools
 
 Guild provides a number of integrated tools.
-
-<div data-guild-class="guild-docs-section">
 
 - [Guild Compare](/docs/compare)
 - [Guild View](/docs/view)
 - [TensorBoard](/docs/tensorboard)
 - [Guild Diff](/docs/diff)
 
-</div>
-
 ## Commands
 
 Refer to [Guild Commands Index](/pages/commands) for an alphabetized list.
 
 ### Frequently Used Commands
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [check](/pages/commands/check)
 - [compare](/pages/commands/compare)
@@ -69,11 +55,7 @@ Refer to [Guild Commands Index](/pages/commands) for an alphabetized list.
 - [runs info](/pages/commands/runs-info)
 - [runs rm](/pages/commands/runs-rm)
 
-</div>
-
 ### Manage Runs
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [label](/pages/commands/label)
 - [run](/pages/commands/run)
@@ -85,11 +67,7 @@ Refer to [Guild Commands Index](/pages/commands) for an alphabetized list.
 - [stop](/pages/commands/stop)
 - [watch](/pages/commands/watch)
 
-</div>
-
 ### Get Run Info
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [cat](/pages/commands/cat)
 - [diff](/pages/commands/diff)
@@ -98,53 +76,33 @@ Refer to [Guild Commands Index](/pages/commands) for an alphabetized list.
 - [runs info](/pages/commands/runs-info)
 - [view](/pages/commands/view)
 
-</div>
-
 ### Compare and Diff Runs
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [compare](/pages/commands/compare)
 - [diff](/pages/commands/diff)
 - [tensorboard](/pages/commands/tensorboard)
 - [view](/pages/commands/view)
 
-</div>
-
 ### Get Model and Operation Info
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [help](/pages/commands/help)
 - [models](/pages/commands/models)
 - [operations](/pages/commands/operations)
 
-</div>
-
 ### Tools
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [compare](/pages/commands/compare)
 - [diff](/pages/commands/diff)
 - [tensorboard](/pages/commands/tensorboard)
 - [view](/pages/commands/view)
 
-</div>
-
 ### Visualization
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [open](/pages/commands/open)
 - [tensorboard](/pages/commands/tensorboard)
 - [view](/pages/commands/view)
 
-</div>
-
 ### Input/Output
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [cat](/pages/commands/cat)
 - [export](/pages/commands/export)
@@ -153,11 +111,7 @@ Refer to [Guild Commands Index](/pages/commands) for an alphabetized list.
 - [push](/pages/commands/push)
 - [sync](/pages/commands/sync)
 
-</div>
-
 ### Packaging
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [install](/pages/commands/install)
 - [package](/pages/commands/package)
@@ -167,11 +121,7 @@ Refer to [Guild Commands Index](/pages/commands) for an alphabetized list.
 - [search](/pages/commands/search)
 - [uninstall](/pages/commands/uninstall)
 
-</div>
-
 ### Remotes
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [pull](/pages/commands/pull)
 - [push](/pages/commands/push)
@@ -181,18 +131,12 @@ Refer to [Guild Commands Index](/pages/commands) for an alphabetized list.
 - [remotes](/pages/commands/remotes)
 - [sync](/pages/commands/sync)
 
-</div>
-
 ### Utilities
-
-<div data-guild-class="guild-docs-section guild-docs-commands-section">
 
 - [check](/pages/commands/check)
 - [download](/pages/commands/download)
 - [shell](/pages/commands/shell)
 - [tensorflow inspect](/pages/commands/tensorflow-inspect)
-
-</div>
 
 ## Reference
 
