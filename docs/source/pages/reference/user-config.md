@@ -19,11 +19,12 @@ The following sections document the type of information defined in user configur
 
 **Section heading:** `check`
 
-[`guild check`](/pages/commands/check) can be configured by defining any of the attributes below under a top-level `check` mapping.
+[`guild check`](project:/pages/commands/check.md) can be configured by defining any of the attributes below under a top-level `check` mapping.
 
 ### Check Attributes
 
-<div data-toc-id="check-offline"><h4>offline</h4></div>
+(check-offline)=
+#### offline 
 
 *Flag specifying default offline mode for checks (boolean)*
 
@@ -40,17 +41,18 @@ check:
   offline: yes
 ```
 
-Note, you can use `--offline` or `--no-offline` when running [`guild check`](/pages/commands/check) to override this setting.
+Note, you can use `--offline` or `--no-offline` when running [`guild check`](project:/pages/commands/check.md) to override this setting.
 
 ## Diff
 
 **Section heading:** `diff`
 
-[`guild diff`](/pages/commands/diff) can be configured by defining any of the attributes below under a top-level `diff` mapping.
+[`guild diff`](project:/pages/commands/diff.md) can be configured by defining any of the attributes below under a top-level `diff` mapping.
 
 ### Diff Attributes
 
-<div data-toc-id="diff-command"><h4>command</h4></div>
+(diff-command)=
+#### command 
 
 *Command used when diffing two paths (string)*
 
@@ -85,4 +87,4 @@ remotes:
     ...
 ```
 
-Refer to [Remotes Reference](/pages/reference/remotes) for details on configuring remote types.
+Refer to [Remotes Reference](project:/pages/reference/remotes.md) for details on configuring remote types.

@@ -21,15 +21,15 @@ Guild View is a web based application that lets you view runs and compare result
 
 Guild View supports these features:
 
-- Compare run results in a table, similar to the information provided by [Guild Compare](/pages/docs/compare)
-- View run metadata, similar to the information provided by [`guild runs info`](/pages/commands/runs-info)
+- Compare run results in a table, similar to the information provided by [Guild Compare](project:/pages/docs/compare.md)
+- View run metadata, similar to the information provided by [`guild runs info`](project:/pages/commands/runs-info.md)
 - View run files
 - View run output
 - View runs in TensorBoard
 
 ## Start Guild View
 
-To start Guild Run, run [`guild view`](/pages/commands/view) from a command line terminal.
+To start Guild Run, run [`guild view`](project:/pages/commands/view.md) from a command line terminal.
 
 ``` bash
 guild view
@@ -39,7 +39,7 @@ Guild starts the application and opens it in a web browser.
 
 ![view-start|685x500](upload://1j2gFVZeJ89JGiqgCa6yviRlK9K.png)
 
-You can filter the runs displayed by Guild View using command options. Refer to [`guild view`](/pages/commands/view) for a list of supported filter options.
+You can filter the runs displayed by Guild View using command options. Refer to [`guild view`](project:/pages/commands/view.md) for a list of supported filter options.
 
 ## Stop Guild View
 
@@ -47,7 +47,7 @@ To stop Guild View, in the command line terminal where you start Guild, press **
 
 Close any browser tabs that use Guild View to save memory.
 
-> <span data-guild-class="callout important">Important</span> Guild View tabs in your browser will no longer work properly after you stop Guild View in the command line terminal. To restart Guild View, close the tabs and re-run [`guild view`](/pages/commands/view) from the command line. Guild will open a new tab in your browser.
+> <span data-guild-class="callout important">Important</span> Guild View tabs in your browser will no longer work properly after you stop Guild View in the command line terminal. To restart Guild View, close the tabs and re-run [`guild view`](project:/pages/commands/view.md) from the command line. Guild will open a new tab in your browser.
 
 ## Run Guild View Remotely
 

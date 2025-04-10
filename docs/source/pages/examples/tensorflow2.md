@@ -17,11 +17,11 @@ Project files:
 | [beginner_with_flags.py](https://github.com/guildai/guildai/blob/master/examples/tensorflow2/beginner_with_flags.py) | Sample code modified to expose flags |
 | [requirements.txt](https://github.com/guildai/guildai/blob/master/examples/tensorflow2/requirements.txt) | List of required libraries |
 
-This example follows the process outlines in [*Use Guild in a Project*](/pages/start/use-guild).
+This example follows the process outlines in [*Use Guild in a Project*](project:/pages/start/use-guild.md).
 
 ## Create Virtual Environment
 
-Start with a new virtual environment. Use [`guild init`](/pages/commands/init) or [another method](/pages/docs/environments#create-a-guild-environment) as you prefer.
+Start with a new virtual environment. Use [`guild init`](project:/pages/commands/init.md) or [another method](project:/pages/docs/environments.md#create-a-guild-environment) as you prefer.
 
 ``` bash
 cd examples/tensorflow2
@@ -65,13 +65,13 @@ By default shows information for the latest run.
 
 Note the model `accuracy` and `loss` reflected in the result.
 
-See [*Runs*](/pages/docs/runs) for commands you can use with runs.
+See [*Runs*](project:/pages/docs/runs.md) for commands you can use with runs.
 
 > <span data-guild-class="callout highlight">Highlight</span> Guild lets you run and track experiments with zero code change.
 
 ## Expose Flags
 
-The sample script from Google uses a number of [hard-coded](/pages/start/use-guild#hard-coded-hyperparameters) and [implicit](/pages/start/use-guild#implicit-hyperparameters) flag values. We want to expose these so users can modify them without editing the code.
+The sample script from Google uses a number of [hard-coded](project:/pages/start/use-guild.md#hard-coded-hyperparameters) and [implicit](project:/pages/start/use-guild.md#implicit-hyperparameters) flag values. We want to expose these so users can modify them without editing the code.
 
 The following script parameters should be exposed as flags:
 
@@ -95,7 +95,7 @@ guild run beginner_with_flags.py epochs=10
 
 ## Optimize Hyperparameters
 
-Use Guild to search for optimial hyperparameters. By default, Guild tries to minimize the `loss` scalar. The sample script happens to log that scalar. If an operation logs something else, specify the scalar to optimize using `--minimize` or `--maximize` with [`guild run`](/pages/commands/run).
+Use Guild to search for optimial hyperparameters. By default, Guild tries to minimize the `loss` scalar. The sample script happens to log that scalar. If an operation logs something else, specify the scalar to optimize using `--minimize` or `--maximize` with [`guild run`](project:/pages/commands/run.md).
 
 Start a run to find optimal values for `learning_rate` and `dropout`. Train over two epochs to save time.
 
@@ -106,11 +106,11 @@ guild run beginner_with_flags.py --optimize \
   learning_rate=loguniform[1e-4:1e-1]
 ```
 
-For more information about this command, see [*Hyperparameter Optimization*](/pages/docs/optimization).
+For more information about this command, see [*Hyperparameter Optimization*](project:/pages/docs/optimization.md).
 
 By default Guild runs 20 trials. Specify a different value using `--max-trials`.
 
-Use [`guild runs`](/pages/commands/runs) to list the runs:
+Use [`guild runs`](project:/pages/commands/runs.md) to list the runs:
 
 ``` bash
 guild runs
@@ -118,7 +118,7 @@ guild runs
 
 By default Guild shows the latest 20 runs. To show all runs, use the `--all` option.
 
-Use [TensorBoard](/pages/docs/tensorboard) to compare runs:
+Use [TensorBoard](project:/pages/docs/tensorboard.md) to compare runs:
 
 ``` bash
 guild tensorboard
@@ -148,7 +148,7 @@ Experiments prompt questions, which prompt more experiments.
 
 ## Add a Guild File
 
-Up to this point you run scripts directly. In this step you run an [*operation*](/pages/docs/operations) defined in a [Guild file](/pages/docs/guildfiles).
+Up to this point you run scripts directly. In this step you run an [*operation*](project:/pages/docs/operations.md) defined in a [Guild file](project:/pages/docs/guildfiles.md).
 
 https://github.com/guildai/guildai/blob/master/examples/tensorflow2/guild.yml
 
@@ -220,4 +220,4 @@ Use arrow keys to navigate the list. Move to the **accuracy** column. The accura
 
 In this example you train a standard TensorFlow example. The original code remains essentially unchanged. You improve the code with variables that define otherwise hard-coded hyperparameters. You don't import or use Guild modules. Instead you augment the project with a Guild file. This is all you need to enable a host of features.
 
-For a more detailed step-by-step tutorial, see [*Get Started with Guidl AI*](/pages/start). If you're already familiar with core Guild features (you learned a lot already in this example), skip to [*Use Guild in a Project*](/pages/start/use-guild) for help applying Guild to your work.
+For a more detailed step-by-step tutorial, see [*Get Started with Guidl AI*](project:/pages/start.md). If you're already familiar with core Guild features (you learned a lot already in this example), skip to [*Use Guild in a Project*](project:/pages/start/use-guild.md) for help applying Guild to your work.

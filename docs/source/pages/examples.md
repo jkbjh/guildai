@@ -10,10 +10,10 @@ Examples are Guild AI projects that illustrate various features and capabilities
 
 |||
 |-|-|
-| [Hello](/pages/examples/hello) | Basic use of flags and dependencies |
-| [Languages](/pages/examples/languages) | How Guild works with various languages |
-| [Notebook - Interactive Interface](/pages/examples/notebooks) | Use Guild's interactive Python API in a Jupyter Notebook |
-| [Notebook - Binary Classifier](/pages/examples/binary-classifier-notebook) | Use Guild to run a binary classifier implemented in a Jupyter Notebook |
+| [Hello](project:/pages/examples/hello.md) | Basic use of flags and dependencies |
+| [Languages](project:/pages/examples/languages.md) | How Guild works with various languages |
+| [Notebook - Interactive Interface](project:/pages/examples/notebooks.md) | Use Guild's interactive Python API in a Jupyter Notebook |
+| [Notebook - Binary Classifier](project:/pages/examples/binary-classifier-notebook.md) | Use Guild to run a binary classifier implemented in a Jupyter Notebook |
 
 </div>
 
@@ -23,7 +23,7 @@ Examples are Guild AI projects that illustrate various features and capabilities
 
 |||
 |-|-|
-| [TensorFlow 2](/pages/examples/tensorflow2) | Use Guild to drive experiments with TensorFlow 2  |
+| [TensorFlow 2](project:/pages/examples/tensorflow2.md) | Use Guild to drive experiments with TensorFlow 2  |
 </div>
 
 ## Miscellaneous
@@ -32,8 +32,8 @@ Examples are Guild AI projects that illustrate various features and capabilities
 
 |||
 |-|-|
-| [Hyperopt](/pages/examples/hyperopt) | Hyperopt integration showing custom hyperparameter optimizer|
-| [Package](/pages/examples/package) | Add package support to a Guild file |
-| [Pytest](/pages/examples/pytest) | Use pytest with Guild to run fine grained tests |
+| [Hyperopt](project:/pages/examples/hyperopt.md) | Hyperopt integration showing custom hyperparameter optimizer|
+| [Package](project:/pages/examples/package.md) | Add package support to a Guild file |
+| [Pytest](project:/pages/examples/pytest.md) | Use pytest with Guild to run fine grained tests |
 
 </div>

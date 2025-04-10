@@ -7,13 +7,13 @@
 
 ## Overview
 
-In [the previous section](/pages/start/optimize) you generate runs to find optimal hyperparameters for the `train.py` script. When developing models, it's not uncommon to run dozens or hundreds of experiments as you try different approaches, data sets, and hyperparameters.
+In [the previous section](project:/pages/start/optimize.md) you generate runs to find optimal hyperparameters for the `train.py` script. When developing models, it's not uncommon to run dozens or hundreds of experiments as you try different approaches, data sets, and hyperparameters.
 
 In this section, you learn techniques for managing runs.
 
 ## Show Runs
 
-Use [`guild runs`](/pages/commands/runs) to show current runs. By default, Guild only shows the latest 20 runs.
+Use [`guild runs`](project:/pages/commands/runs.md) to show current runs. By default, Guild only shows the latest 20 runs.
 
 ``` bash
 guild runs
@@ -35,7 +35,7 @@ guild runs -a
 
 ## Delete Runs
 
-Use [`guild runs rm`](/pages/commands/runs-rm) or [`guild runs delete`](/pages/commands/runs-delete) to delete one or more runs. Provided you omit the `--permanent` option, you can restore deleted runs if you make a mistake.
+Use [`guild runs rm`](project:/pages/commands/runs-rm.md) or [`guild runs delete`](project:/pages/commands/runs-delete.md) to delete one or more runs. Provided you omit the `--permanent` option, you can restore deleted runs if you make a mistake.
 
 Delete all of the runs (you restore them later):
 
@@ -51,9 +51,9 @@ Verify that the runs list is empty:
 guild runs
 ```
 
-Guild moves deleted runs to [*trash*](/pages/docs/environments#guild-home) where they can be viewed, restored, or purged (permanently deleted).
+Guild moves deleted runs to [*trash*](project:/pages/docs/environments.md#guild-home) where they can be viewed, restored, or purged (permanently deleted).
 
-Show deleted runs by including the `--deleted` option with [`guild runs`](/pages/commands/runs):
+Show deleted runs by including the `--deleted` option with [`guild runs`](project:/pages/commands/runs.md):
 
 ``` bash
 guild runs --deleted
@@ -61,7 +61,7 @@ guild runs --deleted
 
 ## Restore Runs
 
-To restore a deleted run, use [`guild runs restore`](/pages/commands/runs-restore).
+To restore a deleted run, use [`guild runs restore`](project:/pages/commands/runs-restore.md).
 
 Restore all of the deleted runs:
 
@@ -81,11 +81,11 @@ guild runs
 
 A label is a short description associated with a run. Guild shows labels when listing and comparing runs.
 
-By default, Guild generates a default label for each run containing flag values. Specify a different label using the `--label` options with [`guild run`](/pages/commands/run).
+By default, Guild generates a default label for each run containing flag values. Specify a different label using the `--label` options with [`guild run`](project:/pages/commands/run.md).
 
-After a run is started, you can modify its label using [`guild label`](/pages/commands/label).
+After a run is started, you can modify its label using [`guild label`](project:/pages/commands/label.md).
 
-To see how labels are used, let's tag the "best" run. First, find the run with the lowest *`loss`* using [`guild select`](/pages/commands/select):
+To see how labels are used, let's tag the "best" run. First, find the run with the lowest *`loss`* using [`guild select`](project:/pages/commands/select.md):
 
 ``` bash
 guild select -Fo train.py --min loss
@@ -102,7 +102,7 @@ Guild shows the `train.py` run with the lowest loss.
 You can append or prepand text to existing labels using the `--append`
 or `--prepend` options respectively.
 
-For example, use the `--prepend` option with [`guild label`](/pages/commands/label) to prepend "best" to the run label:
+For example, use the `--prepend` option with [`guild label`](project:/pages/commands/label.md) to prepend "best" to the run label:
 
 ``` bash
 guild label --prepend best <run ID from previous command>
@@ -110,7 +110,7 @@ guild label --prepend best <run ID from previous command>
 
 Guild prompts you with the proposed change. Press **Enter** to modify the run label.
 
-> <span data-guild-class="callout tip">Tip</span> If you're running Linux, macOS, or another POSIX environment, you can use [command substitution](https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html) and [`guild select`](/pages/commands/select) to specify a run ID argument. For example, `guild run --tag best $(guild select -Fo train.py --min loss)` tags the run with the lowest *`loss`* as "best".
+> <span data-guild-class="callout tip">Tip</span> If you're running Linux, macOS, or another POSIX environment, you can use [command substitution](https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html) and [`guild select`](project:/pages/commands/select.md) to specify a run ID argument. For example, `guild run --tag best $(guild select -Fo train.py --min loss)` tags the run with the lowest *`loss`* as "best".
 
 Show runs with "best" in their label:
 
@@ -128,9 +128,9 @@ Due to random effects, the selected run in your case may have a different value 
 
 Tags are short text values that describe a run. Tags are like labels in that they describe runs. Tags are similarly used to filter runs. Tags provide more provide more precise control over filtering because they must match completely, whereas labels match in part.
 
-You can specify tags when when starting an operation with [`guild run`](/pages/commands/run) using one or more `--tag` option. Tags specified with the `run` command are automatically included in the run label.
+You can specify tags when when starting an operation with [`guild run`](project:/pages/commands/run.md) using one or more `--tag` option. Tags specified with the `run` command are automatically included in the run label.
 
-To tag an existing run, use [`guild tag`](/pages/commands/tag) with the `--add` option. Here we use a tag to mark a "best" run:
+To tag an existing run, use [`guild tag`](project:/pages/commands/tag.md) with the `--add` option. Here we use a tag to mark a "best" run:
 
 ``` bash
 guild tag --add best <run ID from above>
@@ -138,7 +138,7 @@ guild tag --add best <run ID from above>
 
 > <span data-guild-class="callout note">Note</span> Tags are not automatically applied to run labels. They are independent values. You can apply tag changes to a run label by specifying the `--sync-labels` option.
 
-View tags associated with a run using [`guild runs info`](/pages/commands/runs-info).
+View tags associated with a run using [`guild runs info`](project:/pages/commands/runs-info.md).
 
 ## Filter Runs
 
@@ -166,7 +166,7 @@ To show runs that were started within the last 15 minutes, run:
 guild runs --started 'last 15 minutes'
 ```
 
-For help filtering runs, refer to the applicable command in [Guild AI Commands](/pages/commands) or use `--help` with the command.
+For help filtering runs, refer to the applicable command in [Guild AI Commands](project:/pages/commands.md) or use `--help` with the command.
 
 ## Export Runs
 
@@ -192,7 +192,7 @@ Verify that your runs list is empty:
 guild runs
 ```
 
-List runs in an archive directory by specifying the `--archive` option with [`guild runs`](/pages/commands/runs):
+List runs in an archive directory by specifying the `--archive` option with [`guild runs`](project:/pages/commands/runs.md):
 
 ``` bash
 guild runs --archive archived-runs
@@ -200,9 +200,9 @@ guild runs --archive archived-runs
 
 Guild shows the list of runs in the directory.
 
-If you want to import any runs back into your list, use [`guild import`](/pages/commands/import). For this guide, we keep the runs list empty for the next section.
+If you want to import any runs back into your list, use [`guild import`](project:/pages/commands/import.md). For this guide, we keep the runs list empty for the next section.
 
-> <span data-guild-class="callout tip">Tip</span> Use [`guild export`](/pages/commands/export) to keep your list clear of runs you're no longer working with. Use different export directories to categorize your runs as needed. If you want to move runs to a remote location, use [`guild push`](/pages/commands/push) with a [remote configuration](/pages/reference/user-config#remotes).
+> <span data-guild-class="callout tip">Tip</span> Use [`guild export`](project:/pages/commands/export.md) to keep your list clear of runs you're no longer working with. Use different export directories to categorize your runs as needed. If you want to move runs to a remote location, use [`guild push`](project:/pages/commands/push.md) with a [remote configuration](project:/pages/reference/user-config.md#remotes).
 
 ## Summary
 
@@ -219,4 +219,4 @@ In this section you use various commands to manage your runs:
 
 In the next section, you use a *Guild file* to explicitly define operations your project.
 
-<span data-guild-class="next btn">[Next: Create a Guild File](/pages/start/guildfile)</span>
+<span data-guild-class="next btn">[Next: Create a Guild File](project:/pages/start/guildfile.md)</span>

@@ -14,12 +14,12 @@ pages/start/classifier.md
 pages/start/use-guild.md
 ```
 
-- [Start](pages/start.md)
-- [Optimize](pages/start/optimize.md)
-- [Runs](pages/start/runs.md)
-- [Guildfile](pages/start/guildfile.md)
-- [Classifier](pages/start/classifier.md)
-- [Use Guild](pages/start/use-guild.md)
+- [Start](project:/pages/start.md)
+- [Optimize](project:/pages/start/optimize.md)
+- [Runs](project:/pages/start/runs.md)
+- [Guildfile](project:/pages/start/guildfile.md)
+- [Classifier](project:/pages/start/classifier.md)
+- [Use Guild](project:/pages/start/use-guild.md)
 
 ---
 
@@ -48,20 +48,20 @@ pages/docs/queues.md
 pages/docs/package.md
 ```
 
-- [CLI](pages/docs/cli.md)
-- [Python API](pages/docs/python-api.md)
-- [Runs](pages/docs/runs.md)
-- [Guildfiles](pages/docs/guildfiles.md)
-- [Operations](pages/docs/operations.md)
-- [Flags](pages/docs/flags.md)
-- [Scalars](pages/docs/scalars.md)
-- [Optimization](pages/docs/optimization.md)
-- [Dependencies](pages/docs/dependencies.md)
-- [Pipelines](pages/docs/pipelines.md)
-- [Environments](pages/docs/environments.md)
-- [Remotes](pages/docs/remotes.md)
-- [Queues](pages/docs/queues.md)
-- [Packages](pages/docs/package.md)
+- [CLI](project:/pages/docs/cli.md)
+- [Python API](project:/pages/docs/python-api.md)
+- [Runs](project:/pages/docs/runs.md)
+- [Guildfiles](project:/pages/docs/guildfiles.md)
+- [Operations](project:/pages/docs/operations.md)
+- [Flags](project:/pages/docs/flags.md)
+- [Scalars](project:/pages/docs/scalars.md)
+- [Optimization](project:/pages/docs/optimization.md)
+- [Dependencies](project:/pages/docs/dependencies.md)
+- [Pipelines](project:/pages/docs/pipelines.md)
+- [Environments](project:/pages/docs/environments.md)
+- [Remotes](project:/pages/docs/remotes.md)
+- [Queues](project:/pages/docs/queues.md)
+- [Packages](project:/pages/docs/package.md)
 
 ---
 
@@ -80,28 +80,28 @@ pages/docs/tensorboard.md
 pages/docs/diff.md
 ```
 
-- [Compare](pages/docs/compare.md)
-- [View](pages/docs/view.md)
-- [TensorBoard](pages/docs/tensorboard.md)
-- [Diff](pages/docs/diff.md)
+- [Compare](project:/pages/docs/compare.md)
+- [View](project:/pages/docs/view.md)
+- [TensorBoard](project:/pages/docs/tensorboard.md)
+- [Diff](project:/pages/docs/diff.md)
 
 ---
 
-Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized list.
+Refer to [Guild Commands Index](project:/pages/commands-index.md) for an alphabetized list.
 # Commands
 
 
 ## Frequently Used Commands
 
-- [Check](/pages/commands/check.md)
-- [Compare](/pages/commands/compare.md)
-- [Init](/pages/commands/init.md)
-- [LS](/pages/commands/ls.md)
-- [Operations](/pages/commands/operations.md)
-- [Run](/pages/commands/run.md)
-- [Runs](/pages/commands/runs.md)
-- [Runs Info](/pages/commands/runs-info.md)
-- [Runs RM](/pages/commands/runs-rm.md)
+- [Check](project:/pages/commands/check.md)
+- [Compare](project:/pages/commands/compare.md)
+- [Init](project:/pages/commands/init.md)
+- [LS](project:/pages/commands/ls.md)
+- [Operations](project:/pages/commands/operations.md)
+- [Run](project:/pages/commands/run.md)
+- [Runs](project:/pages/commands/runs.md)
+- [Runs Info](project:/pages/commands/runs-info.md)
+- [Runs RM](project:/pages/commands/runs-rm.md)
 
 
 <!-- # Commands1 -->
@@ -113,7 +113,7 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 
 pages/commands.md
 ```
-<!-- - [Commands](pages/commands.md) -->
+<!-- - [Commands](project:/pages/commands.md) -->
 
 # Reference
 
@@ -130,11 +130,11 @@ pages/reference/user-config.md
 pages/reference/plugins.md
 ```
 
-- [Guildfile](pages/reference/guildfile.md)
-- [Optimizers](pages/reference/optimizers.md)
-- [Remotes](pages/reference/remotes.md)
-- [User Config](pages/reference/user-config.md)
-- [Plugins](pages/reference/plugins.md)
+- [Guildfile](project:/pages/reference/guildfile.md)
+- [Optimizers](project:/pages/reference/optimizers.md)
+- [Remotes](project:/pages/reference/remotes.md)
+- [User Config](project:/pages/reference/user-config.md)
+- [Plugins](project:/pages/reference/plugins.md)
 
 ---
 
@@ -151,9 +151,9 @@ pages/cheatsheets/guildfile.md
 pages/cheatsheets/remotes.md
 ```
 
-- [Commands](pages/cheatsheets/commands.md)
-- [Guildfile](pages/cheatsheets/guildfile.md)
-- [Remotes](pages/cheatsheets/remotes.md)
+- [Commands](project:/pages/cheatsheets/commands.md)
+- [Guildfile](project:/pages/cheatsheets/guildfile.md)
+- [Remotes](project:/pages/cheatsheets/remotes.md)
 
 ---
 
@@ -173,14 +173,14 @@ pages/docs/jupyter-notebook-experiments.md
 pages/howto/share-runs-with-gists.md
 ```
 
-- [Help](pages/help.md)
-- [Install](pages/install.md)
-- [System Requirements](pages/system-requirements.md)
-- [Defaults](pages/docs/defaults.md)
-- [Windows](pages/docs/windows.md)
-- [MacOS](pages/docs/macos.md)
-- [Jupyter Notebook Experiments](pages/docs/jupyter-notebook-experiments.md)
-- [Share Runs with Gists](pages/howto/share-runs-with-gists.md)
+- [Help](project:/pages/help.md)
+- [Install](project:/pages/install.md)
+- [System Requirements](project:/pages/system-requirements.md)
+- [Defaults](project:/pages/docs/defaults.md)
+- [Windows](project:/pages/docs/windows.md)
+- [MacOS](project:/pages/docs/macos.md)
+- [Jupyter Notebook Experiments](project:/pages/docs/jupyter-notebook-experiments.md)
+- [Share Runs with Gists](project:/pages/howto/share-runs-with-gists.md)
 
 ---
 
@@ -202,14 +202,14 @@ pages/howto/project-template-for-python-data-science.md
 pages/howto/train-remotely.md
 ```
 
-- [Examples](pages/examples.md)
-- [Hello](pages/examples/hello.md)
-- [Hyperopt](pages/examples/hyperopt.md)
-- [Languages](pages/examples/languages.md)
-- [Notebooks](pages/examples/notebooks.md)
-- [Package](pages/examples/package.md)
-- [Pytest](pages/examples/pytest.md)
-- [TensorFlow2](pages/examples/tensorflow2.md)
-- [Project Template for Python Data Science](pages/howto/project-template-for-python-data-science.md)
-- [Train Remotely](pages/howto/train-remotely.md)
+- [Examples](project:/pages/examples.md)
+- [Hello](project:/pages/examples/hello.md)
+- [Hyperopt](project:/pages/examples/hyperopt.md)
+- [Languages](project:/pages/examples/languages.md)
+- [Notebooks](project:/pages/examples/notebooks.md)
+- [Package](project:/pages/examples/package.md)
+- [Pytest](project:/pages/examples/pytest.md)
+- [TensorFlow2](project:/pages/examples/tensorflow2.md)
+- [Project Template for Python Data Science](project:/pages/howto/project-template-for-python-data-science.md)
+- [Train Remotely](project:/pages/howto/train-remotely.md)
 

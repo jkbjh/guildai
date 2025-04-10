@@ -56,7 +56,7 @@ Use Guild packages to:
 
 ## Build a Package
 
-Build a package for your project by running [`guild package`](/pages/commands/package). The project must contain a [Guild file](/pages/docs/guildfiles) to run this command.
+Build a package for your project by running [`guild package`](project:/pages/commands/package.md). The project must contain a [Guild file](project:/pages/docs/guildfiles.md) to run this command.
 
 ``` bash
 guild package
@@ -64,7 +64,7 @@ guild package
 
 If the project does not contain a top-level `package` object, Guild uses a number of default values when generating a package.
 
-If you intend to distribute the package, define a `package` object using a [full format](/pages/reference/guildfile#full-format) Guild file.
+If you intend to distribute the package, define a `package` object using a [full format](project:/pages/reference/guildfile.md#full-format) Guild file.
 
 ``` yaml
 - package: gpkg.my-model
@@ -79,9 +79,9 @@ If you intend to distribute the package, define a `package` object using a [full
 
 > <span data-guild-class="callout note">Note</span> To avoid name collisions with other packages in PyPI, prefix the package name with `gpkg.` or another namespace.
 
-This minimal configuration lets you name and version the package. For a full list of supported package attributes, see [*Guild File Reference*](/pages/reference/guildfile#package-attributes).
+This minimal configuration lets you name and version the package. For a full list of supported package attributes, see [*Guild File Reference*](project:/pages/reference/guildfile.md#package-attributes).
 
-To upload a package to PyPI use the `--upload` option. Specify your PyPI user name and password using the `--user` and `--password` options respectively. Refer to [`package`](/pages/commands/package) command help for more information.
+To upload a package to PyPI use the `--upload` option. Specify your PyPI user name and password using the `--user` and `--password` options respectively. Refer to [`package`](project:/pages/commands/package.md) command help for more information.
 
 > <span data-guild-class="callout note">Note</span> To upload packages, you need the [`twine`](https://pypi.org/project/twine/) package. Install it using `pip install twine`.
 
@@ -144,15 +144,15 @@ guild operations -i
 
 ## Packages and Remote Operations
 
-Guild uses the packaging facility when running [remote operations](/pages/docs/runs#run-on-a-remote-system). Generally the `package` object is not necessary to support remote runs. Guild's default packaging support is sufficient to package and install a project on a remote system.
+Guild uses the packaging facility when running [remote operations](project:/pages/docs/runs.md#run-on-a-remote-system). Generally the `package` object is not necessary to support remote runs. Guild's default packaging support is sufficient to package and install a project on a remote system.
 
 In cases where the default packaging support is not sufficient, you can create a `package` object as described above.
 
 ### Data Files
 
-If an operation [requires project files](/pages/docs/dependencies#project-files), those files must be included in a package for remote runs.
+If an operation [requires project files](project:/pages/docs/dependencies.md#project-files), those files must be included in a package for remote runs.
 
-Use the [`data-files`](/pages/reference/guildfile#package-data-files) package attribute to list files for inclusion in the package.
+Use the [`data-files`](project:/pages/reference/guildfile.md#package-data-files) package attribute to list files for inclusion in the package.
 
 The `hello-package` example illustrates how this works:
 

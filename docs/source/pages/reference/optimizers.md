@@ -5,7 +5,7 @@
 
 ## Overview
 
-An *optimizer* is a Guild operation that runs a [*batch*](/pages/docs/runs#batches). A batch generates one or more *trial runs* or *trials*. Optimizers are able to suggest flag values to minimize or maximize an objective.
+An *optimizer* is a Guild operation that runs a [*batch*](project:/pages/docs/runs.md#batches). A batch generates one or more *trial runs* or *trials*. Optimizers are able to suggest flag values to minimize or maximize an objective.
 
 Below is a list of supported optimizers.
 
@@ -16,9 +16,9 @@ Below is a list of supported optimizers.
 | [gbrt](#gbrt)     | Sequential optimizer using gradient boosted regression trees. |
 | [random](#random) | Batch processor using randomly selected values.               |
 
-Use the default optimizer for an operation by specifying the `--optimize` option with [`guild run`](/pages/commands/run). The default optimizer can be defined for an operation using the [`optimizers`](/pages/reference/guildfile#operation-optimizers) attribute. Guild uses the [`gp`](#gp) optimizer if one is not otherwise defined for an operation.
+Use the default optimizer for an operation by specifying the `--optimize` option with [`guild run`](project:/pages/commands/run.md). The default optimizer can be defined for an operation using the [`optimizers`](project:/pages/reference/guildfile.md#operation-optimizers) attribute. Guild uses the [`gp`](#gp) optimizer if one is not otherwise defined for an operation.
 
-Specify a named optimizer with the `--optimizer` option to [`guild run`](/pages/commands/run). A name may be one of the optimizers below or may be the name of an optimizer defined for the operation.
+Specify a named optimizer with the `--optimizer` option to [`guild run`](project:/pages/commands/run.md). A name may be one of the optimizers below or may be the name of an optimizer defined for the operation.
 
 Optimizer flags are set using `--opt-flag` or `-Fo`. Optimizer flags are specified like other flags using the format `NAME=VALUE`.
 
@@ -34,7 +34,7 @@ To use the `forest` optimizer:
 guild run train --optimizer forest
 ```
 
-For more examples, see [*Guild File Cheatsheet*](/pages/cheatsheets/guildfile#optimizers).
+For more examples, see [*Guild File Cheatsheet*](project:/pages/cheatsheets/guildfile.md#optimizers).
 
 ## gp
 
@@ -46,7 +46,8 @@ Aliases: `gaussian`, `bayesian`
 
 ### gp Flags
 
-<div data-toc-id="gp-acq-func"><h4>acq-func</h4></div>
+(gp-acq-func)=
+#### acq-func 
 
 *Function to minimize over the gaussian prior (default is `gp_hedge`)*
 
@@ -61,21 +62,25 @@ Choices:
 | `EIps`     | Negative expected improvement per second                |
 | `PIps`     | Negative probability of improvement per second          |
 
-<div data-toc-id="gp-kappa"><h4>kappa</h4></div>
+(gp-kappa)=
+#### kappa 
 
 *Degree to which variance in the predicted values is taken into account (default is `1.96`)*
 
-<div data-toc-id="gp-noise"><h4>noise</h4></div>
+(gp-noise)=
+#### noise 
 
 *Level of noise associated with the objective (default is `gaussian`)*
 
 Use `gaussian` if the objective returns noisy observations, otherwise specify the expected variance of the noise.
 
-<div data-toc-id="gp-random-starts"><h4>random-starts</h4></div>
+(gp-random-starts)=
+#### random-starts 
 
 *Number of trials using random values before optimizing (default is `3`)*
 
-<div data-toc-id="gp-xi"><h4>xi</h4></div>
+(gp-xi)=
+#### xi 
 
 *Improvement to seek over the previous best values (default is `0.05`)*
 
@@ -85,15 +90,18 @@ Sequential optimization using decision trees. Refer to [skopt API documentation]
 
 ### forest Flags
 
-<div data-toc-id="forest-kappa"><h4>kappa</h4></div>
+(forest-kappa)=
+#### kappa 
 
 *Degree to which variance in the predicted values is taken into account (default is `1.96`)*
 
-<div data-toc-id="forest-random-starts"><h4>random-starts</h4></div>
+(forest-random-starts)=
+#### random-starts 
 
 *Number of trials using random values before optimizing (default is `3`)*
 
-<div data-toc-id="forest-xi"><h4>xi</h4></div>
+(forest-xi)=
+#### xi 
 
 *Improvement to seek over the previous best values (default is `0.05`)*
 
@@ -105,15 +113,18 @@ Refer to [skopt API documentation](https://scikit-optimize.github.io/stable/modu
 
 ### gbrt Flags
 
-<div data-toc-id="gbrt-kappa"><h4>kappa</h4></div>
+(gbrt-kappa)=
+#### kappa 
 
 *Degree to which variance in the predicted values is taken into account (default is `1.96`)*
 
-<div data-toc-id="gbrt-random-starts"><h4>random-starts</h4></div>
+(gbrt-random-starts)=
+#### random-starts 
 
 *Number of trials using random values before optimizing (default is `3`)*
 
-<div data-toc-id="gbrt-xi"><h4>xi</h4></div>
+(gbrt-xi)=
+#### xi 
 
 *Improvement to seek over the previous best values (default is `0.05`)*
 

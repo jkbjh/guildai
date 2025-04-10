@@ -54,7 +54,7 @@ To list running runs, use:
 guild runs --running
 ```
 
-You can stop runs using [`guild stop`](/pages/commands/stop).
+You can stop runs using [`guild stop`](project:/pages/commands/stop.md).
 
 Stage a run by specifying the `--stage` option. For example, to stage an run for `train`, run:
 
@@ -74,7 +74,7 @@ guild runs --staged
 
 You can use multiple queues to run operations in parallel. Use GPU affinity to assign runs to a particular queue and GPU.
 
-> <span data-guild-class="callout tip">Tip</span> While you can use queues to run operations in parallel, it is often easier to start runs in the background using `--background` with [`guild run`](/pages/commands/run). In this case, all runs proceed in parallel without the need for queues.
+> <span data-guild-class="callout tip">Tip</span> While you can use queues to run operations in parallel, it is often easier to start runs in the background using `--background` with [`guild run`](project:/pages/commands/run.md). In this case, all runs proceed in parallel without the need for queues.
 
 ## Run Once
 

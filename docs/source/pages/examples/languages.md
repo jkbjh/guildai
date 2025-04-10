@@ -47,7 +47,7 @@ https://github.com/guildai/guildai/blob/master/examples/languages/guild.yml#L1-L
 
 https://github.com/guildai/guildai/blob/master/examples/languages/train.r
 
-<span data-guild-class="caption">R port of the sample function used in [Get Started with Guild AI](/pages/start)</span>
+<span data-guild-class="caption">R port of the sample function used in [Get Started with Guild AI](project:/pages/start.md)</span>
 
 Run this example:
 
@@ -110,7 +110,7 @@ guild run java
 
 The Julia example requires the `ArgParse` modules. If it's not installed, you can install it from the Julia command line by running:
 
-``` bash2
+```julia
 julia> import Pkg
 julia> Pkg.add("ArgParse")
 ```
@@ -119,7 +119,7 @@ https://github.com/guildai/guildai/blob/master/examples/languages/guild.yml#L37-
 
 https://github.com/guildai/guildai/blob/master/examples/languages/train.jl
 
-<span data-guild-class="caption">Julia port of the sample function used in [Get Started with Guild AI](/pages/start)</span>
+<span data-guild-class="caption">Julia port of the sample function used in [Get Started with Guild AI](project:/pages/start.md)</span>
 
 To run the Julia example:
 

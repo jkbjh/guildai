@@ -6,7 +6,7 @@
 
 ## Overview
 
-This [example](https://github.com/guildai/guildai/tree/master/examples/hello-package) illustrates basic package configuration. It's a modification of [Hello](/pages/examples/hello) to include support for packaging.
+This [example](https://github.com/guildai/guildai/tree/master/examples/hello-package) illustrates basic package configuration. It's a modification of [Hello](project:/pages/examples/hello.md) to include support for packaging.
 
 Project files:
 
@@ -19,7 +19,7 @@ Project files:
 
 The Guild file is modified to support packaging with modifications:
 
-- Promote the Guild file format from [*operation only format*](/pages/reference/guildfile#operation-only-format) to [*full format*](/pages/reference/guildfile#full-format). This moves the operations under a model definition. We use the anonymous model (named with an empty string) to maintain the original interface.
+- Promote the Guild file format from [*operation only format*](project:/pages/reference/guildfile.md#operation-only-format) to [*full format*](project:/pages/reference/guildfile.md#full-format). This moves the operations under a model definition. We use the anonymous model (named with an empty string) to maintain the original interface.
 
 - Add a `package` top-level object to the Guild file. This defines the package name and defines the data files that should be included in the package.
 
@@ -27,9 +27,9 @@ The Guild file is modified to support packaging with modifications:
 
 With package support, the `hello-file` operation can be run on remote servers. Without this change, the files `hello.txt` and `hello-2.txt` would not be included in the package installed on remote systems.
 
-All of the steps outlined in [Hello](/pages/examples/hello) can be run with this example on a remote. Include the additional option `\-\-remote <em>NAME</em>`{code} for each command that you want to run remotely.
+All of the steps outlined in [Hello](project:/pages/examples/hello.md) can be run with this example on a remote. Include the additional option `\-\-remote <em>NAME</em>`{code} for each command that you want to run remotely.
 
-> <span data-guild-class="callout important">Important</span> The steps that follow are not required for remote operations. You can run operations remotely without packaging or installing packages --- Guild does this for you when you include the `--remote` option with [`guild run`](/pages/commands/run).
+> <span data-guild-class="callout important">Important</span> The steps that follow are not required for remote operations. You can run operations remotely without packaging or installing packages --- Guild does this for you when you include the `--remote` option with [`guild run`](project:/pages/commands/run.md).
 
 ## Build a Package
 
@@ -39,13 +39,13 @@ From the `package` example directory, run:
 guild package
 ```
 
-Guild uses [setuptools](https://setuptools.readthedocs.io/en/latest/setuptools.html) to build a standard Python package using the package configuration in the Guild file. For more information on supported `package` attributes, see [*Guild File Reference*](/pages/reference/guildfile#packages).
+Guild uses [setuptools](https://setuptools.readthedocs.io/en/latest/setuptools.html) to build a standard Python package using the package configuration in the Guild file. For more information on supported `package` attributes, see [*Guild File Reference*](project:/pages/reference/guildfile.md#packages).
 
 ## Create a Virtual Environment
 
 To ensure that this example does not affect your system Python environments, create a virtual environment.
 
-You can use [`guild init`](/pages/commands/init), *virtualenv*, or *conda*. This example below uses `guild init`.
+You can use [`guild init`](project:/pages/commands/init.md), *virtualenv*, or *conda*. This example below uses `guild init`.
 
 From the `package` example directory, run:
 

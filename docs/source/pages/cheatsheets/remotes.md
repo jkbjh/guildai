@@ -5,7 +5,7 @@
 
 ## Overview
 
-The examples below apply to Guild [user configuration](/pages/reference/user-config). For a complete reference of remote configuration, see [Remotes Reference](/pages/reference/remotes).
+The examples below apply to Guild [user configuration](project:/pages/reference/user-config.md). For a complete reference of remote configuration, see [Remotes Reference](project:/pages/reference/remotes.md).
 
 ## SSH
 

@@ -9,11 +9,11 @@ This document describes the assumptions that Guild makes in the absence of expli
 
 In general, Guild must know the following about an operation:
 
-- [Flags interface](/pages/docs/flags#flags-interface)
-- [Flag definitions](/pages/docs/flags#flag-definitions)
-- [Output scalars](/pages/docs/scalars/#output-scalars)
+- [Flags interface](project:/pages/docs/flags.md#flags-interface)
+- [Flag definitions](project:/pages/docs/flags.md#flag-definitions)
+- [Output scalars](project:/pages/docs/scalars/.md#output-scalars)
 
-If this information is not defined explicitly in a [Guild file](/pages/docs/guildfiles), Guild attempts to infer the information using rules based on what you run.
+If this information is not defined explicitly in a [Guild file](project:/pages/docs/guildfiles.md), Guild attempts to infer the information using rules based on what you run.
 
 ## Python Scripts
 
@@ -21,9 +21,9 @@ Unless otherwise configured in a Guild file, Guild makes assumptions when runnin
 
 ### Flags Interface
 
-If [`flags-dest`](/pages/reference/guildfile#operation-flags-dest) is not defined for an operation, Guild attempts to detect the interface by inspecting the Python module.
+If [`flags-dest`](project:/pages/reference/guildfile.md#operation-flags-dest) is not defined for an operation, Guild attempts to detect the interface by inspecting the Python module.
 
-- If the module imports the [`argparse`](https://pages/docs.python.org/library/argparse.html), Guild assumes that flags are set using command line arguments and uses `args` for `flags-dest`.
+- If the module imports the [`argparse`](https:/project:/pages/docs.python.org/library/argparse.html.md), Guild assumes that flags are set using command line arguments and uses `args` for `flags-dest`.
 
 - If the main module does not import `argparse`, Guild assumes that flags are defined in global variables and uses ``globals`` for `flags-dest`.
 
@@ -74,7 +74,7 @@ While you cannot control how Guild imports flags, you can control what flags are
 
 By default, Guild imports all detected flags.
 
-For details on controlling flag imports, see [Import Flags](/pages/docs/flags#import-flags).
+For details on controlling flag imports, see [Import Flags](project:/pages/docs/flags.md#import-flags).
 
 ## Output Scalars
 
@@ -84,6 +84,6 @@ Guild detects patterns in the format: `<em>KEY</em>: <em>VALUE</em>`{code}, wher
 
 You can test Guild's current output scalar configruation by running the operation with the `--test-output-scalars` option.
 
-If your script prints scalar values in a different format, you can control the pattern that Guild uses by defining the [`output-scalars`](/pages/reference/guildfile#operation-output-scalars) attribute for an operation.
+If your script prints scalar values in a different format, you can control the pattern that Guild uses by defining the [`output-scalars`](project:/pages/reference/guildfile.md#operation-output-scalars) attribute for an operation.
 
-Refer to [Output Scalar](/pages/docs/scalars#output-scalars) for more information.
+Refer to [Output Scalar](project:/pages/docs/scalars.md#output-scalars) for more information.

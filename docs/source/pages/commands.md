@@ -1,4 +1,4 @@
-Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized list.
+Refer to [Guild Commands Index](project:/pages/commands-index.md) for an alphabetized list.
 # Commands
 
 
@@ -20,15 +20,15 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 ```
 
 
-- [Check](/pages/commands/check.md)
-- [Compare](/pages/commands/compare.md)
-- [Init](/pages/commands/init.md)
-- [LS](/pages/commands/ls.md)
-- [Operations](/pages/commands/operations.md)
-- [Run](/pages/commands/run.md)
-- [Runs](/pages/commands/runs.md)
-- [Runs Info](/pages/commands/runs-info.md)
-- [Runs RM](/pages/commands/runs-rm.md)
+- [Check](project:/pages/commands/check.md)
+- [Compare](project:/pages/commands/compare.md)
+- [Init](project:/pages/commands/init.md)
+- [LS](project:/pages/commands/ls.md)
+- [Operations](project:/pages/commands/operations.md)
+- [Run](project:/pages/commands/run.md)
+- [Runs](project:/pages/commands/runs.md)
+- [Runs Info](project:/pages/commands/runs-info.md)
+- [Runs RM](project:/pages/commands/runs-rm.md)
 
 ## Manage Runs
 
@@ -47,15 +47,15 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 /pages/commands/watch.md
 ```
 
-- [Label](/pages/commands/label.md)
-- [Run](/pages/commands/run.md)
-- [Runs](/pages/commands/runs.md)
-- [Runs Delete](/pages/commands/runs-delete.md)
-- [Runs List](/pages/commands/runs-list.md)
-- [Runs Purge](/pages/commands/runs-purge.md)
-- [Runs Restore](/pages/commands/runs-restore.md)
-- [Stop](/pages/commands/stop.md)
-- [Watch](/pages/commands/watch.md)
+- [Label](project:/pages/commands/label.md)
+- [Run](project:/pages/commands/run.md)
+- [Runs](project:/pages/commands/runs.md)
+- [Runs Delete](project:/pages/commands/runs-delete.md)
+- [Runs List](project:/pages/commands/runs-list.md)
+- [Runs Purge](project:/pages/commands/runs-purge.md)
+- [Runs Restore](project:/pages/commands/runs-restore.md)
+- [Stop](project:/pages/commands/stop.md)
+- [Watch](project:/pages/commands/watch.md)
 ## Get Run Info
 
 ```{toctree}
@@ -71,12 +71,12 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 /pages/commands/view.md
 ```
 
-- [Cat](/pages/commands/cat.md)
-- [Diff](/pages/commands/diff.md)
-- [LS](/pages/commands/ls.md)
-- [Open](/pages/commands/open.md)
-- [Runs Info](/pages/commands/runs-info.md)
-- [View](/pages/commands/view.md)
+- [Cat](project:/pages/commands/cat.md)
+- [Diff](project:/pages/commands/diff.md)
+- [LS](project:/pages/commands/ls.md)
+- [Open](project:/pages/commands/open.md)
+- [Runs Info](project:/pages/commands/runs-info.md)
+- [View](project:/pages/commands/view.md)
 
 ## Compare and Diff Runs
 
@@ -91,10 +91,10 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 /pages/commands/view.md
 ```
 
-- [Compare](/pages/commands/compare.md)
-- [Diff](/pages/commands/diff.md)
-- [TensorBoard](/pages/commands/tensorboard.md)
-- [View](/pages/commands/view.md)
+- [Compare](project:/pages/commands/compare.md)
+- [Diff](project:/pages/commands/diff.md)
+- [TensorBoard](project:/pages/commands/tensorboard.md)
+- [View](project:/pages/commands/view.md)
 
 ## Get Model and Operation Info
 
@@ -108,9 +108,9 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 /pages/commands/operations.md
 ```
 
-- [Help](/pages/commands/help.md)
-- [Models](/pages/commands/models.md)
-- [Operations](/pages/commands/operations.md)
+- [Help](project:/pages/commands/help.md)
+- [Models](project:/pages/commands/models.md)
+- [Operations](project:/pages/commands/operations.md)
 
 ## Tools
 
@@ -125,10 +125,10 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 /pages/commands/view.md
 ```
 
-- [Compare](/pages/commands/compare.md)
-- [Diff](/pages/commands/diff.md)
-- [TensorBoard](/pages/commands/tensorboard.md)
-- [View](/pages/commands/view.md)
+- [Compare](project:/pages/commands/compare.md)
+- [Diff](project:/pages/commands/diff.md)
+- [TensorBoard](project:/pages/commands/tensorboard.md)
+- [View](project:/pages/commands/view.md)
 
 ## Visualization
 
@@ -142,9 +142,9 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 /pages/commands/view.md
 ```
 
-- [Open](/pages/commands/open.md)
-- [TensorBoard](/pages/commands/tensorboard.md)
-- [View](/pages/commands/view.md)
+- [Open](project:/pages/commands/open.md)
+- [TensorBoard](project:/pages/commands/tensorboard.md)
+- [View](project:/pages/commands/view.md)
 
 ## Input/Output
 
@@ -161,12 +161,12 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 /pages/commands/sync.md
 ```
 
-- [Cat](/pages/commands/cat.md)
-- [Export](/pages/commands/export.md)
-- [Import](/pages/commands/import.md)
-- [Pull](/pages/commands/pull.md)
-- [Push](/pages/commands/push.md)
-- [Sync](/pages/commands/sync.md)
+- [Cat](project:/pages/commands/cat.md)
+- [Export](project:/pages/commands/export.md)
+- [Import](project:/pages/commands/import.md)
+- [Pull](project:/pages/commands/pull.md)
+- [Push](project:/pages/commands/push.md)
+- [Sync](project:/pages/commands/sync.md)
 
 ## Packaging
 
@@ -184,13 +184,13 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 /pages/commands/uninstall.md
 ```
 
-- [Install](/pages/commands/install.md)
-- [Package](/pages/commands/package.md)
-- [Packages](/pages/commands/packages.md)
-- [Packages Delete](/pages/commands/packages-delete.md)
-- [Packages Info](/pages/commands/packages-info.md)
-- [Search](/pages/commands/search.md)
-- [Uninstall](/pages/commands/uninstall.md)
+- [Install](project:/pages/commands/install.md)
+- [Package](project:/pages/commands/package.md)
+- [Packages](project:/pages/commands/packages.md)
+- [Packages Delete](project:/pages/commands/packages-delete.md)
+- [Packages Info](project:/pages/commands/packages-info.md)
+- [Search](project:/pages/commands/search.md)
+- [Uninstall](project:/pages/commands/uninstall.md)
 
 ## Remotes
 
@@ -208,13 +208,13 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 /pages/commands/sync.md
 ```
 
-- [Pull](/pages/commands/pull.md)
-- [Push](/pages/commands/push.md)
-- [Remote Start](/pages/commands/remote-start.md)
-- [Remote Status](/pages/commands/remote-status.md)
-- [Remote Stop](/pages/commands/remote-stop.md)
-- [Remotes](/pages/commands/remotes.md)
-- [Sync](/pages/commands/sync.md)
+- [Pull](project:/pages/commands/pull.md)
+- [Push](project:/pages/commands/push.md)
+- [Remote Start](project:/pages/commands/remote-start.md)
+- [Remote Status](project:/pages/commands/remote-status.md)
+- [Remote Stop](project:/pages/commands/remote-stop.md)
+- [Remotes](project:/pages/commands/remotes.md)
+- [Sync](project:/pages/commands/sync.md)
 
 ## Utilities
 
@@ -228,9 +228,9 @@ Refer to [Guild Commands Index](pages/commands-index.md) for an alphabetized lis
 /pages/commands/tensorflow-inspect.md
 ```
 
-- [Check](/pages/commands/check.md)
-- [Download](/pages/commands/download.md)
-- [Shell](/pages/commands/shell.md)
-- [TensorFlow Inspect](/pages/commands/tensorflow-inspect.md)
+- [Check](project:/pages/commands/check.md)
+- [Download](project:/pages/commands/download.md)
+- [Shell](project:/pages/commands/shell.md)
+- [TensorFlow Inspect](project:/pages/commands/tensorflow-inspect.md)
 
 ---

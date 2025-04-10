@@ -6,7 +6,7 @@
 
 ## Overview
 
-This [example](https://github.com/guildai/guildai/tree/master/examples/pytest) illustrates how [pytest](https://pages/docs.pytest.org/) can be used within a Guild enabled project.
+This [example](https://github.com/guildai/guildai/tree/master/examples/pytest) illustrates how [pytest](https:/project:/pages/docs.pytest.org/.md) can be used within a Guild enabled project.
 
 Project files:
 

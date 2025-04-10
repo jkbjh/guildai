@@ -41,102 +41,102 @@ Guild provides a number of integrated tools.
 
 ## Commands
 
-Refer to [Guild Commands Index](/pages/commands) for an alphabetized list.
+Refer to [Guild Commands Index](project:/pages/commands.md) for an alphabetized list.
 
 ### Frequently Used Commands
 
-- [check](/pages/commands/check)
-- [compare](/pages/commands/compare)
-- [init](/pages/commands/init)
-- [ls](/pages/commands/ls)
-- [operations](/pages/commands/operations)
-- [run](/pages/commands/run)
-- [runs](/pages/commands/runs)
-- [runs info](/pages/commands/runs-info)
-- [runs rm](/pages/commands/runs-rm)
+- [check](project:/pages/commands/check.md)
+- [compare](project:/pages/commands/compare.md)
+- [init](project:/pages/commands/init.md)
+- [ls](project:/pages/commands/ls.md)
+- [operations](project:/pages/commands/operations.md)
+- [run](project:/pages/commands/run.md)
+- [runs](project:/pages/commands/runs.md)
+- [runs info](project:/pages/commands/runs-info.md)
+- [runs rm](project:/pages/commands/runs-rm.md)
 
 ### Manage Runs
 
-- [label](/pages/commands/label)
-- [run](/pages/commands/run)
-- [runs](/pages/commands/runs)
-- [runs delete](/pages/commands/runs-delete)
-- [runs list](/pages/commands/runs-list)
-- [runs purge](/pages/commands/runs-purge)
-- [runs restore](/pages/commands/runs-restore)
-- [stop](/pages/commands/stop)
-- [watch](/pages/commands/watch)
+- [label](project:/pages/commands/label.md)
+- [run](project:/pages/commands/run.md)
+- [runs](project:/pages/commands/runs.md)
+- [runs delete](project:/pages/commands/runs-delete.md)
+- [runs list](project:/pages/commands/runs-list.md)
+- [runs purge](project:/pages/commands/runs-purge.md)
+- [runs restore](project:/pages/commands/runs-restore.md)
+- [stop](project:/pages/commands/stop.md)
+- [watch](project:/pages/commands/watch.md)
 
 ### Get Run Info
 
-- [cat](/pages/commands/cat)
-- [diff](/pages/commands/diff)
-- [ls](/pages/commands/ls)
-- [open](/pages/commands/open)
-- [runs info](/pages/commands/runs-info)
-- [view](/pages/commands/view)
+- [cat](project:/pages/commands/cat.md)
+- [diff](project:/pages/commands/diff.md)
+- [ls](project:/pages/commands/ls.md)
+- [open](project:/pages/commands/open.md)
+- [runs info](project:/pages/commands/runs-info.md)
+- [view](project:/pages/commands/view.md)
 
 ### Compare and Diff Runs
 
-- [compare](/pages/commands/compare)
-- [diff](/pages/commands/diff)
-- [tensorboard](/pages/commands/tensorboard)
-- [view](/pages/commands/view)
+- [compare](project:/pages/commands/compare.md)
+- [diff](project:/pages/commands/diff.md)
+- [tensorboard](project:/pages/commands/tensorboard.md)
+- [view](project:/pages/commands/view.md)
 
 ### Get Model and Operation Info
 
-- [help](/pages/commands/help)
-- [models](/pages/commands/models)
-- [operations](/pages/commands/operations)
+- [help](project:/pages/commands/help.md)
+- [models](project:/pages/commands/models.md)
+- [operations](project:/pages/commands/operations.md)
 
 ### Tools
 
-- [compare](/pages/commands/compare)
-- [diff](/pages/commands/diff)
-- [tensorboard](/pages/commands/tensorboard)
-- [view](/pages/commands/view)
+- [compare](project:/pages/commands/compare.md)
+- [diff](project:/pages/commands/diff.md)
+- [tensorboard](project:/pages/commands/tensorboard.md)
+- [view](project:/pages/commands/view.md)
 
 ### Visualization
 
-- [open](/pages/commands/open)
-- [tensorboard](/pages/commands/tensorboard)
-- [view](/pages/commands/view)
+- [open](project:/pages/commands/open.md)
+- [tensorboard](project:/pages/commands/tensorboard.md)
+- [view](project:/pages/commands/view.md)
 
 ### Input/Output
 
-- [cat](/pages/commands/cat)
-- [export](/pages/commands/export)
-- [import](/pages/commands/import)
-- [pull](/pages/commands/pull)
-- [push](/pages/commands/push)
-- [sync](/pages/commands/sync)
+- [cat](project:/pages/commands/cat.md)
+- [export](project:/pages/commands/export.md)
+- [import](project:/pages/commands/import.md)
+- [pull](project:/pages/commands/pull.md)
+- [push](project:/pages/commands/push.md)
+- [sync](project:/pages/commands/sync.md)
 
 ### Packaging
 
-- [install](/pages/commands/install)
-- [package](/pages/commands/package)
-- [packages](/pages/commands/packages)
-- [packages delete](/pages/commands/packages-delete)
-- [packages info](/pages/commands/packages-info)
-- [search](/pages/commands/search)
-- [uninstall](/pages/commands/uninstall)
+- [install](project:/pages/commands/install.md)
+- [package](project:/pages/commands/package.md)
+- [packages](project:/pages/commands/packages.md)
+- [packages delete](project:/pages/commands/packages-delete.md)
+- [packages info](project:/pages/commands/packages-info.md)
+- [search](project:/pages/commands/search.md)
+- [uninstall](project:/pages/commands/uninstall.md)
 
 ### Remotes
 
-- [pull](/pages/commands/pull)
-- [push](/pages/commands/push)
-- [remote start](/pages/commands/remote-start)
-- [remote status](/pages/commands/remote-status)
-- [remote stop](/pages/commands/remote-stop)
-- [remotes](/pages/commands/remotes)
-- [sync](/pages/commands/sync)
+- [pull](project:/pages/commands/pull.md)
+- [push](project:/pages/commands/push.md)
+- [remote start](project:/pages/commands/remote-start.md)
+- [remote status](project:/pages/commands/remote-status.md)
+- [remote stop](project:/pages/commands/remote-stop.md)
+- [remotes](project:/pages/commands/remotes.md)
+- [sync](project:/pages/commands/sync.md)
 
 ### Utilities
 
-- [check](/pages/commands/check)
-- [download](/pages/commands/download)
-- [shell](/pages/commands/shell)
-- [tensorflow inspect](/pages/commands/tensorflow-inspect)
+- [check](project:/pages/commands/check.md)
+- [download](project:/pages/commands/download.md)
+- [shell](project:/pages/commands/shell.md)
+- [tensorflow inspect](project:/pages/commands/tensorflow-inspect.md)
 
 ## Reference
 

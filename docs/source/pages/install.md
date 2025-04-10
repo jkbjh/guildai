@@ -10,7 +10,7 @@ Guild AI has the following requirements:
 
 - macOS, Linux, Windows (Windows requires Python 3)
 - Python 2.7, Python 3
-- [pip](https://pip.pypa.io/en/stable/installing/) or [conda](https://pages/docs.conda.io/projects/conda/en/latest/user-guide/install/)
+- [pip](https://pip.pypa.io/en/stable/installing/) or [conda](https:/project:/pages/docs.conda.io/projects/conda/en/latest/user-guide/install/.md)
 
 For a complete list of supported platforms, see [*System Requirements*](/system-requirements#supported-operating-systems).
 
@@ -52,7 +52,7 @@ pip install guildai
 
 ### With Docker
 
-> <span data-guild-class="callout note">Note</span> Installing Guild with Docker requires that you have Docker installed. Refer to [About Docker CE](https://pages/docs.docker.com/install/) for instructions for your platform.
+> <span data-guild-class="callout note">Note</span> Installing Guild with Docker requires that you have Docker installed. Refer to [About Docker CE](https:/project:/pages/docs.docker.com/install/.md) for instructions for your platform.
 
 Guild AI provides a Docker image that you can install by running:
 
@@ -143,7 +143,7 @@ Guild uses NVIDIA System Management Interface (`nvidia-smi`) on GPU accelerated 
 
 ## Verify your Installation
 
-Verify that Guild is installed properly by running [`guild check`](/pages/commands/check):
+Verify that Guild is installed properly by running [`guild check`](project:/pages/commands/check.md):
 
 ``` bash
 guild check
@@ -154,6 +154,6 @@ If there are problems with your installation, Guild shows the details and exits 
 
 Congratulations, you've installed Guild AI!
 
-To learn more about Guild, follow the steps in [Get Started with Guild AI](/pages/start).
+To learn more about Guild, follow the steps in [Get Started with Guild AI](project:/pages/start.md).
 
-For more help, see [Guild AI Documentation](/pages/docs).
+For more help, see [Guild AI Documentation](project:/pages/docs.md).

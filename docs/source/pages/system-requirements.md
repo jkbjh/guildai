@@ -25,7 +25,7 @@ Guild requires various software libraries. Each dependency is carefully consider
 |----------------------------|-----------------------------------------------------------------------------------|
 | *Pillow*                   | Converting images to raw format for TensorBoard summaries                         |
 | *PyYAML*                   | YAML file decoding                                                                |
-| *Werkzeug*                 | HTTP server used by [Guild View](/pages/docs/view) and other Guild web applications |
+| *Werkzeug*                 | HTTP server used by [Guild View](project:/pages/docs/view.md) and other Guild web applications |
 | *daemonize*                | Background runs and other Guild background tools                                  |
 | *filelock*                 | Coordination across Guild processes (e.g. queues)                                 |
 | *jinja2*                   | Template support                                                                  |
@@ -39,6 +39,6 @@ Guild requires various software libraries. Each dependency is carefully consider
 |   |   |
 |---|---|
 | *Pandas* | Required by `guild.ipy`, Guild's Python Notebook interface |
-| *HiPlot* | Required when using `--tool hiplot` with [`guild compare`](/pages/commands/compare) |
+| *HiPlot* | Required when using `--tool hiplot` with [`guild compare`](project:/pages/commands/compare.md) |
 | *TensorFlow* | If enabled via plugins, Guild logs system metrics for each scalar step logged by TensorFlow |
-| *Keras* | Guild detects Keras scripts and applies the [applicable default settings](/pages/docs/defaults) for output scalars |
+| *Keras* | Guild detects Keras scripts and applies the [applicable default settings](project:/pages/docs/defaults.md) for output scalars |

@@ -7,13 +7,13 @@
 
 A *Guild environment* is a system runtime used to manage runs. All Guild commands are executed in the context of a Guild environment.
 
-View information about the current environment using [`guild check`](/pages/commands/check).
+View information about the current environment using [`guild check`](project:/pages/commands/check.md).
 
 The `guild_home` attribute in `check` output indicates the location of the Guild environment. By default the Guild environment is `~/.guild` where `~` is the active user home directory. For more information, see [Guild Home](#guild-home) below.
 
 ## Virtual Environments
 
-By default, Guild environments correspond to activated virtual environments. Use virtual environments created using [conda](https://pages/docs.conda.io/projects/conda/en/latest/user-guide/install/) or [`virtualenv`](https://virtualenv.pypa.io/en/latest/) to isolate your work, including Guild runs.
+By default, Guild environments correspond to activated virtual environments. Use virtual environments created using [conda](https:/project:/pages/docs.conda.io/projects/conda/en/latest/user-guide/install/.md) or [`virtualenv`](https://virtualenv.pypa.io/en/latest/) to isolate your work, including Guild runs.
 
 Virtual environment let you run Python operations using a specific Python runtime along with a controlled set of installed libraries. When you activate a virtual environment, Guild operations run within this isolated context.
 
@@ -47,7 +47,7 @@ Guild Home is laid out as follows:
 | <span data-guild-class="ls-dir-open ls-1">trash</span> | <span data-guild-class="dim">deleted objects</span> |
 | <span data-guild-class="ls-dir ls-2">runs</span> | <span data-guild-class="dim">deleted runs</span> |
 
-> <span data-guild-class="callout tip">Tip</span> Use [`guild check`](/pages/commands/check) to show the current Guild home. This is the value shown for `guild_home` in the output.
+> <span data-guild-class="callout tip">Tip</span> Use [`guild check`](project:/pages/commands/check.md) to show the current Guild home. This is the value shown for `guild_home` in the output.
 
 ### Set Guild Home
 
@@ -78,17 +78,17 @@ guild -H <path> <command> ...
 
 > <span data-guild-class="callout note">Note</span> When using `-H`, the option must be specified *before* `<command>`.
 
-For help setting environment variables on Windows, see [Help with Windows](/pages/docs/windows).
+For help setting environment variables on Windows, see [Help with Windows](project:/pages/docs/windows.md).
 
 ## Create a Guild Environment
 
 New environments may be created using the following methods:
 
-- Use [`guild init`](/pages/commands/init)
-- Use one of the standard Python tools: [`virtualenv`](https://virtualenv.pypa.io/en/latest/), [`venv`](https://pages/docs.python.org/library/venv.html), or [conda](https://pages/docs.conda.io/projects/conda/en/latest/user-guide/install/)
+- Use [`guild init`](project:/pages/commands/init.md)
+- Use one of the standard Python tools: [`virtualenv`](https://virtualenv.pypa.io/en/latest/), [`venv`](https:/project:/pages/docs.python.org/library/venv.html.md), or [conda](https:/project:/pages/docs.conda.io/projects/conda/en/latest/user-guide/install/.md)
 - Create a new directory and [set it as Guild home](#set-guild-home)
 
-[`guild init`](/pages/commands/init) command uses `virtualenv` to create a new virtual environment. When running `init`, Guild performs additional steps to streamline the process of creating a virtualized Guild environment for a project:
+[`guild init`](project:/pages/commands/init.md) command uses `virtualenv` to create a new virtual environment. When running `init`, Guild performs additional steps to streamline the process of creating a virtualized Guild environment for a project:
 
 - Uses a Python [dependency specification](https://www.python.org/dev/peps/pep-0508/) to select an appropriate Python version when creating the virtual environment
 - Runs `pip install -r requirements.txt` if `requirements.txt` is defined for a project
@@ -97,17 +97,17 @@ New environments may be created using the following methods:
 
 You must activate a virtual environment before using it. Activate a virtual environment using the applicable method.
 
-To activate an environment created with [`guild init`](/pages/commands/init) run:
+To activate an environment created with [`guild init`](project:/pages/commands/init.md) run:
 
 ``` bash
 source guild-env [<env path>]
 ```
 
-<span data-guild-class="caption">Activate a virtual environment created using [`guild init`](/pages/commands/init)</span>
+<span data-guild-class="caption">Activate a virtual environment created using [`guild init`](project:/pages/commands/init.md)</span>
 
 You may omit `<env path>` if the environment is defined in the current directory or in a `venv` subdirectory.
 
-> <span data-guild-class="callout note">Note</span> Virtual environments created using [`guild init`](/pages/commands/init) are standard Python virtual environments and can be activated by sourcing the `bin/activate` environment. The `guild-env` command provides a convenient alternative.
+> <span data-guild-class="callout note">Note</span> Virtual environments created using [`guild init`](project:/pages/commands/init.md) are standard Python virtual environments and can be activated by sourcing the `bin/activate` environment. The `guild-env` command provides a convenient alternative.
 
 To activate an environment created using `virtualenv` or `venv` use:
 
@@ -123,7 +123,7 @@ To activate a Conda environment use:
 conda activate <env name>
 ```
 
-For more information about Conda environments, see [Conda - Managing environments](https://pages/docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+For more information about Conda environments, see [Conda - Managing environments](https:/project:/pages/docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html.md).
 
 Once activated, you can verify that Guild home is the expected environment by running:
 

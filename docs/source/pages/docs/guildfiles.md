@@ -17,13 +17,13 @@ While Guild can run scripts directly without explicit configuration, in such cas
 
 More about Guild files:
 
-- [*Get Started: Add a Guild File*](/pages/start/guildfile) --- step-by-step example creating a simple Guild file
-- [*Guild File Reference*](/pages/reference/guildfile) --- complete list of configuration options
-- [*Guild File Cheatsheet*](/pages/cheatsheets/guildfile) --- configuration examples
+- [*Get Started: Add a Guild File*](project:/pages/start/guildfile.md) --- step-by-step example creating a simple Guild file
+- [*Guild File Reference*](project:/pages/reference/guildfile.md) --- complete list of configuration options
+- [*Guild File Cheatsheet*](project:/pages/cheatsheets/guildfile.md) --- configuration examples
 
 ## Format
 
-Guild files are plain text files in YAML format. See [*Guild File Reference*](/pages/reference/guildfile) for details on file format.
+Guild files are plain text files in YAML format. See [*Guild File Reference*](project:/pages/reference/guildfile.md) for details on file format.
 
 ## Operations
 
@@ -55,7 +55,7 @@ You are about to run train
 Continue? (Y/n)
 ```
 
-Guild shows a preview of the flags used for the operation and asks you to confirm the operation by pressing `Enter`. When you confirm the operation, Guild executes the `train` module with the specified flag values. Guild generates a [*run*](/pages/docs/runs), which is a record of the operation inputs and outputs.
+Guild shows a preview of the flags used for the operation and asks you to confirm the operation by pressing `Enter`. When you confirm the operation, Guild executes the `train` module with the specified flag values. Guild generates a [*run*](project:/pages/docs/runs.md), which is a record of the operation inputs and outputs.
 
 Guild passes flag values to Python modules by setting global variables or by passing arguments on the command line. You can configure this interface or Guild can detect it. For more information, see [Flags Interface](#flags-interface) below.
 
@@ -71,7 +71,7 @@ For more information on running operations with difference languages, see [Other
 
 ### Python Operation
 
-Guild provides special support for Python-based operations. To define a Python based operation, use the [`main`](/pages/reference/guildfile#operation-main) operation attribute to specify the Python main module. This is a Python module that runs a task when loaded by the Python interpreter as `__main__`.
+Guild provides special support for Python-based operations. To define a Python based operation, use the [`main`](project:/pages/reference/guildfile.md#operation-main) operation attribute to specify the Python main module. This is a Python module that runs a task when loaded by the Python interpreter as `__main__`.
 
 Consider a script named `train_classifier.py`:
 
@@ -131,7 +131,7 @@ train:
 
 <span data-guild-class="caption">Use flags to define operation inputs such as *learning rate* and *batch size*</span>
 
-When running an operation, a user sets flag values using `FLAG_NAME=VALUE` arguments to [`guild run`](/pages/commands/run).
+When running an operation, a user sets flag values using `FLAG_NAME=VALUE` arguments to [`guild run`](project:/pages/commands/run.md).
 
 ``` bash
 guild run train learning-rate=0.01 batch-size=1000
@@ -143,10 +143,10 @@ See [Flags Interface](#flags-interface) below for information on how Guild conve
 
 Guild records flag values used for each run. Flag values are displayed in several contexts:
 
-- Output from [`runs info`](/pages/commands/runs-info)
-- Columns in [Guild Compare](/pages/docs/compare)
-- Columns in **Compare Runs** of [Guild View](/pages/docs/view)
-- Hyperparameters in [Guild TensorBoard](/pages/docs/tensorboard)
+- Output from [`runs info`](project:/pages/commands/runs-info.md)
+- Columns in [Guild Compare](project:/pages/docs/compare.md)
+- Columns in **Compare Runs** of [Guild View](project:/pages/docs/view.md)
+- Hyperparameters in [Guild TensorBoard](project:/pages/docs/tensorboard.md)
 
 #### Flags Interface
 
@@ -156,7 +156,7 @@ Guild conveys flag values to a script using various methods:
 - Environment variables
 - Global variables (Python only)
 
-For Python based operations, Guild detects the flags interface by inspecting the `main` module. If the module uses Python's [`argparse` package](ext:https://pages/docs.python.org/library/argparse.html), Guild assumes that the script uses command line arguments to read flag values. Otherwise, Guild assumes the script uses global variables for flags.
+For Python based operations, Guild detects the flags interface by inspecting the `main` module. If the module uses Python's [`argparse` package](ext:https:/project:/pages/docs.python.org/library/argparse.html.md), Guild assumes that the script uses command line arguments to read flag values. Otherwise, Guild assumes the script uses global variables for flags.
 
 Specify the interface using the `flags-dest` operation attribute (short for *flags destination*).
 
@@ -188,11 +188,11 @@ When `flags-dest` is `globals`, Guild sets flag values as script global variable
 
 Guild can import flags from Python scripts to avoid duplicating information in a Guild file. By default, Guild does not attempt to import flags from Python scripts.
 
-To import flags from a Python script, use the [`flags-import`](/pages/reference/guildfile#operation-flags-import) operation attribute.
+To import flags from a Python script, use the [`flags-import`](project:/pages/reference/guildfile.md#operation-flags-import) operation attribute.
 
 #### Flag Definitions
 
-See [*Flags*](/pages/docs/flags) for details on defining flags for an operation.
+See [*Flags*](project:/pages/docs/flags.md) for details on defining flags for an operation.
 
 ### Source Code
 
@@ -203,7 +203,7 @@ Guild copies operation source code to a run directory for each run. Guild uses t
 
 It's important to copy the required source code files. By default, Guild copies text files with safeguards to prevent copying too many files or files that are too big. Change this behavior by defining a `sourcecode` attribute for operation or the operation model.
 
-See [*Guild File Reference*](/pages/reference/guildfile#source-code) for more information.
+See [*Guild File Reference*](project:/pages/reference/guildfile.md#source-code) for more information.
 
 ### Output Scalars
 
@@ -252,19 +252,19 @@ By default, Guild applies the following patterns when running Keras operations:
 
 When an operation needs a file or other resource, it defines a *dependency* on a resource. Guild starts each run with an empty directory. If an operation needs a file, it must define it as a dependency.
 
-Refer to [*Dependencies*](/pages/docs/dependencies) for details on defining and using dependencies in Guild.
+Refer to [*Dependencies*](project:/pages/docs/dependencies.md) for details on defining and using dependencies in Guild.
 
 ### Pipelines
 
-Pipelines are multi-step runs defined using the [`steps`](/pages/reference/guildfile#operation-steps) attribute.
+Pipelines are multi-step runs defined using the [`steps`](project:/pages/reference/guildfile.md#operation-steps) attribute.
 
-Refer to [*Pipelines*](/pages/docs/pipelines) for details on defining and using pipelines in Guild.
+Refer to [*Pipelines*](project:/pages/docs/pipelines.md) for details on defining and using pipelines in Guild.
 
 ## Models
 
 A *model* defines a set of related operations. Generally models correspond to the structures that you train, evaluate, and deploy. However, Guild models may define any operations or even be used for non-modeling functions.
 
-Models must be defined using [full format](/pages/reference/guildfile#full-format) Guild files. Models are top-level objects with a `model` attribute.
+Models must be defined using [full format](project:/pages/reference/guildfile.md#full-format) Guild files. Models are top-level objects with a `model` attribute.
 
 ``` yaml
 - model: mnist
@@ -281,21 +281,21 @@ Define a model when you want to:
 
 ## Resources
 
-A *resource* is a set of *sources* required by an operation. A source typically defines one or more source files. An operation indicates it requires a resource by defining it in the [`requires`](/pages/reference/guildfile#operation-requires) attribute.
+A *resource* is a set of *sources* required by an operation. A source typically defines one or more source files. An operation indicates it requires a resource by defining it in the [`requires`](project:/pages/reference/guildfile.md#operation-requires) attribute.
 
-Resources may be defined inline or as named resources. See [*Dependencies*](/pages/docs/dependencies#inline-vs-named-resources) for more information.
+Resources may be defined inline or as named resources. See [*Dependencies*](project:/pages/docs/dependencies.md#inline-vs-named-resources) for more information.
 
-Refer to [*Guild File Reference*](/pages/reference/guildfile#resources) for resource attributes.
+Refer to [*Guild File Reference*](project:/pages/reference/guildfile.md#resources) for resource attributes.
 
 ## Packages
 
-Guild supports installation and use of models and operations through packages. See [*Packages*](/pages/docs/packages) for more information.
+Guild supports installation and use of models and operations through packages. See [*Packages*](project:/pages/docs/packages.md) for more information.
 
 ## Reusable Config
 
 Guild supports reusable configuration through top-level `config` objects.
 
-Configuration must be defined using [full format](/pages/reference/guildfile#full-format) Guild files.
+Configuration must be defined using [full format](project:/pages/reference/guildfile.md#full-format) Guild files.
 
 Configuration objects may contain any attributes. Attributes are applied based on how the object is used.
 

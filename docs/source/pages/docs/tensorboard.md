@@ -15,7 +15,7 @@ Sections for:
 
 Guild provides integrated support for [TensorBoard](https://www.tensorflow.org/tensorboard).
 
-To use TensorBoard to view Guild runs, use [`guild tensorboard`](/pages/commands/tensorboard):
+To use TensorBoard to view Guild runs, use [`guild tensorboard`](project:/pages/commands/tensorboard.md):
 
 ``` bash
 guild tensorboard
@@ -39,4 +39,4 @@ A number of things are different when you run TensorBoard with Guild:
 
   ![tb-hparams2|552x354](upload://nHvQt4ObNpmO2GMOeHp3SKu8uf.png)
 
-- Guild filters runs shown in TensorBoard according to the run filter options used with [`guild tensorboard`](/pages/commands/tensorboard). This lets you quickly compare runs matching various criteria without having to manually create a TensorBoard log directory.
+- Guild filters runs shown in TensorBoard according to the run filter options used with [`guild tensorboard`](project:/pages/commands/tensorboard.md). This lets you quickly compare runs matching various criteria without having to manually create a TensorBoard log directory.

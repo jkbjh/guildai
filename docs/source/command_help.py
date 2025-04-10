@@ -3,19 +3,19 @@ import os
 import re
 import subprocess
 
-#from .api import init as init_api
-#from .api import DiscourseClientError
-#from .log_util import get_logger
+# from .api import init as init_api
+# from .api import DiscourseClientError
+# from .log_util import get_logger
 
 # from . import cache
-#from . import util
+# from . import util
 try:
     from sphinx.util import logging
 except ImportError:
     import logging
 
 log = logging.getLogger(__name__)
-#log = get_logger()
+# log = get_logger()
 
 COMMAND_HELP_POST_TEMPLATE = """
 <!-- -*- eval: (visual-line-mode 1) -*- -->
@@ -58,7 +58,7 @@ def generate_command_help():
     log.info("querying guild for command help")
     cmds = _guild_commands()
     for cmd, help_data in cmds:
-        filename = _command_permalink(cmd)  # + ".md")
+        filename = _command_permalink(cmd).lstrip("/")  # + ".md")
         print(filename)
         with open(filename, "w") as manpage:
             manpage.write(f"# {cmd}\n\n")
@@ -109,8 +109,9 @@ def _get_cmd_help_data(cmd):
     log.info("Fetching command info for %s", cmd_desc)
 
     git_root = "cd $(git rev-parse --show-toplevel)"
-    help_cmd = """(%s; python -c 'import runpy, sys; sys.argv[0]="guild"; runpy.run_module("guild.main_bootstrap", run_name="__main__")' %s --help)""" % (
-        git_root, cmd
+    help_cmd = (
+        """(%s; python -c 'import runpy, sys; sys.argv[0]="guild"; runpy.run_module("guild.main_bootstrap", run_name="__main__")' %s --help)"""
+        % (git_root, cmd)
     )
     # help_cmd = "guild %s --help" % cmd
     help_env = dict(os.environ)
@@ -162,7 +163,7 @@ def _join_cmd(base_cmd, subcmd):
 
 
 def _command_permalink(cmd):
-    return "pages/commands/%s" % cmd.replace(" ", "-") + ".md"
+    return "/pages/commands/%s" % cmd.replace(" ", "-") + ".md"
 
 
 def _command_help_title(cmd):
@@ -229,7 +230,7 @@ def _format_subcommand_links(cmd, subcmd):
 
 
 def _format_subcommand_link(base_cmd, subcmd_term):
-    return "[%s](%s)" % (
+    return "[%s](project:%s)" % (
         subcmd_term,
         _command_permalink(_join_cmd(base_cmd, subcmd_term)),
     )
@@ -243,7 +244,7 @@ def _apply_command_refs(s):
 def _try_command_ref(s):
     m = re.match(r"``guild (.+) --help``", s)
     if m:
-        return "[`guild %s`](%s)" % (m.group(1), _command_permalink(m.group(1)))
+        return "[`guild %s`](project:%s)" % (m.group(1), _command_permalink(m.group(1)))
     return None
 
 

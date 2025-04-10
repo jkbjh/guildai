@@ -31,35 +31,43 @@ The following external software is required to use SSH remotes:
 
 ### SSH Attributes
 
-<div data-toc-id="ssh-description"><h4>description</h4></div>
+(ssh-description)=
+#### description 
 
 *Remote description (string)*
 
-<div data-toc-id="ssh-host"><h4>host</h4></div>
+(ssh-host)=
+#### host 
 
 *Host name to use when connecting to the remote (required string)*
 
-<div data-toc-id="ssh-port"><h4>port</h4></div>
+(ssh-port)=
+#### port 
 
 *Port for SSH connections (integer)*
 
-<div data-toc-id="ssh-user"><h4>user</h4></div>
+(ssh-user)=
+#### user 
 
 *User for SSH connections (string)*
 
-<div data-toc-id="ssh-private-key"><h4>private-key</h4></div>
+(ssh-private-key)=
+#### private-key 
 
 *Local path to the private key for SSH connections (string)*
 
-<div data-toc-id="ssh-proxy"><h4>proxy</h4></div>
+(ssh-proxy)=
+#### proxy 
 
 *Proxy to use for the SSH connection (string)*
 
-<div data-toc-id="ssh-connect-time"><h4>connect-time</h4></div>
+(ssh-connect-time)=
+#### connect-time 
 
 *Number of seconds to wait for an SSH connection before quitting (integer)*
 
-<div data-toc-id="ssh-guild-home"><h4>guild-home</h4></div>
+(ssh-guild-home)=
+#### guild-home 
 
 *Path to Guild home on the remote host (string)*
 
@@ -69,7 +77,8 @@ is not used.
 
 Set this value when Guild home is different from the default location.
 
-<div data-toc-id="ssh-venv-path"><h4>venv-path</h4></div>
+(ssh-venv-path)=
+#### venv-path 
 
 *Path to a virtual environment on the remote host (string)*
 
@@ -81,29 +90,34 @@ Virtual environments are standard Python virtual environments that are created w
 
 To strictly control the environment activation, use [`venv-activate`](#ssh-venv-activate) instead.
 
-<div data-toc-id="ssh-guild-env"><h4>guild-env</h4></div>
+(ssh-guild-env)=
+#### guild-env 
 
 *Alias for [`venv-path`](#ssh-venv-path) (see above)*
 
-<div data-toc-id="ssh-conda-env"><h4>conda-env</h4></div>
+(ssh-conda-env)=
+#### conda-env 
 
 *Conda environment name on the remote (string)*
 
 Guild activates the Conda environment for each remote command. If [`guild-env`](#ssh-guild-env) is also specified, the Guild environment is activated rather than the Conda environment.
 
-<div data-toc-id="ssh-venv-activate"><h4>venv-activate</h4></div>
+(ssh-venv-activate)=
+#### venv-activate 
 
 *Command used to activate an environment on the remote (string)*
 
 Use this to specify the command that Guild uses to activate an environment for remote commands. If this attribute is specified, Guild ignores [`guild-env`](#ssh-guild-env) and [`conda-env`](#ssh-conda-env).
 
-<div data-toc-id="ssh-use-prerelease"><h4>use-prerelease</h4></div>
+(ssh-use-prerelease)=
+#### use-prerelease 
 
 *Whether to use pre-release versions for required packages (boolean)*
 
 When Guild starts a remote run, it installs the run code along with required Python packages that are specified in the project package definition or in `requirements.txt`. Set this flag to `yes` to instruct Guild to install pre-release versions of required packages.
 
-<div data-toc-id="ssh-init"><h4>init</h4></div>
+(ssh-init)=
+#### init 
 
 *Shell command to run when the remote is reinitialized (string)*
 
@@ -111,13 +125,13 @@ See [SSH Start and Stop](#ssh-start-and-stop) details information on initializin
 
 ### SSH Status
 
-When you run [`guild remote status`](/pages/commands/remote-status), Guild attempts to connect to the remote host over SSH using the specified connect information. If the connect succeeds, Guild considers the remote to be available.
+When you run [`guild remote status`](project:/pages/commands/remote-status.md), Guild attempts to connect to the remote host over SSH using the specified connect information. If the connect succeeds, Guild considers the remote to be available.
 
 ### SSH Start and Stop
 
 SSH remotes cannot be started or stopped. Guild assumes that the specified host is available using the specified connect information.
 
-SSH remotes can, however, be initialized using the `--reinit` option to [`guild remote start`](/pages/commands/remote-start). When `--reinit` is specified, Guild runs the shell command defined in the remote [`init`](#ssh-init) attribute.
+SSH remotes can, however, be initialized using the `--reinit` option to [`guild remote start`](project:/pages/commands/remote-start.md). When `--reinit` is specified, Guild runs the shell command defined in the remote [`init`](.md#ssh-init) attribute.
 
 Consider the following remote configuration:
 
@@ -141,21 +155,21 @@ The commands below can be used with SSH remotes.
 
 |||
 |-|-|
-| [`check`](/pages/commands/check) | *Check Guild on the remote* |
-| [`run`](/pages/commands/run) | *Run an operation on a remote* |
-| [`stop`](/pages/commands/runs-stop) | *Stop runs in progress on a remote* |
-| [`watch`](/pages/commands/watch) | *Connect to a remote run in progress and watch its output* |
-| [`runs`](/pages/commands/runs-list)| *List runs on a remote* |
-| [`runs info`](/pages/commands/runs-info) | *Show information about a remote run* |
-| [`ls`](/pages/commands/ls) | *List remote run files* |
-| [`diff`](/pages/commands/diff) | *Diff remote runs* |
-| [`cat`](/pages/commands/cat) | *Show remote run file or output* |
-| [`label`](/pages/commands/label) | *Apply a label to one or more remote runs* |
-| [`runs delete`](/pages/commands/runs-delete) | *Delete remote runs* |
-| [`runs restore`](/pages/commands/runs-restore) | *Restore deleted remote runs on a remote* |
-| [`runs purge`](/pages/commands/runs-purge) | *Purge deleted remote runs on a remote* |
-| [`pull`](/pages/commands/pull) | *Copy remote runs to the local environment* |
-| [`push`](/pages/commands/push) | *Copy local runs to the remote* |
+| [`check`](project:/pages/commands/check.md) | *Check Guild on the remote* |
+| [`run`](project:/pages/commands/run.md) | *Run an operation on a remote* |
+| [`stop`](project:/pages/commands/runs-stop.md) | *Stop runs in progress on a remote* |
+| [`watch`](project:/pages/commands/watch.md) | *Connect to a remote run in progress and watch its output* |
+| [`runs`](project:/pages/commands/runs-list.md)| *List runs on a remote* |
+| [`runs info`](project:/pages/commands/runs-info.md) | *Show information about a remote run* |
+| [`ls`](project:/pages/commands/ls.md) | *List remote run files* |
+| [`diff`](project:/pages/commands/diff.md) | *Diff remote runs* |
+| [`cat`](project:/pages/commands/cat.md) | *Show remote run file or output* |
+| [`label`](project:/pages/commands/label.md) | *Apply a label to one or more remote runs* |
+| [`runs delete`](project:/pages/commands/runs-delete.md) | *Delete remote runs* |
+| [`runs restore`](project:/pages/commands/runs-restore.md) | *Restore deleted remote runs on a remote* |
+| [`runs purge`](project:/pages/commands/runs-purge.md) | *Purge deleted remote runs on a remote* |
+| [`pull`](project:/pages/commands/pull.md) | *Copy remote runs to the local environment* |
+| [`push`](project:/pages/commands/push.md) | *Copy local runs to the remote* |
 
 ### SSH Security
 
@@ -163,7 +177,7 @@ Security is managed by the SSH protocol between the local system (client) and th
 
 ### SSH Examples
 
-Refer to [*Remotes Cheatsheet*](/pages/cheatsheets/remotes#ssh) for SSH configuration examples.
+Refer to [*Remotes Cheatsheet*](project:/pages/cheatsheets/remotes.md#ssh) for SSH configuration examples.
 
 ## EC2
 
@@ -179,30 +193,35 @@ The following external software is required to use EC2 remotes:
 
 Any [SSH Attribute](#ssh-attributes) may be used to configure an EC2 remote. Refer to that section for details.
 
-In addition to supporting SSH attributes, EC2 remotes support various EC2-specific settings. These are used when running [`guild remote start`](/pages/commands/remote-start) to create new EC2 resources to support remote operations.
+In addition to supporting SSH attributes, EC2 remotes support various EC2-specific settings. These are used when running [`guild remote start`](project:/pages/commands/remote-start.md) to create new EC2 resources to support remote operations.
 
-<div data-toc-id="ec2-ami"><h4>ami</h4></div>
+(ec2-ami)=
+#### ami 
 
 *AMI used to create the EC2 instance (required string)*
 
-<div data-toc-id="ec2-instance-type"><h4>instance-type</h4></div>
+(ec2-instance-type)=
+#### instance-type 
 
 *Type of EC2 instance to create (required string)*
 
-<div data-toc-id="ec2-region"><h4>region</h4></div>
+(ec2-region)=
+#### region 
 
 *AWS region to create the EC2 instance in (string)*
 
 If this value isn't specified, Guild uses the value defined by the
 `AWS_DEFAULT_REGION` environment variable.
 
-<div data-toc-id="ec2-root-device-size"><h4>root-device-size</h4></div>
+(ec2-root-device-size)=
+#### root-device-size 
 
 *Size of the root volume created for the server (integer)*
 
 If this value is omitted, the default volume size for the AMI is used.
 
-<div data-toc-id="ec2-public-key"><h4>public-key</h4></div>
+(ec2-public-key)=
+#### public-key 
 
 *The public key used when starting the EC2 instance (string or file path)*
 
@@ -210,13 +229,15 @@ This value may be a path, relative to the user configuration directory (i.e. `~/
 
 The public key is installed on the new instance to provide SSH access. This public key must correspond to the private key used to access the instance (see [`private-key`](#ec2-private-key) below).
 
-<div data-toc-id="ec2-private-key"><h4>private-key</h4></div>
+(ec2-private-key)=
+#### private-key 
 
 *The private key used to connect to the VM instance (string or file path)*
 
 This value may be a path, relative to the user configuration directory (i.e. `~/.guild`) or the base 64 encoded private key.
 
-<div data-toc-id="ec2-init-timeout"><h4>init-timeout</h4></div>
+(ec2-init-timeout)=
+#### init-timeout 
 
 *The timeout to wait for a connection to the instance to become available (integer or string)*
 
@@ -226,11 +247,11 @@ If a valud is not specified, 5 minutes is assumed.
 
 ### EC2 Status
 
-On [`guild remote status`](/pages/commands/remote-status), Guild attempts to connect to the remote host over SSH using the specified connect information. If the connect succeeds, Guild considers the remote to be available.
+On [`guild remote status`](project:/pages/commands/remote-status.md), Guild attempts to connect to the remote host over SSH using the specified connect information. If the connect succeeds, Guild considers the remote to be available.
 
 ### EC2 Start and Stop
 
-On [`guild remote start`](/pages/commands/remote-start), Guild uses [Terraform](https://terraform.io) to start an EC2 instance using the EC2 remote settings. On [`guild remote stop`](/pages/commands/remote-stop), Guild similarly terminates the EC2 instance using Terraform.
+On [`guild remote start`](project:/pages/commands/remote-start.md), Guild uses [Terraform](https://terraform.io) to start an EC2 instance using the EC2 remote settings. On [`guild remote stop`](project:/pages/commands/remote-stop.md), Guild similarly terminates the EC2 instance using Terraform.
 
 ### EC2 Remote Commands
 
@@ -240,21 +261,21 @@ The commands below can be used with EC2 remotes.
 
 |||
 |-|-|
-| [`check`](/pages/commands/check) | *Check Guild on the remote* |
-| [`run`](/pages/commands/run) | *Run an operation on a remote* |
-| [`stop`](/pages/commands/runs-stop) | *Stop runs in progress on a remote* |
-| [`watch`](/pages/commands/watch) | *Connect to a remote run in progress and watch its output* |
-| [`runs`](/pages/commands/runs-list)| *List runs on a remote* |
-| [`runs info`](/pages/commands/runs-info) | *Show information about a remote run* |
-| [`ls`](/pages/commands/ls) | *List remote run files* |
-| [`diff`](/pages/commands/diff) | *Diff remote runs* |
-| [`cat`](/pages/commands/cat) | *Show remote run file or output* |
-| [`label`](/pages/commands/label) | *Apply a label to one or more remote runs* |
-| [`runs delete`](/pages/commands/runs-delete) | *Delete remote runs* |
-| [`runs restore`](/pages/commands/runs-restore) | *Restore deleted remote runs on a remote* |
-| [`runs purge`](/pages/commands/runs-purge) | *Purge deleted remote runs on a remote* |
-| [`pull`](/pages/commands/pull) | *Copy remote runs to the local environment* |
-| [`push`](/pages/commands/push) | *Copy local runs to the remote* |
+| [`check`](project:/pages/commands/check.md) | *Check Guild on the remote* |
+| [`run`](project:/pages/commands/run.md) | *Run an operation on a remote* |
+| [`stop`](project:/pages/commands/runs-stop.md) | *Stop runs in progress on a remote* |
+| [`watch`](project:/pages/commands/watch.md) | *Connect to a remote run in progress and watch its output* |
+| [`runs`](project:/pages/commands/runs-list.md)| *List runs on a remote* |
+| [`runs info`](project:/pages/commands/runs-info.md) | *Show information about a remote run* |
+| [`ls`](project:/pages/commands/ls.md) | *List remote run files* |
+| [`diff`](project:/pages/commands/diff.md) | *Diff remote runs* |
+| [`cat`](project:/pages/commands/cat.md) | *Show remote run file or output* |
+| [`label`](project:/pages/commands/label.md) | *Apply a label to one or more remote runs* |
+| [`runs delete`](project:/pages/commands/runs-delete.md) | *Delete remote runs* |
+| [`runs restore`](project:/pages/commands/runs-restore.md) | *Restore deleted remote runs on a remote* |
+| [`runs purge`](project:/pages/commands/runs-purge.md) | *Purge deleted remote runs on a remote* |
+| [`pull`](project:/pages/commands/pull.md) | *Copy remote runs to the local environment* |
+| [`push`](project:/pages/commands/push.md) | *Copy local runs to the remote* |
 
 ### EC2 Security
 
@@ -277,7 +298,7 @@ between the local system (client) and the remote (server).
 
 ### EC2 Examples
 
-Refer to [*Remotes Cheatsheet*](/pages/cheatsheets/remotes#ec2) for EC2 configuration examples.
+Refer to [*Remotes Cheatsheet*](project:/pages/cheatsheets/remotes.md#ec2) for EC2 configuration examples.
 
 ## S3
 
@@ -291,19 +312,23 @@ The following external software is required to use SSH remotes:
 
 ### S3 Attributes
 
-<div data-toc-id="s3-description"><h4>description</h4></div>
+(s3-description)=
+#### description 
 
 *Remote description (string)*
 
-<div data-toc-id="s3-bucket"><h4>bucket</h4></div>
+(s3-bucket)=
+#### bucket 
 
 *S3 bucket to store runs in (required string)*
 
-<div data-toc-id="s3-root"><h4>root</h4></div>
+(s3-root)=
+#### root 
 
 *Path in the S3 bucket to store runs in (string)*
 
-<div data-toc-id="s3-region"><h4>region</h4></div>
+(s3-region)=
+#### region 
 
 *AWS region where the bucket was created (string)*
 
@@ -311,7 +336,7 @@ The region may alternatively be specified using the `AWS_DEFAULT_REGION` environ
 
 ### S3 Status
 
-When you run  [`guild remote status`](/pages/commands/remote-status), Guild checks that the bucket exists and that Guild can read from it. This check does not perform a write test.
+When you run  [`guild remote status`](project:/pages/commands/remote-status.md), Guild checks that the bucket exists and that Guild can read from it. This check does not perform a write test.
 
 ### S3 Start and Stop
 
@@ -327,13 +352,13 @@ The following commands can be used with S3 remotes.
 
 |||
 |-|-|
-| [`runs`](/pages/commands/runs-list)| *List runs on a remote* |
-| [`runs info`](/pages/commands/runs-info) | *Show information about a remote run* |
-| [`runs delete`](/pages/commands/runs-delete) | *Delete remote runs* |
-| [`runs restore`](/pages/commands/runs-restore) | *Restore deleted remote runs on a remote* |
-| [`runs purge`](/pages/commands/runs-purge) | *Purge deleted remote runs on a remote* |
-| [`pull`](/pages/commands/pull) | *Copy remote runs to the local environment* |
-| [`push`](/pages/commands/push) | *Copy local runs to the remote* |
+| [`runs`](project:/pages/commands/runs-list.md)| *List runs on a remote* |
+| [`runs info`](project:/pages/commands/runs-info.md) | *Show information about a remote run* |
+| [`runs delete`](project:/pages/commands/runs-delete.md) | *Delete remote runs* |
+| [`runs restore`](project:/pages/commands/runs-restore.md) | *Restore deleted remote runs on a remote* |
+| [`runs purge`](project:/pages/commands/runs-purge.md) | *Purge deleted remote runs on a remote* |
+| [`pull`](project:/pages/commands/pull.md) | *Copy remote runs to the local environment* |
+| [`push`](project:/pages/commands/push.md) | *Copy local runs to the remote* |
 
 ### S3 Security
 
@@ -352,7 +377,7 @@ The following environment variables may be optionally defined:
 
 ### S3 Examples
 
-Refer to [*Remotes Cheatsheet*](/pages/cheatsheets/remotes#s3) for S3 configuration examples.
+Refer to [*Remotes Cheatsheet*](project:/pages/cheatsheets/remotes.md#s3) for S3 configuration examples.
 
 ## Azure VM
 
@@ -363,37 +388,42 @@ can be started and stopped on Azure by configuring Azure VM instance attributes.
 
 The following external software is required to use Azure VM remotes:
 
-- [Azure Command Line Interface](https://pages/docs.microsoft.com/en-us/cli/azure/)
+- [Azure Command Line Interface](https:/project:/pages/docs.microsoft.com/en-us/cli/azure/.md)
 
 ### Azure VM Attributes
 
 Any [SSH Attribute](#ssh-attributes) may be used to configure an Azure VM remote. Refer to that section for details.
 
-In addition to supporting SSH attributes, EC2 remotes support various EC2-specific settings. These are used when running [`guild remote start`](/pages/commands/remote-start) to create new EC2 resources to support remote operations.
+In addition to supporting SSH attributes, EC2 remotes support various EC2-specific settings. These are used when running [`guild remote start`](project:/pages/commands/remote-start.md) to create new EC2 resources to support remote operations.
 
-<div data-toc-id="azure-vm-image"><h4>image</h4></div>
+(azure-vm-image)=
+#### image 
 
 *Azure image ID used to create the VM instance (required string)*
 
-<div data-toc-id="azure-vm-instance-type"><h4>instance-type</h4></div>
+(azure-vm-instance-type)=
+#### instance-type 
 
 *Type of Azure VM instance to create (required string)*
 
-<div data-toc-id="azure-vm-root-device-size"><h4>root-device-size</h4></div>
+(azure-vm-root-device-size)=
+#### root-device-size 
 
 *Size of the root volume created for the server (integer)*
 
 If this value is omitted, the default volume size for the image is used.
 
-<div data-toc-id="azure-vm-disk-type"><h4>disk-type</h4></div>
+(azure-vm-disk-type)=
+#### disk-type 
 
 *The type of storage to use for the managed disk (string)*
 
 If this value is omitted, `Premium_LRS` is used.
 
-For a list of supported values, refer to the Terraform [`storage_account_type`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/pages/docs/resources/managed_disk#storage_account_type) attribute.
+For a list of supported values, refer to the Terraform [`storage_account_type`](https://registry.terraform.io/providers/hashicorp/azurerm/latestproject:/pages/docs/resources/managed_disk.md#storage_account_type) attribute.
 
-<div data-toc-id="azure-vm-public-key"><h4>public-key</h4></div>
+(azure-vm-public-key)=
+#### public-key 
 
 *The public key used when starting the VM instance (string or file path)*
 
@@ -401,13 +431,15 @@ This value may be a path, relative to the user configuration directory (i.e. `~/
 
 The public key is installed on the new instance to provide SSH access. This public key must correspond to the private key used to access the instance (see [`private-key`](#azure-vm-private-key) below).
 
-<div data-toc-id="azure-vm-private-key"><h4>private-key</h4></div>
+(azure-vm-private-key)=
+#### private-key 
 
 *The private key used to connect to the VM instance (string or file path)*
 
 This value may be a path, relative to the user configuration directory (i.e. `~/.guild`) or the base 64 encoded private key.
 
-<div data-toc-id="azure-vm-init-timeout"><h4>init-timeout</h4></div>
+(azure-vm-init-timeout)=
+#### init-timeout 
 
 *The timeout to wait for a connection to the instance to become available (integer or string)*
 
@@ -417,16 +449,16 @@ If a valud is not specified, 5 minutes is assumed.
 
 ### Azure VM Status
 
-On [`guild remote status`](/pages/commands/remote-status), Guild attempts to
+On [`guild remote status`](project:/pages/commands/remote-status.md), Guild attempts to
 connect to the remote host over SSH using the specified connect
 information. If the connect succeeds, Guild considers the remote to be
 available.
 
 ### Azure VM Start and Stop
 
-On [`guild remote start`](/pages/commands/remote-start), Guild uses
+On [`guild remote start`](project:/pages/commands/remote-start.md), Guild uses
 [Terraform](https://terraform.io) to start an Azure VM instance using the
-Azure VM remote settings. On [`guild remote stop`](/pages/commands/remote-stop),
+Azure VM remote settings. On [`guild remote stop`](project:/pages/commands/remote-stop.md),
 Guild similarly terminates the Azure VM instance using Terraform.
 
 ### Azure VM Remote Commands
@@ -437,21 +469,21 @@ The commands below can be used with Azure VM remotes.
 
 |||
 |-|-|
-| [`check`](/pages/commands/check) | *Check Guild on the remote* |
-| [`run`](/pages/commands/run) | *Run an operation on a remote* |
-| [`stop`](/pages/commands/runs-stop) | *Stop runs in progress on a remote* |
-| [`watch`](/pages/commands/watch) | *Connect to a remote run in progress and watch its output* |
-| [`runs`](/pages/commands/runs-list)| *List runs on a remote* |
-| [`runs info`](/pages/commands/runs-info) | *Show information about a remote run* |
-| [`ls`](/pages/commands/ls) | *List remote run files* |
-| [`diff`](/pages/commands/diff) | *Diff remote runs* |
-| [`cat`](/pages/commands/cat) | *Show remote run file or output* |
-| [`label`](/pages/commands/label) | *Apply a label to one or more remote runs* |
-| [`runs delete`](/pages/commands/runs-delete) | *Delete remote runs* |
-| [`runs restore`](/pages/commands/runs-restore) | *Restore deleted remote runs on a remote* |
-| [`runs purge`](/pages/commands/runs-purge) | *Purge deleted remote runs on a remote* |
-| [`pull`](/pages/commands/pull) | *Copy remote runs to the local environment* |
-| [`push`](/pages/commands/push) | *Copy local runs to the remote* |
+| [`check`](project:/pages/commands/check.md) | *Check Guild on the remote* |
+| [`run`](project:/pages/commands/run.md) | *Run an operation on a remote* |
+| [`stop`](project:/pages/commands/runs-stop.md) | *Stop runs in progress on a remote* |
+| [`watch`](project:/pages/commands/watch.md) | *Connect to a remote run in progress and watch its output* |
+| [`runs`](project:/pages/commands/runs-list.md)| *List runs on a remote* |
+| [`runs info`](project:/pages/commands/runs-info.md) | *Show information about a remote run* |
+| [`ls`](project:/pages/commands/ls.md) | *List remote run files* |
+| [`diff`](project:/pages/commands/diff.md) | *Diff remote runs* |
+| [`cat`](project:/pages/commands/cat.md) | *Show remote run file or output* |
+| [`label`](project:/pages/commands/label.md) | *Apply a label to one or more remote runs* |
+| [`runs delete`](project:/pages/commands/runs-delete.md) | *Delete remote runs* |
+| [`runs restore`](project:/pages/commands/runs-restore.md) | *Restore deleted remote runs on a remote* |
+| [`runs purge`](project:/pages/commands/runs-purge.md) | *Purge deleted remote runs on a remote* |
+| [`pull`](project:/pages/commands/pull.md) | *Copy remote runs to the local environment* |
+| [`push`](project:/pages/commands/push.md) | *Copy local runs to the remote* |
 
 ### Azure VM Security
 
@@ -474,7 +506,7 @@ between the local system (client) and the remote (server).
 
 ### Azure VM Examples
 
-Refer to [*Remotes Cheatsheet*](/pages/cheatsheets/remotes#azure-vm) for Azure VM configuration examples.
+Refer to [*Remotes Cheatsheet*](project:/pages/cheatsheets/remotes.md#azure-vm) for Azure VM configuration examples.
 
 ## Azure Blob
 
@@ -484,35 +516,38 @@ Use Azure Blob remotes to store runs remotely in [Microsoft Azure blob storage](
 
 The following external software is required to use Azure Blob remotes:
 
-- [AzCopy](https://pages/docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)
+- [AzCopy](https:/project:/pages/docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10.md)
 
 ### Azure Blob Attributes
 
-<div data-toc-id="azure-blob-description"><h4>description</h4></div>
+(azure-blob-description)=
+#### description 
 
 *Remote description (string)*
 
-<div data-toc-id="azure-blob-bucket"><h4>container</h4></div>
+(azure-blob-bucket)=
+#### container 
 
 *Azure blob container URI to store runs in (required string)*
 
-Refer to [*Resource URI Syntax*](https://pages/docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#resource-uri-syntax) for Azure resources for information on the URI format.
+Refer to [*Resource URI Syntax*](https:/project:/pages/docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata.md#resource-uri-syntax) for Azure resources for information on the URI format.
 
-<div data-toc-id="azure-blob-root"><h4>root</h4></div>
+(azure-blob-root)=
+#### root 
 
 *Path in the Azure container to store runs in (string)*
 
 ### Azure Blob Status
 
-When you run  [`guild remote status`](/pages/commands/remote-status), Guild checks that the container exists and that Guild can read from it. This check does not perform a write test.
+When you run  [`guild remote status`](project:/pages/commands/remote-status.md), Guild checks that the container exists and that Guild can read from it. This check does not perform a write test.
 
 ### Azure Blob Start and Stop
 
-Azure Blob remotes do not currently support [`guild remote start`](/pages/commands/remote-start) and [`guild remote stop`](/pages/commands/remote-stop). You must create and delete the applicable containers outside of Guild. Refer to [*Quickstart: Upload, download, and list blobs with the Azure portal*](https://pages/docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal) for more information.
+Azure Blob remotes do not currently support [`guild remote start`](project:/pages/commands/remote-start.md) and [`guild remote stop`](project:/pages/commands/remote-stop.md). You must create and delete the applicable containers outside of Guild. Refer to [*Quickstart: Upload, download, and list blobs with the Azure portal*](https:/project:/pages/docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal.md) for more information.
 
 ### Azure Blob Remote Commands
 
-The Azure Blob remote does not support all remote management commands. In particular, Azure Blob remotes do not support non-permanent deletes. Therefore, [`runs restore`](/pages/commands/runs-restore) and [`runs purge`](/pages/commands/runs-purge) are not supported. Additionally, [`runs delete`](/pages/commands/runs-delete) requires the `--permanent` option.
+The Azure Blob remote does not support all remote management commands. In particular, Azure Blob remotes do not support non-permanent deletes. Therefore, [`runs restore`](project:/pages/commands/runs-restore.md) and [`runs purge`](project:/pages/commands/runs-purge.md) are not supported. Additionally, [`runs delete`](project:/pages/commands/runs-delete.md) requires the `--permanent` option.
 
 The following commands can be used with Azure Blob remotes:
 
@@ -520,32 +555,32 @@ The following commands can be used with Azure Blob remotes:
 
 |||
 |-|-|
-| [`runs`](/pages/commands/runs-list)| *List runs on a remote* |
-| [`runs info`](/pages/commands/runs-info) | *Show information about a remote run* |
-| [`runs delete`](/pages/commands/runs-delete) | *Delete remote runs* |
-| [`pull`](/pages/commands/pull) | *Copy remote runs to the local environment* |
-| [`push`](/pages/commands/push) | *Copy local runs to the remote* |
+| [`runs`](project:/pages/commands/runs-list.md)| *List runs on a remote* |
+| [`runs info`](project:/pages/commands/runs-info.md) | *Show information about a remote run* |
+| [`runs delete`](project:/pages/commands/runs-delete.md) | *Delete remote runs* |
+| [`pull`](project:/pages/commands/pull.md) | *Copy remote runs to the local environment* |
+| [`push`](project:/pages/commands/push.md) | *Copy local runs to the remote* |
 
 The following commads are not currently supported for Azure Blob remotes:
 
 |||
 |-|-|
-| [`runs restore`](/pages/commands/runs-restore) | *Restore deleted remote runs on a remote --- not supported* |
-| [`runs purge`](/pages/commands/runs-purge) | *Purge deleted remote runs on a remote --- not supported* |
+| [`runs restore`](project:/pages/commands/runs-restore.md) | *Restore deleted remote runs on a remote --- not supported* |
+| [`runs purge`](project:/pages/commands/runs-purge.md) | *Purge deleted remote runs on a remote --- not supported* |
 
 ### Azure Blob Security
 
-Security is handled via [AzCopy](https://pages/docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10) authorization using Azure Active Directory. You must log in using `azcopy login` before running Guild commands that access the applicable remote container. For more information, see [*Authorize access to blobs with AzCopy and Azure Active Directory (Azure AD)*](https://pages/docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-authorize-azure-active-directory).
+Security is handled via [AzCopy](https:/project:/pages/docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10.md) authorization using Azure Active Directory. You must log in using `azcopy login` before running Guild commands that access the applicable remote container. For more information, see [*Authorize access to blobs with AzCopy and Azure Active Directory (Azure AD)*](https:/project:/pages/docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-authorize-azure-active-directory.md).
 
 Guild does not support Azure SAS access tokens at this time.
 
 ### Azure Blob Examples
 
-Refer to [*Remotes Cheatsheet*](/pages/cheatsheets/remotes#azure-blob) for Azure Blob configuration examples.
+Refer to [*Remotes Cheatsheet*](project:/pages/cheatsheets/remotes.md#azure-blob) for Azure Blob configuration examples.
 
 ## Gist
 
-The Gist remote type is used to store Guild runs in a [GitHub gist](https://pages/docs.github.com/en/free-pro-team@latest/github/writing-on-github/creating-gists). This is most convenient with Guild's inline remote support. Provided you have the required
+The Gist remote type is used to store Guild runs in a [GitHub gist](https:/project:/pages/docs.github.com/en/free-pro-team@latest/github/writing-on-github/creating-gists.md). This is most convenient with Guild's inline remote support. Provided you have the required
 
 Guild create gists with public access rights. To make a gist private, you must [change the gist visibility](https://github.blog/2014-05-09-change-the-visibility-of-your-gists/).
 
@@ -557,15 +592,18 @@ The following external software is required to use Gist remotes:
 
 ### Gist Attributes Attributes
 
-<div data-toc-id="gist-description"><h4>description</h4></div>
+(gist-description)=
+#### description 
 
 *Remote description (string)*
 
-<div data-toc-id="gist-user"><h4>user</h4></div>
+(gist-user)=
+#### user 
 
 *Gist owner GitHub user name (required string)*
 
-<div data-toc-id="gist-gist-name"><h4>gist-name</h4></div>
+(gist-gist-name)=
+#### gist-name 
 
 *Name to use for the gist (required string)*
 
@@ -573,15 +611,15 @@ This value must be unique for `user`. Guild uses this attribute to generate a RE
 
 ### Gist Status
 
-When you run  [`guild remote status`](/pages/commands/remote-status), Guild checks that gist exists and that Guild can read from it. This check does not perform a write test.
+When you run  [`guild remote status`](project:/pages/commands/remote-status.md), Guild checks that gist exists and that Guild can read from it. This check does not perform a write test.
 
 ### Gist Start and Stop
 
-Guild implicitly creates the applicable gist in GitHub whenever runs are pushed to it. You may explicitly create a gist using using [`guild remote start`](/pages/commands/remote-start). Delete a gist using [`guild remote stop`](/pages/commands/remote-stop). Note that when a gist is deleted, any associated runs cannot be recovered.
+Guild implicitly creates the applicable gist in GitHub whenever runs are pushed to it. You may explicitly create a gist using using [`guild remote start`](project:/pages/commands/remote-start.md). Delete a gist using [`guild remote stop`](project:/pages/commands/remote-stop.md). Note that when a gist is deleted, any associated runs cannot be recovered.
 
 ### Gist Remote Commands
 
-The Gist remote does not support all remote management commands. In particular, Gist remotes do not support non-permanent deletes. Therefore, [`runs restore`](/pages/commands/runs-restore) and [`runs purge`](/pages/commands/runs-purge) are not supported. Additionally, [`runs delete`](/pages/commands/runs-delete) requires the `--permanent` option.
+The Gist remote does not support all remote management commands. In particular, Gist remotes do not support non-permanent deletes. Therefore, [`runs restore`](project:/pages/commands/runs-restore.md) and [`runs purge`](project:/pages/commands/runs-purge.md) are not supported. Additionally, [`runs delete`](project:/pages/commands/runs-delete.md) requires the `--permanent` option.
 
 The following commands can be used with Gist remotes:
 
@@ -589,30 +627,30 @@ The following commands can be used with Gist remotes:
 
 |||
 |-|-|
-| [`runs`](/pages/commands/runs-list)| *List runs on a remote* |
-| [`runs info`](/pages/commands/runs-info) | *Show information about a remote run* |
-| [`runs delete`](/pages/commands/runs-delete) | *Delete remote runs* |
-| [`pull`](/pages/commands/pull) | *Copy remote runs to the local environment* |
-| [`push`](/pages/commands/push) | *Copy local runs to the remote* |
+| [`runs`](project:/pages/commands/runs-list.md)| *List runs on a remote* |
+| [`runs info`](project:/pages/commands/runs-info.md) | *Show information about a remote run* |
+| [`runs delete`](project:/pages/commands/runs-delete.md) | *Delete remote runs* |
+| [`pull`](project:/pages/commands/pull.md) | *Copy remote runs to the local environment* |
+| [`push`](project:/pages/commands/push.md) | *Copy local runs to the remote* |
 
 The following commads are not currently supported for Gist remotes:
 
 |||
 |-|-|
-| [`runs restore`](/pages/commands/runs-restore) | *Restore deleted remote runs on a remote --- not supported* |
-| [`runs purge`](/pages/commands/runs-purge) | *Purge deleted remote runs on a remote --- not supported* |
+| [`runs restore`](project:/pages/commands/runs-restore.md) | *Restore deleted remote runs on a remote --- not supported* |
+| [`runs purge`](project:/pages/commands/runs-purge.md) | *Purge deleted remote runs on a remote --- not supported* |
 
 ### Gist Security
 
 Guild creates publicly visible gists. Therefore anyone can read published runs without authorization. You may [make a gist private](https://github.blog/2014-05-09-change-the-visibility-of-your-gists/) after it's created to limit access.
 
-To create or write to a gist, you must provide a gist-authorized [personal access token](https://pages/docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) using the environment variable `GIST_ACCESS_TOKEN`.
+To create or write to a gist, you must provide a gist-authorized [personal access token](https:/project:/pages/docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token.md) using the environment variable `GIST_ACCESS_TOKEN`.
 
 By default, Guild uses the `https` URL type to access gists. If you prefer to to use `ssh` URL types, define the environment variable `GIST_URLTYPE` to be `ssh`.
 
 ### Gist Blob Examples
 
-Refer to [*Remotes Cheatsheet*](/pages/cheatsheets/remotes#gist) for Gist configuration examples.
+Refer to [*Remotes Cheatsheet*](project:/pages/cheatsheets/remotes.md#gist) for Gist configuration examples.
 
 ### Gist Inline Specs
 
