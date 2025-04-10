@@ -12,7 +12,7 @@ Guild AI has the following requirements:
 - Python 2.7, Python 3
 - [pip](https://pip.pypa.io/en/stable/installing/) or [conda](https:/project:/pages/docs.conda.io/projects/conda/en/latest/user-guide/install/.md)
 
-For a complete list of supported platforms, see [*System Requirements*](/system-requirements#supported-operating-systems).
+For a complete list of supported platforms, see [*System Requirements*](project:/pages/system-requirements.md#supported-operating-systems).
 
 ## Install Guild AI
 

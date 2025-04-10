@@ -13,9 +13,9 @@ Guild provides precompiled packages that can be installed using pip. Below is a 
 | maxOS 10.14, 10.15 | Python 2.7, 2.6, 3.7, 3.8      |
 | Windows 10         | Python 3.5, 3.6, 3.7, 3.8           |
 
-If your operating system configuration is not suppored by one of Guild's precompiled packages, you can try to compile Guild from source by following the steps in [*Install Guild AI - From Source Code*](/install/#from-source-code).
+If your operating system configuration is not suppored by one of Guild's precompiled packages, you can try to compile Guild from source by following the steps in [*Install Guild AI - From Source Code*](project:/pages/install.md#from-source-code).
 
-If you need help getting Guild running on your system, [ask for help](/new-topic?category=troubleshooting).
+<!-- If you need help getting Guild running on your system, [ask for help](/new-topic?category=troubleshooting). -->
 
 ## Required Software Libraries
 

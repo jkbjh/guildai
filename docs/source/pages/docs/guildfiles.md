@@ -156,7 +156,7 @@ Guild conveys flag values to a script using various methods:
 - Environment variables
 - Global variables (Python only)
 
-For Python based operations, Guild detects the flags interface by inspecting the `main` module. If the module uses Python's [`argparse` package](ext:https:/project:/pages/docs.python.org/library/argparse.html.md), Guild assumes that the script uses command line arguments to read flag values. Otherwise, Guild assumes the script uses global variables for flags.
+For Python based operations, Guild detects the flags interface by inspecting the `main` module. If the module uses Python's [`argparse` package](https://docs.python.org/library/argparse.html.md), Guild assumes that the script uses command line arguments to read flag values. Otherwise, Guild assumes the script uses global variables for flags.
 
 Specify the interface using the `flags-dest` operation attribute (short for *flags destination*).
 
@@ -230,7 +230,8 @@ train:
     step:
 ```
 
-#### Disable Output Scalars
+#### Framework Scalars
+##### Disable Output Scalars
 
 If you want to log scalars explicitly (e.g. using a [TensorFlow summary writer](https://www.tensorflow.org/api_docs/python/tf/summary/SummaryWriter)) you can disable Guild's output summary support by setting `output-scalars` to `off`.
 
@@ -239,7 +240,7 @@ train:
   output-scalars: off
 ```
 
-#### Keras Scalars
+##### Keras Scalars
 
 By default, Guild applies the following patterns when running Keras operations:
 

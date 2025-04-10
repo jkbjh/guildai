@@ -131,7 +131,7 @@ When you run [`guild remote status`](project:/pages/commands/remote-status.md), 
 
 SSH remotes cannot be started or stopped. Guild assumes that the specified host is available using the specified connect information.
 
-SSH remotes can, however, be initialized using the `--reinit` option to [`guild remote start`](project:/pages/commands/remote-start.md). When `--reinit` is specified, Guild runs the shell command defined in the remote [`init`](.md#ssh-init) attribute.
+SSH remotes can, however, be initialized using the `--reinit` option to [`guild remote start`](project:/pages/commands/remote-start.md). When `--reinit` is specified, Guild runs the shell command defined in the remote [`init`](#ssh-init) attribute.
 
 Consider the following remote configuration:
 
@@ -302,7 +302,7 @@ Refer to [*Remotes Cheatsheet*](project:/pages/cheatsheets/remotes.md#ec2) for E
 
 ## S3
 
-Use S3 remotes to store runs remotely. S3 buckets support the full set of remote management commands. See [Remote Commands](#s3-remote-commands-23) below for details.
+Use S3 remotes to store runs remotely. S3 buckets support the full set of remote management commands. See [Remote Commands](#s3-remote-commands) below for details.
 
 ### S3 Requirements
 
@@ -382,7 +382,7 @@ Refer to [*Remotes Cheatsheet*](project:/pages/cheatsheets/remotes.md#s3) for S3
 ## Azure VM
 
 The Azure VM remote type provides the same features as SSH remotes. In addition, Azure VM remotes
-can be started and stopped on Azure by configuring Azure VM instance attributes. Refer to [Attributes](#azure-vm--attributes) below for details.
+can be started and stopped on Azure by configuring Azure VM instance attributes. Refer to [Attributes](#azure-vm-attributes) below for details.
 
 ### Azure VM Requirements
 

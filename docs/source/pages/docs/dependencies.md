@@ -20,7 +20,7 @@ Dependencies are defined using *resources*, which in turn consist of one or more
 When Guild runs `train` above it resolves the required file `data.csv` as follows:
 
 - Guild looks for `data.csv` relative to the Guild file location.
-- If Guild finds `data.csv` it creates a link to or a copy of `data.csv` in the [run directory](/t/runs/40#run-directory).
+- If Guild finds `data.csv` it creates a link to or a copy of `data.csv` in the [run directory](project:/pages/docs/runs.md#run-directory).
 - If Guild does not find `data.csv` it stops the run with an error message.
 
 Use dependencies to ensure that an operation has what it needs to run.

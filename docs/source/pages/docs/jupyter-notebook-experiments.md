@@ -107,11 +107,11 @@ Guild also saves plots and other notebook generates images as external PNG files
 
 ## Scalars
 
-Guild captures and logs scalars output by notebook cells. Scalars can be captured using the operation `output-scalars` attribute. For more information, see [Scalars](/docs/scalars).
+Guild captures and logs scalars output by notebook cells. Scalars can be captured using the operation `output-scalars` attribute. For more information, see [Scalars](project:/pages/docs/scalars.md).
 
 ## Hyperparameter Search
 
-You can run a notebook multiple times, each time with different flag values, using a single Guild command. Any of the [search methods](/docs/optimization) can be applied to notebooks this way.
+You can run a notebook multiple times, each time with different flag values, using a single Guild command. Any of the [search methods](project:/pages/docs/optimization.md) can be applied to notebooks this way.
 
 For example, the following command uses Bayesian optimization to find values of `learning_rate` and `dropout` that minimize training loss.
 
@@ -141,7 +141,7 @@ train:
 
 ## Example
 
-See [Binary Classifier Notebook Example](/examples/binary-classifier-notebook) for a step-by-step example of using a notebook to perform a binary prediction task.
+See [Binary Classifier Notebook Example](project:/pages/examples/binary-classifier-notebook.md) for a step-by-step example of using a notebook to perform a binary prediction task.
 
 ## Summary
 

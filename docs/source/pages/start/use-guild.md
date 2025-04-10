@@ -9,7 +9,9 @@
 
 This is the final section of [*Get Started with Guild AI*](../start). In the previous sections, you learn about Guild's core features. Here you apply Guild to your own work.
 
-> <span data-guild-class="callout note">Note</span> This guide applies to Python based projects. If your project uses a different language, refer to [*Languages Example*](../examples/languages). If you don't see a suitable example for a language, [ask for help](/new-topic?category=general).
+> <span data-guild-class="callout note">Note</span> This guide applies to Python based projects. If your project uses a different language, refer to [*Languages Example*](project:/pages/examples/languages.md).
+
+<!-- If you don't see a suitable example for a language, [ask for help](/new-topic?category=general). -->
 
 ## Identify the Main Module
 
@@ -25,7 +27,7 @@ For this guide, we use various main modules to illustate different configuration
 
 Even if you don't plan to use a virtual environment for your work, it's a good idea to create a new, empty virtual environment when adding Guild support. As you run your project and discover missing Python modules, install the applicable Python packages using `pip` and add them to [`requirements.txt`](https://pip.pypa.io/en/stable/user_guide/#requirements-files). With this file, others can easily recreate a working virtual environment.
 
-As you [learn earlier](classifier#create-a-guild-environment), Guild works with any virtual environment, including those created with [conda](https:/project:/pages/docs.conda.io/.md), [virtualenv](https://virtualenv.pypa.io), or Python's [venv](https:/project:/pages/docs.python.org/library/venv.html.md) module.
+As you [learn earlier](project:/pages/start/classifier.md#create-a-guild-environment), Guild works with any virtual environment, including those created with [conda](https://docs.conda.io/), [virtualenv](https://virtualenv.pypa.io), or Python's [venv](https://docs.python.org/library/venv.html) module.
 
 Here's a simple way to create a project-local virtual environment using Python's built-in `venv` module (Python 3 only):
 
@@ -33,7 +35,7 @@ Here's a simple way to create a project-local virtual environment using Python's
 python -m venv venv
 ```
 
-You can alternatively use [`guild init`](../commands/init) to create a virtual environment. This method uses *virtualenv*. To ensure that you create an empty environment, use the `--no-reqs` option.
+You can alternatively use [`guild init`](project:/pages/commands/init.md) to create a virtual environment. This method uses *virtualenv*. To ensure that you create an empty environment, use the `--no-reqs` option.
 
 ``` bash
 guild init --no-reqs
@@ -277,6 +279,7 @@ guild ls --sourcecode
 
 Confirm that the module from the error message is missing. Adjust the `sourcecode` operation attribute as described in [Test Operation Source Code](#test-operation-source-code) (see above).
 
+(file-dependencies)=
 ## Resolve Missing Input Files
 
 If the operation is missing required input files, the error message usually contains `IOError: [Errno 2] No such file or directory: ...` or `FileNotFoundError: ...`. The message may differ. It generally refers to a missing file.
@@ -354,7 +357,8 @@ if not os.path.exists("saved-models"):
 
 ## Guild File Checkpoint
 
-If you work through the issues above, you should be able to run the operation with Guild. If you still can't run the operation with Guild, [open a topic in #troubleshooting](/new-topic?category=troubleshooting) and someone will help.
+If you work through the issues above, you should be able to run the operation with Guild. 
+<!-- If you still can't run the operation with Guild, [open a topic in #troubleshooting](/new-topic?category=troubleshooting) and someone will help. -->
 
 Otherwise, congratulations --- you have baseline support for Guild! This is a good time to add the Guild file to the project repository and commit your changes.
 
@@ -866,8 +870,8 @@ Your project now supports:
 
 </div>
 
-## Next Steps
+<!-- ## Next Steps -->
 
-You may have questions at this point about how to most effectively use Guild AI. Guild is a technical tool and it's often easier to ask for help than to work through problems on your own. [Explore the documentation](project:/pages/docs.md) and [how-to guides](/c/howto) but don't hesitate to [ask a question](/new-topic?category=general) if you can't find and answer.
+<!-- You may have questions at this point about how to most effectively use Guild AI. Guild is a technical tool and it's often easier to ask for help than to work through problems on your own. [Explore the documentation](project:/pages/docs.md) and [how-to guides](/c/howto) but don't hesitate to [ask a question](/new-topic?category=general) if you can't find and answer. -->
 
-Please also take a moment to read the community [Code of Conduct](/code-of-conduct). This is our pledge to keep this community safe and welcoming environment for all voices and perspectives. If you feel that behavior by community members or content on this site or any [Guild AI repository](https://github.com/guildai) is not consistent with this code, please let us know by sending a message to `admin@guild.ai`. Your concerns are maintained with strict confidentiality.
+<!-- Please also take a moment to read the community [Code of Conduct](/code-of-conduct). This is our pledge to keep this community safe and welcoming environment for all voices and perspectives. If you feel that behavior by community members or content on this site or any [Guild AI repository](https://github.com/guildai) is not consistent with this code, please let us know by sending a message to `admin@guild.ai`. Your concerns are maintained with strict confidentiality. -->

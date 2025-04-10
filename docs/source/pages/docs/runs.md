@@ -27,7 +27,7 @@ Runs serve as a unit of *reproducibility*. By automating and capturing experimen
 
 Guild saves runs on standard file systems. Guild is different in this respect from experiment tracking systems that save experiment results in databases or exotic file systems..
 
-Runs are stored under a `runs` directory located in [*Guild home*](project:/pages/docs/environments.md#guild-home). To show where Guild saves runs, refer to the `guild_home` attribute shown by [`guild check`](project:/pages/commands/check.md). Each run is saved in a unique subdirectory. For more information, see [Run Directory](.md#run-directory) below.
+Runs are stored under a `runs` directory located in [*Guild home*](project:/pages/docs/environments.md#guild-home). To show where Guild saves runs, refer to the `guild_home` attribute shown by [`guild check`](project:/pages/commands/check.md). Each run is saved in a unique subdirectory. For more information, see [Run Directory](#run-directory) below.
 
 ### Run Directory
 
@@ -103,7 +103,7 @@ This is often a good place to start because it doesn't require additional config
 
 For more information on Guild's default behavior, see [*Default Behavior - Python Scripts*](project:/pages/docs/defaults.md).
 
-> <span data-guild-class="callout tip">Tip</span> Guild's support for directly script execution is a convenience to get started quickly. Without additional information, Guild makes various [assumptions](project:/pages/docs/defaults.md) that may not hold true for your script. Consider using [operations](project:/pages/docs/operations.md) for more control over how Guild runs your script. See [Run an Operation](.md#run-an-operation) below for more information.
+> <span data-guild-class="callout tip">Tip</span> Guild's support for directly script execution is a convenience to get started quickly. Without additional information, Guild makes various [assumptions](project:/pages/docs/defaults.md) that may not hold true for your script. Consider using [operations](project:/pages/docs/operations.md) for more control over how Guild runs your script. See [Run an Operation](#run-an-operation) below for more information.
 
 #### Auto-Detect Python Script Flags
 

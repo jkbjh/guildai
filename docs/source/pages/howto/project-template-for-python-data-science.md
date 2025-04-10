@@ -117,7 +117,7 @@ Notebooks stored in project repositories should be summary only. They should not
 
 ### Use of Guild Files
 
-The templates below include [Guild files](/docs/guildfiles) in the project root. Because each structure affects how operations are defined, we provide an example Guild file for each case.
+The templates below include [Guild files](project:/pages/docs/guildfiles.md) in the project root. Because each structure affects how operations are defined, we provide an example Guild file for each case.
 
 ## Simplest Possible Project
 

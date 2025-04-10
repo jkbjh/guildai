@@ -95,7 +95,7 @@ Use `-Fo` options to set optimizer flags for a batch. The following command sets
 guild run train -o gp -Fo xi=0.1 -Fo random-starts=5
 ```
 
-By deault, sequential optimizers attempts to minimize the `loss` scalar value. Use `--maximize` or `--minimize` with the [`run`](command:run) command to specify a different scalar. For example, to maximize the scalar `auc` with the `forest` optimizer, use:
+By deault, sequential optimizers attempts to minimize the `loss` scalar value. Use `--maximize` or `--minimize` with the [`run`](project:/pages/commands/run.md) command to specify a different scalar. For example, to maximize the scalar `auc` with the `forest` optimizer, use:
 
 ``` bash
 guild run train -o forest --maximize auc

@@ -7,7 +7,7 @@
 
 Gists are used to informally share work with others. You can use Guild AI to share runs in a similar way.
 
-Guild supports gists as [remote](/reference/remotes) types. As with other remotes, you can define the gist in [user config](/reference/user-config).
+Guild supports gists as [remote](project:/pages/reference/remotes.md) types. As with other remotes, you can define the gist in [user config](project:/pages/reference/user-config.md).
 
 ``` yaml
 # Guild AI user config (e.g. ~/.guild/config.yml)
@@ -32,7 +32,7 @@ To create or modify a gist, you must provide your GitHub credentials or use a [G
 
 Say you have some runs that you want feedback on. You can quickly publish them to a gist for others to access. The example below assumes the GitHub user `maria`.
 
-We use the Guild AI [Hello Example](/examples/hello) to demonstrate. The example source code is available in the Guild AI source code repository [on GitHub](https://github.com/guildai/guildai). First, change to the example directory.
+We use the Guild AI [Hello Example](project:/pages/examples/hello.md) to demonstrate. The example source code is available in the Guild AI source code repository [on GitHub](https://github.com/guildai/guildai). First, change to the example directory.
 
 ``` bash
 cd guildai/examples/hello

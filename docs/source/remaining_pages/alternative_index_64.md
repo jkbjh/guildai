@@ -4,44 +4,44 @@
 
 Start here to learn about Guild AI through easy-to-follow, step-by-step guides.
 
-- [Get Started with Guild AI](/start)
-- [Optimize a Model](/start/optimize)
-- [Manage Runs](/start/runs)
-- [Create a Guild File](/start/guildfile)
-- [Add a Classifier](/start/classifier)
-- [Use Guild in a Project](/start/use-guild)
+- [Get Started with Guild AI](project:/pages/start.md)
+- [Optimize a Model](project:/pages/start/optimize.md)
+- [Manage Runs](project:/pages/start/runs.md)
+- [Create a Guild File](project:/pages/start/guildfile.md)
+- [Add a Classifier](project:/pages/start/classifier.md)
+- [Use Guild in a Project](project:/pages/start/use-guild.md)
 
 ## Concepts
 
 Go deeper into the core concepts behind the features.
 
-- [Command Line Interface](/docs/cli)
-- [Python API](/docs/python-api)
-- [Runs](/docs/runs)
-- [Guild Files](/docs/guildfiles)
-- [Operations](/docs/operations)
-- [Flags](/docs/flags)
-- [Scalars](/docs/scalars)
-- [Hyperparameter Optimization](/docs/optimization)
-- [Dependencies](/docs/dependencies)
-- [Pipelines](/docs/pipelines)
-- [Environments](/docs/environments)
-- [Remotes](/docs/remotes)
-- [Queues](/docs/queues)
-- [Packages](/docs/packages)
+- [Command Line Interface](project:/pages/docs/cli.md)
+- [Python API](project:/pages/docs/python-api.md)
+- [Runs](project:/pages/docs/runs.md)
+- [Guild Files](project:/pages/docs/guildfiles.md)
+- [Operations](project:/pages/docs/operations.md)
+- [Flags](project:/pages/docs/flags.md)
+- [Scalars](project:/pages/docs/scalars.md)
+- [Hyperparameter Optimization](project:/pages/docs/optimization.md)
+- [Dependencies](project:/pages/docs/dependencies.md)
+- [Pipelines](project:/pages/docs/pipelines.md)
+- [Environments](project:/pages/docs/environments.md)
+- [Remotes](project:/pages/docs/remotes.md)
+- [Queues](project:/pages/docs/queues.md)
+- [Packages](project:/pages/docs/packages.md)
 
 ## Tools
 
 Guild provides a number of integrated tools.
 
-- [Guild Compare](/docs/compare)
-- [Guild View](/docs/view)
-- [TensorBoard](/docs/tensorboard)
-- [Guild Diff](/docs/diff)
+- [Guild Compare](project:/pages/docs/compare.md)
+- [Guild View](project:/pages/docs/view.md)
+- [TensorBoard](project:/pages/docs/tensorboard.md)
+- [Guild Diff](project:/pages/docs/diff.md)
 
 ## Commands
 
-Refer to [Guild Commands Index](project:/pages/commands.md) for an alphabetized list.
+Refer to [Guild Commands Index](project:/pages/commands.md.md) for an alphabetized list.
 
 ### Frequently Used Commands
 
@@ -144,11 +144,11 @@ The documents below cover a variety of reference material.
 
 <div data-guild-class="guild-docs-section">
 
-- [Guild File](/reference/guildfile)
-- [Optimizers](/reference/optimizers)
-- [Remotes](/reference/remotes)
-- [User Config](/reference/user-config)
-- [Plugins](/reference/plugins)
+- [Guild File](project:/pages/reference/guildfile.md)
+- [Optimizers](project:/pages/reference/optimizers.md)
+- [Remotes](project:/pages/reference/remotes.md)
+- [User Config](project:/pages/reference/user-config.md)
+- [Plugins](project:/pages/reference/plugins.md)
 
 </div>
 
@@ -158,9 +158,9 @@ Cheatsheets contain short, easy-to-copy snippets of configuration you can use in
 
 <div data-guild-class="guild-docs-section">
 
-- [Commands](/cheatsheets/commands)
-- [Guild File](/cheatsheets/guildfile)
-- [Remotes](/cheatsheets/remotes)
+- [Commands](project:/pages/cheatsheets/commands.md)
+- [Guild File](project:/pages/cheatsheets/guildfile.md)
+- [Remotes](project:/pages/cheatsheets/remotes.md)
 
 </div>
 
@@ -168,12 +168,12 @@ Cheatsheets contain short, easy-to-copy snippets of configuration you can use in
 
 <div data-guild-class="guild-docs-section">
 
-- [Help with Guild AI](/help)
-- [Install Guild AI](/install)
-- [System Requirements](/system-requirements)
-- [Default Behavior](/docs/defaults)
-- [Help with Windows](/docs/windows)
-- [Help wth macOS](/docs/macos)
-- [Jupyter Notebook Experiments](/docs/jupyter-notebook-experiments)
+- [Help with Guild AI](project:/pages/help.md)
+- [Install Guild AI](project:/pages/install.md)
+- [System Requirements](project:/pages/system-requirements.md)
+- [Default Behavior](project:/pages/docs/defaults.md)
+- [Help with Windows](project:/pages/docs/windows.md)
+- [Help wth macOS](project:/pages/docs/macos.md)
+- [Jupyter Notebook Experiments](project:/pages/docs/jupyter-notebook-experiments.md)
 
 </div>

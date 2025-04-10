@@ -27,4 +27,4 @@ If you're not familiar with running commands from a terminal, we suggest reading
 
 ## Command Completion
 
-Guild AI supports command completion for bash, zsh, and fish shells. For details on configuring command completion, see [Install Guild AI](/install#command-completion).
+Guild AI supports command completion for bash, zsh, and fish shells. For details on configuring command completion, see [Install Guild AI](project:/pages/install#command-completion).

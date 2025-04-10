@@ -1121,7 +1121,7 @@ The special templates `\key`, `\value`, and `\step` represent regular expression
 
 > <span data-guild-class="callout tip">Tip</span> Use the `--test-output-scalars` option to [`guild run`](project:/pages/commands/run.md) to test strings from generated output. You can test a file or interatively test strings that you type into the console (use `-` as the file name to read from standard intput).
 
-Refer to [Guild File Cheatsheet](/t/guild-file-cheatsheet/192#output-scalars-15) for output scalar configuration examples.
+Refer to [Guild File Cheatsheet](project:/pages/cheatsheets/guildfile.md#output-scalars) for output scalar configuration examples.
 
 ## Columns
 
@@ -1329,7 +1329,7 @@ The `sourcecode` spec defined at the model level applies to all model operations
 
 *Default Python requirement for model operations (string)*
 
-This value must be a valid [pip install requirements spec](https://pip.pypa.io/en/stableproject:/pages/reference/pip_install/.md#requirement-specifiers).
+This value must be a valid [pip install requirements spec](https://pip.pypa.io/en/stable/reference/pip_install/requirement-specifiers).
 
 Operations can redefine this value as needed using [`python-requires`](#operation-python-requires).
 
@@ -1528,7 +1528,7 @@ The value for $include can be a single string, which references the object to in
 The following attributes support mapping includes:
 
 - Operation [`flags`](#operation-flags)
-- Model [`operations`](#model-operation)
+- Model [`operations`](#model-operations)
 
 ### Reuse Flag Definitions
 

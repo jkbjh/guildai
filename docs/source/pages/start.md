@@ -11,13 +11,13 @@ If you're familiar with installing Python packages using `pip`, simply install t
 pip install guildai
 ```
 
-Alternatively, to install to the [user install directory](https://pip.pypa.io/en/stableproject:/pages/reference/pip_install/.md#cmdoption-user), run:
+Alternatively, to install to the [user install directory](https://pip.pypa.io/en/stable/reference/pip_install/#cmdoption-user), run:
 
 ``` bash
 pip install guildai --user
 ```
 
-For detailed installation instructions, see [*Install Guild AI*](/install).
+For detailed installation instructions, see [*Install Guild AI*](project:/pages/install.md).
 
 When Guild is installed, check the environment:
 
@@ -25,7 +25,7 @@ When Guild is installed, check the environment:
 guild check
 ```
 
-For help troubleshooting, see [*Get Help with Guid AI*](/help).
+For help troubleshooting, see [*Get Help with Guid AI*](project:/pages/help.md).
 
 ## Get Command Help
 
