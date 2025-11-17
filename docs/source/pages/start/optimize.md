@@ -32,7 +32,7 @@ In a real scenario, we don't know optimal hyperparameter values. We need to sear
 
 When experimenting with hyperparameters, it's often useful to start with values based on prior experience or intuition.
 
-Guild lets you run multiple trials in a batch by specifying them as a list in the form `[<em>VAL1</em>,<em>VAL2</em>,...,<em>VALN</em>]`{code}.
+Guild lets you run multiple trials in a batch by specifying them as a list in the form `[<em>VAL1</em>,<em>VAL2</em>,...,<em>VALN</em>]`{em-code}.
 
 Run three trials of `train.py` using different values for *`x`*:
 
@@ -136,7 +136,7 @@ Return to the command terminal and press **Ctrl-C** to stop TensorBoard.
 
 ## Grid Search
 
-Grid search is a systematic search across a subset of hyperparameter space. Guild supports a special  [*sequence function*](project:/pages/docs/flags.md#sequence-functions) syntax for specifying value ranges. Ranges are specified using the format `<em>FUNCTION</em>[<em>START</em>:<em>END</em>:<em>STEP_OR_COUNT</em>]`{code} where *`FUNCTION`* is the type of sequence and *`START`* and *`END`* mark the start and end of the sequence respectively. *`STEP_OR_COUNT`* is the range step or value count depending on the function used.
+Grid search is a systematic search across a subset of hyperparameter space. Guild supports a special  [*sequence function*](project:/pages/docs/flags.md#sequence-functions) syntax for specifying value ranges. Ranges are specified using the format `<em>FUNCTION</em>[<em>START</em>:<em>END</em>:<em>STEP_OR_COUNT</em>]`{em-code} where *`FUNCTION`* is the type of sequence and *`START`* and *`END`* mark the start and end of the sequence respectively. *`STEP_OR_COUNT`* is the range step or value count depending on the function used.
 
 Use the [`linspace`](project:/pages/docs/flags.md#linspace) flag function to run four trials where *`x`* is evenly spaced between `-0.6` and `0.6`:
 
@@ -165,7 +165,7 @@ Guild supports random search over a both uniform and log-uniform distributions.
 
 Search space is specified by special [*search space functions*](project:/pages/docs/flags.md#search-space-functions), which include [`uniform`](project:/pages/docs/flags.md#uniform) and [`loguniform`](project:/pages/docs/flags.md#loguniform). The `uniform` function name may be omitted.
 
-To search over a uniformly distributed range of values, specify a flag value in the format `[<em>MIN</em>:<em>MAX</em>]`{code}. By default, Guild runs 20 trials using randomly chosen values within the specified range. Use `--max-trials` to specify a different limit.
+To search over a uniformly distributed range of values, specify a flag value in the format `[<em>MIN</em>:<em>MAX</em>]`{em-code}. By default, Guild runs 20 trials using randomly chosen values within the specified range. Use `--max-trials` to specify a different limit.
 
 Start a random search over *`x`* with 5 trials:
 

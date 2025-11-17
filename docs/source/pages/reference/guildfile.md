@@ -183,7 +183,7 @@ train:
 
 An operation *name* is a mapping key. If the Guild file is written in operation-only format, the mapping is defined at the top-level of the Guild file. If the Guild file is written in full format, the mapping is the value of the `operations` attribute for a model.
 
-Use an operation name to run operation. If the operation is defined for a named model (full format only), you can refer to it as `<em>MODEL_NAME</em>:<em>OPERATION_NAME</em>`{code}. Otherwise refer to it as *`OPERATION_NAME`*. The model name in this case is empty and can be omitted.
+Use an operation name to run operation. If the operation is defined for a named model (full format only), you can refer to it as {em-code}`<em>MODEL_NAME</em>:<em>OPERATION_NAME</em>`. Otherwise refer to it as *`OPERATION_NAME`*. The model name in this case is empty and can be omitted.
 
 (operation-description)=
 #### description 
@@ -206,15 +206,15 @@ Guild runs the default operation if an operation name is not specified. If there
 
 This value tells Guild what to execute when someone runs the operation. The value must be in the format:
 
-<pre>`[<em>MODULE_PATH</em>/]<em>MODULE</em> [<em>ARG</em>...]`{code}</pre>
+<pre>`[<em>MODULE_PATH</em>/]<em>MODULE</em> [<em>ARG</em>...]`{em-code}</pre>
 
 *`MODULE_PATH`* must be specified if the module is located in a non-package subdirectory relative to the Guild file. When defined, Guild includes *`MODULE_PATH`* in the Python system when running *`MODULE`*. *`MODULE`* is the full module name including any parent Python packages.
 
 *`ARG`* is argument that should be passed to the module. Specify multiple *`ARG`* values as you would when running the module with Python. You must quote arguments containing spaces to ensure they are passed to the module correctly.
 
-Guild appends flag arguments after the `main` spec as `\-\-<em>FLAG_NAME</em> <em>FLAG_VAL</em>`{code}.
+Guild appends flag arguments after the `main` spec as `\-\-<em>FLAG_NAME</em> <em>FLAG_VAL</em>`{em-code}.
 
-You can explicitly specify flag values using the format `${<em>FLAG_NAME</em>}`{code}. Guild replaces these references with corresponding values when creating the command. Note that unless [`arg-skip`](#flag-arg-skip) is true for referenced flags, those values will also be appended as argument as per above.
+You can explicitly specify flag values using the format `${<em>FLAG_NAME</em>}`{em-code}. Guild replaces these references with corresponding values when creating the command. Note that unless [`arg-skip`](#flag-arg-skip) is true for referenced flags, those values will also be appended as argument as per above.
 
 Do not include the `.py` extension in the value for `MODULE`.
 
@@ -227,7 +227,7 @@ Do not include the `.py` extension in the value for `MODULE`.
 
 Guild uses this value to execute a system command. Use `exec` to run non-Python operations or when you want to control the command that Guild uses to run the operation.
 
-Use `exec` to run operations by executing a program. By default, flags are not included in the operation command. To include all flags in the format `\-\-<em>FLAG_NAME</em> <em>FLAG_VAL</em>`{code}, specify `${flag_args}` in the position you want the arguments included in the command. Otherwise specify flag values using the format using the format `${<em>FLAG_NAME</em>}`{code}.
+Use `exec` to run operations by executing a program. By default, flags are not included in the operation command. To include all flags in the format `\-\-<em>FLAG_NAME</em> <em>FLAG_VAL</em>`{em-code}, specify `${flag_args}` in the position you want the arguments included in the command. Otherwise specify flag values using the format using the format `${<em>FLAG_NAME</em>}`{em-code}.
 
 (operation-steps)=
 #### steps 
@@ -260,17 +260,17 @@ This value tells Guild how to communicate flag values to the operation script. G
 
   Set flag values as global variables (Python modules only).
 
-- `global:<em>DOTTED_NAME</em>`{code}
+- `global:<em>DOTTED_NAME</em>`{em-code}
 
   Set flag values as dict values in *`DOTTED_NAME`* (Python modules only).
 
   *`DOTTED_NAME`* is a series of keys where each key separated by a dot (`.`) Guild sets each flag value in a Python dict that is resolved by reading module namespace attributes starting with the root namespace and proceeding from left-to-right along the series. For example, the value `global:params` sets flag values in a global dict named `params`. The value `global:params.train` sets values in a dict defined as the attribute or key `train` of the global variable `params`.
 
-- `dict:<em>DOTTED_NAME</em>`{code}
+- `dict:<em>DOTTED_NAME</em>`{em-code}
 
-  Alias for `global:<em>DOTTED_NAME</em>`{code}. See above for details.
+  Alias for `global:<em>DOTTED_NAME</em>`{em-code}. See above for details.
 
-- `namespace:<em>NAME</em>`{code}
+- `namespace:<em>NAME</em>`{em-code}
 
   Set flag values in a [`SimpleNamespace`](https:/project:/pages/docs.python.org/3/library/types.html.md#types.SimpleNamespace) global variable (Python 3 modules only).
 
@@ -342,7 +342,7 @@ To disable capturing of output scalars altogether, specify `no`.
 
 *Additional environment variables available to the operation process (mapping of names to values)*
 
-Flag values are always available in the environment as `FLAG_<em>NAME</em>`{code} variables, where *`NAME`* is the upper case flag name with non-alphanumeric characters converted to underscores. A flag can specify a different environment variable name using the [`env-name`](#flag-env-name) flag attribute.
+Flag values are always available in the environment as `FLAG_<em>NAME</em>`{em-code} variables, where *`NAME`* is the upper case flag name with non-alphanumeric characters converted to underscores. A flag can specify a different environment variable name using the [`env-name`](#flag-env-name) flag attribute.
 
 (operation-env-secrets)=
 #### env-secrets 
@@ -372,7 +372,7 @@ By default, Guild designated user-terminated operations as `terminated`. In some
 
 By default, Guild creates a label that includes user-provided flag values. Use the `label` attribute to to define an alternative default label template.
 
-Use `${<em>FLAG_NAME</em>}`{code} in the label to include specific flag values.
+Use `${<em>FLAG_NAME</em>}`{em-code} in the label to include specific flag values.
 
 (operation-tags)=
 #### tags 
@@ -400,9 +400,9 @@ By default, the max trials used when the user doesn't explicitly specify `--max-
 
 *Objective used by sequential optimizers (string or mapping)*
 
-If `objective` is a string, optimizers attempt to minimize the specified scalar value for runs. This is equivalent to the mapping `minimize: <em>SCALAR</em>`{code}.
+If `objective` is a string, optimizers attempt to minimize the specified scalar value for runs. This is equivalent to the mapping `minimize: <em>SCALAR</em>`{em-code}.
 
-To maximize a scalar, precede the attribute value with a negative sign `-`. This is equivalent to the mapping `maximize: <em>SCALAR</em>`{code}.
+To maximize a scalar, precede the attribute value with a negative sign `-`. This is equivalent to the mapping `maximize: <em>SCALAR</em>`{em-code}.
 
 (operation-optimizers)=
 #### optimizers 
@@ -464,14 +464,14 @@ Guild supports the special `$include` mapping key, which can be a string or list
 
 *Flag name (required string)*
 
-The flag name is used when specifing a flag value. When specifying a value as an argument to the [`guild run`](project:/pages/commands/run.md) command, the name is used as `<em>FLAG_NAME</em>=<em>VALUE</em>`{code}.
+The flag name is used when specifing a flag value. When specifying a value as an argument to the [`guild run`](project:/pages/commands/run.md) command, the name is used as `<em>FLAG_NAME</em>=<em>VALUE</em>`{em-code}.
 
 (flag-description)=
 #### description 
 
 *Flag description (string)*
 
-The flag description is used in project and operation help. If the flag description contains more than one line, the first line is displayed for operation help (e.g. when `guild run <em>OPERATION</em> --help-op`{code} is run). The full string is displayed for project help (e.g. when `guild help` is run for a project).
+The flag description is used in project and operation help. If the flag description contains more than one line, the first line is displayed for operation help (e.g. when `guild run <em>OPERATION</em> --help-op`{em-code} is run). The full string is displayed for project help (e.g. when `guild help` is run for a project).
 
 (flag-type)=
 #### type 
@@ -521,7 +521,7 @@ Supported types:
 
 *Default flag value*
 
-By default, flag values are `null` and are not passed to the script. Users override a default value when running an operation using the form `guild run <em>OPERATION</em> <em>FLAG_NAME</em>=<em>VALUE</em>`{code}.
+By default, flag values are `null` and are not passed to the script. Users override a default value when running an operation using the form `guild run <em>OPERATION</em> <em>FLAG_NAME</em>=<em>VALUE</em>`{em-code}.
 
 (flag-required)=
 #### required 
@@ -539,7 +539,7 @@ If operation `flags-dest` is `args`, this attribute specifies the argument optio
 
 If operation `flags-dest` is `globals`, this attribute specifies the global variable name.
 
-If operation `flags-dest` is `global:<em>PARAM</em>`{code}, this attribute specifies the key used when setting the flag in the *`PARAM`* global dict. In this case, dots (`.`) in the name denote nested entries in the global dict. For example, the value for a flag with arg name `train.lr` will be set in the dict *`PARAM`* so that it can be read as *`PARAM`*`["train"]["lr"]`. <!-- odd formatting is workaround for double-quote conversion that occurs inside <code> tag -->
+If operation `flags-dest` is `global:<em>PARAM</em>`{em-code}, this attribute specifies the key used when setting the flag in the *`PARAM`* global dict. In this case, dots (`.`) in the name denote nested entries in the global dict. For example, the value for a flag with arg name `train.lr` will be set in the dict *`PARAM`* so that it can be read as *`PARAM`*`["train"]["lr"]`. <!-- odd formatting is workaround for double-quote conversion that occurs inside <code> tag -->
 
 (flag-arg-encoding)=
 #### arg-encoding 
@@ -576,7 +576,7 @@ Use to skip flag arguments that are specified in [`main`](#operation-name) or [`
 
 *Flag value that, when specified, causes the flag to be set as a boolean switch*
 
-By default, Guild passes a flag on the command line in two parts in the format `\-\-<em>FLAG_NAME</em> <em>FLAG_VAL</em>`{code}. When `arg-switch` is defined, Guild passes the flag as a single part in the format `\-\-<em>FLAG_NAME</em>`{code}. This only occurs when the flag value equals the `arg-switch` value. If the value is not equal to `arg-switch`, Guild does not pass any arguments. This is referred to as a *boolean switch*.
+By default, Guild passes a flag on the command line in two parts in the format `\-\-<em>FLAG_NAME</em> <em>FLAG_VAL</em>`{em-code}. When `arg-switch` is defined, Guild passes the flag as a single part in the format `\-\-<em>FLAG_NAME</em>`{em-code}. This only occurs when the flag value equals the `arg-switch` value. If the value is not equal to `arg-switch`, Guild does not pass any arguments. This is referred to as a *boolean switch*.
 
 A boolean switch is specified as `True` when set as a global variable.
 
@@ -658,7 +658,7 @@ By default, when `choices` is defined for an operation, Guild prevents the user 
 
 Use to defined an alternative environment variable name.
 
-By default, Guild provides a flag value as the environment variable `FLAG_<em>UPPER_NAME</em>`{code} where *`UPPER_NAME`* is the flag name in upper case. All non-alpha-numeric characters are converted to underscore characters. So a flag named `learning-rate` is available by default as the environment variable `FLAG_LEARNING_RATE`.
+By default, Guild provides a flag value as the environment variable `FLAG_<em>UPPER_NAME</em>`{em-code} where *`UPPER_NAME`* is the flag name in upper case. All non-alpha-numeric characters are converted to underscore characters. So a flag named `learning-rate` is available by default as the environment variable `FLAG_LEARNING_RATE`.
 
 (flag-env-encoding)=
 #### env-encoding 
@@ -788,7 +788,7 @@ Guild creates either file links or file copies when it resolves sources. This at
 
 *Flag name used to specify resource values using flag assignment syntax (string)*
 
-Some resource sources support user-defined values using flag assignment syntax. For example, an operation source will use a run ID specified as `<em>NAME</em>=<em>VALUE</em>`{code} where *`NAME`* is the resource name. You can use a different name for the flag assignment by defining `flag-name`.
+Some resource sources support user-defined values using flag assignment syntax. For example, an operation source will use a run ID specified as `<em>NAME</em>=<em>VALUE</em>`{em-code} where *`NAME`* is the resource name. You can use a different name for the flag assignment by defining `flag-name`.
 
 (resource-default-unpack)=
 #### default-unpack 
@@ -1135,15 +1135,15 @@ Guild supports a special syntax for specifying a column, which is defined by the
 
 '.' + <em>RUN_ATTRIBUTE</em> ['as' <em>DISPLAY_NAME</em>]</code></pre>
 
-A column can be renamed by appending `as <em>DISPLAY_NAME</em>`{code} to the column expression.
+A column can be renamed by appending `as <em>DISPLAY_NAME</em>`{em-code} to the column expression.
 
 To show a *scalar*, specify the scalar key. Note that scalars are logged per *step* and so can have multiple values. Each value is associated with a step. Specify how to summarize scalar values over all steps by preceding the expression with one of the qualifiers listed above (i.e. `first`, `last`, etc.) By default, Guild applies the `last` qualifier. This uses the scalar value associated with the largest step.
 
 To show a run *flag*, prefix the flag name with an equals sign (`'='`).
 
-To show a run *attribute*, prefix the attribute name with a dot (`'.'`). For a list of attributes, run `guild ls -a -p .guild/attrs <em>RUN</em>`{code}.
+To show a run *attribute*, prefix the attribute name with a dot (`'.'`). For a list of attributes, run `guild ls -a -p .guild/attrs <em>RUN</em>`{em-code}.
 
-> <span data-guild-class="callout note">Note</span> Column specs are used with any column-spec command option. For example, use the above syntax for *`SPECS`* in `guild compare \-\-columns <em>SPECS</em>`{code} where each column spec is separated with a comma.
+> <span data-guild-class="callout note">Note</span> Column specs are used with any column-spec command option. For example, use the above syntax for *`SPECS`* in `guild compare \-\-columns <em>SPECS</em>`{em-code} where each column spec is separated with a comma.
 
 ## Steps
 
@@ -1308,7 +1308,7 @@ Use to provide a single line description as well as multiline descriptions. The 
 
 Use to define supported model operations. Mapping keys are operation names. See [Operations](#operations) for operation attributes.
 
-Model operations are run using `guild run <em>MODEL</em>:<em>OPERATION</em>`{code} where *`MODEL`* is the model name and *`OPERATION`* is the operation name.
+Model operations are run using `guild run <em>MODEL</em>:<em>OPERATION</em>`{em-code} where *`MODEL`* is the model name and *`OPERATION`* is the operation name.
 
 (model-resources)=
 #### resources 
@@ -1490,7 +1490,7 @@ Inheriting from a multiple parents:
 
 ## Parameters
 
-Parents can use *parameters* in both attribute names and values. A parameter reference uses the format `{{ <em>NAME</em> }}`{code}.
+Parents can use *parameters* in both attribute names and values. A parameter reference uses the format `{{ <em>NAME</em> }}`{em-code}.
 
 Parameter values are defined using the [`params`](#model-params) model attribute. Parameters are inherited and can be redefined by children.
 

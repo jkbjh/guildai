@@ -191,7 +191,7 @@ train:
   main: mnist_mlp
 ```
 
-If the main module is in a subdirectory, include that subdirectory as a path prefix in the format `<em>PATH</em>/<em>MODULE</em>`{code}. For example, if the module is `mnist_mlp` and located in a `src` project subdirectory, use:
+If the main module is in a subdirectory, include that subdirectory as a path prefix in the format `<em>PATH</em>/<em>MODULE</em>`{em-code}. For example, if the module is `mnist_mlp` and located in a `src` project subdirectory, use:
 
 ``` yaml
 train:
@@ -256,8 +256,8 @@ You re-enable flags import later as needed. Your goal in this step is to run the
 When Guild starts an operation, it executes these steps:
 
 1. Create a new run directory in the `runs` subdirectory of [Guild home](project:/pages/docs/environments.md#guild-home)
-2. Initialize the run directory with run metadata in `<em>RUN_DIR</em>/.guild`{code}
-3. Copy operation source code to `<em>RUN_DIR</em>/.guild/sourcecode`{code}
+2. Initialize the run directory with run metadata in `<em>RUN_DIR</em>/.guild`{em-code}
+3. Copy operation source code to `<em>RUN_DIR</em>/.guild/sourcecode`{em-code}
 4. Resolve dependencies (you don't have any yet --- you learn about this in [File Dependencies](#file-dependencies) below)
 5. Run the main module using *`RUN_DIR`* as the current directory
 
@@ -769,7 +769,7 @@ A command line interface offers several advantages over global variables:
 
 - Explicit user interface --- user-configurable options are defined by the parser
 - Portable code --- options can be applied with or without Guild
-- Self documenting --- e.g. run `python -m <em>MODULE</em> --help`{code}
+- Self documenting --- e.g. run `python -m <em>MODULE</em> --help`{em-code}
 - Validated --- argument parsers check input and convert values to required types
 
 These benefits should be weighed against the cost of code change, associated risk, and perceived disruption by other developers. If you prefer less disruptive changes, use the techniques outlined above.
@@ -817,7 +817,7 @@ We expose only those settings the user should modify in the operation above.
 
 ### Environment Variables
 
-Flag values are always available as run environment variables in the format `FLAG_<em>NAME</em>`{code} where *`NAME`* is the flag name in upper case with non-alphanumeric characters replaced with underscores.
+Flag values are always available as run environment variables in the format `FLAG_<em>NAME</em>`{em-code} where *`NAME`* is the flag name in upper case with non-alphanumeric characters replaced with underscores.
 
 The following sets `epochs` and `batch_size` using environment variables, when defined:
 

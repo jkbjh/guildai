@@ -28,9 +28,9 @@ Guild uses two general interfaces to pass flag values to programs:
 
 The examples in this project show the use of both. Refer to the sections below for details.
 
-When using a command line interface, flag values may be referenced in arguments using `${<em>FLAG_NAME</em>}`{code}.
+When using a command line interface, flag values may be referenced in arguments using `${<em>FLAG_NAME</em>}`{em-code}.
 
-To include all flag arguments, use `${flag_args}`. In this case, each flag is included as two arguments in the format ``--`<em>FLAG_ARG_NAME</em> <em>FLAG_VALUE</em>`{code}.
+To include all flag arguments, use `${flag_args}`. In this case, each flag is included as two arguments in the format ``--`<em>FLAG_ARG_NAME</em> <em>FLAG_VALUE</em>`{em-code}.
 
 ## Source Code
 

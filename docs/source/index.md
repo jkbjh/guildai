@@ -1,3 +1,28 @@
+```{toctree}
+:hidden:
+:maxdepth: 1
+test.rst
+```
+
+{emcode}`test the <em>todo</em>`
+
+```{emcode}
+test the <em>todo</em>
+```
+
+
+```{emcode}
+after <em>hehe</em>
+<em>newline</em>
+regular line
+```
+
+```{em-code}
+after <em>hehe</em>
+<em>newline</em>
+regular line
+```
+
 # Get Started
 
 Start here to learn about Guild AI through easy-to-follow, step-by-step guides.

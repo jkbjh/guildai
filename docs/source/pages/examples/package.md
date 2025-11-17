@@ -27,7 +27,7 @@ The Guild file is modified to support packaging with modifications:
 
 With package support, the `hello-file` operation can be run on remote servers. Without this change, the files `hello.txt` and `hello-2.txt` would not be included in the package installed on remote systems.
 
-All of the steps outlined in [Hello](project:/pages/examples/hello.md) can be run with this example on a remote. Include the additional option `\-\-remote <em>NAME</em>`{code} for each command that you want to run remotely.
+All of the steps outlined in [Hello](project:/pages/examples/hello.md) can be run with this example on a remote. Include the additional option `\-\-remote <em>NAME</em>`{em-code} for each command that you want to run remotely.
 
 > <span data-guild-class="callout important">Important</span> The steps that follow are not required for remote operations. You can run operations remotely without packaging or installing packages --- Guild does this for you when you include the `--remote` option with [`guild run`](project:/pages/commands/run.md).
 
