@@ -28,7 +28,7 @@ def archive_params(fn):
             ),
             runs_support.runs_arg,
             click.Option(
-                ("-c", "--create"),
+                ("-C", "--create"),
                 help="Create a new archive if NAME doesn't exist.",
                 is_flag=True,
             ),

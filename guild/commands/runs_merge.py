@@ -54,7 +54,7 @@ def merge_params(fn):
                 is_flag=True,
             ),
             click.Option(
-                ("-S", "--skip-sourcecode"),
+                ("-C", "--skip-sourcecode"),
                 help="Don't copy run source code.",
                 is_flag=True,
             ),
@@ -70,7 +70,7 @@ def merge_params(fn):
                 multiple=True,
             ),
             click.Option(
-                ("-S", "--no-summary"),
+                ("-Z", "--no-summary"),
                 help="Don't generate a run summary.",
                 is_flag=True,
             ),
