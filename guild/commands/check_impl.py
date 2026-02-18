@@ -22,7 +22,10 @@ import sys
 import warnings
 
 import click
-import pkg_resources
+
+from packaging.version import Version
+import importlib.resources
+
 
 import guild
 
@@ -274,7 +277,8 @@ def _safe_apply(check, f, *args, **kw):
 
 
 def _guild_install_location():
-    return pkg_resources.resource_filename("guild", "")
+
+    return str(importlib.resources.files("guild"))
 
 
 def _guild_resource_cache():
@@ -367,7 +371,6 @@ def _try_import_torch():
     # pylint: disable=import-error
     try:
         import torch
-        import torch.version as _unused
     except Exception:
         if log.getEffectiveLevel() <= logging.DEBUG:
             log.exception("try import torch")
@@ -561,7 +564,7 @@ def _parse_latest_version(s):
 
 
 def _is_newer(latest, cur):
-    return pkg_resources.parse_version(latest) > pkg_resources.parse_version(cur)
+    return Version(latest) > Version(cur)
 
 
 def _notify_newer_version():

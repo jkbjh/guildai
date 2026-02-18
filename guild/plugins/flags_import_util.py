@@ -65,7 +65,7 @@ def apply_flags(opdef, import_flags_data_cb, apply_flags_data_cb=None):
             name: flags_data[name]
             for name in flags_data if (
                 (to_import is import_all_marker or name in to_import)
-                and not name in to_skip
+                and name not in to_skip
             )
         }
         opdef.merge_flags(_ImportedFlagsOpDefProxy(import_data, opdef))

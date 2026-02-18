@@ -12,18 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import warnings
-
-with warnings.catch_warnings():
-    warnings.filterwarnings('ignore', category=DeprecationWarning)
-    # pylint: disable=deprecated-module
-    import imp
-
 import logging
 import os
 import pdb
 import sys
 import traceback
+import warnings
 
 # Avoid expensive imports here as load times directly add to runs.
 
@@ -144,7 +138,7 @@ def _fix_guild_model_finder():
     variable `NO_GUILD_MODEL_FINDER` set to `1`.
     """
     with util.Env({"NO_GUILD_MODEL_FINDER": "1"}):
-        import guild.model as _
+        pass
 
 
 def _apply_plugin(name):
@@ -194,44 +188,31 @@ def _try_resolve_package_path(package_path):
 
 
 def _find_module(module):
-    """Find module using imp.find_module.
+    """Find module using importlib-based path scanning.
 
-    While imp is deprecated, it provides a Python 2/3 compatible
-    interface for finding a module. We use the result later to load
-    the module with imp.load_module with the '__main__' name, causing
-    it to execute.
-
-    The non-deprecated method of using importlib.util.find_spec and
-    loader.execute_module is not supported in Python 2.
-
-    The _find_module implementation uses a novel approach to bypass
-    imp.find_module's requirement that package directories contain
-    __init__.py/__init__.pyc markers. This lets users specify
-    namespace packages in main modules, which are not otherwise
-    supported by imp.find_module.
+    Searches sys.path for the named module, supporting dotted names
+    (e.g. 'package.submodule') and namespace packages that lack
+    __init__.py markers. Returns a ModuleInfo with the resolved file
+    path and package name.
     """
+    from guild import python_util
+
     parts = module.split(".")
     module_path = parts[0:-1]
     package = ".".join(module_path)
     module_name_part = parts[-1]
-    # See function docstring for the rationale of this algorithm.
     for sys_path_item in sys.path:
         cur_path = os.path.join(sys_path_item, *module_path)
-        try:
-            f, path, _desc = imp.find_module(module_name_part, [cur_path])
-        except ImportError:
-            pass
-        else:
-            if f:
-                f.close()
-            else:
-                path = _find_package_main(path)
-                if path is None:
+        maybe_mod_path = python_util._find_module_path(module_name_part, cur_path)
+        if maybe_mod_path is not None:
+            if os.path.isdir(maybe_mod_path):
+                maybe_mod_path = _find_package_main(maybe_mod_path)
+                if maybe_mod_path is None:
                     raise ImportError(
                         f"No module named {module}.__main__ ('{module}' is "
                         "a package and cannot be directly executed)"
                     )
-            return ModuleInfo(path, package)
+            return ModuleInfo(maybe_mod_path, package)
     raise ImportError(f"No module named {module}")
 
 

@@ -279,7 +279,7 @@ def _iter_stage_param_files(state):
     for _param, filename in dvc_util.iter_stage_params(
         state.target_stage, state.dvc_config
     ):
-        if not filename in seen:
+        if filename not in seen:
             seen.add(filename)
             yield filename
 

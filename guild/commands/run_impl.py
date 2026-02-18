@@ -527,7 +527,7 @@ def _apply_no_output_env(op_env):
     We take this approach because Guild's only interface for disabling
     run output is the current Guild env's 'NO_RUN_OUTPUT' value.
     """
-    if "NO_RUN_OUTPUT" in op_env and not "NO_RUN_OUTPUT" in os.environ:
+    if "NO_RUN_OUTPUT" in op_env and "NO_RUN_OUTPUT" not in os.environ:
         os.environ["NO_RUN_OUTPUT"] = str(op_env["NO_RUN_OUTPUT"])
 
 

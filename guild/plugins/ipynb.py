@@ -147,7 +147,7 @@ def _iter_notebook_flag_data(notebook_path, opdef=None):
             yield name, _flag_data_for_val(val)
             seen.add(name)
     for name, val, ann_type in _iter_notebook_assigns(notebook_path):
-        if not name in seen:
+        if name not in seen:
             yield name, _flag_data_for_val(val, ann_type)
 
 

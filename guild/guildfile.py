@@ -1725,11 +1725,12 @@ def _for_guildfile_ref(run):
 
 
 def _for_package_ref(opref):
-    import pkg_resources
+    from importlib.metadata import distribution
+    from importlib.metadata import PackageNotFoundError
 
     try:
-        dist = pkg_resources.get_distribution(opref.pkg_name)
-    except pkg_resources.DistributionNotFound as e:
+        dist = distribution(opref.pkg_name)
+    except PackageNotFoundError as e:
         raise GuildfileMissing(f"cannot find package '{opref.pkg_name}'") from e
     else:
         return _for_pkg_dist(dist, opref)

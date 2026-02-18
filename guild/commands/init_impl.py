@@ -20,7 +20,7 @@ import subprocess
 import sys
 import typing
 
-import pkg_resources
+import importlib.resources
 
 import yaml
 
@@ -414,7 +414,11 @@ def _install_guild_dist(config):
 
 
 def _guild_reqs_file():
-    guild_location = pkg_resources.resource_filename("guild", "")
+
+
+    # importlib.resources.files() gives us the package root without
+    # relying on pkg_resources.resource_filename.
+    guild_location = str(importlib.resources.files("guild"))
     guild_parent = os.path.dirname(guild_location)
     path = os.path.join(guild_parent, "requirements.txt")
     try:

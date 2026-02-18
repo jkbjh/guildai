@@ -19,8 +19,6 @@ import logging
 import os
 import sys
 
-import pkg_resources
-
 from guild import config
 from guild import entry_point_util
 from guild import guildfile
@@ -155,9 +153,43 @@ def _try_acc_modeldefs(path, acc):
             acc.append(modeldef)
 
 
-class GuildfileDistribution(pkg_resources.Distribution):
+class LocalEntryPoint:
+    """A synthetic entry point created from a local guildfile.
+
+    Replaces pkg_resources.EntryPoint for in-memory use. Presents the
+    same interface as entry_point_util._EntryPointShim expects:
+    .name, .dist, and .resolve().
+    """
+
+    def __init__(self, name, target_class, dist):
+        self.name = name
+        self._target_class = target_class
+        self.dist = dist
+
+    def resolve(self):
+        return self._target_class
+
+    def __str__(self):
+        return f"{self.name} = {self._target_class.__module__}:{self._target_class.__name__}"
+
+
+class GuildfileDistribution:
+    """Synthetic distribution derived from a guildfile.
+
+    Replaces the pkg_resources.Distribution subclass. Holds just the
+    attributes and methods actually used in this module and by callers:
+      .location      — directory containing the guildfile
+      .project_name  — encoded name of the form '.guildfile.<escaped_path>'
+      .version       — always "" (guildfile dists have no version)
+      .guildfile     — the underlying GuildFile object
+      .get_entry_map(group=None)
+      .get_modeldef(name)
+    """
+
     def __init__(self, guildfile):
-        super().__init__(guildfile.dir, project_name=self._init_project_name(guildfile))
+        self.location = guildfile.dir
+        self.project_name = self._init_project_name(guildfile)
+        self.version = ""
         self.guildfile = guildfile
         self._entry_map = self._init_entry_map()
 
@@ -183,15 +215,10 @@ class GuildfileDistribution(pkg_resources.Distribution):
 
             '.guildfile.' + ESCAPED_GUILDFILE_PATH
 
-        ESCAPED_GUILDFILE_PATH is a 'safe' project name (i.e. will not be
-        modified in a call to `pkg_resources.safe_name`) that, when
-        unescaped using `unescape_project_name`, is the relative path of
-        the directory containing the guildfile. The modefile name itself
-        (e.g. 'guild.yml') is not contained in the path.
-
-        Guildfile paths are relative to the current working directory
-        (i.e. the value of os.getcwd() at the time they are generated) and
-        always start with '.'.
+        ESCAPED_GUILDFILE_PATH is the base64-hex encoding of the relative
+        path of the directory containing the guildfile (relative to cwd).
+        When decoded with `unescape_project_name` it gives back that path.
+        Guildfile paths always start with '.'.
         """
         pkg_path = os.path.relpath(guildfile.dir, config.cwd())
         if pkg_path[0] != ".":
@@ -212,10 +239,9 @@ class GuildfileDistribution(pkg_resources.Distribution):
         }
 
     def _model_entry_point(self, model):
-        return pkg_resources.EntryPoint(
+        return LocalEntryPoint(
             name=model.name,
-            module_name="guild.model",
-            attrs=("GuildfileModel",),
+            target_class=GuildfileModel,
             dist=self,
         )
 
@@ -225,10 +251,9 @@ class GuildfileDistribution(pkg_resources.Distribution):
                 yield res
 
     def _resource_entry_point(self, name):
-        return pkg_resources.EntryPoint(
+        return LocalEntryPoint(
             name=name,
-            module_name="guild.model",
-            attrs=("GuildfileResource",),
+            target_class=GuildfileResource,
             dist=self,
         )
 
@@ -247,8 +272,19 @@ class ModelImportError(ImportError):
     pass
 
 
-class BadGuildfileDistribution(pkg_resources.Distribution):
-    """Distribution for a guildfile that can't be read."""
+class BadGuildfileDistribution:
+    """Synthetic distribution for a guildfile that can't be read.
+
+    Replaces the pkg_resources.Distribution subclass. Presents just
+    enough interface for callers that check importer.dist to get a
+    non-None, repr-able object that returns an empty entry map.
+    """
+
+    def __init__(self, location):
+        self.location = location
+        self.project_name = ""
+        self.version = ""
+
     def __repr__(self):
         return f"<guild.model.BadGuildfileDistribution '{self.location}'>"
 
@@ -273,6 +309,15 @@ class ModelImporter:
 
     @staticmethod
     def find_module(_fullname, _path=None):
+        return None
+
+    @staticmethod
+    def find_spec(_fullname, _path=None, _target=None):
+        # Returning None tells the import system this finder cannot
+        # handle the module, delegating to the next finder in sys.meta_path.
+        # This matches the behaviour of find_module above; find_spec is the
+        # modern equivalent (PEP 451) and is called in preference to
+        # find_module on Python 3.4+.
         return None
 
 
@@ -381,8 +426,12 @@ def for_name(name):
 
 
 def _register_model_finder():
+    # Register ModelImporter as a sys.path hook so Python's import
+    # machinery calls it when scanning path entries. The pkg_resources
+    # register_finder call that used to live here has been removed:
+    # entry_point_util now uses importlib.metadata rather than
+    # pkg_resources.working_set, so there is nothing left to notify.
     sys.path_hooks.insert(0, ModelImporter)
-    pkg_resources.register_finder(ModelImporter, _model_finder)
 
 
 # TODO: This needs to be removed as we don't need to customize module

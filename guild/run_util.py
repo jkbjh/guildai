@@ -117,7 +117,7 @@ class RunsMonitor(util.LoopingThread):
             os.path.join(self.logdir, basename) for basename in os.listdir(self.logdir)
         ]
         for run_path in existing_runs:
-            if not run_path in latest_run_paths:
+            if run_path not in latest_run_paths:
                 log.debug("Deleting run %s", run_path)
                 util.safe_rmtree(run_path)
 

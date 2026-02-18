@@ -1,9 +1,7 @@
 """Forest based minimization algorithms."""
 
-from sklearn.utils import check_random_state
 
 from .base import base_minimize
-from ..utils import cook_estimator
 
 
 

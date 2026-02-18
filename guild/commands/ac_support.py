@@ -94,7 +94,7 @@ def _filter_path(path, filters, normlized_extensions, incomplete):
         return False
     if path.is_dir():
         return True
-    if normlized_extensions and not path.suffix.lower() in normlized_extensions:
+    if normlized_extensions and path.suffix.lower() not in normlized_extensions:
         return False
     return True
 

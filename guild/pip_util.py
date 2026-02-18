@@ -210,14 +210,19 @@ def print_package_info(pkg, verbose=False, show_files=False):
 
 
 def is_requirements(path):
-    from pkg_resources import parse_requirements
-
+    from packaging.requirements import Requirement, InvalidRequirement
     if not util.is_text_file(path):
         return False
     try:
         with open(path) as f:
-            list(parse_requirements(f.readlines()))
-    except Exception:
+            for line in f.readlines():
+                line = line.strip()
+                # Skip blank lines and comments (pip-style requirements files
+                # allow both; packaging.Requirement does not handle them)
+                if not line or line.startswith("#") or line.startswith("-"):
+                    continue
+                Requirement(line)
+    except InvalidRequirement:
         return False
     else:
         return True
