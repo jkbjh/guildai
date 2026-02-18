@@ -12,29 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import warnings
-
-with warnings.catch_warnings():
-    warnings.filterwarnings("ignore", category=DeprecationWarning)
-    # pylint: disable=deprecated-module
-    import imp
-
 import ast
+import importlib.machinery
+import importlib.util
 import logging
 import os
 import re
 import sys
 import types
-
-try:
-    # pylint: disable=ungrouped-imports
-    from ast import NameConstant
-except ImportError:
-
-    class FakeType:
-        pass
-
-    NameConstant = FakeType
 
 log = logging.getLogger("guild")
 
@@ -139,11 +124,10 @@ class Script:
 
 
 def ast_param_val(val):
-    if isinstance(val, ast.Num):
-        return val.n
-    if isinstance(val, ast.Str):
-        return val.s
-    if isinstance(val, NameConstant):
+    # ast.Constant covers what ast.Num, ast.Str, and ast.NameConstant used to
+    # handle separately. Those three node types were deprecated in Python 3.8
+    # and removed in Python 3.12.
+    if isinstance(val, ast.Constant):
         return val.value
     if isinstance(val, ast.Name):
         if val.id == "True":
@@ -168,11 +152,11 @@ def ast_param_val(val):
 
 
 def _unary_val(val):
-    if isinstance(val.operand, ast.Num):
+    if isinstance(val.operand, ast.Constant) and isinstance(val.operand.value, (int, float)):
         if isinstance(val.op, ast.USub):
-            return -val.operand.n
+            return -val.operand.value
         if isinstance(val.op, ast.UAdd):
-            return +val.operand.n
+            return +val.operand.value
         raise TypeError(val)
     raise TypeError(val)
 
@@ -194,28 +178,7 @@ def _namespace_kw(val):
 
 
 def _SimpleNamespace(kw):
-    try:
-        from types import SimpleNamespace as BuiltinSimpleNamespace
-    except ImportError:
-        return SimpleNamespace(**kw)
-    else:
-        return BuiltinSimpleNamespace(**kw)
-
-
-class SimpleNamespace:
-    def __init__(self, **kwargs):
-        self.__dict__.update(kwargs)
-
-    def __repr__(self):
-        from pprint import pformat
-
-        items = (f"{k}={pformat(v)}" for k, v in sorted(self.__dict__.items()))
-        return f"namespace({', '.join(items)})"
-
-    def __eq__(self, other):
-        if isinstance(self, SimpleNamespace) and isinstance(other, SimpleNamespace):
-            return self.__dict__ == other.__dict__
-        return NotImplemented
+    return types.SimpleNamespace(**kw)
 
 
 class Call:
@@ -562,14 +525,10 @@ def _find_module(main_mod, model_paths):
         module_name_part = parts[-1]
         for sys_path_item in [main_mod_sys_path] + sys.path:
             cur_path = os.path.join(sys_path_item, *module_path)
-            try:
-                f, maybe_mod_path, _desc = imp.find_module(module_name_part, [cur_path])
-            except ImportError:
-                pass
-            else:
-                if f:
-                    f.close()
-                else:
+            maybe_mod_path = _find_module_path(module_name_part, cur_path)
+            if maybe_mod_path is not None:
+                if os.path.isdir(maybe_mod_path):
+                    # It's a package — look for __main__.py
                     maybe_mod_path = _find_package_main(maybe_mod_path)
                     if not maybe_mod_path:
                         raise ImportError(
@@ -578,6 +537,42 @@ def _find_module(main_mod, model_paths):
                         )
                 return main_mod_sys_path, maybe_mod_path
     raise ImportError(f"No module named {main_mod}")
+
+
+def _find_module_path(module_name, search_dir):
+    """Locate a module file or package directory inside *search_dir*.
+
+    Returns the file path (for a plain module) or directory path (for a
+    package), or None if the module cannot be found.
+
+    This replaces ``imp.find_module(module_name, [search_dir])``, which was
+    removed in Python 3.12.
+    """
+    # Package directory: search_dir/module_name/__init__.py
+    pkg_dir = os.path.join(search_dir, module_name)
+    if os.path.isdir(pkg_dir) and os.path.isfile(
+        os.path.join(pkg_dir, "__init__.py")
+    ):
+        return pkg_dir
+
+    # Plain source module: search_dir/module_name.py
+    src_file = os.path.join(search_dir, module_name + ".py")
+    if os.path.isfile(src_file):
+        return src_file
+
+    # Compiled-only module (e.g. .pyc in __pycache__, or top-level .pyc)
+    for suffix in importlib.machinery.BYTECODE_SUFFIXES:
+        compiled = os.path.join(search_dir, module_name + suffix)
+        if os.path.isfile(compiled):
+            return compiled
+
+    # Extension module (.so / .pyd)
+    for suffix in importlib.machinery.EXTENSION_SUFFIXES:
+        ext = os.path.join(search_dir, module_name + suffix)
+        if os.path.isfile(ext):
+            return ext
+
+    return None
 
 
 def _find_package_main(mod_path):
@@ -665,24 +660,15 @@ def _iter_breakable_lines(top):
             yield line
 
 
-NON_BREAKABLE_NODE_TYPES = set(
-    [
-        ast.Expr,
-        ast.Str,
-        ast.Num,
-        ast.List,
-        ast.Dict,
-        ast.Tuple,
-        ast.Set,
-        ast.Name,
-    ]
-)
-
-try:
-    NON_BREAKABLE_NODE_TYPES.add(ast.Constant)
-except AttributeError:
-    pass
-
+NON_BREAKABLE_NODE_TYPES = {
+    ast.Expr,
+    ast.Constant,  # covers ast.Num, ast.Str, ast.Bytes, ast.NameConstant (removed in 3.12)
+    ast.List,
+    ast.Dict,
+    ast.Tuple,
+    ast.Set,
+    ast.Name,
+}
 
 def _is_node_breakable(node):
     # pylint: disable=unidiomatic-typecheck
