@@ -77,13 +77,16 @@ WINDOWS_ONLY = doctest.register_optionflag("WINDOWS_ONLY")
 DEFAULT_TIMING_MIN_CPUS = 4
 
 
-def run_all(skip=None, fail_fast=False, force=False, concurrency=None):
+def run_all(
+    skip=None, fail_fast=False, force=False, concurrency=None, test_result_file=None
+):
     return run(
         all_tests(),
         skip=skip,
         fail_fast=fail_fast,
         concurrency=concurrency,
         force=force,
+        test_result_file=test_result_file,
     )
 
 
@@ -101,22 +104,41 @@ def _test_name_for_path(path):
     return name
 
 
-def run(tests, skip=None, fail_fast=False, force=False, concurrency=None):
+def run(
+    tests,
+    skip=None,
+    fail_fast=False,
+    force=False,
+    concurrency=None,
+    test_result_file=None,
+):
     if concurrency and concurrency > 1:
-        return _run_parallel(tests, skip, fail_fast, force, concurrency)
-    return _run_(tests, skip, fail_fast, force)
+        success, test_results = _run_parallel(
+            tests, skip, fail_fast, force, concurrency
+        )
+    else:
+        success, test_results = _run_(tests, skip, fail_fast, force)
+
+    if test_result_file is not None:
+        with open(test_result_file, "w") as test_results_fobj:
+            for test_name, result in test_results.items():
+                test_results_fobj.write(f"{test_name}:   '{result}' \n")
+    return success
 
 
 def _run_(tests, skip, fail_fast, force):
+    test_results = {}
     skip = skip or []
     success = True
     for test in tests:
         if test not in skip:
             run_success = _run_test(test, fail_fast, force)
             success &= run_success
+            test_results[test] = "pass" if run_success else "fail"
         else:
+            test_results[test] = "skip"
             sys.stdout.write(_test_skipped_output(test))
-    return success
+    return success, test_results
 
 
 def _test_skipped_output(test):
@@ -1564,6 +1586,7 @@ def use_project(project_name, guild_home=None):
 
 def _run_parallel(tests, skip, fail_fast, force, concurrency):
     skip = skip or []
+    test_results = {}
     tests = _init_concurrent_tests(tests, skip)
     test_queue = _init_test_queue([test for test in tests if not test.skip])
     test_runners = _init_test_runners(test_queue, fail_fast, force, concurrency)
@@ -1571,9 +1594,11 @@ def _run_parallel(tests, skip, fail_fast, force, concurrency):
         success = True
         for test in tests:
             if test.skip:
+                test_results[test.name] = "skip"
                 sys.stdout.write(_test_skipped_output(test.name))
                 continue
             test.wait_done()
+            test_results[test.name] = "pass" if test.success else "fail"
             assert test.output is not None
             assert test.success is not None
             sys.stdout.write(test.output)
@@ -1582,7 +1607,7 @@ def _run_parallel(tests, skip, fail_fast, force, concurrency):
         for runner in test_runners:
             runner.join()
         assert all(not r.is_alive() for r in test_runners)
-        return success
+        return success, test_results
     except (KeyboardInterrupt, Exception):
         for runner in test_runners:
             runner.stop()

@@ -99,6 +99,7 @@ def _ac_builtin_tests(ctx, _param, incomplete):
 @click.option("--force-uat", hidden=True, is_flag=True)
 @click.option("--external", hidden=True)
 @click.option("--no-chrome", hidden=True, is_flag=True)
+@click.option('--test-result-file', type=str, default=None, help='Store test results.')
 @click_util.use_args
 def check(args):
     """Check the Guild setup.

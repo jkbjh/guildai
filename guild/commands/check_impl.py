@@ -26,7 +26,6 @@ import click
 from packaging.version import Version
 import importlib.resources
 
-
 import guild
 
 from guild import _test
@@ -208,6 +207,7 @@ def _run_tests_(check):
             fail_fast=check.args.fast,
             concurrency=check.args.concurrency,
             force=check.args.force_test,
+            test_result_file=check.args.test_result_file,
         )
     elif check.args.tests:
         if check.args.skip:
@@ -217,6 +217,7 @@ def _run_tests_(check):
             fail_fast=check.args.fast,
             concurrency=check.args.concurrency,
             force=check.args.force_test,
+            test_result_file=check.args.test_result_file,
         )
     if not success:
         check.error()
