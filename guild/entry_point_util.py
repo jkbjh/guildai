@@ -13,13 +13,47 @@
 # limitations under the License.
 
 import importlib.metadata
-import importlib.util
 import logging
 import os
 import sys
 import threading
 
 log = logging.getLogger("guild")
+
+
+def _iter_path_importer_entry_points(group, paths):
+    """Yield entry points from any path-hook importers that expose them.
+
+    This bridges the gap left by removing pkg_resources.register_finder:
+    importlib.metadata only knows about installed distributions, not the
+    synthetic in-memory ones created by ModelImporter for local guildfiles.
+
+    We actively invoke sys.path_hooks for any path not yet in
+    sys.path_importer_cache (mirroring what pkg_resources.WorkingSet did),
+    then duck-type against any importer that has a .dist.get_entry_map()
+    — exactly what GuildfileDistribution provides — without importing
+    guild.model directly (which would cause a circular import).
+    """
+    for path in paths:
+        # Populate the cache if this path hasn't been seen yet.
+        if path not in sys.path_importer_cache:
+            for hook in sys.path_hooks:
+                try:
+                    sys.path_importer_cache[path] = hook(path)
+                    break
+                except ImportError:
+                    continue
+        importer = sys.path_importer_cache.get(path)
+        if importer is None:
+            continue
+        dist = getattr(importer, "dist", None)
+        if dist is None:
+            continue
+        get_entry_map = getattr(dist, "get_entry_map", None)
+        if get_entry_map is None:
+            continue
+        for _name, ep in get_entry_map(group).items():
+            yield ep
 
 
 class _EntryPointShim:
@@ -68,36 +102,26 @@ class _PathWorkingSet:
         self.entries = list(entries)
 
     def iter_entry_points(self, group):
-        """Yield _EntryPointShim instances for *group* found in self.entries."""
-        # Build a custom metadata path that only includes dist-info
-        # directories reachable from our entries list.
-        meta_path = self._meta_path()
-        eps = importlib.metadata.entry_points(
-            group=group,
-            # path= was added in Python 3.12; for 3.8–3.11 we temporarily
-            # patch sys.path instead (see _iter_with_path_patch).
-        ) if self._supports_path_kwarg() else self._iter_with_path_patch(group)
+        """Yield entry points for *group* found in self.entries.
+
+        Combines two sources:
+        1. Installed distributions discovered by importlib.metadata.
+        2. Synthetic in-memory distributions (e.g. GuildfileDistribution)
+           registered by path-hook importers such as ModelImporter.
+        """
+        eps = (
+            importlib.metadata.entry_points(group=group)
+            if self._supports_path_kwarg()
+            else self._iter_with_path_patch(group)
+        )
         for ep in eps:
             yield _EntryPointShim(ep)
+        yield from _iter_path_importer_entry_points(group, self.entries)
 
     def _supports_path_kwarg(self):
         import inspect
         sig = inspect.signature(importlib.metadata.entry_points)
         return "path" in sig.parameters
-
-    def _meta_path(self):
-        """Collect dist-info / egg-info directories under self.entries."""
-        meta = []
-        for entry in self.entries:
-            if not os.path.isdir(entry):
-                continue
-            try:
-                for name in os.listdir(entry):
-                    if name.endswith((".dist-info", ".egg-info")):
-                        meta.append(os.path.join(entry, name))
-            except OSError:
-                pass
-        return meta
 
     def _iter_with_path_patch(self, group):
         """Python 3.8–3.11: temporarily replace sys.path to scope the search.
@@ -128,6 +152,7 @@ class _GlobalWorkingSet:
     def iter_entry_points(self, group):
         for ep in importlib.metadata.entry_points(group=group):
             yield _EntryPointShim(ep)
+        yield from _iter_path_importer_entry_points(group, sys.path)
 
 
 # Module-level singleton, equivalent to pkg_resources.working_set
