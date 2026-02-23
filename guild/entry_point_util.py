@@ -12,54 +12,53 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import importlib.metadata
 import logging
-import os
 import sys
-import threading
+
+import importlib.metadata
 
 log = logging.getLogger("guild")
 
 
-def _iter_path_importer_entry_points(group, paths):
-    """Yield entry points from any path-hook importers that expose them.
-
-    This bridges the gap left by removing pkg_resources.register_finder:
-    importlib.metadata only knows about installed distributions, not the
-    synthetic in-memory ones created by ModelImporter for local guildfiles.
-
-    We actively invoke sys.path_hooks for any path not yet in
-    sys.path_importer_cache (mirroring what pkg_resources.WorkingSet did),
-    then duck-type against any importer that has a .dist.get_entry_map()
-    — exactly what GuildfileDistribution provides — without importing
-    guild.model directly (which would cause a circular import).
+class _InstalledDist:
+    """Wraps an importlib.metadata Distribution to expose get_entry_map(),
+    matching the interface that WorkingSet.iter_entry_points relies on.
     """
-    for path in paths:
-        # Populate the cache if this path hasn't been seen yet.
-        if path not in sys.path_importer_cache:
-            for hook in sys.path_hooks:
-                try:
-                    sys.path_importer_cache[path] = hook(path)
-                    break
-                except ImportError:
-                    continue
-        importer = sys.path_importer_cache.get(path)
-        if importer is None:
-            continue
-        dist = getattr(importer, "dist", None)
-        if dist is None:
-            continue
-        get_entry_map = getattr(dist, "get_entry_map", None)
-        if get_entry_map is None:
-            continue
-        for _name, ep in get_entry_map(group).items():
-            yield ep
+
+    def __init__(self, dist):
+        self._dist = dist
+
+    @property
+    def location(self):
+        return str(self._dist.locate_file("."))
+
+    @property
+    def project_name(self):
+        return self._dist.metadata["Name"]
+
+    @property
+    def version(self):
+        return self._dist.metadata["Version"]
+
+    def get_entry_map(self, group=None):
+        eps = self._dist.entry_points
+        if group is not None:
+            eps = [ep for ep in eps if ep.group == group]
+        result = {}
+        for ep in eps:
+            result[ep.name] = _InstalledEntryPoint(ep)
+        if group is not None:
+            return result
+        # group=None: return {group: {name: ep, ...}, ...}
+        by_group = {}
+        for ep in self._dist.entry_points:
+            by_group.setdefault(ep.group, {})[ep.name] = _InstalledEntryPoint(ep)
+        return by_group
 
 
-class _EntryPointShim:
-    """Wraps importlib.metadata.EntryPoint to provide a resolve() method
-    and a .dist attribute, matching the pkg_resources.EntryPoint interface
-    that Resource.inst() and Resource.__str__() rely on.
+class _InstalledEntryPoint:
+    """Wraps importlib.metadata.EntryPoint to match the pkg_resources
+    EntryPoint interface: .name, .dist, resolve().
     """
 
     def __init__(self, ep):
@@ -74,95 +73,89 @@ class _EntryPointShim:
         return getattr(self._ep, "dist", None)
 
     def resolve(self):
-        """Return the class/callable this entry point refers to.
-
-        Matches pkg_resources.EntryPoint.resolve() — returns the object
-        that the entry point points to (e.g. a class), not an instance.
-        Callers then invoke it themselves, passing self as the argument:
-            ep.resolve()(ep)
-        """
         return self._ep.load()
 
     def __str__(self):
         return str(self._ep)
 
 
-class _PathWorkingSet:
-    """Lightweight replacement for pkg_resources.WorkingSet.
-
-    Scans *entries* (a list of sys.path-style directories) for installed
-    distributions and exposes iter_entry_points(group), mirroring the
-    subset of the pkg_resources.WorkingSet API used by EntryPointResources.
-
-    For the global (unscoped) case we delegate directly to
-    importlib.metadata, which already reflects the running environment.
-    """
-
-    def __init__(self, entries):
-        self.entries = list(entries)
-
-    def iter_entry_points(self, group):
-        """Yield entry points for *group* found in self.entries.
-
-        Combines two sources:
-        1. Installed distributions discovered by importlib.metadata.
-        2. Synthetic in-memory distributions (e.g. GuildfileDistribution)
-           registered by path-hook importers such as ModelImporter.
-        """
-        eps = (
-            importlib.metadata.entry_points(group=group)
-            if self._supports_path_kwarg()
-            else self._iter_with_path_patch(group)
-        )
-        for ep in eps:
-            yield _EntryPointShim(ep)
-        yield from _iter_path_importer_entry_points(group, self.entries)
-
-    def _supports_path_kwarg(self):
-        import inspect
-        sig = inspect.signature(importlib.metadata.entry_points)
-        return "path" in sig.parameters
-
-    def _iter_with_path_patch(self, group):
-        """Python 3.8–3.11: temporarily replace sys.path to scope the search.
-
-        Serialised with _path_patch_lock so concurrent calls from different
-        threads don't observe each other's scoped sys.path.
-        """
-        with _path_patch_lock:
-            old_path = sys.path[:]
-            sys.path[:] = self.entries
+def _get_importer(path_item):
+    """Replaces pkg_resources.get_importer: invoke sys.path_hooks and cache."""
+    try:
+        return sys.path_importer_cache[path_item]
+    except KeyError:
+        for path_hook in sys.path_hooks:
             try:
-                return list(importlib.metadata.entry_points(group=group))
-            finally:
-                sys.path[:] = old_path
+                importer = path_hook(path_item)
+                sys.path_importer_cache.setdefault(path_item, importer)
+                return importer
+            except ImportError:
+                pass
+        sys.path_importer_cache[path_item] = None
+        return None
 
 
-class _GlobalWorkingSet:
-    """Thin wrapper around the global importlib.metadata state.
+def _find_distributions_for_path(path_item):
+    """Yield distributions for a single path entry.
 
-    Used when no custom path has been set, equivalent to
-    pkg_resources.working_set.
+    For path entries handled by a custom importer (e.g. ModelImporter),
+    yields the synthetic distribution directly from importer.dist.
+    For ordinary directories, yields _InstalledDist wrappers from
+    importlib.metadata.
+    """
+    importer = _get_importer(path_item)
+    # Custom importer with a synthetic dist (e.g. GuildfileDistribution)
+    dist = getattr(importer, "dist", None)
+    if dist is not None:
+        yield dist
+        return
+    # Ordinary directory: find installed dists whose location matches
+    for dist in importlib.metadata.distributions():
+        if str(dist.locate_file(".")) == path_item:
+            yield _InstalledDist(dist)
+
+
+class WorkingSet:
+    """Replacement for pkg_resources.WorkingSet.
+
+    Maintains a list of path entries and a corresponding set of
+    distributions, exactly mirroring the pkg_resources structure.
+    Distributions are discovered eagerly on construction, both from
+    custom path-hook importers (for local guildfiles) and from
+    importlib.metadata (for installed packages).
     """
 
-    @property
-    def entries(self):
-        return sys.path
+    def __init__(self, entries=None):
+        self.entries = []
+        self._dists = []
+        self._dist_keys = set()
+        if entries is None:
+            entries = sys.path
+        for entry in entries:
+            self.add_entry(entry)
 
-    def iter_entry_points(self, group):
-        for ep in importlib.metadata.entry_points(group=group):
-            yield _EntryPointShim(ep)
-        yield from _iter_path_importer_entry_points(group, sys.path)
+    def add_entry(self, entry):
+        self.entries.append(entry)
+        for dist in _find_distributions_for_path(entry):
+            key = getattr(dist, "project_name", None) or id(dist)
+            if key not in self._dist_keys:
+                self._dist_keys.add(key)
+                self._dists.append(dist)
+
+    def iter_entry_points(self, group, name=None):
+        """Yield entry points from group across all distributions.
+
+        Mirrors pkg_resources.WorkingSet.iter_entry_points exactly:
+        calls dist.get_entry_map(group).values() on each distribution.
+        """
+        for dist in self._dists:
+            for ep in dist.get_entry_map(group).values():
+                if name is None or name == ep.name:
+                    yield ep
 
 
-# Module-level singleton, equivalent to pkg_resources.working_set
-_global_working_set = _GlobalWorkingSet()
-
-# Lock serialising sys.path mutations in _iter_with_path_patch on Python
-# 3.8-3.11, where entry_points() has no path= kwarg and we must temporarily
-# swap sys.path to scope distribution discovery. Without this, concurrent
-# calls from different threads would see each other's scoped path.
-_path_patch_lock = threading.Lock()
+# Global working set singleton, equivalent to pkg_resources.working_set
+working_set = WorkingSet()
 
 
 class Resource:
@@ -202,7 +195,7 @@ class EntryPointResources:
     def _working_set(self):
         if self.__working_set is not None:
             return self.__working_set
-        return _global_working_set
+        return working_set
 
     def _init_resources(self):
         resources = {}
@@ -245,7 +238,7 @@ class EntryPointResources:
     def set_path(self, val, clear_cache=False):
         if clear_cache:
             self._clear_path_importer_cache(val)
-        self.__working_set = _PathWorkingSet(val)
+        self.__working_set = WorkingSet(val)
         self.__resources = None
 
     @staticmethod

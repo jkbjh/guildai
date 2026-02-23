@@ -536,6 +536,11 @@ def _find_module(main_mod, model_paths):
                             "a package and cannot be directly executed)"
                         )
                 return main_mod_sys_path, maybe_mod_path
+        # no lock.
+        spec = importlib.util.find_spec(main_mod)
+        if spec is not None:
+            return main_mod_sys_path, spec.origin
+        # TODO, if this works, probably the looping through sys.path can be removed.
     raise ImportError(f"No module named {main_mod}")
 
 
