@@ -169,22 +169,22 @@ class RunsSeries(pd.Series):
 
     # pylint: disable=arguments-differ
     def info(self, **kw):
-        _print_run_info(self[0], **kw)
+        _print_run_info(self.iloc[0], **kw)
 
     def scalars(self):
-        return _runs_scalars([self[0].value])
+        return _runs_scalars([self.iloc[0].value])
 
     def scalars_detail(self):
-        return _runs_scalars_detail([self[0].value])
+        return _runs_scalars_detail([self.iloc[0].value])
 
     def attributes(self):
-        return _runs_attributes([self[0].value])
+        return _runs_attributes([self.iloc[0].value])
 
     def guild_flags(self):
-        return _runs_flags([self[0].value])
+        return _runs_flags([self.iloc[0].value])
 
     def compare(self):
-        return _runs_compare([self[0]])
+        return _runs_compare([self.iloc[0]])
 
 
 class RunsDataFrame(pd.DataFrame):
@@ -206,10 +206,10 @@ class RunsDataFrame(pd.DataFrame):
         return [run.id for run in runs]
 
     def _runs(self):
-        return [row[1][0].value for row in self.iterrows()]
+        return [row[1].iloc[0].value for row in self.iterrows()]
 
     def _items(self):
-        return [row[1][0] for row in self.iterrows()]
+        return [row[1].iloc[0] for row in self.iterrows()]
 
     # pylint: disable=arguments-differ
     def info(self, *args, **kw):
