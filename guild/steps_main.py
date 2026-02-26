@@ -166,7 +166,11 @@ def _apply_data_params(data, ctx, run_spec):
 
     Warns if params contains unused values.
     """
-    defaults = {p.name: p.default for p in ctx.command.params}
+    click_unset = getattr(click.parser, "UNSET", None)
+    defaults = {
+        p.name: p.default if p.default is not click_unset else None
+        for p in ctx.command.params
+    }
     for name, val in sorted(ctx.params.items()):
         if name in STEP_USED_PARAMS:
             data_name = name.replace("_", "-")
