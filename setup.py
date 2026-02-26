@@ -87,7 +87,7 @@ def _read_version():
     with open(version_file, encoding="utf-8") as f:
         for line in f:
             if line.startswith("__version__"):
-                # Handles:  __version__ = "0.9.1"  or  __version__ = '0.9.1'
+                # Handles:  __version__ = "0.9.2"  or  __version__ = '0.9.2'
                 return line.split("=", 1)[1].strip().strip("\"'")
     raise RuntimeError("__version__ not found in {}".format(version_file))
 
