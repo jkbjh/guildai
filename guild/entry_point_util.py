@@ -11,13 +11,54 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+from itertools import chain
 import logging
 import sys
-
+import pkgutil
+import importlib
+import json
+import urllib
 import importlib.metadata
 
 log = logging.getLogger("guild")
+
+
+class _Map:
+    _module_to_pkg = None
+    _distname_to_dists = None
+
+    @classmethod
+    def refresh(cls):
+        cls._module_to_pkg = None
+        cls._distname_to_dists = None
+
+    @classmethod
+    def _ensure_module_to_pkg(cls):
+        if cls._module_to_pkg is None:
+            cls._module_to_pkg = importlib.metadata.packages_distributions()
+
+    @classmethod
+    def _ensure_distname_to_dists(cls):
+        if cls._distname_to_dists is not None:
+            return
+        cls._distname_to_dists = {}
+        for dist in importlib.metadata.distributions():
+            cls._distname_to_dists[dist.name] = cls._distname_to_dists.get(
+                dist.name, set()
+            )
+            cls._distname_to_dists[dist.name].add(dist)
+
+    @classmethod
+    def modules_to_packagelist(cls, modules):
+        cls._ensure_module_to_pkg()
+        for module in modules:
+            if module in cls._module_to_pkg:
+                yield (module, cls._module_to_pkg[module])
+
+    @classmethod
+    def distname_to_distributions(cls, distname):
+        cls._ensure_distname_to_dists()
+        return cls._distname_to_dists[distname]
 
 
 class _InstalledDist:
@@ -95,6 +136,26 @@ def _get_importer(path_item):
         return None
 
 
+def _find_distributions_for_path_with_pkgutil(path_item):
+    module_names = [module.name for module in pkgutil.iter_modules([path_item])]
+    package_list = chain(
+        *(pkl for mod, pkl in _Map.modules_to_packagelist(module_names) if pkl)
+    )
+    widened_dist_list = chain(
+        *(_Map.distname_to_distributions(dname) for dname in package_list)
+    )
+    # # try via origin-url
+    for dist in widened_dist_list:
+        try:
+            direct_url_json = dist.read_text("direct_url.json") or ""
+            url = json.loads(direct_url_json)["url"]
+            path = urllib.parse.urlparse(url).path
+            if path == path_item:
+                yield dist
+        except (AttributeError, json.JSONDecodeError, KeyError):
+            pass
+
+
 def _find_distributions_for_path(path_item):
     """Yield distributions for a single path entry.
 
@@ -110,9 +171,15 @@ def _find_distributions_for_path(path_item):
         yield dist
         return
     # Ordinary directory: find installed dists whose location matches
+    location_match = False
     for dist in importlib.metadata.distributions():
-        if str(dist.locate_file(".")) == path_item:
+        if str(dist.locate_file(".")) == path_item:  # this does not work.
             yield _InstalledDist(dist)
+            location_match = True
+    if location_match:
+        return
+    for dist in _find_distributions_for_path_with_pkgutil(path_item):
+        yield _InstalledDist(dist)
 
 
 class WorkingSet:
