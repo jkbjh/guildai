@@ -160,7 +160,7 @@ setup(
     keywords=PKG_INFO.get("Keywords"),
     classifiers=_get_all(PKG_INFO, "Classifier"),
     install_requires=_get_all(PKG_INFO, "Requires-Dist"),
-    python_requires=PKG_INFO.get("Requires-Python") or ">=3.7",
+    python_requires=PKG_INFO.get("Requires-Python") or ">=3.10",
 
     # Entry points read from dist-info
     entry_points=ENTRY_POINTS,
