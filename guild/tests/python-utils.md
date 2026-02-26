@@ -396,8 +396,8 @@ method.
 
 Let's dynamically create a module for our tests:
 
-    >>> import imp
-    >>> howdy = imp.new_module("howdy")
+    >>> import types
+    >>> howdy = types.ModuleType("howdy")
     >>> howdy_def = """
     ... def say(msg):
     ...   print(msg)
