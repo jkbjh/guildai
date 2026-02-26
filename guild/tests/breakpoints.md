@@ -50,11 +50,11 @@ Break accepts file names with line numbers.
     <exit ...>
 
 It also accepts function names. Function names must be preceded by
-their containing module.
+their containing module. (Note that the shown location of the breakpoint changed between 3.10 and 3.13)
 
     >>> run("guild run breakable_lines.py --break breakable_lines.bar -y",
     ...     timeout=prompt_timeout)
-    Breakpoint 1 at .../breakable_lines.py:39
+    Breakpoint 1 at .../breakable_lines.py:...
     hello
     hello from loop
     hello from loop

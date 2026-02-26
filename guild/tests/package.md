@@ -63,22 +63,32 @@ definition in the Guild file.
 The wheel is written to the `dist` subdirectory.
 
     >>> find("dist")
-    gpkg.hello-0.3.0.dev4-py2.py3-none-any.whl
+    gpkg...hello-0.3.0.dev4-py2.py3-none-any.whl
+
+ Note, that previously, the wheel would be called:
+`gpkg.hello-0.3.0.dev4-py2.py3-none-any.whl`, but with newer versions of setuptools (75.8+), this is now
+normalized to `gpkg_hello-0.3.0.dev4-py2.py3-none-any.whl`.
+
+	>>> from importlib.metadata import version
+	>>> from packaging.version import parse
+	>>> installed_version = version("setuptools")
+	>>> old_wheel_names = parse(installed_version) < parse("75.8")
+	>>> separator = "." if old_wheel_names else "_"
 
 Wheels are zip files. We can read the contents of the generated file.
 
     >>> import zipfile
-    >>> wheel_path = path("dist", "gpkg.hello-0.3.0.dev4-py2.py3-none-any.whl")
+    >>> wheel_path = path("dist", f"gpkg{separator}hello-0.3.0.dev4-py2.py3-none-any.whl")
     >>> wheel = zipfile.ZipFile(wheel_path)
-    >>> pprint(sorted(wheel.namelist()))  # doctest: +REPORT_UDIFF
+    >>> pprint(sorted(wheel.namelist(), key=lambda name: name.replace("_", ".")))  # doctest: +REPORT_UDIFF
     ['gpkg.hello-0.3.0.dev4...-nspkg.pth',
-     'gpkg.hello-0.3.0.dev4.dist-info/METADATA',
-     'gpkg.hello-0.3.0.dev4.dist-info/PACKAGE',
-     'gpkg.hello-0.3.0.dev4.dist-info/RECORD',
-     'gpkg.hello-0.3.0.dev4.dist-info/WHEEL',
-     'gpkg.hello-0.3.0.dev4.dist-info/entry_points.txt',
-     'gpkg.hello-0.3.0.dev4.dist-info/namespace_packages.txt',
-     'gpkg.hello-0.3.0.dev4.dist-info/top_level.txt',
+     'gpkg...hello-0.3.0.dev4.dist-info/METADATA',
+     'gpkg...hello-0.3.0.dev4.dist-info/PACKAGE',
+     'gpkg...hello-0.3.0.dev4.dist-info/RECORD',
+     'gpkg...hello-0.3.0.dev4.dist-info/WHEEL',
+     'gpkg...hello-0.3.0.dev4.dist-info/entry_points.txt',
+     'gpkg...hello-0.3.0.dev4.dist-info/namespace_packages.txt',
+     'gpkg...hello-0.3.0.dev4.dist-info/top_level.txt',
      'gpkg/hello/README.md',
      'gpkg/hello/a.txt',
      'gpkg/hello/guild.yml',
@@ -87,9 +97,9 @@ Wheels are zip files. We can read the contents of the generated file.
 Use `twine` to check the generated distribution.
 
     >>> from twine.commands import check
-    >>> dist_path = path("dist", "gpkg.hello-0.3.0.dev4-py2.py3-none-any.whl")
+    >>> dist_path = path("dist", f"gpkg{separator}hello-0.3.0.dev4-py2.py3-none-any.whl")
     >>> check.check([dist_path])
-    Checking dist/gpkg.hello-0.3.0.dev4-py2.py3-none-any.whl: PASSED
+    Checking dist/gpkg...hello-0.3.0.dev4-py2.py3-none-any.whl: PASSED
     False
 
 ## Default packages
