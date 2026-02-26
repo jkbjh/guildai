@@ -248,7 +248,7 @@ class GuildfileDistribution:
     def _resource_entry_point(self, name):
         return LocalEntryPoint(
             name=name,
-            target_class=GuildfileResource,
+            target_class="GuildfileResource",
             dist=self,
         )
 
