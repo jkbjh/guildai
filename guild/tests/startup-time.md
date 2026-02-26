@@ -20,7 +20,7 @@ Run `guild.main_bootstrap` module with no arguments to test startup time.
     >>> time0 = time.time()
     >>> try:
     ...     out = subprocess.check_output(
-    ...         [sys.executable, "-m", "guild.main_bootstrap"],
+    ...         [sys.executable, "-m", "guild.main_bootstrap", "--help"],
     ...         env=env,
     ...         stderr=subprocess.STDOUT)
     ... except subprocess.CalledProcessError as e:
