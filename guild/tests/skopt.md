@@ -68,7 +68,7 @@ value for a second flag.
     ...     y0=None,
     ...     random_state=66)
 
-    >>> res.x_iters
+    >>> [[float(n) for n in l] for l in res.x_iters]
     [[1.0, ...]]
 
     >>> x0_1 = res.x_iters[0][1]
