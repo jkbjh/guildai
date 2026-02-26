@@ -1,5 +1,14 @@
 # Operation errors
 
+Note: In Python 3.11+ an indicator for the error was added to the
+tracebacks, which makes this test fail, so we first disably that
+indicator:
+
+    >>> import os
+	>>> os.environ['PYTHONNODEBUGRANGES'] = "1"
+
+Alright, back to the test.
+
 When an operation generates an exception, Guild prints only the
 traceback information applicable to the operation module. This
 information does not include the initial layers of the stack
@@ -14,7 +23,7 @@ associated with Guild.
     Exception: big time fail
     <exit 1>
 
-    >>> project.run("stack.py")
+>>> project.run("stack.py")
     Traceback (most recent call last):
       File ".../stack.py", line 13, in <module>
         fail()

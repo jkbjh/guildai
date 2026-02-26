@@ -1,5 +1,15 @@
 # op_main.py
 
+Note: In Python 3.11+ an indicator for the error was added to the
+tracebacks, which makes this test fail, so we first disably that
+indicator:
+
+    >>> import os
+	>>> os.environ['PYTHONNODEBUGRANGES'] = "1"
+
+Alright, back to the test.
+
+
 These tests illustrate behavior implemented by `op_main.py`.
 
 `op_main.py` is the module used to run Python modules.
