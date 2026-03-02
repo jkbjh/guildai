@@ -12,6 +12,7 @@ from .learning import ExtraTreesRegressor
 from .learning import GaussianProcessRegressor
 from .learning import GradientBoostingQuantileRegressor
 from .learning import RandomForestRegressor
+from sklearn.dummy import DummyRegressor
 from .learning.gaussian_process.kernels import ConstantKernel
 from .learning.gaussian_process.kernels import HammingKernel
 from .learning.gaussian_process.kernels import Matern
@@ -395,7 +396,7 @@ def cook_estimator(base_estimator, space=None, **kwargs):
         base_estimator = GradientBoostingQuantileRegressor(base_estimator=gbrt)
 
     elif base_estimator == "DUMMY":
-        return None
+        return DummyRegressor()
 
     if ('n_jobs' in kwargs.keys()) and not hasattr(base_estimator, 'n_jobs'):
         del kwargs['n_jobs']
