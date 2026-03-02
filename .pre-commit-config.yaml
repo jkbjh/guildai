@@ -1,0 +1,13 @@
+repos:
+ - repo: https://github.com/akaihola/darker
+   rev: v3.0.0
+   hooks:
+     - id: darker
+       args:
+         - --formatter=black
+       additional_dependencies:
+         - black
+ - repo: https://github.com/charliermarsh/ruff-pre-commit
+   rev: v0.15.4  # Use the latest version of ruff-pre-commit
+   hooks:
+     - id: ruff
