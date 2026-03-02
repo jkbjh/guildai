@@ -2,8 +2,28 @@
 requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
-[tool.black]
+[tool.ruff]
+line-length = 88
+ignore = [
+  "E203",  # whitespace before ':'  (conflicts with black)
+  "E501",  # line too long (handled by ruff line-length)
+  "W291",  # trailing whitespace
+  "W293",  # blank line contains whitespace
+  "I",     # import formatting (conflicts with black/yapf)
+]
+exclude = [
+  "guild/tests/samples/*",
+  "guild/_skopt/*",
+  "venv/*",
+  ".venv/*",
+  "**/venv/*",
+  "**/.venv/*",
+  "build/*",
+  "**/build/*",
+]
 
+[tool.black]
+line-length = 88
 skip-string-normalization = true
 exclude = 'guild/tests/samples|guild/_skopt|\.?venv'
 
