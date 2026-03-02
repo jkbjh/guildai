@@ -391,7 +391,11 @@ A helper function:
     ...     lines = [line + "\n" for line in source.split("\n")]
     ...     state = _ApplyFlagsStateProxy(flags, {})
     ...     repl_lines = _apply_flags_to_source_lines(lines, state)
-    ...     sys.stdout.write("".join(repl_lines))
+    ...     sys.stdout.write("".join(repl_lines).strip("\n"))
+
+We also strip newlines from beginning and end of source, because the
+TransformerMananger from IPython.core.inputtransformer2 appears to do
+that anyway.
 
 Mixed code including magics:
 
@@ -404,7 +408,6 @@ Mixed code including magics:
     ... for _ in range(count):
     ...     print(msg)
     ... """, count=2, msg="hello")  # doctest: -NORMALIZE_WHITESPACE
-    <BLANKLINE>
     get_ipython().run_line_magic('autoreload', '')
     # A comment
     count = 2
