@@ -894,7 +894,7 @@ Here are the last two runs and their status:
 And the exit status for the last run:
 
     >>> with guild_home:
-    ...     ipy.runs().iloc[0][0].run.get("exit_status")
+    ...     ipy.runs().iloc[0, 0].run.get("exit_status")
     1
 
 When KeyboardInterrupt is raised - as it the case when the user types
@@ -926,7 +926,7 @@ The generated run:
 The generated run exit status:
 
     >>> with guild_home:
-    ...     ipy.runs().iloc[0][0].run.get("exit_status")
+    ...     ipy.runs().iloc[0, 0].run.get("exit_status")
     -16
 
 ## Run Process
