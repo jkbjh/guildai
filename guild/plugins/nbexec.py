@@ -246,9 +246,13 @@ def _pattern_slices(m):
 
 def _replace_flag_assign_vals(source, state):
     assigns = _assigns_lookup_for_source(source, state.flags)
-    source_tokens, nl_added = _tokenize_source_with_nl(source)
-    repl_tokens = _replace_assigns_for_tokens(source_tokens, assigns)
-    repl_source = tokenize.untokenize(repl_tokens)
+    try:
+        source_tokens, nl_added = _tokenize_source_with_nl(source)
+        repl_tokens = _replace_assigns_for_tokens(source_tokens, assigns)
+        repl_source = tokenize.untokenize(repl_tokens)
+    except tokenize.TokenError:  # the tokenizer has become more strict in 3.13
+        nl_added = False
+        repl_source = source
     return _maybe_strip_nl(nl_added, repl_source)
 
 
