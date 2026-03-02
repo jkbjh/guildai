@@ -86,7 +86,6 @@ def _init_run(args):
 
 def _check_env():
     _check_nbconvert()
-    _check_nbextensions()
 
 
 def _init_flags(run, args):
@@ -103,7 +102,7 @@ def _init_flags(run, args):
 
 def _check_nbconvert():
     try:
-        import nbconvert as _unused
+        import nbconvert as _unused  # noqa: F401
     except ImportError:
         log.error(
             "jupyter-nbconvert is required to run Notebooks - "
@@ -112,16 +111,6 @@ def _check_nbconvert():
         sys.exit(1)
 
 
-def _check_nbextensions():
-    try:
-        import jupyter_contrib_nbextensions as _unused
-    except ImportError:
-        log.error(
-            "jupyter_contrib_nbextensions is required to run Notebooks - "
-            "install it by running 'pip install jupyter-contrib-nbextensions' "
-            "and try again"
-        )
-        sys.exit(1)
 
 
 def _nbexec(notebook):
