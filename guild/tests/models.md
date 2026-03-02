@@ -86,12 +86,16 @@ defined. Guild supports two types of distributions:
 
 - Guildfile distributions, which are based on guildfiles
 
-The `mnist-cnn` model is defined in a standard Python distribution:
+~~The `mnist-cnn` model is defined in a standard Python distribution~~
+The `mnist-cnn` model is defined as an
+`guild.entry_point._InstalledDist` class, because `pkg_resources` has
+been deprecated (and removed) and `importlib.metadata` distributions,
+do not provide all information:
 
     >>> cnn = next(guild.model.for_name("mnist-cnn"))
 
     >>> cnn.dist.__class__
-    <class 'pkg_resources.DistInfoDistribution'>
+    <class 'guild.entry_point_util._InstalledDist'>
 
 Here we see that the project name is `gpkg.dist` and the distribution
 is located in the sample `packages` directory. Standard

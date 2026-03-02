@@ -179,9 +179,12 @@ class GuildfileDistribution:
     def __init__(self, guildfile):
         self.location = guildfile.dir
         self.project_name = self._init_project_name(guildfile)
-        self.version = ""
         self.guildfile = guildfile
         self._entry_map = self._init_entry_map()
+
+    @property
+    def version(self):
+        raise ValueError("GuildfileDistributions do not have a version.")
 
     def __repr__(self):
         return f"<guild.model.GuildfileDistribution '{self.guildfile.dir}'>"

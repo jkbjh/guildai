@@ -11,15 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from itertools import chain
 import logging
 import sys
-import pkgutil
 import importlib
 import json
 import urllib
 import importlib.metadata
-
+from pathlib import Path
 log = logging.getLogger("guild")
 
 
@@ -81,6 +79,20 @@ class _InstalledDist:
     def version(self):
         return self._dist.metadata["Version"]
 
+    def get_metadata_lines(self, name):
+        """Replaces pkg_resources.Distribution.get_metadata_lines.
+
+        Reads a metadata file (e.g. 'RECORD') and yields its non-empty,
+        non-comment lines, matching the pkg_resources interface.
+        """
+        text = self._dist.read_text(name)
+        if text is None:
+            raise IOError(f"No {name} metadata found for {self.project_name}")
+        for line in text.splitlines():
+            line = line.strip()
+            if line and not line.startswith("#"):
+                yield line
+
     def get_entry_map(self, group=None):
         eps = self._dist.entry_points
         if group is not None:
@@ -111,7 +123,8 @@ class _InstalledEntryPoint:
 
     @property
     def dist(self):
-        return getattr(self._ep, "dist", None)
+        raw = getattr(self._ep, "dist", None)
+        return _InstalledDist(raw) if raw is not None else None
 
     def resolve(self):
         return self._ep.load()
@@ -136,24 +149,6 @@ def _get_importer(path_item):
         return None
 
 
-def _find_distributions_for_path_with_pkgutil(path_item):
-    module_names = [module.name for module in pkgutil.iter_modules([path_item])]
-    package_list = chain(
-        *(pkl for mod, pkl in _Map.modules_to_packagelist(module_names) if pkl)
-    )
-    widened_dist_list = chain(
-        *(_Map.distname_to_distributions(dname) for dname in package_list)
-    )
-    # # try via origin-url
-    for dist in widened_dist_list:
-        try:
-            direct_url_json = dist.read_text("direct_url.json") or ""
-            url = json.loads(direct_url_json)["url"]
-            path = urllib.parse.urlparse(url).path
-            if path == path_item:
-                yield dist
-        except (AttributeError, json.JSONDecodeError, KeyError):
-            pass
 
 
 def _find_distributions_for_path(path_item):
@@ -164,6 +159,7 @@ def _find_distributions_for_path(path_item):
     For ordinary directories, yields _InstalledDist wrappers from
     importlib.metadata.
     """
+    pl_path_item = Path(path_item)
     importer = _get_importer(path_item)
     # Custom importer with a synthetic dist (e.g. GuildfileDistribution)
     dist = getattr(importer, "dist", None)
@@ -176,10 +172,26 @@ def _find_distributions_for_path(path_item):
         if str(dist.locate_file(".")) == path_item:  # this does not work.
             yield _InstalledDist(dist)
             location_match = True
-    if location_match:
-        return
-    for dist in _find_distributions_for_path_with_pkgutil(path_item):
-        yield _InstalledDist(dist)
+        else:
+            try:
+                direct_url_json = dist.read_text("direct_url.json") or ""
+                url = json.loads(direct_url_json)["url"]
+                path = urllib.parse.urlparse(url).path
+                if path == path_item:
+                    yield _InstalledDist(dist)
+                    location_match = True
+            except (AttributeError, json.JSONDecodeError, KeyError):
+                pass
+
+    # if all fails, it might be a distribution not in the search path:
+    # (this holds for PackageModels)
+    if not location_match and path_item not in sys.path:
+        context = importlib.metadata.DistributionFinder.Context(path=[pl_path_item])
+        for dist in importlib.metadata.MetadataPathFinder.find_distributions(
+            context=context
+        ):
+            if dist.locate_file(".") == pl_path_item:
+                yield _InstalledDist(dist)
 
 
 class WorkingSet:
